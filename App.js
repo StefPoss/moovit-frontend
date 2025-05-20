@@ -3,9 +3,9 @@ import { useFonts } from "expo-font"; // Import du module Expo pour l'usage des 
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Splash from "./Screens/Auth/SplashScreen";
-import Login from "./Screens/Auth/LoginScreen";
-import SignUp from "./Screens/Auth/SignupScreen";
+import Splash from "./screens/Auth/SplashScreen";
+import Login from "./screens/Auth/LoginScreen";
+import SignUp from "./screens/Auth/SignupScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,5 +37,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-
