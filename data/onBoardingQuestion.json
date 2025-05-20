@@ -1,0 +1,84 @@
+[
+  {
+    "id": 1,
+    "type": "checkBox",
+    "mainQuestion": "Peux-tu nous en dire plus sur toi ?",
+    "secondaryQuestion": "Ton genre ?",
+    "data": ["Masculin", "Féminin", "Non binaire"]
+  },
+  {
+    "id": 2,
+    "type": "fieldBox",
+    "mainQuestion": "Peux-tu nous en dire plus sur toi ?",
+    "secondaryQuestion": "",
+    "data": [
+      {
+        "title": "age",
+        "desc": "Entrez votre âge"
+      },
+      {
+        "title": "ville",
+        "desc": "Entrez votre ville"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "type": "imgSelect",
+    "mainQuestion": "",
+    "secondaryQuestion": "Choisis ton sport ?",
+    "data": [
+      {
+        "title": "Paddle",
+        "src": ""
+      },
+      {
+        "title": "Natation",
+        "src": ""
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "type": "checkBoxObject",
+    "mainQuestion": "",
+    "secondaryQuestion": "Choisis ton niveau ?",
+    "data": [
+      {
+        "main": "Aucune expérience",
+        "desc": "Jamais fait un squat ? Aucun souci, on part de zéro."
+      },
+      {
+        "main": "Débutant",
+        "desc": "Tu as déjà transpiré un peu… et tu veux y revenir."
+      },
+      {
+        "main": "Intermédiaire",
+        "desc": "Tu connais la douleur des courbatures et t’en redemandes !"
+      },
+      {
+        "main": "Avancé",
+        "desc": "Tu vis pour les défis et les séances qui brûlent !"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "type": "checkBox",
+    "mainQuestion": "",
+    "secondaryQuestion": "Pourquoi cherches-tu un coach ?",
+    "data": [
+      "Pour me motiver",
+      "Pour me challenger",
+      "Pour rencontrer d’autres pratiquants",
+      "Pour découvrir la pratique"
+    ]
+  },
+  {
+    "id": 6,
+    "type": "checkBox",
+    "mainQuestion": "",
+    "secondaryQuestion": "Quel est ton objectif ?",
+    "data": ["15 min/jour", "30 min/jour", "4 h/semaine", "8 h/semaine ou plus"]
+  }
+]
