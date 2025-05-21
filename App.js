@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Splash from "./screens/Auth/SplashScreen";
 import Login from "./screens/Auth/LoginScreen";
 import SignUp from "./screens/Auth/SignupScreen";
+import CguScreen from "./screens/Auth/CGUScreen";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
@@ -55,6 +56,7 @@ export default function App() {
             <Stack.Screen name="Welcome" component={Splash} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="cgu" component={CguScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
