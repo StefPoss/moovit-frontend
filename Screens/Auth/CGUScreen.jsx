@@ -1,18 +1,26 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import cgu from "../../data/cgu-fr.json";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function CguScreen() {
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>{cgu.title}</Text>
-      {cgu.content.map((section, index) => (
-        <View key={index} style={styles.section}>
-          <Text style={styles.heading}>{section.heading}</Text>
-          <Text style={styles.body}>{section.body}</Text>
-        </View>
-      ))}
-    </ScrollView>
+    <SafeAreaView style={{ flex:1 }}>
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>{cgu.title}</Text>
+        {cgu.content.map(
+          (
+            section,
+            index // pour parcourir le fichier
+          ) => (
+            <View key={index} style={styles.section}>
+              <Text style={styles.heading}>{section.heading}</Text>
+              <Text style={styles.body}>{section.body}</Text>
+            </View>
+          )
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
