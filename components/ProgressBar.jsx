@@ -4,7 +4,7 @@ import { ProgressBar, MD3Colors } from "react-native-paper";
 import questionForm from "../data/onBoardingQuestion.json";
 
 const ProgressBarComp = (props) => {
-  let indice = props.count / questionForm.length;
+  let indice = props.count / (questionForm.length - 1);
   return (
     <ProgressBar
       progress={indice}

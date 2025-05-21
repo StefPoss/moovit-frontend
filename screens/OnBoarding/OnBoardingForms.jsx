@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Pressable,
   Keyboard,
   SafeAreaView,
+  Image,
 } from "react-native";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import Button from "../../components/buttons";
@@ -20,6 +21,21 @@ export default function SignupScreen({ navigation }) {
   const [numQuestion, setNumQuestion] = useState(0);
   const [gend, setGender] = useState(null);
   const [level, setLevel] = useState(null);
+  const [sport, setSport] = useState(null);
+  const [age, setAge] = useState(null);
+  const [city, setCity] = useState(null);
+  const [infos, setInfos] = useState({});
+
+  useEffect(() => {
+    console.log(numQuestion);
+    console.log(gend);
+    console.log(level);
+    console.log(sport);
+    console.log(infos);
+  }, [numQuestion, gend, level, sport, infos]);
+  const handleChange = (key, value) => {
+    setInfos((prev) => ({ ...prev, [key]: value }));
+  };
 
   const onBoardingDisp = (numQuestion) => {
     if (questionForm[numQuestion]?.type) {
@@ -32,28 +48,24 @@ export default function SignupScreen({ navigation }) {
                 text={questionForm[numQuestion].mainQuestion}
                 // borderColor={"#D5D5D5"}
               />
-            ) : (
-              <Text>ERROR </Text>
-            )}
+            ) : null}
             {questionForm[numQuestion]?.secondaryQuestion ? (
               <Text style={styles.textSecondQuestion}>
                 {questionForm[numQuestion].secondaryQuestion}
               </Text>
-            ) : (
-              <Text>ERROR </Text>
-            )}
+            ) : null}
             <View style={styles.boxContain}>
-              {questionForm[numQuestion].data.map((gender) => (
-                <View key={gender} style={styles.checkedBox}>
+              {questionForm[numQuestion].data.map((data) => (
+                <View key={data} style={styles.checkedBox}>
                   <Checkbox
-                    status={gend === gender ? "checked" : "unchecked"}
-                    onPress={() => setGender(gender)}
+                    status={gend === data ? "checked" : "unchecked"}
+                    onPress={() => setGender(data)}
                   />
                   <Text
                     style={styles.textChecked}
-                    onPress={() => setGender(gender)}
+                    onPress={() => setGender(data)}
                   >
-                    {gender}
+                    {data}
                   </Text>
                 </View>
               ))}
@@ -72,29 +84,22 @@ export default function SignupScreen({ navigation }) {
                 color={"#F5F5F5"}
                 text={questionForm[numQuestion].mainQuestion}
               />
-            ) : (
-              <Text>ERROR </Text>
-            )}
+            ) : null}
             {questionForm[numQuestion]?.secondaryQuestion ? (
               <Text style={styles.textSecondQuestion}>
                 {questionForm[numQuestion].secondaryQuestion}
               </Text>
-            ) : (
-              <Text>ERROR </Text>
-            )}
+            ) : null}
             <View style={styles.boxContain}>
-              {questionForm[numQuestion].data.map((gender) => (
-                <View key={gender} style={styles.checkedBox}>
-                  <Checkbox
-                    status={gend === gender ? "checked" : "unchecked"}
-                    onPress={() => setGender(gender)}
+              {questionForm[numQuestion].data.map((data) => (
+                <View key={data.title}>
+                  <Text>{data.title}</Text>
+                  <TextInput
+                    onChangeText={(text) => handleChange(data.title, text)}
+                    value={infos[data.title] || ""}
+                    style={styles.textinput}
+                    placeholder={data.desc}
                   />
-                  <Text
-                    style={styles.textChecked}
-                    onPress={() => setGender(gender)}
-                  >
-                    {gender}
-                  </Text>
                 </View>
               ))}
             </View>
@@ -105,7 +110,45 @@ export default function SignupScreen({ navigation }) {
         );
         ////////////////////////////////:
       } else if (questionForm[numQuestion].type === "imgSelect") {
-        return <Text> {questionForm[numQuestion].type}</Text>;
+        return (
+          <View style={styles.onBoardContain}>
+            {questionForm[numQuestion]?.mainQuestion ? (
+              <CardComp
+                color={"#F5F5F5"}
+                text={questionForm[numQuestion].mainQuestion}
+                // borderColor={"#D5D5D5"}
+              />
+            ) : null}
+
+            {questionForm[numQuestion]?.secondaryQuestion ? (
+              <Text style={styles.textSecondQuestion}>
+                {questionForm[numQuestion].secondaryQuestion}
+              </Text>
+            ) : null}
+            <View style={styles.boxContain}>
+              {questionForm[numQuestion].data.map((data) => (
+                <TouchableOpacity
+                  key={data.title}
+                  onPress={() => setSport(data.title)}
+                  style={[
+                    styles.sportBox,
+                    sport === data.title && styles.selectedBox,
+                  ]}
+                >
+                  <Image
+                    source={{ uri: data.src }}
+                    style={styles.sportImage}
+                    resizeMode="contain"
+                  />
+                  <Text style={styles.sportLabel}>{data.title}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <View style={styles.buttonOnboard}>
+              <Button title={"Continuer"} style={styles.buttonOnboard} />
+            </View>
+          </View>
+        );
         ////////////////////////////////:
       } else if (questionForm[numQuestion].type === "checkBoxObject") {
         return (
@@ -116,27 +159,23 @@ export default function SignupScreen({ navigation }) {
                 text={questionForm[numQuestion].mainQuestion}
                 borderColor={"#D5D5D5"}
               />
-            ) : (
-              <Text>ERROR </Text>
-            )}
+            ) : null}
             {questionForm[numQuestion]?.secondaryQuestion ? (
               <Text style={styles.textSecondQuestion}>
                 {questionForm[numQuestion].secondaryQuestion}
               </Text>
-            ) : (
-              <Text>ERROR </Text>
-            )}
+            ) : null}
             <View style={styles.boxContain}>
               {questionForm[numQuestion].data.map((data) => (
                 <View key={data.main} style={styles.checkedBox}>
                   <Checkbox
-                    status={level === data ? "checked" : "unchecked"}
-                    onPress={() => setLevel(data)}
+                    status={level === data.main ? "checked" : "unchecked"}
+                    onPress={() => setLevel(data.main)}
                     style={styles.checkDesign}
                   />
                   <Text
                     style={styles.textChecked}
-                    onPress={() => setLevel(data)}
+                    onPress={() => setLevel(data.main)}
                   >
                     <Text>
                       {data.main}
@@ -154,10 +193,10 @@ export default function SignupScreen({ navigation }) {
         );
         ////////////////////////////////:
       } else {
-        <Text> ERROR</Text>;
+        null;
       }
     } else {
-      return <Text> ERROR</Text>;
+      return null;
     }
   };
 
@@ -170,7 +209,7 @@ export default function SignupScreen({ navigation }) {
             onPress={() => setNumQuestion(numQuestion - 1)}
           ></TouchableOpacity>
           <Text style={styles.countFormText}>
-            Question : {numQuestion}/{questionForm.length}
+            Question : {numQuestion + 1}/{questionForm.length}
           </Text>
           <TouchableOpacity
             style={styles.testbtn}
@@ -256,5 +295,33 @@ const styles = StyleSheet.create({
   },
   descdata: {
     fontFamily: "Manrope-ExtraLight",
+  },
+  sportBox: {
+    alignItems: "center",
+    padding: 10,
+
+    borderColor: "#ccc",
+    borderRadius: 12,
+    width: 200,
+    flexDirection: "row",
+  },
+  selectedBox: {
+    backgroundColor: "#7d6bb3",
+  },
+  sportImage: {
+    width: 80,
+    height: 80,
+    marginBottom: 8,
+  },
+  sportLabel: {
+    fontSize: 16,
+    textAlign: "center",
+  },
+  textinput: {
+    borderWidth: 2,
+    width: 350,
+    paddingHorizontal: 10,
+    height: 40,
+    marginBottom: 20,
   },
 });

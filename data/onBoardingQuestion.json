@@ -13,11 +13,11 @@
     "secondaryQuestion": "",
     "data": [
       {
-        "title": "age",
+        "title": "Age",
         "desc": "Entrez votre âge"
       },
       {
-        "title": "ville",
+        "title": "Ville",
         "desc": "Entrez votre ville"
       }
     ]
@@ -30,11 +30,11 @@
     "data": [
       {
         "title": "Paddle",
-        "src": ""
+        "src": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png"
       },
       {
         "title": "Natation",
-        "src": ""
+        "src": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png"
       }
     ]
   },
