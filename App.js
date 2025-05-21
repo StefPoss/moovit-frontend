@@ -1,13 +1,41 @@
 import { StatusBar } from "expo-status-bar";
-import { useFonts } from "expo-font"; // Import du module Expo pour l'usage des fonts
-import { StyleSheet, Text, View } from "react-native";
+import { useFonts } from "expo-font";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Splash from "./screens/Auth/SplashScreen";
 import Login from "./screens/Auth/LoginScreen";
 import SignUp from "./screens/Auth/SignupScreen";
-import Cgu from "./screens/Auth/CGUScreen";
+import CguScreen from "./screens/Auth/CGUScreen";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import userReducer from "./reducers/userSlice";
+import onBoardingReducer from "./reducers/onBoardingSlice";
+
+const rootReducer = combineReducers({
+  user: userReducer,
+  onBoarding: onBoardingReducer,
+});
+
+const persistConfig = {
+  key: "Moovit",
+  storage: AsyncStorage,
+  whitelist: ["user", "onBoarding"],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
+});
+
+const persistor = persistStore(store);
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -20,15 +48,19 @@ export default function App() {
   //if (!fontsLoaded) return null;
 
   return (
-    <NavigationContainer>
-      <StatusBar style="light" />
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Welcome" component={Splash} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="cgu" component={Cgu} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <StatusBar style="light" />
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Welcome" component={Splash} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="cgu" component={CguScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
+    </Provider>
   );
 }
 const styles = StyleSheet.create({

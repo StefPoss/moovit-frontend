@@ -7,7 +7,7 @@ export default function WelcomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Video
-        source={require("../../assets/video.mp4")}
+        source={require("../../assets/video_splash.mp4")}
         shouldPlay
         isLooping
         resizeMode="cover"
