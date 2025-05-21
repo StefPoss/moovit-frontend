@@ -6,13 +6,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Splash from "./screens/Auth/SplashScreen";
 import Login from "./screens/Auth/LoginScreen";
 import SignUp from "./screens/Auth/SignupScreen";
+import onBoardingForms from "./screens/OnBoarding/OnBoardingForms";
 import CguScreen from "./screens/Auth/CGUScreen";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import userReducer from "./reducers/userSlice";
 import onBoardingReducer from "./reducers/onBoardingSlice";
 
@@ -42,7 +42,13 @@ export default function App() {
   // Attention Android requiert le nom Exact des fonts - passage des fonts sur https://fontdrop.info/ pour avoir le nom reeal
   const [fontsLoaded] = useFonts({
     "CocomatPro-Regular": require("./assets/fonts/cocomat-pro-regular.ttf"), // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
-    "Manrope-ExtraLight": require("./assets/fonts/Manrope-ExtraLight.ttf"), // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
+    ManropeExtraLight: require("./assets/fonts/Manrope-ExtraLight.ttf"),
+    ManropeLight: require("./assets/fonts/Manrope-Light.ttf"),
+    ManropeRegular: require("./assets/fonts/Manrope-Regular.ttf"),
+    ManropeMedium: require("./assets/fonts/Manrope-Medium.ttf"),
+    ManropeSemiBold: require("./assets/fonts/Manrope-SemiBold.ttf"),
+    ManropeBold: require("./assets/fonts/Manrope-Bold.ttf"),
+    ManropeExtraBold: require("./assets/fonts/Manrope-ExtraBold.ttf"), // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
   });
 
   //if (!fontsLoaded) return null;
@@ -56,6 +62,7 @@ export default function App() {
             <Stack.Screen name="Welcome" component={Splash} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="onBoardingForms" component={onBoardingForms} />
             <Stack.Screen name="cgu" component={CguScreen} />
           </Stack.Navigator>
         </NavigationContainer>
