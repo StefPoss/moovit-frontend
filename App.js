@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Splash from "./screens/Auth/SplashScreen";
 import Login from "./screens/Auth/LoginScreen";
 import SignUp from "./screens/Auth/SignupScreen";
+import Cgu from "./screens/Auth/CGUScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
         <Stack.Screen name="Welcome" component={Splash} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="cgu" component={Cgu} />
       </Stack.Navigator>
     </NavigationContainer>
   );
