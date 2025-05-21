@@ -81,7 +81,7 @@ export default function SignupScreen({ navigation }) {
 
         {/* Sign in avec Button importé du composant*/}
         <Button
-          title="Sign In"
+          title="Sign Up"
           onPress={handleSignIn}
           backgroundColor="#cbb7ff"
           textColor="#000"
