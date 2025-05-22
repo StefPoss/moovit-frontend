@@ -1,9 +1,11 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import { ProgressBar, MD3Colors } from "react-native-paper";//importation du module progressbar de native-paper
 
-const activityCard = () => {
+const activityCard = (props) => {
 
+
+  // let text = 'Activitées'
+    
     const linkTo=()=>{}
 
   return (
@@ -12,7 +14,7 @@ const activityCard = () => {
           style={styles.button}
           onPress={() => linkTo}
         >
-          <Text>touchableOpacity Button</Text>
+          <Text style={styles.buttonText}>{props.text}</Text>
         </TouchableOpacity>
 
   );
@@ -25,5 +27,13 @@ const styles = StyleSheet.create({
     height:"150",//haut du boutton
     borderRadius:15,//arrondi des angles
     backgroundColor: "#FCEACE",//gris du figma
+    margin:5,
+  },
+  buttonText:{
+    flex:1,
+    textAlign:"center",
+    marginTop:55,
+    fontWeight:"700",
+
   },
 });
