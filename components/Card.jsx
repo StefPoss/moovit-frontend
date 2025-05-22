@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   CardContain: {
-    width: "80%",
+    width: "100%",
     paddingHorizontal: 30,
     marginHorizontal: "auto",
     borderRadius: 20,
