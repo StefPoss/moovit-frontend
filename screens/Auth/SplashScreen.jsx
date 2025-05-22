@@ -31,12 +31,12 @@ export default function WelcomeScreen({ navigation }) {
 
           <View style={styles.buttonContainer}>
             <Button
-              title="Sign up"
-              onPress={() => navigation.navigate("SignUp")}
+              title="S'inscrire"
+              onPress={() => navigation.navigate("S'inscrire")}
             />
             <Button
-              title="Log in"
-              onPress={() => navigation.navigate("Login")}
+              title="Se connecter"
+              onPress={() => navigation.navigate("Se connecter")}
               backgroundColor="transparent"
               textColor="#d6c9ff"
             />

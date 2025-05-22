@@ -4,14 +4,24 @@ import {
   Text,
   StyleSheet,
   ScrollView,
+  Touchable,
+  TouchableOpacity,
 } from "react-native";
 import cgu from "../../data/cgu-fr.json";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function CguScreen() {
+export default function CguScreen({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView style={styles.container}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back" size={24} color="#000" />
+        </TouchableOpacity>
+
         <Text style={styles.title}>{cgu.title}</Text>
         {cgu.content.map((section, index) => (
           <View key={index} style={styles.section}>
@@ -47,5 +57,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 22,
     color: "#333",
+  },
+  backButton: {
+    marginBottom: 16,
+    alignSelf: "flex-start",
   },
 });
