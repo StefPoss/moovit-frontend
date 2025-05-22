@@ -20,6 +20,7 @@ import {
   removeAllInfoToStore,
 } from "../../reducers/onBoardingSlice";
 import { useDispatch } from "react-redux";
+import { checkBody } from "../../modules/checkBody";
 
 export default function OnBoarding({ navigation }) {
   const [numQuestion, setNumQuestion] = useState(0);
@@ -58,6 +59,20 @@ export default function OnBoarding({ navigation }) {
         });
     }
   }, [numQuestion]);
+
+  const btnclick = () => {
+    if (questionForm[numQuestion]?.required) {
+      for (let i = 0; i < questionForm[numQuestion].data.length; i++) {
+        const key = questionForm[numQuestion].data[i].name;
+        if (!infos[key]) {
+          alert("Merci de remplir tous les champs obligatoires");
+          return;
+        }
+      }
+    }
+
+    setNumQuestion((n) => n + 1);
+  };
 
   const onBoardingDisp = (numQuestion) => {
     if (questionForm[numQuestion]?.type) {
@@ -125,10 +140,7 @@ export default function OnBoarding({ navigation }) {
 
         <View style={styles.formContent}>{onBoardingDisp(numQuestion)}</View>
         <View style={styles.fixedButton}>
-          <Button
-            title="Continuer"
-            onPress={() => setNumQuestion(numQuestion + 1)}
-          />
+          <Button title="Continuer" onPress={btnclick} />
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

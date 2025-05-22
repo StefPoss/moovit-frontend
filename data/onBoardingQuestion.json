@@ -2,7 +2,7 @@
   {
     "id": 1,
     "type": "checkBox",
-    "required": false,
+    "required": true,
     "mainQuestion": "Peux-tu nous en dire plus sur toi ?",
     "secondaryQuestion": "Ton genre ?",
     "data": [
@@ -14,37 +14,50 @@
   {
     "id": 2,
     "type": "fieldBox",
-    "required": false,
+    "required": true,
+
     "mainQuestion": "Peux-tu nous en dire plus sur toi ?",
     "secondaryQuestion": "",
     "data": [
-      { "title": "Age", "desc": "Entrez votre âge", "name": "age" },
-      { "title": "Ville", "desc": "Entrez votre ville", "name": "ville" }
+      {
+        "title": "Age",
+        "desc": "Entrez votre âge",
+        "name": "age",
+        "fieldType": "number"
+      },
+      {
+        "title": "Ville",
+        "desc": "Entrez votre ville",
+        "name": "city",
+        "fieldType": "string"
+      }
     ]
   },
   {
     "id": 2.1,
     "type": "fieldBox",
-    "required": false,
+    "required": true,
     "mainQuestion": "Peux-tu nous en dire plus sur toi ?",
     "secondaryQuestion": "",
     "data": [
       {
         "title": "Poids",
         "desc": "Entrez votre poids (en kg)",
-        "name": "poid"
+        "name": "poid",
+        "fieldType": "number"
       },
       {
         "title": "Taille",
         "desc": "Entrez votre taille (en cm)",
-        "name": "taille"
+        "name": "taille",
+        "fieldType": "number"
       }
     ]
   },
   {
     "id": 3,
     "type": "imgSelect",
-    "required": false,
+    "required": true,
     "mainQuestion": "",
     "secondaryQuestion": "Choisis ton sport ?",
     "data": [
@@ -63,7 +76,7 @@
   {
     "id": 4,
     "type": "checkBoxObject",
-    "required": false,
+    "required": true,
     "mainQuestion": "",
     "secondaryQuestion": "Choisis ton niveau ?",
     "data": [
