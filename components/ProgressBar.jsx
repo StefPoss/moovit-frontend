@@ -18,6 +18,6 @@ export default ProgressBarComp;
 
 const styles = StyleSheet.create({
   progress: {
-    width: "400",
+    width: "100vw",
   },
 });
