@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import cgu from "../../data/cgu-fr.json";
 import { SafeAreaView } from "react-native-safe-area-context";
 
