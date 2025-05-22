@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Video } from "expo-av";
-import Button from "../../components/buttons";
+import Button from "../../components/clickable/buttons";
 
 export default function WelcomeScreen({ navigation }) {
   return (
