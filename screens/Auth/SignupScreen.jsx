@@ -65,7 +65,7 @@ export default function SignupScreen({ navigation }) {
         {/* Password */}
         <View style={styles.input}>
           <TextInput
-            placeholder="Password"
+            placeholder="Mot de passe"
             placeholderTextColor="#aaa"
             secureTextEntry={!passwordVisible}
             style={styles.inputField}
@@ -81,14 +81,14 @@ export default function SignupScreen({ navigation }) {
 
         {/* Sign in avec Button importé du composant*/}
         <Button
-          title="Sign Up"
+          title="Se connecter"
           onPress={handleSignIn}
           backgroundColor="#cbb7ff"
           textColor="#000"
         />
 
         {/* Mot de passe oublié */}
-        <Text style={styles.forgotText}>Forgot password?</Text>
+        <Text style={styles.forgotText}>Mot de passe oublié ?</Text>
       </View>
       {/* Boutons sociaux visuels non fonctionnel pour l'instant */}
       <TouchableOpacity style={styles.socialButton}>

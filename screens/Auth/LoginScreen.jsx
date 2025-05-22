@@ -16,6 +16,8 @@ import Button from "../../components/buttons";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
@@ -62,7 +64,10 @@ export default function LoginScreen({ navigation }) {
               placeholder="Entrez votre password"
               secureTextEntry={!passwordVisible}
               style={styles.inputText}
+              value={password} // pour le state
+              onChangeText={setPassword}
             />
+
             <Pressable onPress={() => setPasswordVisible(!passwordVisible)}>
               <Ionicons
                 name={passwordVisible ? "eye-off" : "eye"}

@@ -64,10 +64,19 @@ export default function App() {
             <StatusBar style="light" />
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name="Welcome" component={Splash} />
+<<<<<<< HEAD
               <Stack.Screen name="SignUp" component={SignUp} />
               <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="onBoarding" component={onBoarding} />
               <Stack.Screen name="Dashboard" component={Dashboard} />
+=======
+              <Stack.Screen name="S'inscrire" component={SignUp} />
+              <Stack.Screen name="Se connecter" component={Login} />
+              <Stack.Screen
+                name="onBoardingForms"
+                component={onBoardingForms}
+              />
+>>>>>>> 0ad30714d3c223697f838923e4ddeee1f73fbf50
               <Stack.Screen name="cgu" component={CguScreen} />
             </Stack.Navigator>
           </NavigationContainer>
