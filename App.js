@@ -15,6 +15,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import userReducer from "./reducers/userSlice";
 import onBoardingReducer from "./reducers/onBoardingSlice";
+import { PaperProvider } from "react-native-paper";
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -48,7 +49,8 @@ export default function App() {
     ManropeMedium: require("./assets/fonts/Manrope-Medium.ttf"),
     ManropeSemiBold: require("./assets/fonts/Manrope-SemiBold.ttf"),
     ManropeBold: require("./assets/fonts/Manrope-Bold.ttf"),
-    ManropeExtraBold: require("./assets/fonts/Manrope-ExtraBold.ttf"), // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
+    ManropeExtraBold: require("./assets/fonts/Manrope-ExtraBold.ttf"),
+    MaterialCommunityIcons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"), // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
   });
 
   //if (!fontsLoaded) return null;
@@ -56,6 +58,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+<<<<<<< HEAD
         <NavigationContainer>
           <StatusBar style="light" />
           <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -66,6 +69,23 @@ export default function App() {
             <Stack.Screen name="cgu" component={CguScreen} />
           </Stack.Navigator>
         </NavigationContainer>
+=======
+        <PaperProvider>
+          <NavigationContainer>
+            <StatusBar style="light" />
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="Welcome" component={Splash} />
+              <Stack.Screen name="SignUp" component={SignUp} />
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen
+                name="onBoardingForms"
+                component={onBoardingForms}
+              />
+              <Stack.Screen name="cgu" component={CguScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PaperProvider>
+>>>>>>> 51654d582c59867c7f6d07282309233428362d10
       </PersistGate>
     </Provider>
   );
