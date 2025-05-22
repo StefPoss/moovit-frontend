@@ -4,12 +4,12 @@ const initialState = {
   value: [
     {
       token: "",
-      email: "",
+      photoUrl: "",
       username: "",
       admin: false,
       sportPlayed: "",
       xp: "",
-      niveau: "",
+      level: "",
     },
   ],
 };
