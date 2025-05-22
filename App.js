@@ -6,7 +6,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Splash from "./screens/Auth/SplashScreen";
 import Login from "./screens/Auth/LoginScreen";
 import SignUp from "./screens/Auth/SignupScreen";
-import onBoardingForms from "./screens/OnBoarding/OnBoardingForms";
+import onBoarding from "./screens/OnBoarding/OnBoardingForms";
+import Dashboard from "./screens/Main/Dashboard";
 import CguScreen from "./screens/Auth/CGUScreen";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -65,10 +66,8 @@ export default function App() {
               <Stack.Screen name="Welcome" component={Splash} />
               <Stack.Screen name="SignUp" component={SignUp} />
               <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen
-                name="onBoardingForms"
-                component={onBoardingForms}
-              />
+              <Stack.Screen name="onBoarding" component={onBoarding} />
+              <Stack.Screen name="Dashboard" component={Dashboard} />
               <Stack.Screen name="cgu" component={CguScreen} />
             </Stack.Navigator>
           </NavigationContainer>

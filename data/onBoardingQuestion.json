@@ -6,9 +6,9 @@
     "mainQuestion": "Peux-tu nous en dire plus sur toi ?",
     "secondaryQuestion": "Ton genre ?",
     "data": [
-      { "answer": "Masculin", "name": "genre" },
-      { "answer": "Féminin", "name": "genre" },
-      { "answer": "Non binaire", "name": "genre" }
+      { "answer": "Masculin", "name": "gender" },
+      { "answer": "Féminin", "name": "gender" },
+      { "answer": "Non binaire", "name": "gender" }
     ]
   },
   {
@@ -23,6 +23,25 @@
     ]
   },
   {
+    "id": 2.1,
+    "type": "fieldBox",
+    "required": false,
+    "mainQuestion": "Peux-tu nous en dire plus sur toi ?",
+    "secondaryQuestion": "",
+    "data": [
+      {
+        "title": "Poids",
+        "desc": "Entrez votre poids (en kg)",
+        "name": "poid"
+      },
+      {
+        "title": "Taille",
+        "desc": "Entrez votre taille (en cm)",
+        "name": "taille"
+      }
+    ]
+  },
+  {
     "id": 3,
     "type": "imgSelect",
     "required": false,
@@ -32,12 +51,12 @@
       {
         "title": "Paddle",
         "src": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png",
-        "name": "sport"
+        "name": "sportsPlayed"
       },
       {
         "title": "Natation",
         "src": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png",
-        "name": "sport"
+        "name": "sportsPlayed"
       }
     ]
   },
@@ -51,22 +70,22 @@
       {
         "main": "Aucune expérience",
         "desc": "Jamais fait un squat ? Aucun souci, on part de zéro.",
-        "name": "niveau"
+        "name": "level"
       },
       {
         "main": "Débutant",
         "desc": "Tu as déjà transpiré un peu… et tu veux y revenir.",
-        "name": "niveau"
+        "name": "level"
       },
       {
         "main": "Intermédiaire",
         "desc": "Tu connais la douleur des courbatures et t’en redemandes !",
-        "name": "niveau"
+        "name": "level"
       },
       {
         "main": "Avancé",
         "desc": "Tu vis pour les défis et les séances qui brûlent !",
-        "name": "niveau"
+        "name": "level"
       }
     ]
   },
@@ -77,10 +96,10 @@
     "mainQuestion": "",
     "secondaryQuestion": "Pourquoi cherches-tu un coach ?",
     "data": [
-      { "answer": "Pour me motiver", "name": "raison" },
-      { "answer": "Pour me challenger", "name": "raison" },
-      { "answer": "Pour rencontrer d’autres pratiquants", "name": "raison" },
-      { "answer": "Pour découvrir la pratique", "name": "raison" }
+      { "answer": "Pour me motiver", "name": "reason" },
+      { "answer": "Pour me challenger", "name": "reason" },
+      { "answer": "Pour rencontrer d’autres pratiquants", "name": "reason" },
+      { "answer": "Pour découvrir la pratique", "name": "reason" }
     ]
   },
   {
@@ -90,10 +109,10 @@
     "mainQuestion": "",
     "secondaryQuestion": "Quel est ton objectif ?",
     "data": [
-      { "answer": "15 min/jour", "name": "objectif" },
-      { "answer": "30 min/jour", "name": "objectif" },
-      { "answer": "4 h/semaine", "name": "objectif" },
-      { "answer": "8 h/semaine ou plus", "name": "objectif" }
+      { "answer": "15 min/jour", "name": "dayTime" },
+      { "answer": "30 min/jour", "name": "dayTime" },
+      { "answer": "4 h/semaine", "name": "dayTime" },
+      { "answer": "8 h/semaine ou plus", "name": "dayTime" }
     ]
   }
 ]

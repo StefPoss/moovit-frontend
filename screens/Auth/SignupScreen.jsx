@@ -20,16 +20,15 @@ export default function SignupScreen({ navigation }) {
 
   // si l'email est invalid afficher le message d'erreur
   const handleSignIn = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // regex pour valider l'email avec @ obligatoire au moins 1 caractère sauf espace
-    if (!emailRegex.test(email)) {
-      // si l'email ne correspond pas au format défini par regex alors...
-      setEmailError("Email invalide");
-    } else {
-      setEmailError(""); // sinon on efface l'erreur
-      console.log("Inscription réussie");
-      () => navigation.navigate("onBoardingForms");
-      // navigation ou appel API ici vers le backend
-    }
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // regex pour valider l'email avec @ obligatoire au moins 1 caractère sauf espace
+    // if (!emailRegex.test(email)) {
+    //   // si l'email ne correspond pas au format défini par regex alors...
+    //   setEmailError("Email invalide");
+    // } else {
+    //   setEmailError(""); // sinon on efface l'erreur
+    //   console.log("Inscription réussie");
+    navigation.navigate("onBoarding");
+    // navigation ou appel API ici vers le backend
   };
 
   return (
