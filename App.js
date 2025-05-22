@@ -59,9 +59,9 @@ export default function App() {
         <NavigationContainer>
           <StatusBar style="light" />
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Welcome" component={Splash} />
+            {/* <Stack.Screen name="Welcome" component={Splash} />
             <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Login" component={Login} /> */}
             <Stack.Screen name="onBoardingForms" component={onBoardingForms} />
             <Stack.Screen name="cgu" component={CguScreen} />
           </Stack.Navigator>
