@@ -17,12 +17,20 @@ import Button from "../../components/buttons";
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleLogin = () => {
-    console.log("Connexion...");
-    // logique à intégrer plus tard
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // regex pour valider l'email avec @ obligatoire au moins 1 caractère sauf espace
+    if (!emailRegex.test(email)) {
+      // si l'email ne correspond pas au format défini par regex alors...
+      setEmailError("Email invalide");
+    } else {
+      setEmailError(""); // sinon on efface l'erreur
+      console.log("Connexion réussie");
+      // navigation ou appel API ici vers le backend
+    }
   };
 
   return (
@@ -46,42 +54,49 @@ export default function LoginScreen({ navigation }) {
           ton coach sportif de poche !
         </Text>
 
-        <View style={styles.form}>
-          <TextInput
-            placeholder="Entrez votre email"
-            style={styles.input}
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-
-          <View style={styles.inputRow}>
+        <View style={styles.formContainer}>
+          <View style={styles.form}>
             <TextInput
-              placeholder="Entrez votre password"
-              secureTextEntry={!passwordVisible}
-              style={styles.inputText}
-              value={password} // pour le state
-              onChangeText={setPassword}
+              placeholder="Entrez votre email"
+              placeholderTextColor="#aaa"
+              style={styles.input}
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
             />
-
-            <Pressable onPress={() => setPasswordVisible(!passwordVisible)}>
-              <Ionicons
-                name={passwordVisible ? "eye-off" : "eye"}
-                size={20}
-                color="#777"
+            {emailError !== "" && (
+              <Text style={{ color: "red", marginTop: 4, marginLeft: 4 }}>
+                {emailError}
+              </Text>
+            )}
+            <View style={styles.inputRow}>
+              <TextInput
+                placeholder="Entrez votre mot de passe"
+                placeholderTextColor="#aaa"
+                secureTextEntry={!passwordVisible}
+                style={styles.inputText}
+                value={password} // pour le state
+                onChangeText={setPassword}
               />
-            </Pressable>
+
+              <Pressable onPress={() => setPasswordVisible(!passwordVisible)}>
+                <Ionicons
+                  name={passwordVisible ? "eye-off" : "eye"}
+                  size={20}
+                  color="#777"
+                />
+              </Pressable>
+            </View>
+
+            <Button
+              title="Se connecter"
+              onPress={handleLogin}
+              backgroundColor="#cbb7ff"
+              textColor="#000"
+            />
           </View>
-
-          <Button
-            title="Sign In"
-            onPress={handleLogin}
-            backgroundColor="#cbb7ff"
-            textColor="#000"
-          />
         </View>
-
         {/* Boutons sociaux sans fonctionnalité pour l'instant */}
         <TouchableOpacity style={styles.socialButton}>
           <AntDesign name="google" size={20} color="#000" />
@@ -104,10 +119,24 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  formContainer: {
+    backgroundColor: "#f9f9f9", // fond gris clair
+    borderRadius: 16,
+    padding: 20,
+    marginVertical: 10,
+    marginHorizontal: 16,
+    width: "100%",
+    marginBottom: 40,
+  },
+
+  /*form: {
+  gap: 50,
+},*/
+
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    padding: 30,
+    padding: 20,
     paddingTop: 90,
     alignItems: "center",
   },
@@ -120,7 +149,9 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: "center",
     fontFamily: "CocomatPro-Regular",
-    marginBottom: 80,
+    marginBottom: 60,
+    paddingTop: 20,
+
     color: "#000",
   },
   brand: {
@@ -128,7 +159,7 @@ const styles = StyleSheet.create({
   },
   form: {
     width: "100%",
-    marginBottom: 20,
+    marginBottom: 30,
   },
   label: {
     fontSize: 13,
@@ -140,7 +171,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#aaa",
+    borderColor: "#ddd",
     paddingHorizontal: 16,
     marginBottom: 16,
     fontFamily: "Manrope-Extralight",
@@ -150,7 +181,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#aaa",
+    borderColor: "#ddd",
     paddingHorizontal: 16,
     marginBottom: 16,
     flexDirection: "row",
@@ -158,7 +189,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   inputText: {
-    flex: 1,
+    //flex: 1,
     fontFamily: "Manrope-Extralight",
   },
   socialButton: {
