@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -20,9 +20,12 @@ export default function LoginScreen({ navigation }) {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  useEffect(() => {
+    console.log(email);
+  }, [email]);
+
   const handleLogin = () => {
     console.log("Connexion...");
-    // logique à intégrer plus tard
   };
 
   return (
