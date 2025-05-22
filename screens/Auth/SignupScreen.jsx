@@ -27,8 +27,8 @@ export default function SignupScreen({ navigation }) {
     } else {
       setEmailError(""); // sinon on efface l'erreur
       console.log("Inscription réussie");
-      // navigation ou appel API ici vers le backend
-    }
+      navigation.navigate("onBoarding");
+    } // navigation ou appel API ici vers le backend
   };
 
   return (
