@@ -7,7 +7,8 @@ import Splash from "./screens/Auth/SplashScreen";
 import Login from "./screens/Auth/LoginScreen";
 import Dashboard from "./screens/autre/Dashboard";
 import SignUp from "./screens/Auth/SignupScreen";
-import onBoardingForms from "./screens/OnBoarding/OnBoardingForms";
+import onBoarding from "./screens/OnBoarding/OnBoardingForms";
+import Dashboard from "./screens/Main/Dashboard";
 import CguScreen from "./screens/Auth/CGUScreen";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -63,9 +64,9 @@ export default function App() {
           <NavigationContainer>
             <StatusBar style="light" />
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              {/* <Stack.Screen name="Welcome" component={Splash} />
-              <Stack.Screen name="SignUp" component={SignUp} />
-              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Welcome" component={Splash} />
+              <Stack.Screen name="S'inscrire" component={SignUp} />
+              <Stack.Screen name="Se connecter" component={Login} />
               <Stack.Screen
                 name="onBoardingForms"
                 component={onBoardingForms}

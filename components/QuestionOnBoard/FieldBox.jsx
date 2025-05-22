@@ -25,6 +25,7 @@ export default function FieldBox({ question, infos, handleChange }) {
               onChangeText={(text) => handleChange(data.name, text)}
               placeholder={data.desc}
               style={styles.input}
+              keyboardType={data.fieldType === "number" ? "numeric" : "default"}
             />
           </View>
         ))}

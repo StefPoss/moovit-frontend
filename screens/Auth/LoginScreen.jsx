@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -16,11 +16,16 @@ import Button from "../../components/buttons";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  useEffect(() => {
+    console.log(email);
+  }, [email]);
 
   const handleLogin = () => {
     console.log("Connexion...");
-    // logique à intégrer plus tard
   };
 
   return (
@@ -59,7 +64,10 @@ export default function LoginScreen({ navigation }) {
               placeholder="Entrez votre password"
               secureTextEntry={!passwordVisible}
               style={styles.inputText}
+              value={password} // pour le state
+              onChangeText={setPassword}
             />
+
             <Pressable onPress={() => setPasswordVisible(!passwordVisible)}>
               <Ionicons
                 name={passwordVisible ? "eye-off" : "eye"}

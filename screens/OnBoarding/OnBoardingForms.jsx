@@ -15,20 +15,64 @@ import CheckBoxGroup from "../../components/QuestionOnBoard/CheckBoxGroup";
 import FieldBox from "../../components/QuestionOnBoard/FieldBox";
 import ImageSelect from "../../components/QuestionOnBoard/ImageSelect";
 import CheckBoxObjectGroup from "../../components/QuestionOnBoard/CheckBoxObjectGroup";
+import {
+  addInfoToStore,
+  removeAllInfoToStore,
+} from "../../reducers/onBoardingSlice";
+import { useDispatch } from "react-redux";
+import { checkBody } from "../../modules/checkBody";
 
 export default function OnBoarding({ navigation }) {
   const [numQuestion, setNumQuestion] = useState(0);
   const [infos, setInfos] = useState({});
+  const dispatch = useDispatch();
 
   const handleChange = (key, value) => {
     setInfos((e) => ({ ...e, [key]: value }));
   };
-
-  if (numQuestion === questionForm.length) {
-  }
   useEffect(() => {
-    console.log(infos);
+    dispatch(addInfoToStore(infos));
   }, [infos]);
+
+  useEffect(() => {
+    if (numQuestion >= questionForm.length) {
+      fetch("http://localhost:3000/api/users/onboarding", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(infos),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Backend non atteint");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Réponse du backend :", data);
+          navigation.navigate("Dashboard");
+          dispatch(removeAllInfoToStore());
+        })
+        .catch((error) => {
+          console.error("Erreur lors de l’envoi :", error);
+        });
+    }
+  }, [numQuestion]);
+
+  const btnclick = () => {
+    if (questionForm[numQuestion]?.required) {
+      for (let i = 0; i < questionForm[numQuestion].data.length; i++) {
+        const key = questionForm[numQuestion].data[i].name;
+        if (!infos[key]) {
+          alert("Merci de remplir tous les champs obligatoires");
+          return;
+        }
+      }
+    }
+
+    setNumQuestion((n) => n + 1);
+  };
 
   const onBoardingDisp = (numQuestion) => {
     if (questionForm[numQuestion]?.type) {
@@ -85,17 +129,9 @@ export default function OnBoarding({ navigation }) {
       >
         <View>
           <View style={styles.countForm}>
-            <TouchableOpacity
-              style={styles.testbtn1}
-              onPress={() => setNumQuestion(numQuestion - 1)}
-            ></TouchableOpacity>
             <Text style={styles.countFormText}>
               Question : {numQuestion + 1}/{questionForm.length}
             </Text>
-            <TouchableOpacity
-              style={styles.testbtn}
-              onPress={() => setNumQuestion(numQuestion + 1)}
-            ></TouchableOpacity>
           </View>
           <View>
             <ProgressBarComp count={numQuestion} />
@@ -104,10 +140,7 @@ export default function OnBoarding({ navigation }) {
 
         <View style={styles.formContent}>{onBoardingDisp(numQuestion)}</View>
         <View style={styles.fixedButton}>
-          <Button
-            title="Continuer"
-            onPress={() => setNumQuestion(numQuestion + 1)}
-          />
+          <Button title="Continuer" onPress={btnclick} />
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

@@ -27,8 +27,8 @@ export default function SignupScreen({ navigation }) {
     } else {
       setEmailError(""); // sinon on efface l'erreur
       console.log("Inscription réussie");
-      // navigation ou appel API ici vers le backend
-    }
+      navigation.navigate("onBoarding");
+    } // navigation ou appel API ici vers le backend
   };
 
   return (
@@ -65,7 +65,7 @@ export default function SignupScreen({ navigation }) {
         {/* Password */}
         <View style={styles.input}>
           <TextInput
-            placeholder="Password"
+            placeholder="Mot de passe"
             placeholderTextColor="#aaa"
             secureTextEntry={!passwordVisible}
             style={styles.inputField}
@@ -81,14 +81,14 @@ export default function SignupScreen({ navigation }) {
 
         {/* Sign in avec Button importé du composant*/}
         <Button
-          title="Sign In"
+          title="Se connecter"
           onPress={handleSignIn}
           backgroundColor="#cbb7ff"
           textColor="#000"
         />
 
         {/* Mot de passe oublié */}
-        <Text style={styles.forgotText}>Forgot password?</Text>
+        <Text style={styles.forgotText}>Mot de passe oublié ?</Text>
       </View>
       {/* Boutons sociaux visuels non fonctionnel pour l'instant */}
       <TouchableOpacity style={styles.socialButton}>
