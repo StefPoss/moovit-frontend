@@ -58,18 +58,6 @@ export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-<<<<<<< HEAD
-        <NavigationContainer>
-          <StatusBar style="light" />
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            {/* <Stack.Screen name="Welcome" component={Splash} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="Login" component={Login} /> */}
-            <Stack.Screen name="onBoardingForms" component={onBoardingForms} />
-            <Stack.Screen name="cgu" component={CguScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-=======
         <PaperProvider>
           <NavigationContainer>
             <StatusBar style="light" />
@@ -85,7 +73,6 @@ export default function App() {
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
->>>>>>> 51654d582c59867c7f6d07282309233428362d10
       </PersistGate>
     </Provider>
   );
