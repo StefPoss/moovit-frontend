@@ -63,7 +63,7 @@ export default function App() {
           <NavigationContainer>
             <StatusBar style="light" />
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              {/* <Stack.Screen name="Welcome" component={Splash} />
+              <Stack.Screen name="Welcome" component={Splash} />
               <Stack.Screen name="S'inscrire" component={SignUp} />
               <Stack.Screen name="Se connecter" component={Login} />
               <Stack.Screen name="onBoarding" component={onBoarding} />
