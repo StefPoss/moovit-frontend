@@ -34,7 +34,7 @@ export default function DashBoard(props) {
             backgroundColor="#FEF5F8" //gris du figma
             textColor="blue"
           />
-          <CardLevelClicable
+          <StaticCard
             color="black"
             fontWeight="700"
             text="amel"

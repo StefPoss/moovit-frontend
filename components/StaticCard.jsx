@@ -2,18 +2,18 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 function StaticCard({
-    title='',
+    text='',
     width= "350", //long du boutton
     height= "75", //haut du boutton
     backgroundColor= "#000", //gris du figma
-    textColor="#000",
+    color="#000",
 }) {
   
   return (
     <View 
     style={[styles.static, {width, height, backgroundColor }]}
     >
-      <Text style={[styles.staticText, { color: textColor }]}>{title}</Text>
+      <Text style={[styles.staticText, { color: color }]}>{text}</Text>
     </View>
   );
 };
