@@ -7,6 +7,9 @@ import {
 } from "react-native-safe-area-context";
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { API_URL } from "@env"
+import { useDispatch } from "react-redux"
+import { addUserToStore } from "../../reducers/userSlice"
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
@@ -32,13 +35,14 @@ export default function DashBoard(props) {
   //      />
 
   const User = useSelector((state) => state.user.value);
+  const dispatch = useDispatch()
 
   //useEffect pour charger les données au chargement de la page
 useEffect(() => 
 {
   
   //requete vers le back 
-  fetch("http://localhost:3000/api/users/dashboard",
+  fetch(`${API_URL}/api/users/dashboard`,
   {
     method: 'POST', // méthode HTTP POST pour envoyer les données
     headers: { 'Content-Type': 'application/json' }, // type de contenu envoyé en JSON
@@ -49,7 +53,29 @@ useEffect(() =>
     })
   }).then(r=>r.json()).then(data=>
   {
-    console.log(data);
+    //console.log(data);
+    
+    if(data.result)
+    {
+      let newUser = 
+      {
+        token: data.dataUser.token,
+        photoUrl:  data.dataUser.token,
+        username:  data.dataUser.username,
+        admin: false,
+        sportPlayed:  data.dataUser.sportPlayed[0],
+        xp:  data.dataUser.xp,
+        level:  data.dataUser.level,
+      }
+      dispatch(addUserToStore(newUser))
+
+
+      console.log(User);
+      
+
+
+    }
+    
     
 
   })
