@@ -10,25 +10,34 @@ import {
   KeyboardAvoidingView,
 } from "react-native"; // import des composants react native
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
-import Button from "../../components/buttons";
+import Button from "../../components/Buttons";
+import { checkBody } from "../../modules/checkBody";
 
 export default function SignupScreen({ navigation }) {
   // état pour afficher ou cacher le mot de passe
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState(""); // état pour gérer la valeur du champ email avec initialisation
   const [emailError, setEmailError] = useState("");
+  const [password] = useState("");
 
   // si l'email est invalid afficher le message d'erreur
-  const handleSignIn = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // regex pour valider l'email avec @ obligatoire au moins 1 caractère sauf espace
+  const handleSignup = () => {
+    const requiredFields = ["email", "password"];
+    const body = { email, password };
+
+    if (!checkBody(body, requiredFields)) {
+      setEmailError("Tous les champs sont requis");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      // si l'email ne correspond pas au format défini par regex alors...
       setEmailError("Email invalide");
     } else {
-      setEmailError(""); // sinon on efface l'erreur
-      console.log("Inscription réussie");
-      navigation.navigate("onBoarding");
-    } // navigation ou appel API ici vers le backend
+      setEmailError("");
+      console.log("Connexion réussie");
+      navigation.navigate("onBoarding"); // ou API
+    }
   };
 
   return (
@@ -82,7 +91,7 @@ export default function SignupScreen({ navigation }) {
         {/* Sign in avec Button importé du composant*/}
         <Button
           title="S'inscrire"
-          onPress={handleSignIn}
+          onPress={handleSignup}
           backgroundColor="#cbb7ff"
           textColor="#000"
         />

@@ -12,7 +12,8 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
-import Button from "../../components/buttons";
+import Button from "../../components/Buttons";
+import { checkBody } from "../../modules/checkBody";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -26,9 +27,23 @@ export default function LoginScreen({ navigation }) {
   }, [email]);
 
   const handleLogin = () => {
-    console.log("Connexion...");
-  };
+    const requiredFields = ["email", "password"];
+    const body = { email, password };
 
+    if (!checkBody(body, requiredFields)) {
+      setEmailError("Tous les champs sont requis");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("Email invalide");
+    } else {
+      setEmailError("");
+      console.log("Connexion réussie");
+      navigation.navigate("onBoarding"); // ou API
+    }
+  };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -217,3 +232,22 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 });
+
+/*const handleLogin = () => {
+  const requiredFields = ['email', 'password'];
+  const body = { email, password };
+
+  if (!checkBody(body, requiredFields)) {
+    setEmailError("Tous les champs sont requis");
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    setEmailError("Email invalide");
+  } else {
+    setEmailError("");
+    console.log("Connexion réussie");
+    navigation.navigate("onBoarding"); // ou API
+  }
+};*/
