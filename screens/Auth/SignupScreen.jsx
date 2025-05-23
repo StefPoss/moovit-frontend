@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,13 +12,22 @@ import {
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import Button from "../../components/Buttons";
 import { checkBody } from "../../modules/checkBody";
+import Button from "../../components/Buttons";
+import { useDispatch } from "react-redux";
+import { addUserToStore } from "../../reducers/userSlice";
 
 export default function SignupScreen({ navigation }) {
   // état pour afficher ou cacher le mot de passe
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState(""); // état pour gérer la valeur du champ email avec initialisation
   const [emailError, setEmailError] = useState("");
-  const [password] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(password);
+    console.log(email);
+  }, [password, email]);
 
   // si l'email est invalid afficher le message d'erreur
   const handleSignup = () => {
@@ -34,10 +43,36 @@ export default function SignupScreen({ navigation }) {
     if (!emailRegex.test(email)) {
       setEmailError("Email invalide");
     } else {
-      setEmailError("");
-      console.log("Connexion réussie");
-      navigation.navigate("onBoarding"); // ou API
-    }
+      setEmailError(""); // sinon on efface l'erreur
+
+      fetch("http://localhost:3000/api/users/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password: password, email: email }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Backend non atteint");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.result) {
+            console.log("Réponse du backend :", data);
+            dispatch(addUserToStore({ token: data.token }));
+            navigation.navigate("onBoarding");
+          } else {
+            alert(data.error);
+          }
+        })
+        .catch((error) => {
+          console.error("Erreur lors de l’envoi :", error);
+        });
+
+      console.log("Inscription réussie");
+    } // navigation ou appel API ici vers le backend
   };
 
   return (
@@ -64,7 +99,7 @@ export default function SignupScreen({ navigation }) {
             placeholderTextColor="#aaa"
             style={styles.inputField} // style appliqué uniquement sur le champs du texte
             value={email}
-            onChangeText={setEmail}
+            onChangeText={(value) => setEmail(value)}
             keyboardType="email-address"
             autoCapitalize="none"
           />
@@ -76,6 +111,8 @@ export default function SignupScreen({ navigation }) {
           <TextInput
             placeholder="Mot de passe"
             placeholderTextColor="#aaa"
+            onChangeText={(value) => setPassword(value)}
+            value={password}
             secureTextEntry={!passwordVisible}
             style={styles.inputField}
           />
