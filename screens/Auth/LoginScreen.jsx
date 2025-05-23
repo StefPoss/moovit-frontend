@@ -13,36 +13,40 @@ import {
 } from "react-native";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import Button from "../../components/buttons";
+import { addUserToStore } from "../../reducers/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [passwordVisible, setPasswordVisible] = useState(false);
-
+  const dispatch = useDispatch();
   const handleLogin = () => {
-
-     // Envoi d'une requête POST à l'API backend pour la route /signin
-    fetch("http://localhost:3000/api/users/signin",
-    {
-      method: 'POST', // méthode HTTP POST pour envoyer les données
-      headers: { 'Content-Type': 'application/json' }, // type de contenu envoyé en JSON
-      body: JSON.stringify(
-      {
-        email:email,  // email saisi par l'utilisateur
-        password:password, // mot de passe saisi par l'utilisateur
-      })
+    // Envoi d'une requête POST à l'API backend pour la route /signin
+    fetch("http://localhost:3000/api/users/signin", {
+      method: "POST", // méthode HTTP POST pour envoyer les données
+      headers: { "Content-Type": "application/json" }, // type de contenu envoyé en JSON
+      body: JSON.stringify({
+        email: email, // email saisi par l'utilisateur
+        password: password, // mot de passe saisi par l'utilisateur
+      }),
       // transformation de la réponse en objet JSON
-    }).then(r=>r.json()).then(resultData=>
-    {
-      // Si le login est réussi
-      if(resultData.result)
-      {
-        
-        //envoi vers le screen dashboard
-        //navigation.navigate("Dashboard")
-      }
     })
+      .then((data) => data.json())
+      .then((resultData) => {
+        // Si le login est réussi
+        if (resultData.result && resultData.sport.length === 0) {
+          //envoi vers le screen dashboard
+          navigation.navigate("onBoarding");
+          dispatch(addUserToStore({ token: data.token }));
+        } else if (resultData.result && resultData.sport.length > 0) {
+          navigation.navigate("Dashboard");
+          dispatch(addUserToStore({ token: data.token }));
+        } else {
+          alert(resultData.error);
+        }
+      });
   };
 
   return (
