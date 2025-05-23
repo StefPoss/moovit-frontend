@@ -5,7 +5,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Splash from "./screens/Auth/SplashScreen";
 import Login from "./screens/Auth/LoginScreen";
-import Dashboard from "./screens/autre/Dashboard";
 import SignUp from "./screens/Auth/SignupScreen";
 import onBoarding from "./screens/OnBoarding/OnBoardingForms";
 import Dashboard from "./screens/Main/Dashboard";
@@ -64,14 +63,14 @@ export default function App() {
           <NavigationContainer>
             <StatusBar style="light" />
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="Welcome" component={Splash} />
+              {/* <Stack.Screen name="Welcome" component={Splash} />
               <Stack.Screen name="S'inscrire" component={SignUp} />
               <Stack.Screen name="Se connecter" component={Login} />
               <Stack.Screen
                 name="onBoardingForms"
                 component={onBoardingForms}
               />
-              <Stack.Screen name="cgu" component={CguScreen} /> */}
+              <Stack.Screen name="cgu" component={CguScreen} />  */}
 
               <Stack.Screen name="Dashboard" component={Dashboard} />
 

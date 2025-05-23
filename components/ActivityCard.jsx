@@ -1,39 +1,55 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
-const activityCard = (props) => {
+function activityCard({
+  text = "",
+  width = "150", //long du boutton
+  height = "150", //haut du boutton
+  backgroundColor = "#FCEACE", //gris du figma
+  url = "https://reactnative.dev/img/tiny_logo.png",
 
-
-  // let text = 'Activitées'
-    
-    const linkTo=()=>{}
+  color = "black",
+  fontWeight = "700",
+}) {
+  const linkTo = () => {};
 
   return (
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => linkTo}
-        >
-          <Text style={styles.buttonText}>{props.text}</Text>
-        </TouchableOpacity>
-
+    <TouchableOpacity
+      onPress={() => linkTo}
+      style={[styles.button, { width, height, backgroundColor }]}
+    >
+      <Image
+        style={[styles.tinyLogo, { width, height }]}
+        source={{
+          uri: url,
+        }}
+      />
+      <Text style={[styles.buttonText, { color, fontWeight }]}>{text}</Text>
+    </TouchableOpacity>
   );
-};
+}
 export default activityCard;
 
 const styles = StyleSheet.create({
   button: {
-    width: "150",//long du boutton
-    height:"150",//haut du boutton
-    borderRadius:15,//arrondi des angles
-    backgroundColor: "#FCEACE",//gris du figma
-    margin:5,
+    width: "150", //long du boutton
+    height: "150", //haut du boutton
+    borderRadius: 15, //arrondi des angles
+    backgroundColor: "#FCEACE", //gris du figma
+    margin: 5,
   },
-  buttonText:{
-    flex:1,
-    textAlign:"center",
-    marginTop:55,
-    fontWeight:"700",
 
+  buttonText: {
+    flex: 0,
+   zIndex:99999,
+    textAlign: "center",
+     marginTop:-100,
+    fontWeight: "700",
+    color: "black",
+  },
+  tinyLogo: {
+    borderRadius: 15,
+    width: 66,
+    height: 58,
   },
 });
