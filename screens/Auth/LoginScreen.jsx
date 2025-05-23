@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -20,12 +20,29 @@ export default function LoginScreen({ navigation }) {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  useEffect(() => {
-    console.log(email);
-  }, [email]);
-
   const handleLogin = () => {
-    console.log("Connexion...");
+
+     // Envoi d'une requête POST à l'API backend pour la route /signin
+    fetch("http://localhost:3000/api/users/signin",
+    {
+      method: 'POST', // méthode HTTP POST pour envoyer les données
+      headers: { 'Content-Type': 'application/json' }, // type de contenu envoyé en JSON
+      body: JSON.stringify(
+      {
+        email:email,  // email saisi par l'utilisateur
+        password:password, // mot de passe saisi par l'utilisateur
+      })
+      // transformation de la réponse en objet JSON
+    }).then(r=>r.json()).then(resultData=>
+    {
+      // Si le login est réussi
+      if(resultData.result)
+      {
+        
+        //envoi vers le screen dashboard
+        //navigation.navigate("Dashboard")
+      }
+    })
   };
 
   return (
