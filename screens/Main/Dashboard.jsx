@@ -13,34 +13,44 @@ import {
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function DashBoard(props) {
-  <ActivityCard
-    text=""
-    width="150" //long du boutton
-    height="150" //haut du boutton
-    backgroundColor="#FCEACE" //gris du figma
-    url="https://reactnative.dev/img/tiny_logo.png"
-    color="black"
-    fontWeight="700"
-  />;
+  // <ActivityCard    //clickable
+  //   text=""//texte a afficher dans le bouton
+  //   width="150" //long du boutton
+  //   height="150" //haut du boutton
+  //   backgroundColor="#FCEACE" //gris du figma
+  //   url="https://reactnative.dev/img/tiny_logo.png"//url de l'image
+  //   color="black"//couleur de la font
+  //   fontWeight="700"//fontsize
+  // />;
 
+  //  <StaticCard   //NON-clickable
+  //     text="user" //texte a afficher dans le bouton
+  //     textAlign="left" //affichage du text left/center/right
+  //     width="340" //long du boutton
+  //     height="70" //haut du boutton
+  //     backgroundColor="lightgrey" //couleur du bg
+  //     color="green"//couleur de la font
+  //     fontWeight="700"//fontsize
+  //      />
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
         <View style={styles.container}>
           <StaticCard
-            title="user"
-            width="340" //long du boutton
-            height="70" //haut du boutton
-            backgroundColor="#FEF5F8" //gris du figma
-            textColor="blue"
+            text="user"
+            textAlign="left"
+            width="340" 
+            height="70" 
+            backgroundColor="lightgrey" 
+            color="green"
           />
           <StaticCard
             color="black"
             fontWeight="700"
             text="amel"
-            width="340" //long du boutton
-            height="75" //haut du boutton
-            backgroundColor="#C5C4D9" //gris du figma
+            width="340" 
+            height="75" 
+            backgroundColor="#C5C4D9" 
             url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
           />
           <Text style={styles.text}>Training Now</Text>
@@ -48,7 +58,7 @@ export default function DashBoard(props) {
             <ScrollView
               contentContainerStyle={{ padding: 5 }}
               horizontal={true} //permet le scroll horizontal
-              // showHorizontalScrollIndicator={false} //affiche une barre de scroll
+              showHorizontalScrollIndicator={false} //affiche une barre de scroll
               style={styles.scrollView}
             >
               <ActivityCard
@@ -74,7 +84,10 @@ export default function DashBoard(props) {
           <StaticCard
             width="340" //long du boutton
             height="150" //haut du boutton
-            backgroundColor="#FEF5F8" //gris du figma
+            backgroundColor="#EF5F8" 
+            color="white"
+            text="statistic"
+            textAlign="left"
           />
           <View style={styles.bottomButton}>
             <ActivityCard style={styles.activity} text="Amel" url="" />
@@ -82,6 +95,7 @@ export default function DashBoard(props) {
               width="200" //long du boutton
               height="150" //haut du boutton
               backgroundColor="#C5C4D9" //gris du figma
+              
             />
           </View>
         </View>
