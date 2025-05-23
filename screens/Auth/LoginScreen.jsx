@@ -15,6 +15,7 @@ import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import Button from "../../components/buttons";
 import { addUserToStore } from "../../reducers/userSlice";
 import { useDispatch } from "react-redux";
+import { API_URL } from "@env";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
   const handleLogin = () => {
     // Envoi d'une requête POST à l'API backend pour la route /signin
-    fetch("http://localhost:3000/api/users/signin", {
+    fetch(`${API_URL}/api/users/signin`, {
       method: "POST", // méthode HTTP POST pour envoyer les données
       headers: { "Content-Type": "application/json" }, // type de contenu envoyé en JSON
       body: JSON.stringify({
