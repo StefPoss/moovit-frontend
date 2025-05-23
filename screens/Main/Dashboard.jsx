@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import ActivityCard from "../../components/ActivityCard";
+import CardLevelClicable from "../../components/CardLevelClicable";
 import StaticCard from "../../components/StaticCard";
 import {
   SafeAreaView,
@@ -12,17 +13,16 @@ import {
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function DashBoard(props) {
+  <ActivityCard
+    text=""
+    width="150" //long du boutton
+    height="150" //haut du boutton
+    backgroundColor="#FCEACE" //gris du figma
+    url="https://reactnative.dev/img/tiny_logo.png"
+    color="black"
+    fontWeight="700"
+  />;
 
-<ActivityCard
-  text = ""
-  width = "150"//long du boutton
-  height = "150" //haut du boutton
-  backgroundColor = "#FCEACE" //gris du figma
-  url = "https://reactnative.dev/img/tiny_logo.png"
-  color = "black"
-  fontWeight = "700"
-              />
-  
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
@@ -34,12 +34,14 @@ export default function DashBoard(props) {
             backgroundColor="#FEF5F8" //gris du figma
             textColor="blue"
           />
-          <StaticCard
-            title="amel"
+          <CardLevelClicable
+            color="black"
+            fontWeight="700"
+            text="amel"
             width="340" //long du boutton
             height="75" //haut du boutton
-            backgroundColor="black" //gris du figma
-            textColor="white"
+            backgroundColor="#C5C4D9" //gris du figma
+            url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
           />
           <Text style={styles.text}>Training Now</Text>
           <View style={styles.topButton}>
@@ -49,20 +51,23 @@ export default function DashBoard(props) {
               // showHorizontalScrollIndicator={false} //affiche une barre de scroll
               style={styles.scrollView}
             >
-              <ActivityCard style={styles.activity} text="nico" />
               <ActivityCard
                 style={styles.activity}
-                text="dhfjghkhghlhljimij"
-                backgroundColor="#C5C4D9" //gris du figma 
-                color="red"
-                 url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
-
+                text="nico"
+                color="yellow"
               />
               <ActivityCard
                 style={styles.activity}
-                text="amel"
+                text="Sport"
+                backgroundColor="#C5C4D9" //gris du figma
+                color="yellow"
+                url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
+              />
+              <ActivityCard
+                style={styles.activity}
+                text="Amel"
                 backgroundColor="#E9FEE1" //gris du figma
-               url=''
+                url=""
               />
             </ScrollView>
           </View>
@@ -72,7 +77,7 @@ export default function DashBoard(props) {
             backgroundColor="#FEF5F8" //gris du figma
           />
           <View style={styles.bottomButton}>
-            <ActivityCard style={styles.activity} text="amel" url=''/>
+            <ActivityCard style={styles.activity} text="Amel" url="" />
             <StaticCard
               width="200" //long du boutton
               height="150" //haut du boutton
@@ -89,7 +94,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FEF5F8",
-    // justifyContent: "center",
+    justifyContent: "center",
     alignItems: "center",
     // overflow:'visible',
     width: 400,
