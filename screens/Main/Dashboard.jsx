@@ -8,21 +8,23 @@ import {
   SafeAreaInsetsContext,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
+
+import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function DashBoard(props) {
+  <ActivityCard
+    text=""
+    width="150" //long du boutton
+    height="150" //haut du boutton
+    backgroundColor="#FCEACE" //gris du figma
+    url="https://reactnative.dev/img/tiny_logo.png"
+    color="black"
+    fontWeight="700"
+  />;
 
-<ActivityCard
-  text = ""
-  width = "150"//long du boutton
-  height = "150" //haut du boutton
-  backgroundColor = "#FCEACE" //gris du figma
-  url = "https://reactnative.dev/img/tiny_logo.png"
-  color = "black"
-  fontWeight = "700"
-              />
-  
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
@@ -53,16 +55,15 @@ export default function DashBoard(props) {
               <ActivityCard
                 style={styles.activity}
                 text="dhfjghkhghlhljimij"
-                backgroundColor="#C5C4D9" //gris du figma 
+                backgroundColor="#C5C4D9" //gris du figma
                 color="red"
-                 url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
-
+                url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
               />
               <ActivityCard
                 style={styles.activity}
                 text="amel"
                 backgroundColor="#E9FEE1" //gris du figma
-               url=''
+                url=""
               />
             </ScrollView>
           </View>
@@ -72,7 +73,7 @@ export default function DashBoard(props) {
             backgroundColor="#FEF5F8" //gris du figma
           />
           <View style={styles.bottomButton}>
-            <ActivityCard style={styles.activity} text="amel" url=''/>
+            <ActivityCard style={styles.activity} text="amel" url="" />
             <StaticCard
               width="200" //long du boutton
               height="150" //haut du boutton
@@ -80,6 +81,8 @@ export default function DashBoard(props) {
             />
           </View>
         </View>
+        {/* Intégration de la Tabnavigation ici à modifier */}
+        <Tabnavigation />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -88,11 +91,11 @@ export default function DashBoard(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FEF5F8",
+    backgroundColor: "#ffff",
     // justifyContent: "center",
     alignItems: "center",
     // overflow:'visible',
-    width: 400,
+    width: "100%",
     height: "100%",
   },
   text: {

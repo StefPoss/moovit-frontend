@@ -17,6 +17,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import userReducer from "./reducers/userSlice";
 import onBoardingReducer from "./reducers/onBoardingSlice";
 import { PaperProvider } from "react-native-paper";
+import ProfileScreen from "./screens/Main/ProfileScreen";
+import PlayScreen from "./screens/Main/PlayScreen";
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -63,11 +65,16 @@ export default function App() {
           <NavigationContainer>
             <StatusBar style="light" />
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-               <Stack.Screen name="Welcome" component={Splash} />
+              {/* <Stack.Screen name="Welcome" component={Splash} />
               <Stack.Screen name="S'inscrire" component={SignUp} />
-              <Stack.Screen name="Se connecter" component={Login} />
+              <Stack.Screen name="Se connecter" component={Login} /> 
               <Stack.Screen name="onBoarding" component={onBoarding} />
-              <Stack.Screen name="cgu" component={CguScreen} />
+              <Stack.Screen name="cgu" component={CguScreen} /> */}
+                            <Stack.Screen name="Dashboard" component={Dashboard} />
+                                                        <Stack.Screen name="Profile" component={ProfileScreen} />
+                                                        <Stack.Screen name="Play" component={PlayScreen} />
+
+
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
