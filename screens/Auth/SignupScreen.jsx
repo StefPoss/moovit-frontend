@@ -12,7 +12,6 @@ import {
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import Button from "../../components/Buttons";
 import { checkBody } from "../../modules/checkBody";
-import Button from "../../components/Buttons";
 import { useDispatch } from "react-redux";
 import { addUserToStore } from "../../reducers/userSlice";
 
