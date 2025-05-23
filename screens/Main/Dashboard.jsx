@@ -8,10 +8,38 @@ import {
   SafeAreaInsetsContext,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function DashBoard(props) {
+
+  const User = useSelector((state) => state.user.value);
+
+  //useEffect pour charger les données au chargement de la page
+useEffect(() => 
+{
+  
+  //requete vers le back 
+  fetch("http://localhost:3000/api/users/dashboard",
+  {
+    method: 'POST', // méthode HTTP POST pour envoyer les données
+    headers: { 'Content-Type': 'application/json' }, // type de contenu envoyé en JSON
+    body: JSON.stringify(
+    {
+      token:User.token,  // token stocké dans le redux
+     
+    })
+  }).then(r=>r.json()).then(data=>
+  {
+    data
+
+  })
+ 
+}, []);
+
+
 
 <ActivityCard
   text = ""
