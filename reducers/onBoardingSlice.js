@@ -9,7 +9,8 @@ export const onBoardingSlice = createSlice({
   initialState,
   reducers: {
     addInfoToStore: (state, action) => {
-      state.value = { ...state.value, ...action.payload };
+      state.value = action.payload;
+      console.log(state.value);
     },
     removeAllInfoToStore: (state, action) => {
       state.value = initialState.value;

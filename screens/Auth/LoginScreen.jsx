@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -20,7 +20,12 @@ export default function LoginScreen({ navigation }) {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  useEffect(() => {
+    console.log(email);
+  }, [email]);
+
   const handleLogin = () => {
+<<<<<<< HEAD
 
      // Envoi d'une requête POST à l'API backend pour la route /signin
     fetch("http://localhost:3000/api/users/signin",
@@ -42,6 +47,9 @@ export default function LoginScreen({ navigation }) {
         navigation.navigate("Dashboard")
       }
     })
+=======
+    console.log("Connexion...");
+>>>>>>> abb8fb3fce39d2329e01493733a11cb0cab95ee2
   };
 
   return (
