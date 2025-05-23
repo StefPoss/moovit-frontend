@@ -14,6 +14,7 @@ import Button from "../../components/Buttons";
 import { checkBody } from "../../modules/checkBody";
 import { useDispatch } from "react-redux";
 import { addUserToStore } from "../../reducers/userSlice";
+import { API_URL } from "@env";
 
 export default function SignupScreen({ navigation }) {
   // état pour afficher ou cacher le mot de passe
@@ -22,6 +23,7 @@ export default function SignupScreen({ navigation }) {
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  console.log(API_URL);
 
   useEffect(() => {
     console.log(password);
@@ -44,7 +46,7 @@ export default function SignupScreen({ navigation }) {
     } else {
       setEmailError(""); // sinon on efface l'erreur
 
-      fetch("http://localhost:3000/api/users/signup", {
+      fetch(`http://localhost:3000/api/users/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -21,6 +21,7 @@ import {
 } from "../../reducers/onBoardingSlice";
 import { useDispatch } from "react-redux";
 import { checkBody } from "../../modules/checkBody";
+import { API_URL } from "@env";
 
 export default function OnBoarding({ navigation }) {
   const [numQuestion, setNumQuestion] = useState(0);
@@ -36,7 +37,7 @@ export default function OnBoarding({ navigation }) {
 
   useEffect(() => {
     if (numQuestion >= questionForm.length) {
-      fetch("http://localhost:3000/api/users/onboarding", {
+      fetch(`${API_URL}/api/users/onboarding`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
