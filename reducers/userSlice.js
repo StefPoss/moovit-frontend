@@ -20,6 +20,7 @@ export const userSlice = createSlice({
   reducers: {
     addUserToStore: (state, action) => {
       state.value = action.payload;
+      console.log(state.value);
     },
     removeUserToStore: (state, action) => {
       state.value = initialState.value;

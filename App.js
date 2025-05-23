@@ -66,14 +66,8 @@ export default function App() {
               {/* <Stack.Screen name="Welcome" component={Splash} />
               <Stack.Screen name="S'inscrire" component={SignUp} />
               <Stack.Screen name="Se connecter" component={Login} />
-              <Stack.Screen
-                name="onBoardingForms"
-                component={onBoardingForms}
-              />
-              <Stack.Screen name="cgu" component={CguScreen} />  */}
-
-              <Stack.Screen name="Dashboard" component={Dashboard} />
-
+              <Stack.Screen name="onBoarding" component={onBoarding} />
+              <Stack.Screen name="cgu" component={CguScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
