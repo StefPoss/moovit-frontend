@@ -1,4 +1,5 @@
 import NewRelic from "newrelic-react-native-agent"
+
 import { StatusBar } from "expo-status-bar"
 import { useFonts } from "expo-font"
 import { StyleSheet } from "react-native"
