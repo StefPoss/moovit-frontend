@@ -1,13 +1,9 @@
-import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import ActivityCard from "../../components/ActivityCard";
-import CardLevelClicable from "../../components/CardLevelClicable";
 import StaticCard from "../../components/StaticCard";
 import {
   SafeAreaView,
   SafeAreaProvider,
-  SafeAreaInsetsContext,
-  useSafeAreaInsets,
 } from "react-native-safe-area-context";
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
@@ -110,7 +106,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FEF5F8",
     justifyContent: "center",
     alignItems: "center",
-    // overflow:'visible',
     width: 400,
     height: "100%",
   },
@@ -122,14 +117,6 @@ const styles = StyleSheet.create({
   topButton: {
     flex: 0,
     flexDirection: "row",
-    // overflow: "scroll",
-    // flexWrap: "Wrap",
-    // flexWrap: "Wrap",
-    // borderWidth: 2,
-    // width:"100%",
-    // height:"100%",
-    // justifyContent: "center",
-    // alignItems: "center",
   },
   activity: {
     padding: "5",
