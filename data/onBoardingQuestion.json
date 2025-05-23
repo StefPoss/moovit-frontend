@@ -1,5 +1,26 @@
 [
   {
+    "id": 1.1,
+    "type": "fieldBox",
+    "required": true,
+    "mainQuestion": "Peux-tu nous en dire plus sur toi ?",
+    "secondaryQuestion": "",
+    "data": [
+      {
+        "title": "Nom d'utilisateur",
+        "desc": "Entrez votre username",
+        "name": "username",
+        "fieldType": "string"
+      },
+      {
+        "title": "Prenom",
+        "desc": "Entrez votre prénom",
+        "name": "name",
+        "fieldType": "string"
+      }
+    ]
+  },
+  {
     "id": 1,
     "type": "checkBox",
     "required": true,
@@ -43,13 +64,13 @@
       {
         "title": "Poids",
         "desc": "Entrez votre poids (en kg)",
-        "name": "poid",
+        "name": "weight",
         "fieldType": "number"
       },
       {
         "title": "Taille",
         "desc": "Entrez votre taille (en cm)",
-        "name": "taille",
+        "name": "height",
         "fieldType": "number"
       }
     ]
@@ -62,7 +83,7 @@
     "secondaryQuestion": "Choisis ton sport ?",
     "data": [
       {
-        "title": "Paddle",
+        "title": "Padel",
         "src": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png",
         "name": "sportsPlayed"
       },
