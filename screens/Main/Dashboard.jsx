@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux';
 import { API_URL } from "@env"
 import { useDispatch } from "react-redux"
 import { addUserToStore } from "../../reducers/userSlice"
+import { addActivityToStore } from "../../reducers/activitySlice"
+
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
@@ -35,11 +37,16 @@ export default function DashBoard(props) {
   //      />
 
   const User = useSelector((state) => state.user.value);
+  const Activity = useSelector((state) => state.activity.value);
   const dispatch = useDispatch()
+
+  
 
   //useEffect pour charger les données au chargement de la page
 useEffect(() => 
 {
+  
+  
   
   //requete vers le back 
   fetch(`${API_URL}/api/users/dashboard`,
@@ -68,12 +75,14 @@ useEffect(() =>
         level:  data.dataUser.level,
       }
       dispatch(addUserToStore(newUser))
-
-
-      console.log(User);
+      dispatch(addActivityToStore(data.dataLevel.subLevels))
+      console.log(Activity);
+      
+      
       
 
 
+      
     }
     
     

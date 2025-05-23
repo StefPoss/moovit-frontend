@@ -15,18 +15,20 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import userReducer from "./reducers/userSlice";
+import activityReducer from "./reducers/activitySlice";
 import onBoardingReducer from "./reducers/onBoardingSlice";
 import { PaperProvider } from "react-native-paper";
 
 const rootReducer = combineReducers({
   user: userReducer,
+  activity: activityReducer,
   onBoarding: onBoardingReducer,
 });
 
 const persistConfig = {
   key: "Moovit",
   storage: AsyncStorage,
-  whitelist: ["user", "onBoarding"],
+  whitelist: ["user", "activity", "onBoarding"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
