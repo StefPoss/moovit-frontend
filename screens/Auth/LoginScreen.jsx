@@ -29,7 +29,7 @@ export default function LoginScreen({ navigation }) {
       method: "POST", // méthode HTTP POST pour envoyer les données
       headers: { "Content-Type": "application/json" }, // type de contenu envoyé en JSON
       body: JSON.stringify({
-        email: email, // email saisi par l'utilisateur
+        email: email, // email saisi par l'utilisateur∑
         password: password, // mot de passe saisi par l'utilisateur
       }),
       // transformation de la réponse en objet JSON

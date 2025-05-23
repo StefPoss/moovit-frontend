@@ -6,7 +6,11 @@ const CardComp = (props) => {
     <View
       style={[
         styles.CardContain,
-        { backgroundColor: props.color },
+        {
+          backgroundColor: props.color,
+          width: props.width,
+          height: props.height,
+        },
         // { borderColor: props.borderColor },
       ]}
     >
