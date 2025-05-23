@@ -22,12 +22,6 @@ export default function SignupScreen({ navigation }) {
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  console.log(API_URL);
-
-  useEffect(() => {
-    console.log(password);
-    console.log(email);
-  }, [password, email]);
 
   // si l'email est invalid afficher le message d'erreur
   const handleSignIn = () => {
@@ -38,7 +32,7 @@ export default function SignupScreen({ navigation }) {
     } else {
       setEmailError(""); // sinon on efface l'erreur
 
-      fetch(`http://localhost:3000/api/users/signup`, {
+      fetch(`${API_URL}/users/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
