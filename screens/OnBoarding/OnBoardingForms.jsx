@@ -19,7 +19,7 @@ import {
   addInfoToStore,
   removeAllInfoToStore,
 } from "../../reducers/onBoardingSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { checkBody } from "../../modules/checkBody";
 import { API_URL } from "@env";
 
@@ -28,9 +28,16 @@ export default function OnBoarding({ navigation }) {
   const [infos, setInfos] = useState({});
   const dispatch = useDispatch();
 
+  const tokenFromRedux = useSelector((state) => state.user.value.token);
+
   const handleChange = (key, value) => {
     setInfos((e) => ({ ...e, [key]: value }));
   };
+
+  useEffect(() => {
+    setInfos((e) => ({ ...e, token: tokenFromRedux }));
+  }, []);
+
   useEffect(() => {
     dispatch(addInfoToStore(infos));
   }, [infos]);

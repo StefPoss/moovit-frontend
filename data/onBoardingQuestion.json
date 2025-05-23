@@ -64,13 +64,13 @@
       {
         "title": "Poids",
         "desc": "Entrez votre poids (en kg)",
-        "name": "poid",
+        "name": "weight",
         "fieldType": "number"
       },
       {
         "title": "Taille",
         "desc": "Entrez votre taille (en cm)",
-        "name": "taille",
+        "name": "height",
         "fieldType": "number"
       }
     ]
