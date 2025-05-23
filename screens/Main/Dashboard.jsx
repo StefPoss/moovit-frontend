@@ -5,6 +5,13 @@ import {
   SafeAreaView,
   SafeAreaProvider,
 } from "react-native-safe-area-context";
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { API_URL } from "@env"
+import { useDispatch } from "react-redux"
+import { addUserToStore } from "../../reducers/userSlice"
+import { addActivityToStore } from "../../reducers/activitySlice"
+
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
@@ -28,12 +35,88 @@ export default function DashBoard(props) {
   //     color="green"//couleur de la font
   //     fontWeight="700"//fontsize
   //      />
+
+
+
+  const User = useSelector((state) => state.user.value);
+  const Activity = useSelector((state) => state.activity.value);
+  const dispatch = useDispatch()
+
+  
+
+  //useEffect pour charger les données au chargement de la page
+useEffect(() => 
+{
+  
+  
+  
+  //requete vers le back 
+  fetch(`${API_URL}/api/users/dashboard`,
+  {
+    method: 'POST', // méthode HTTP POST pour envoyer les données
+    headers: { 'Content-Type': 'application/json' }, // type de contenu envoyé en JSON
+    body: JSON.stringify(
+    {
+      token:User.token,  // token stocké dans le redux
+     
+    })
+  }).then(r=>r.json()).then(data=>
+  {
+    //console.log(data);
+    
+    if(data.result)
+    {
+      let newUser = 
+      {
+        token: data.dataUser.token,
+        photoUrl:  data.dataUser.token,
+        username:  data.dataUser.username,
+        admin: false,
+        sportPlayed:  data.dataUser.sportPlayed[0],
+        xp:  data.dataUser.xp,
+        level:  data.dataUser.level,
+      }
+      dispatch(addUserToStore(newUser))
+      dispatch(addActivityToStore(data.dataLevel.subLevels))
+      console.log(data);
+      
+    }
+  })
+ 
+}, []);
+
+let levelsCards = Activity.map((e, i)=>
+{
+  return <ActivityCard
+                key={i}
+                style={styles.activity}
+                text={e.title}
+                backgroundColor="#C5C4D9" //gris du figma
+                color="yellow"
+                url={e.image}
+              />
+})
+
+let nameString = `Bonjour ${User.username}`
+
+
+
+{/* <ActivityCard
+  text = ""
+  width = "150"//long du boutton
+  height = "150" //haut du boutton
+  backgroundColor = "#FCEACE" //gris du figma
+  url = "https://reactnative.dev/img/tiny_logo.png"
+  color = "black"
+  fontWeight = "700"
+              /> */}
+  
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
         <View style={styles.container}>
           <StaticCard
-            text="user"
+            text={nameString}
             textAlign="left"
             width="340" 
             height="70" 
@@ -57,7 +140,7 @@ export default function DashBoard(props) {
               showHorizontalScrollIndicator={false} //affiche une barre de scroll
               style={styles.scrollView}
             >
-              <ActivityCard
+              {/* <ActivityCard
                 style={styles.activity}
                 text="nico"
                 color="yellow"
@@ -74,7 +157,8 @@ export default function DashBoard(props) {
                 text="Amel"
                 backgroundColor="#E9FEE1" //gris du figma
                 url=""
-              />
+              /> */}
+              {levelsCards}
             </ScrollView>
           </View>
           <StaticCard
