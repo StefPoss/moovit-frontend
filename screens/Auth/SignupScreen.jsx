@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,29 +8,30 @@ import {
   Pressable,
   Platform,
   KeyboardAvoidingView,
-} from "react-native" // import des composants react native
-import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons"
-import Button from "../../components/buttons"
-import { useDispatch } from "react-redux"
-import { addUserToStore } from "../../reducers/userSlice"
-import { API_URL } from "@env"
+} from "react-native"; // import des composants react native
+import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
+import Button from "../../components/buttons";
+import { useDispatch } from "react-redux";
+import { addUserToStore } from "../../reducers/userSlice";
+import { API_URL } from "@env";
 
 export default function SignupScreen({ navigation }) {
   // état pour afficher ou cacher le mot de passe
-  const [passwordVisible, setPasswordVisible] = useState(false)
-  const [email, setEmail] = useState("") // état pour gérer la valeur du champ email avec initialisation
-  const [emailError, setEmailError] = useState("")
-  const [password, setPassword] = useState("")
-  const dispatch = useDispatch()
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [email, setEmail] = useState(""); // état pour gérer la valeur du champ email avec initialisation
+  const [emailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  console.log(API_URL);
 
   // si l'email est invalid afficher le message d'erreur
   const handleSignIn = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/ // regex pour valider l'email avec @ obligatoire au moins 1 caractère sauf espace
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // regex pour valider l'email avec @ obligatoire au moins 1 caractère sauf espace
     if (!emailRegex.test(email)) {
       // si l'email ne correspond pas au format défini par regex alors...
-      setEmailError("Email invalide")
+      setEmailError("Email invalide");
     } else {
-      setEmailError("") // sinon on efface l'erreur
+      setEmailError(""); // sinon on efface l'erreur
 
       fetch(`${API_URL}/api/users/signup`, {
         method: "POST",
@@ -41,26 +42,24 @@ export default function SignupScreen({ navigation }) {
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Backend non atteint")
+            alert("Verifiez votre connexion");
           }
-          return response.json()
+          return response.json();
         })
         .then((data) => {
           if (data.result) {
-            console.log("Réponse du backend :", data)
-            dispatch(addUserToStore({ token: data.token }))
-            navigation.navigate("onBoarding")
+            console.log("Réponse du backend :", data);
+            dispatch(addUserToStore({ token: data.token }));
+            navigation.navigate("onBoarding");
           } else {
-            alert(data.error)
+            alert(data.error);
           }
         })
         .catch((error) => {
-          console.error("Erreur lors de l’envoi :", error)
-        })
-
-      console.log("Inscription réussie")
+          console.error("Erreur lors de l’envoi :", error);
+        });
     } // navigation ou appel API ici vers le backend
-  }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -141,7 +140,7 @@ export default function SignupScreen({ navigation }) {
         confidentialité
       </Text>
     </KeyboardAvoidingView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -234,4 +233,4 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "500",
   },
-})
+});

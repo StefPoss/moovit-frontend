@@ -1,10 +1,7 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import ActivityCard from "../../components/ActivityCard";
 import StaticCard from "../../components/StaticCard";
-import {
-  SafeAreaView,
-  SafeAreaProvider,
-} from "react-native-safe-area-context";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
@@ -35,18 +32,18 @@ export default function DashBoard(props) {
           <StaticCard
             text="user"
             textAlign="left"
-            width="340" 
-            height="70" 
-            backgroundColor="lightgrey" 
+            width="340"
+            height="70"
+            backgroundColor="lightgrey"
             color="green"
           />
           <StaticCard
             color="black"
             fontWeight="700"
             text="amel"
-            width="340" 
-            height="75" 
-            backgroundColor="#C5C4D9" 
+            width="340"
+            height="75"
+            backgroundColor="#C5C4D9"
             url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
           />
           <Text style={styles.text}>Training Now</Text>
@@ -80,7 +77,7 @@ export default function DashBoard(props) {
           <StaticCard
             width="340" //long du boutton
             height="150" //haut du boutton
-            backgroundColor="#EF5F8" 
+            backgroundColor="#EF5F8"
             color="white"
             text="statistic"
             textAlign="left"
@@ -91,7 +88,6 @@ export default function DashBoard(props) {
               width="200" //long du boutton
               height="150" //haut du boutton
               backgroundColor="#C5C4D9" //gris du figma
-              
             />
           </View>
         </View>
@@ -106,7 +102,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FEF5F8",
     justifyContent: "center",
     alignItems: "center",
-    width: 400,
+    width: "100%",
     height: "100%",
   },
   text: {
