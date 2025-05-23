@@ -36,6 +36,8 @@ export default function DashBoard(props) {
   //     fontWeight="700"//fontsize
   //      />
 
+
+
   const User = useSelector((state) => state.user.value);
   const Activity = useSelector((state) => state.activity.value);
   const dispatch = useDispatch()
@@ -76,24 +78,30 @@ useEffect(() =>
       }
       dispatch(addUserToStore(newUser))
       dispatch(addActivityToStore(data.dataLevel.subLevels))
-      console.log(Activity);
-      
-      
-      
-
-
+      console.log(data);
       
     }
-    
-    
-
   })
  
 }, []);
 
+let levelsCards = Activity.map((e, i)=>
+{
+  return <ActivityCard
+                key={i}
+                style={styles.activity}
+                text={e.title}
+                backgroundColor="#C5C4D9" //gris du figma
+                color="yellow"
+                url={e.image}
+              />
+})
+
+let nameString = `Bonjour ${User.username}`
 
 
-<ActivityCard
+
+{/* <ActivityCard
   text = ""
   width = "150"//long du boutton
   height = "150" //haut du boutton
@@ -101,14 +109,14 @@ useEffect(() =>
   url = "https://reactnative.dev/img/tiny_logo.png"
   color = "black"
   fontWeight = "700"
-              />
+              /> */}
   
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
         <View style={styles.container}>
           <StaticCard
-            text="user"
+            text={nameString}
             textAlign="left"
             width="340" 
             height="70" 
@@ -132,7 +140,7 @@ useEffect(() =>
               showHorizontalScrollIndicator={false} //affiche une barre de scroll
               style={styles.scrollView}
             >
-              <ActivityCard
+              {/* <ActivityCard
                 style={styles.activity}
                 text="nico"
                 color="yellow"
@@ -149,7 +157,8 @@ useEffect(() =>
                 text="Amel"
                 backgroundColor="#E9FEE1" //gris du figma
                 url=""
-              />
+              /> */}
+              {levelsCards}
             </ScrollView>
           </View>
           <StaticCard
