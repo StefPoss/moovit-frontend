@@ -3,12 +3,14 @@ import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
 function CardLevelClicable({
   text = "",
+  description = "",
   color = "black",
+  fontWeight = "700",
   width = "150", //long du boutton
   height = "150", //haut du boutton
   backgroundColor = "#FCEACE", //gris du figma
   url = "https://reactnative.dev/img/tiny_logo.png",
-  fontWeight = "700",
+  
 }) {
   const linkTo = () => {};
 
@@ -19,6 +21,7 @@ function CardLevelClicable({
     >
       <View style={styles.container}>
         <Text style={[styles.buttonText, { color, fontWeight }]}>{text}</Text>
+        <Text style={[styles.buttonDescription, { color, fontWeight }]}>{description}</Text>
         <Image style={[styles.tinyLogo, {}]} source={{ uri: url }} />
       </View>
     </TouchableOpacity>
@@ -47,6 +50,12 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "black",
   },
+  buttonDescription:{
+    marginLeft: 15,
+    fontWeight: "700",
+    color: "black",
+  },
+
   tinyLogo: {
     borderRadius: 15,
     // alignSelf:"flex-end",
