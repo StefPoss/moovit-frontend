@@ -69,7 +69,6 @@ export default function App() {
               <Stack.Screen name="onBoarding" component={onBoarding} />
               <Stack.Screen name="cgu" component={CguScreen} />
               <Stack.Screen name="Dashboard" component={Dashboard} />
-
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
