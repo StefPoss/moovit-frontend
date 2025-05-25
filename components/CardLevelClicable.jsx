@@ -1,28 +1,34 @@
 import React from "react";
 import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
-
+//creation d'une carte d'activité clicable
 function CardLevelClicable({
-  text = "",
-  description = "",
-  color = "black",
-  fontWeight = "700",
+  text = "", //text
+  description = "", //description s'affiche sous le txt
+  color = "black", //color de la font
+  fontWeight = "700", //la fontWeight de toute les lettre
   width = "150", //long du boutton
   height = "150", //haut du boutton
-  backgroundColor = "#FCEACE", //gris du figma
-  url = "https://reactnative.dev/img/tiny_logo.png",
-  
+  backgroundColor = "#FCEACE", //couleur du fond de la carte
+  url = "https://reactnative.dev/img/tiny_logo.png", //petite img sur le coté
 }) {
-  const linkTo = () => {};
+  const linkTo = () => {}; //lien utilisable au click
 
   return (
-    <TouchableOpacity
-      onPress={() => linkTo}
-      style={[styles.button, { width, height, backgroundColor }]}
+    <TouchableOpacity //propriete qui permet de clicker comme button et onpress
+      onPress={() => linkTo} //lien executable au click
+      style={[styles.button, { width, height, backgroundColor }]} //modif du css via les props
     >
-      <View style={styles.container}>
-        <Text style={[styles.buttonText, { color, fontWeight }]}>{text}</Text>
-        <Text style={[styles.buttonDescription, { color, fontWeight }]}>{description}</Text>
-        <Image style={[styles.tinyLogo, {}]} source={{ uri: url }} />
+      <View style={styles.container}// contenaier general
+       >
+        <View style={styles.lines} //container uniquement des lignes txt+description permet de gardé l'img dans le cadre du container
+        > 
+          <Text style={[styles.buttonText, { color, fontWeight }]} //txt en titre modifiable via les props
+          >{text}</Text>
+          <Text style={[styles.buttonDescription, { color, fontWeight }]} // txt de despription
+          > {description}</Text>
+        </View>
+        <Image style={[styles.tinyLogo, {}]} source={{ uri: url }} //petit img d'illustration du coté
+        />
       </View>
     </TouchableOpacity>
   );
@@ -35,6 +41,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    backgroundColor: "rgba(1, 1, 1, 0)",
+    minWidth: "99%",
   },
   button: {
     width: "150", //long du boutton
@@ -47,26 +55,26 @@ const styles = StyleSheet.create({
 
   buttonText: {
     marginLeft: 15,
+    fontSize: 20,
     fontWeight: "700",
     color: "black",
   },
-  buttonDescription:{
+  buttonDescription: {
+    flex: 0,
+    flexWrap: "wrap",
     marginLeft: 15,
     fontWeight: "700",
     color: "black",
   },
-
+  lines: {
+    width: "60%",
+  },
   tinyLogo: {
     borderRadius: 15,
     // alignSelf:"flex-end",
-    width: 66,
-    height: 58,
+    width: "30%",
+    height: "85%",
     margin: 10,
     marginRight: 15,
-
-    flex: 0,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
   },
 });
