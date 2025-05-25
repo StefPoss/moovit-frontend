@@ -49,11 +49,9 @@ export default function DashBoard(props) {
           />
           <ProgressBarCircular
             style={styles.activity}
-            levelTitle="Niveau de progression"
-            completedSteps={8}
-            totalSteps={10}
-            width={340}
-            height={70}
+            levelTitle={undefined}
+            completedSteps={undefined}
+            totalSteps={undefined}
           />
 
           <Text style={styles.text}>Training Now</Text>
