@@ -9,7 +9,8 @@ import SignUp from "./screens/Auth/SignupScreen";
 import onBoarding from "./screens/OnBoarding/OnBoardingForms";
 import Dashboard from "./screens/Main/Dashboard";
 import CguScreen from "./screens/Auth/CGUScreen";
-import OnPlay from "./screens/Activities/OnPlay";
+import Play from "./screens/Activities/Play";
+
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
@@ -70,7 +71,7 @@ export default function App() {
               <Stack.Screen name="onBoarding" component={onBoarding} />
               <Stack.Screen name="cgu" component={CguScreen} />
               <Stack.Screen name="Dashboard" component={Dashboard} /> */}
-              <Stack.Screen name="OnPlay" component={OnPlay} />
+              <Stack.Screen name="Play" component={Play} />
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
