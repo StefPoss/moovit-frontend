@@ -1,10 +1,8 @@
-import { View, Text, ScrollView, StyleSheet } from "react-native";
-import ActivityCard from "../../components/ActivityCard";
-import StaticCard from "../../components/StaticCard";
-import {
-  SafeAreaView,
-  SafeAreaProvider,
-} from "react-native-safe-area-context";
+import { View, Text, ScrollView, StyleSheet } from "react-native"
+import ActivityCard from "../../components/ActivityCard"
+import StaticCard from "../../components/StaticCard"
+import ProgressBarCircular from "../../components/ProgressBarCircular"
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context"
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
@@ -35,20 +33,27 @@ export default function DashBoard(props) {
           <StaticCard
             text="user"
             textAlign="left"
-            width="340" 
-            height="70" 
-            backgroundColor="lightgrey" 
+            width="340"
+            height="70"
+            backgroundColor="lightgrey"
             color="green"
           />
           <StaticCard
             color="black"
             fontWeight="700"
             text="amel"
-            width="340" 
-            height="75" 
-            backgroundColor="#C5C4D9" 
+            width="340"
+            height="75"
+            backgroundColor="#C5C4D9"
             url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
           />
+          <ProgressBarCircular
+            style={styles.activity}
+            levelTitle={undefined}
+            completedSteps={undefined}
+            totalSteps={undefined}
+          />
+
           <Text style={styles.text}>Training Now</Text>
           <View style={styles.topButton}>
             <ScrollView
@@ -80,7 +85,7 @@ export default function DashBoard(props) {
           <StaticCard
             width="340" //long du boutton
             height="150" //haut du boutton
-            backgroundColor="#EF5F8" 
+            backgroundColor="#EF5F8"
             color="white"
             text="statistic"
             textAlign="left"
@@ -91,37 +96,48 @@ export default function DashBoard(props) {
               width="200" //long du boutton
               height="150" //haut du boutton
               backgroundColor="#C5C4D9" //gris du figma
-              
             />
           </View>
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FEF5F8",
-    justifyContent: "center",
+  card: {
+    flexDirection: "row",
     alignItems: "center",
-    width: 400,
-    height: "100%",
+    backgroundColor: "#1a1a1a",
+    borderRadius: 20,
+    marginVertical: 12,
+    marginHorizontal: 0,
+    alignSelf: "center",
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOpacity: 0.13,
+    shadowRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 14,
   },
-  text: {
-    color: "grey",
-    fontSize: 20,
-    marginLeft: -170,
+  leftBlock: {
+    flex: 1,
+    justifyContent: "center",
   },
-  topButton: {
-    flex: 0,
-    flexDirection: "row",
+  title: {
+    color: "#fff",
+    fontSize: 17,
+    fontWeight: "600",
+    marginBottom: 4,
   },
-  activity: {
-    padding: "5",
+  steps: {
+    color: "#fff",
+    fontSize: 15,
+    opacity: 0.85,
   },
-  bottomButton: {
-    flexDirection: "row",
+  rightBlock: {
+    width: 38,
+    alignItems: "center",
+    justifyContent: "center",
   },
-});
+})
