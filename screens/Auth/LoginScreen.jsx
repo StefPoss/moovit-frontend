@@ -50,14 +50,16 @@ export default function LoginScreen({ navigation }) {
     })
       .then((data) => data.json())
       .then((resultData) => {
+        console.log("-- ",resultData);
+        
         // Si le login est réussi
         if (resultData.result && resultData.sport.length === 0) {
           //envoi vers le screen dashboard
           navigation.navigate("onBoarding");
-          dispatch(addUserToStore({ token: data.token }));
+          dispatch(addUserToStore({ token: resultData.token }));
         } else if (resultData.result && resultData.sport.length > 0) {
           navigation.navigate("Dashboard");
-          dispatch(addUserToStore({ token: data.token }));
+          dispatch(addUserToStore({ token: resultData.token }));
         } else {
           alert(resultData.error);
         }
