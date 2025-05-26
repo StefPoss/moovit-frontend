@@ -1,12 +1,9 @@
-import React from "react";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import ActivityCard from "../../components/ActivityCard";
 import StaticCard from "../../components/StaticCard";
 import {
   SafeAreaView,
   SafeAreaProvider,
-  SafeAreaInsetsContext,
-  useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -15,6 +12,7 @@ import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigati
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function DashBoard(props) {
+
   <ActivityCard
     text=""
     width="150" //long du boutton
@@ -25,43 +23,53 @@ export default function DashBoard(props) {
     fontWeight="700"
   />;
 
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
         <View style={styles.container}>
           <StaticCard
-            title="user"
-            width="340" //long du boutton
-            height="70" //haut du boutton
-            backgroundColor="#FEF5F8" //gris du figma
-            textColor="blue"
+            text="user"
+            textAlign="left"
+            width="340" 
+            height="70" 
+            backgroundColor="lightgrey" 
+            color="green"
           />
           <StaticCard
-            title="amel"
-            width="340" //long du boutton
-            height="75" //haut du boutton
-            backgroundColor="black" //gris du figma
-            textColor="white"
+            color="black"
+            fontWeight="700"
+            text="amel"
+            width="340" 
+            height="75" 
+            backgroundColor="#C5C4D9" 
+            url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
           />
           <Text style={styles.text}>Training Now</Text>
           <View style={styles.topButton}>
             <ScrollView
               contentContainerStyle={{ padding: 5 }}
               horizontal={true} //permet le scroll horizontal
-              // showHorizontalScrollIndicator={false} //affiche une barre de scroll
+              showHorizontalScrollIndicator={false} //affiche une barre de scroll
               style={styles.scrollView}
             >
-              <ActivityCard style={styles.activity} text="nico" />
               <ActivityCard
                 style={styles.activity}
-                text="dhfjghkhghlhljimij"
+
+                text="nico"
+                color="yellow"
+              />
+              <ActivityCard
+                style={styles.activity}
+                text="Sport"
                 backgroundColor="#C5C4D9" //gris du figma
-                color="red"
+                color="yellow"
+
                 url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
               />
               <ActivityCard
                 style={styles.activity}
-                text="amel"
+                text="Amel"
                 backgroundColor="#E9FEE1" //gris du figma
                 url=""
               />
@@ -70,14 +78,20 @@ export default function DashBoard(props) {
           <StaticCard
             width="340" //long du boutton
             height="150" //haut du boutton
-            backgroundColor="#FEF5F8" //gris du figma
+            backgroundColor="#EF5F8" 
+            color="white"
+            text="statistic"
+            textAlign="left"
           />
           <View style={styles.bottomButton}>
-            <ActivityCard style={styles.activity} text="amel" url="" />
+
+            <ActivityCard style={styles.activity} text="Amel" url="" />
+
             <StaticCard
               width="200" //long du boutton
               height="150" //haut du boutton
               backgroundColor="#C5C4D9" //gris du figma
+              
             />
           </View>
         </View>
@@ -91,11 +105,12 @@ export default function DashBoard(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffff",
-    // justifyContent: "center",
+
+    backgroundColor: "#FEF5F8",
+    justifyContent: "center",
     alignItems: "center",
-    // overflow:'visible',
-    width: "100%",
+    width:"100%",
+
     height: "100%",
   },
   text: {
@@ -106,14 +121,6 @@ const styles = StyleSheet.create({
   topButton: {
     flex: 0,
     flexDirection: "row",
-    // overflow: "scroll",
-    // flexWrap: "Wrap",
-    // flexWrap: "Wrap",
-    // borderWidth: 2,
-    // width:"100%",
-    // height:"100%",
-    // justifyContent: "center",
-    // alignItems: "center",
   },
   activity: {
     padding: "5",

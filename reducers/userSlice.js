@@ -1,17 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: [
-    {
-      token: "",
-      photoUrl: "",
-      username: "",
-      admin: false,
-      sportPlayed: "",
-      xp: "",
-      level: "",
-    },
-  ],
+  value: {
+    token: "",
+    photoUrl: "",
+    username: "",
+    admin: false,
+    sportPlayed: "",
+    xp: "",
+    level: "",
+  },
 };
 
 export const userSlice = createSlice({
