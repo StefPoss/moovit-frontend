@@ -12,9 +12,9 @@ export default function ProgressBarCircular({
   // Titre du niveau courant ("Niveau 1", etc)
   levelTitle = "Niveau de progression",
   // Nb d'étapes déjà validées pour ce niveau
-  completedSteps = 10,
+  completedSteps = 5,
   // Nb total d'étapes du niveau
-  totalSteps = 15
+  totalSteps = 20,
 }) {
   // Calcul du pourcentage de complétion
   const percent = totalSteps
