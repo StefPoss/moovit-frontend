@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "react-native";
 
-// composant principal PlayScreen
+// composant principal PlayScreen page
 export default function PlayScreen() {
   const [duration, setDuration] = useState("5"); // durée choisie par l'utilisateur (en minutes sous forme de texte pour l'instant à 5min)
   const [seconds, setSeconds] = useState(0); // compteur en secondes pour le timer initialisé à 0
