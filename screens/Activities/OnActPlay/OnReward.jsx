@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import CardAct from "../../../components/CardAct";
 
-export default function OnReward({ navigation }) {
+export default function OnReward({ navigation, xp }) {
+  const textreward = `+${xp} XP gagnés , Rythme de dingue !`;
   return (
     <SafeAreaView>
       <View style={styles.contain}>
@@ -17,12 +18,17 @@ export default function OnReward({ navigation }) {
           <CardAct
             height={100}
             width={"100%"}
-            color={"grey"}
-            text={"Page de reward"}
+            color={"white"}
+            text={"FELICITATIONS !"}
           />
         </View>
         <View>
-          <Text>Page de ONDONE</Text>
+          <CardAct
+            height={100}
+            width={"100%"}
+            color={"yellow"}
+            text={textreward}
+          />
         </View>
       </View>
     </SafeAreaView>

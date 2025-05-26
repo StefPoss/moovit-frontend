@@ -19,11 +19,11 @@ export default function Play({ navigation }) {
   const [numLevel, setNumLevel] = useState(0);
 
   const subLevels = activities?.levels?.[0]?.subLevels || [];
-  const imgback = subLevels[numLevel]?.image;
+  const uriImage = subLevels[numLevel]?.image;
   const tabLevel = ["onPlay", "onDone", "onReward", "onProgress"];
   const totalLevels = subLevels.length;
+  const levelxp = subLevels[numLevel]?.xp;
 
-  // Gestion du changement d'état (onPlay / onDone / ...)
   const plusstate = () => {
     if (levelStatus < tabLevel.length - 1) {
       setLevelStatus(levelStatus + 1);
@@ -62,55 +62,49 @@ export default function Play({ navigation }) {
       />
     );
   } else if (tabLevel[levelStatus] === "onDone") {
-    toDisp = <OnDone />;
+    toDisp = <OnDone numLevel={numLevel} uriImage={uriImage} />;
   } else if (tabLevel[levelStatus] === "onReward") {
-    toDisp = <OnReward />;
+    toDisp = <OnReward xp={levelxp} />;
   } else if (tabLevel[levelStatus] === "onProgress") {
     toDisp = <OnProgress />;
   }
 
   return (
-    <ImageBackground
-      source={{ uri: imgback }}
-      style={styles.background}
-      resizeMode="cover"
-    >
-      <SafeAreaView style={styles.safeArea}>
-        <View style={styles.testHeader}>
-          <TouchableOpacity style={styles.smallButton} onPress={moinstate}>
-            <Text style={styles.btnText}>state-</Text>
-          </TouchableOpacity>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.testHeader}>
+        <TouchableOpacity style={styles.smallButton} onPress={moinstate}>
+          <Text style={styles.btnText}>state-</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity style={styles.smallButton} onPress={plusstate}>
-            <Text style={styles.btnText}>state+</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.smallButton} onPress={plusstate}>
+          <Text style={styles.btnText}>state+</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity style={styles.smallButton} onPress={moinslevel}>
-            <Text style={styles.btnText}>level-</Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.smallButton} onPress={moinslevel}>
+          <Text style={styles.btnText}>level-</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity style={styles.smallButton} onPress={pluslevel}>
-            <Text style={styles.btnText}>level+</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={styles.smallButton} onPress={pluslevel}>
+          <Text style={styles.btnText}>level+</Text>
+        </TouchableOpacity>
+      </View>
 
-        <View style={styles.overlay}>
-          <View style={styles.container}>
-            <View style={styles.content}>{toDisp}</View>
-            <View style={{ alignItems: "center", marginBottom: 10 }}>
-              <Text style={{ color: "white" }}>
-                numLevel: {numLevel} / total: {subLevels.length}
-              </Text>
-            </View>
-            <View style={styles.progree}>
-              <View style={{ paddingHorizontal: 20, marginBottom: 20 }}>
-                <ProgressBarComp count={numLevel} total={subLevels.length} />
-              </View>
+      <View style={styles.overlay}>
+        <View style={styles.container}>
+          <View style={styles.content}>{toDisp}</View>
+          <View style={{ alignItems: "center", marginBottom: 10 }}>
+            <Text style={{ color: "white" }}>
+              numLevel: {numLevel} / total: {subLevels.length}
+            </Text>
+          </View>
+          <View style={styles.progree}>
+            <View style={{ paddingHorizontal: 20, marginBottom: 20 }}>
+              <ProgressBarComp count={numLevel} total={subLevels.length} />
             </View>
           </View>
         </View>
-      </SafeAreaView>
-    </ImageBackground>
+      </View>
+    </SafeAreaView>
   );
 }
 

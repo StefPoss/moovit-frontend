@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     fontFamily: "ManropeSemiBold",
     fontSize: 20,
     fontWeight: "2000",
-
+    color: "black",
     textAlign: "center",
   },
   CardContain: {
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     marginHorizontal: "auto",
     borderRadius: 20,
-    // borderWidth: 1,
+
     justifyContent: "center",
     alignItems: "center",
   },
