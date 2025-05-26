@@ -56,7 +56,7 @@ export default function LevelScreen(props) {
             color="black"
             width="370" //long du boutton
             height="140" //haut du boutton
-            // backgroundColor="#11111" //gris du figma
+             backgroundColor="#FCEACE" //gris du figma
             url="https://reactnative.dev/img/tiny_logo.png"
             fontWeight="700"
           />
