@@ -128,7 +128,7 @@ export default function DashBoard(props) {
               </View>
             </View>
 
-            {/*PROGRESS CARD  */}
+            {/*PROGRESS CARD */}
             <View style={styles.progressCard}>
               <View style={styles.progressLeftBlock}>
                 <Text style={styles.progressTitle}>{User.level}</Text>
