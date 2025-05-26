@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
-function activityCard({
+function ActivityCard({
   text = "",
   width = "150", //long du boutton
   height = "150", //haut du boutton
@@ -28,7 +28,7 @@ function activityCard({
     </TouchableOpacity>
   );
 }
-export default activityCard;
+export default ActivityCard;
 
 const styles = StyleSheet.create({
   button: {

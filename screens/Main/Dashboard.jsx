@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   SafeAreaProvider,
 } from "react-native-safe-area-context";
+
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { API_URL } from "@env"
@@ -15,28 +16,15 @@ import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
 
+import { Ionicons } from "@expo/vector-icons";
+
+import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
+
+
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function DashBoard(props) {
-  // <ActivityCard    //clickable
-  //   text=""//texte a afficher dans le bouton
-  //   width="150" //long du boutton
-  //   height="150" //haut du boutton
-  //   backgroundColor="#FCEACE" //gris du figma
-  //   url="https://reactnative.dev/img/tiny_logo.png"//url de l'image
-  //   color="black"//couleur de la font
-  //   fontWeight="700"//fontsize
-  // />;
 
-  //  <StaticCard   //NON-clickable
-  //     text="user" //texte a afficher dans le bouton
-  //     textAlign="left" //affichage du text left/center/right
-  //     width="340" //long du boutton
-  //     height="70" //haut du boutton
-  //     backgroundColor="lightgrey" //couleur du bg
-  //     color="green"//couleur de la font
-  //     fontWeight="700"//fontsize
-  //      />
 
 
 
@@ -132,16 +120,20 @@ let levelsCards = Activity.map((e, i)=>
 
 
 
-{/* <ActivityCard
-  text = ""
-  width = "150"//long du boutton
-  height = "150" //haut du boutton
-  backgroundColor = "#FCEACE" //gris du figma
-  url = "https://reactnative.dev/img/tiny_logo.png"
-  color = "black"
-  fontWeight = "700"
-              /> */}
+
   
+
+  <ActivityCard
+    text=""
+    width="150" //long du boutton
+    height="150" //haut du boutton
+    backgroundColor="#FCEACE" //gris du figma
+    url="https://reactnative.dev/img/tiny_logo.png"
+    color="black"
+    fontWeight="700"
+  />;
+
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
@@ -190,8 +182,11 @@ let levelsCards = Activity.map((e, i)=>
               showHorizontalScrollIndicator={false} //affiche une barre de scroll
               style={styles.scrollView}
             >
+
               
               {levelsCards}
+
+              
             </ScrollView>
           </View>
           <StatiscticGraphic playTime={playTime} sessions={sessions} xp={xp}></StatiscticGraphic>
@@ -205,8 +200,13 @@ let levelsCards = Activity.map((e, i)=>
             textAlign="left"
           /> */}
           <View style={styles.bottomButton}>
-            {/* <ActivityCard style={styles.activity} text={dayTime} url="" /> */}
-            {/* <StaticCard
+
+
+
+            <ActivityCard style={styles.activity} text="Amel" url="" />
+
+            <StaticCard
+
               width="200" //long du boutton
               height="150" //haut du boutton
               backgroundColor="#C5C4D9" //gris du figma
@@ -229,6 +229,8 @@ let levelsCards = Activity.map((e, i)=>
            
           </View>
         </View>
+        {/* Intégration de la Tabnavigation ici à modifier */}
+        <Tabnavigation />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -237,10 +239,12 @@ let levelsCards = Activity.map((e, i)=>
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     backgroundColor: "#FEF5F8",
     justifyContent: "center",
     alignItems: "center",
-    width: 400,
+    width:"100%",
+
     height: "100%",
   },
   text: {
