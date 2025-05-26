@@ -120,37 +120,22 @@ let levelsCards = Activity.map((e, i)=>
 
   
 
-  <ActivityCard
-    text=""
-    width="150" //long du boutton
-    height="150" //haut du boutton
-    backgroundColor="#FCEACE" //gris du figma
-    url="https://reactnative.dev/img/tiny_logo.png"
-    color="black"
-    fontWeight="700"
-  />;
+  // <ActivityCard
+  //   text=""
+  //   width="150" //long du boutton
+  //   height="150" //haut du boutton
+  //   backgroundColor="#FCEACE" //gris du figma
+  //   url="https://reactnative.dev/img/tiny_logo.png"
+  //   color="black"
+  //   fontWeight="700"
+  // />
 
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
         <View style={styles.container}>
-          <StaticCard
-            text="user"
-            textAlign="left"
-            width="340"
-            height="70"
-            backgroundColor="lightgrey" />
          
-          {/* <StaticCard
-            text="aaa"
-            textAlign="center"
-            width="340" 
-            height="70" 
-            backgroundColor="lightgrey" 
-
-            color="green"
-          /> */}
           <View style={styles.profilContainer}>
              <PhotoProfil photoUrl={"https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1748005964/projectFinDeBatch/front/images/default-profile_cltqmm.png"}></PhotoProfil>
              <View style={styles.textProfilContainer}>
@@ -169,15 +154,7 @@ let levelsCards = Activity.map((e, i)=>
 
          
           
-          {/* <StaticCard
-            color="black"
-            fontWeight="700"
-            text="amel"
-            width="340"
-            height="75"
-            backgroundColor="#C5C4D9"
-            url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
-          /> */}
+         
           <Text style={styles.text}>Training Now</Text>
           <View style={styles.topButton}>
             <ScrollView
@@ -195,19 +172,12 @@ let levelsCards = Activity.map((e, i)=>
           </View>
           <StatiscticGraphic playTime={playTime} sessions={sessions} xp={xp}></StatiscticGraphic>
          
-          {/* <StaticCard
-            width="340" //long du boutton
-            height="150" //haut du boutton
-            backgroundColor="#EF5F8"
-            color="white"
-            text="statistic"
-            textAlign="left"
-          /> */}
+         
           <View style={styles.bottomButton}>
 
 
 
-            <ActivityCard style={styles.activity} text="Amel" url="" />
+           
 
 
             <View style={styles.dayTrainingContainer}>

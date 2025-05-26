@@ -13,10 +13,11 @@ import {
 } from "react-native";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 
-import Button from "../../components/buttons";
+import Button from "../../components/Buttons";
 import { addUserToStore } from "../../reducers/userSlice";
 import { useDispatch } from "react-redux";
 import { API_URL } from "@env";
+import { checkBody } from "../../modules/checkBody";
 
 
 export default function LoginScreen({ navigation }) {
@@ -60,10 +61,8 @@ export default function LoginScreen({ navigation }) {
           alert(resultData.error);
         }
       });
-  };
 
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setEmailError("Email invalide");
     } else {
@@ -72,8 +71,12 @@ export default function LoginScreen({ navigation }) {
       navigation.navigate("onBoarding"); // ou API
     }
   };
+
+
+    
+  
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={styles.container}
@@ -154,7 +157,7 @@ export default function LoginScreen({ navigation }) {
         </Text>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
