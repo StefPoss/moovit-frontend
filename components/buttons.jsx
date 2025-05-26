@@ -1,5 +1,7 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
+//pour pouvoir pusher
+
 
 export default function Button({
   title, // props à utiliser avec le composant bouton 
