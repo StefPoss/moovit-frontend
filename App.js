@@ -15,7 +15,7 @@ import LevelScreen from "./screens/LevelScreen"
 import CguScreen from "./screens/Auth/CGUScreen"
 import Play from "./screens/Activities/Play"
 import ProfileScreen from "./screens/Main/ProfileScreen"
-import PlayScreen from "./screens/Main/PlayScreen"
+import TimerScreen from "./screens/Main/TimerScreen"
 
 import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
@@ -80,6 +80,7 @@ export default function App() {
               <Stack.Screen name="cgu" component={CguScreen} />
               <Stack.Screen name="Dashboard" component={Dashboard} />
               <Stack.Screen name="Play" component={Play} />
+              <Stack.Screen name="Profile" component={ProfileScreen} />
 
             </Stack.Navigator>
           </NavigationContainer>
