@@ -5,13 +5,15 @@ import {
   SafeAreaView,
   SafeAreaProvider,
 } from "react-native-safe-area-context";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { API_URL } from "@env"
 import { useDispatch } from "react-redux"
 import { addUserToStore } from "../../reducers/userSlice"
 import { addActivityToStore } from "../../reducers/activitySlice"
-
+import PhotoProfil from "../../components/PhotoProfil";
+import ExercisesProgressBar from "../../components/ExercisesProgressBar";
+import StatiscticGraphic from "../../components/StatiscticGraphic";
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
@@ -41,8 +43,13 @@ export default function DashBoard(props) {
   const User = useSelector((state) => state.user.value);
   const Activity = useSelector((state) => state.activity.value);
   const dispatch = useDispatch()
+  const [nExercices, setNExercices] = useState(8);
+  const [dayTime, setDayTime] = useState("Indisponible");
+  const [meteo, setMeteo] = useState("Indisponible");
+  let playTime = 35
+  let sessions = 5
+  let xp = 105
 
-  
 
   //useEffect pour charger les données au chargement de la page
 useEffect(() => 
@@ -69,7 +76,7 @@ useEffect(() =>
       let newUser = 
       {
         token: data.dataUser.token,
-        photoUrl:  data.dataUser.token,
+        photoUrl:  data.dataUser.photoUrl,
         username:  data.dataUser.username,
         admin: false,
         sportPlayed:  data.dataUser.sportPlayed[0],
@@ -78,10 +85,34 @@ useEffect(() =>
       }
       dispatch(addUserToStore(newUser))
       dispatch(addActivityToStore(data.dataLevel.subLevels))
-      console.log(data);
-      
+      console.log(data.dataMeteo);
+      let dailyTime = data.dataUser.form.dayTime
+      if(dailyTime==="4 h/semaine")
+      {
+        setDayTime("45 minutes")
+      }
+      else if(dailyTime==="8 h/semaine ou plus")
+      {
+        setDayTime("1 heure")
+      }
+      else if(dailyTime==="15 min/jour")
+      {
+        setDayTime("15 minutes")
+      }
+      else if(dailyTime==="30 min/jour")
+      {
+        setDayTime("30 minutes")
+      }
+
+      setMeteo(data.dataMeteo)
+
+
+
+
     }
   })
+
+
  
 }, []);
 
@@ -97,7 +128,7 @@ let levelsCards = Activity.map((e, i)=>
               />
 })
 
-let nameString = `Bonjour ${User.username}`
+
 
 
 
@@ -115,15 +146,34 @@ let nameString = `Bonjour ${User.username}`
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
         <View style={styles.container}>
-          <StaticCard
-            text={nameString}
-            textAlign="left"
+         
+          {/* <StaticCard
+            text="aaa"
+            textAlign="center"
             width="340" 
             height="70" 
             backgroundColor="lightgrey" 
             color="green"
-          />
-          <StaticCard
+          /> */}
+          <View style={styles.profilContainer}>
+             <PhotoProfil photoUrl={"https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1748005964/projectFinDeBatch/front/images/default-profile_cltqmm.png"}></PhotoProfil>
+             <View style={styles.textProfilContainer}>
+                <Text style={[styles.profilText, { fontSize: 20 }]}  >Bonjour {User.username}</Text>
+                <Text style={styles.profilText}>ready for challenge?</Text>
+             </View>
+          </View>
+
+           <View style={[styles.profilContainer, {backgroundColor:"#C5C4D9"}]}>
+             <View style={styles.textProfilContainer}>
+                <Text style={[styles.progressText, { fontSize: 20 }]}  >Niveau de progression</Text>
+                <Text style={styles.progressText}>{nExercices}/10 Exercises completés</Text>
+             </View>
+              <ExercisesProgressBar value={nExercices*10}></ExercisesProgressBar>
+          </View>
+
+         
+          
+          {/* <StaticCard
             color="black"
             fontWeight="700"
             text="amel"
@@ -131,7 +181,7 @@ let nameString = `Bonjour ${User.username}`
             height="75" 
             backgroundColor="#C5C4D9" 
             url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
-          />
+          /> */}
           <Text style={styles.text}>Training Now</Text>
           <View style={styles.topButton}>
             <ScrollView
@@ -140,43 +190,43 @@ let nameString = `Bonjour ${User.username}`
               showHorizontalScrollIndicator={false} //affiche une barre de scroll
               style={styles.scrollView}
             >
-              {/* <ActivityCard
-                style={styles.activity}
-                text="nico"
-                color="yellow"
-              />
-              <ActivityCard
-                style={styles.activity}
-                text="Sport"
-                backgroundColor="#C5C4D9" //gris du figma
-                color="yellow"
-                url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
-              />
-              <ActivityCard
-                style={styles.activity}
-                text="Amel"
-                backgroundColor="#E9FEE1" //gris du figma
-                url=""
-              /> */}
+              
               {levelsCards}
             </ScrollView>
           </View>
-          <StaticCard
+          <StatiscticGraphic playTime={playTime} sessions={sessions} xp={xp}></StatiscticGraphic>
+         
+          {/* <StaticCard
             width="340" //long du boutton
             height="150" //haut du boutton
             backgroundColor="#EF5F8" 
             color="white"
             text="statistic"
             textAlign="left"
-          />
+          /> */}
           <View style={styles.bottomButton}>
-            <ActivityCard style={styles.activity} text="Amel" url="" />
-            <StaticCard
+            {/* <ActivityCard style={styles.activity} text={dayTime} url="" /> */}
+            {/* <StaticCard
               width="200" //long du boutton
               height="150" //haut du boutton
               backgroundColor="#C5C4D9" //gris du figma
               
-            />
+            /> */}
+            <View style={styles.dayTrainingContainer}>
+               <View style={styles.textbottomButtonContainer}>
+                <Text style={[styles.progressText, { fontSize: 20 }]}  >Training</Text>
+                <Text style={styles.progressText}>{dayTime}</Text>
+              </View>
+            </View>
+
+             <View style={styles.meteoContainer}>
+               <View style={styles.textbottomButtonContainer}>
+                <Text style={[styles.profilText, { fontSize: 20 }]}  >{meteo}</Text>
+                <Text style={styles.profilText}>{meteo}</Text>
+              </View>
+            </View>
+
+           
           </View>
         </View>
       </SafeAreaView>
@@ -208,4 +258,57 @@ const styles = StyleSheet.create({
   bottomButton: {
     flexDirection: "row",
   },
+  profilContainer:
+  {
+    width:350,
+    height:90,
+    backgroundColor:"lightgrey",
+    borderRadius: 15,
+    marginRight: 5,
+    margin: 5,
+    padding: 5,
+    flexDirection:"row",
+
+  },
+  profilText:
+  {
+    color:"green",
+    marginTop: 5,
+    fontWeight: "500",
+   
+
+
+  },
+  progressText:
+  {
+    color:"black",
+    marginTop: 5,
+    fontWeight: "500",
+   
+
+
+  },
+  dayTrainingContainer:
+  {
+    backgroundColor:"#FCEACE",
+     width: "170", //long du boutton
+    height: "150", //haut du boutton
+    borderRadius: 15, //arrondi des angles
+     margin: 5,
+  },
+  textbottomButtonContainer:
+  {
+    alignItems:"center",
+    paddingTop:40,
+
+  },
+  meteoContainer:
+  {
+    backgroundColor:"#C5C4D9",
+     width: "170", //long du boutton
+    height: "150", //haut du boutton
+    borderRadius: 15, //arrondi des angles
+     margin: 5,
+
+  }
 });
