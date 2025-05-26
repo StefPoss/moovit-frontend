@@ -8,7 +8,7 @@ function StaticCard({
   height = "75", //haut du boutton
   backgroundColor = "#000", //gris du figma
   color = "#000",
-  fontWeight="700",
+  fontWeight="700"
 }) {
   return (
     <View style={[styles.static, { width, height, backgroundColor }]}>
