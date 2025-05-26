@@ -28,7 +28,7 @@ import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigatio
 
 export default function DashBoard(props) {
   const User = useSelector((state) => state.user.value)
-  const Activity = useSelector((state) => state.activity.value)
+  const activity = useSelector((state) => state.activity.value)
   const dispatch = useDispatch()
   const [nExercices, setNExercices] = useState(8)
   const [dayTime, setDayTime] = useState("Indisponible")
@@ -36,6 +36,8 @@ export default function DashBoard(props) {
   let playTime = 35
   let sessions = 5
   let xp = 105
+  // console.log("activity is", activity)
+  // console.log("rendering dashboard")
 
   const [refreshing, setRefreshing] = React.useState(false)
 
@@ -59,7 +61,7 @@ export default function DashBoard(props) {
     })
       .then((r) => r.json())
       .then((data) => {
-        // console.log("data is", data)
+        console.log("data is", data)
 
         if (data.result) {
           let newUser = {
@@ -73,7 +75,7 @@ export default function DashBoard(props) {
           }
           dispatch(addUserToStore(newUser))
           dispatch(addActivityToStore(data.dataLevel.subLevels))
-          // console.log("Activity is", Activity)
+          // console.log("activity is", activity)
           console.log("data is", data.dataLevel.subLevels)
           // console.log(data)
           let dailyTime = data.dataUser.form.dayTime
@@ -92,7 +94,7 @@ export default function DashBoard(props) {
       })
   }, [])
 
-  let levelsCards = Activity.map((e, i) => (
+  let levelsCards = activity?.map((e, i) => (
     <ActivityCard
       key={i}
       style={styles.activity}
@@ -120,11 +122,13 @@ export default function DashBoard(props) {
                 <Text style={[styles.profilText, { fontSize: 20 }]}>
                   Bonjour {User.username}
                 </Text>
-                <Text style={styles.profilText}>Prêt pour un nouveau challenge ?</Text>
+                <Text style={styles.profilText}>
+                  Prêt pour un nouveau challenge ?
+                </Text>
               </View>
             </View>
 
-            {/*PROGRESS CARD  */}
+            {/*PROGRESS CARD */}
             <View style={styles.progressCard}>
               <View style={styles.progressLeftBlock}>
                 <Text style={styles.progressTitle}>{User.level}</Text>
