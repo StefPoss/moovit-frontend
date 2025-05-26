@@ -1,37 +1,37 @@
-import NewRelic from "newrelic-react-native-agent"
+import NewRelic from "newrelic-react-native-agent";
 
-import { StatusBar } from "expo-status-bar"
-import { useFonts } from "expo-font"
-import { StyleSheet } from "react-native"
-import { NavigationContainer } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { StatusBar } from "expo-status-bar";
+import { useFonts } from "expo-font";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Splash from "./screens/Auth/SplashScreen"
-import Login from "./screens/Auth/LoginScreen"
-import SignUp from "./screens/Auth/SignupScreen"
-import onBoarding from "./screens/OnBoarding/OnBoardingForms"
-import Dashboard from "./screens/Main/Dashboard"
-import LevelScreen from "./screens/LevelScreen"
-import CguScreen from "./screens/Auth/CGUScreen"
-import Play from "./screens/Activities/Play"
-import ProfileScreen from "./screens/Main/ProfileScreen"
-import PlayScreen from "./screens/Main/PlayScreen"
+import Splash from "./screens/Auth/SplashScreen";
+import Login from "./screens/Auth/LoginScreen";
+import SignUp from "./screens/Auth/SignupScreen";
+import onBoarding from "./screens/OnBoarding/OnBoardingForms";
+import Dashboard from "./screens/Main/Dashboard";
+import LevelScreen from "./screens/LevelScreen";
+import CguScreen from "./screens/Auth/CGUScreen";
+import Play from "./screens/Activities/Play";
+import ProfileScreen from "./screens/Main/ProfileScreen";
+import PlayScreen from "./screens/Main/PlayScreen";
 
-import { Provider } from "react-redux"
-import { PersistGate } from "redux-persist/integration/react"
-import { configureStore, combineReducers } from "@reduxjs/toolkit"
-import { persistStore, persistReducer } from "redux-persist"
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import userReducer from "./reducers/userSlice"
-import activityReducer from "./reducers/activitySlice"
-import onBoardingReducer from "./reducers/onBoardingSlice"
-import { PaperProvider } from "react-native-paper"
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import userReducer from "./reducers/userSlice";
+import activityReducer from "./reducers/activitySlice";
+import onBoardingReducer from "./reducers/onBoardingSlice";
+import { PaperProvider } from "react-native-paper";
 
 const rootReducer = combineReducers({
   user: userReducer,
   activity: activityReducer,
   onBoarding: onBoardingReducer,
-})
+});
 
 const persistConfig = {
   key: "Moovit",
@@ -39,16 +39,16 @@ const persistConfig = {
   whitelist: ["user", "activity", "onBoarding"],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
-})
+});
 
-const persistor = persistStore(store)
-const Stack = createNativeStackNavigator()
+const persistor = persistStore(store);
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   // Attention Android requiert le nom Exact des fonts - passage des fonts sur https://fontdrop.info/ pour avoir le nom reeal
@@ -62,7 +62,7 @@ export default function App() {
     ManropeBold: require("./assets/fonts/Manrope-Bold.ttf"),
     ManropeExtraBold: require("./assets/fonts/Manrope-ExtraBold.ttf"),
     MaterialCommunityIcons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"), // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
-  })
+  });
 
   //if (!fontsLoaded) return null;
 
@@ -75,18 +75,17 @@ export default function App() {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name="Welcome" component={Splash} />
               <Stack.Screen name="S'inscrire" component={SignUp} />
-              <Stack.Screen name="Se connecter" component={Login} /> 
+              <Stack.Screen name="Se connecter" component={Login} />
               <Stack.Screen name="onBoarding" component={onBoarding} />
               <Stack.Screen name="cgu" component={CguScreen} />
               <Stack.Screen name="Dashboard" component={Dashboard} />
               <Stack.Screen name="Play" component={Play} />
-
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
       </PersistGate>
     </Provider>
-  )
+  );
 }
 const styles = StyleSheet.create({
   container: {
@@ -95,4 +94,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-})
+});
