@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 function StaticCard({
+
   text = "",
   textAlign = "center",
   width = "350", //long du boutton
@@ -9,7 +10,9 @@ function StaticCard({
   backgroundColor = "#000", //gris du figma
   color = "#000",
   fontWeight = "700",
+
 }) {
+
   return (
     <View style={[styles.static, { width, height, backgroundColor }]}>
       <Text

@@ -8,6 +8,7 @@ import Login from "./screens/Auth/LoginScreen";
 import SignUp from "./screens/Auth/SignupScreen";
 import onBoarding from "./screens/OnBoarding/OnBoardingForms";
 import Dashboard from "./screens/Main/Dashboard";
+import LevelScreen from "./screens/LevelScreen";
 import CguScreen from "./screens/Auth/CGUScreen";
 import Play from "./screens/Activities/Play";
 
@@ -17,18 +18,22 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import userReducer from "./reducers/userSlice";
+import activityReducer from "./reducers/activitySlice";
 import onBoardingReducer from "./reducers/onBoardingSlice";
 import { PaperProvider } from "react-native-paper";
+import ProfileScreen from "./screens/Main/ProfileScreen";
+import PlayScreen from "./screens/Main/PlayScreen";
 
 const rootReducer = combineReducers({
   user: userReducer,
+  activity: activityReducer,
   onBoarding: onBoardingReducer,
 });
 
 const persistConfig = {
   key: "Moovit",
   storage: AsyncStorage,
-  whitelist: ["user", "onBoarding"],
+  whitelist: ["user", "activity", "onBoarding"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -67,11 +72,12 @@ export default function App() {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name="Welcome" component={Splash} />
               <Stack.Screen name="S'inscrire" component={SignUp} />
-              <Stack.Screen name="Se connecter" component={Login} />
+              <Stack.Screen name="Se connecter" component={Login} /> 
               <Stack.Screen name="onBoarding" component={onBoarding} />
               <Stack.Screen name="cgu" component={CguScreen} />
               <Stack.Screen name="Dashboard" component={Dashboard} />
               <Stack.Screen name="Play" component={Play} />
+
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>

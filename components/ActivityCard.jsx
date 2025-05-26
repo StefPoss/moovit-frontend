@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
+
 export default function ActivityCard({
   text = "",
   width = "150", //long du boutton
