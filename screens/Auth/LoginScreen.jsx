@@ -55,28 +55,14 @@ export default function LoginScreen({ navigation }) {
           navigation.navigate("onBoarding")
           dispatch(addUserToStore({ token: resultData.token }))
         } else if (resultData.result && resultData.sport.length > 0) {
-<<<<<<< HEAD
           navigation.navigate("TabNavigator");
           dispatch(addUserToStore({ token: resultData.token }));
-=======
-          navigation.navigate("Dashboard")
-          dispatch(addUserToStore({ token: resultData.token }))
->>>>>>> 78462c0fa796c62e5a1659a3186edcbe976c8798
         } else {
           alert(resultData.error)
         }
       })
   }
 
-<<<<<<< HEAD
-     
-  };
-
-
-    
-  
-=======
->>>>>>> 78462c0fa796c62e5a1659a3186edcbe976c8798
   return (
     <TouchableWithoutFeedback
       onPress={() => {
