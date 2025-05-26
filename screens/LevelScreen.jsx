@@ -21,8 +21,9 @@ export default function LevelScreen(props) {
   //      text = Data.title
   //      description = Data.description
   //      color="black"
-  //      width="150" //long du boutton
-  //      height="150" //haut du boutton
+  //      color="black"
+  //      width="370" //long du boutton
+  //      height="140" //haut du boutton
   //      backgroundColor="#FCEACE" //gris du figma
   //      url = Data.image
   //      fontWeight="700"
