@@ -12,38 +12,51 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
-import Button from "../../components/buttons";
+import Button from "../../components/Buttons";
 import { addUserToStore } from "../../reducers/userSlice";
 import { useDispatch } from "react-redux";
 import { API_URL } from "@env";
+import { checkBody } from "../../modules/checkBody";
+//pour pouvoir pusher
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch = useDispatch();
   const handleLogin = () => {
+    const requiredFields = ["email", "password"];
+    const body = { email, password };
+
+    if (!checkBody(body, requiredFields)) {
+      setEmailError("Tous les champs sont requis");
+      return;
+    }
+
     // Envoi d'une requête POST à l'API backend pour la route /signin
     fetch(`${API_URL}/api/users/signin`, {
       method: "POST", // méthode HTTP POST pour envoyer les données
       headers: { "Content-Type": "application/json" }, // type de contenu envoyé en JSON
       body: JSON.stringify({
-        email: email, // email saisi par l'utilisateur
+        email: email, // email saisi par l'utilisateur∑
         password: password, // mot de passe saisi par l'utilisateur
       }),
       // transformation de la réponse en objet JSON
     })
       .then((data) => data.json())
       .then((resultData) => {
+        console.log("-- ", resultData);
+
         // Si le login est réussi
         if (resultData.result && resultData.sport.length === 0) {
           //envoi vers le screen dashboard
           navigation.navigate("onBoarding");
-          dispatch(addUserToStore({ token: data.token }));
+          dispatch(addUserToStore({ token: resultData.token }));
         } else if (resultData.result && resultData.sport.length > 0) {
-          navigation.navigate("Dashboard");
-          dispatch(addUserToStore({ token: data.token }));
+          navigation.navigate("TabNavigator");
+          dispatch(addUserToStore({ token: resultData.token }));
         } else {
           alert(resultData.error);
         }
@@ -51,7 +64,11 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={styles.container}
@@ -71,42 +88,49 @@ export default function LoginScreen({ navigation }) {
           ton coach sportif de poche !
         </Text>
 
-        <View style={styles.form}>
-          <TextInput
-            placeholder="Entrez votre email"
-            style={styles.input}
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-
-          <View style={styles.inputRow}>
+        <View style={styles.formContainer}>
+          <View style={styles.form}>
             <TextInput
-              placeholder="Entrez votre password"
-              secureTextEntry={!passwordVisible}
-              style={styles.inputText}
-              value={password} // pour le state
-              onChangeText={setPassword}
+              placeholder="Entrez votre email"
+              placeholderTextColor="#aaa"
+              style={styles.input}
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
             />
-
-            <Pressable onPress={() => setPasswordVisible(!passwordVisible)}>
-              <Ionicons
-                name={passwordVisible ? "eye-off" : "eye"}
-                size={20}
-                color="#777"
+            {emailError !== "" && (
+              <Text style={{ color: "red", marginTop: 4, marginLeft: 4 }}>
+                {emailError}
+              </Text>
+            )}
+            <View style={styles.inputRow}>
+              <TextInput
+                placeholder="Entrez votre mot de passe"
+                placeholderTextColor="#aaa"
+                secureTextEntry={!passwordVisible}
+                style={styles.inputText}
+                value={password} // pour le state
+                onChangeText={setPassword}
               />
-            </Pressable>
+
+              <Pressable onPress={() => setPasswordVisible(!passwordVisible)}>
+                <Ionicons
+                  name={passwordVisible ? "eye-off" : "eye"}
+                  size={20}
+                  color="#777"
+                />
+              </Pressable>
+            </View>
+
+            <Button
+              title="Se connecter"
+              onPress={handleLogin}
+              backgroundColor="#cbb7ff"
+              textColor="#000"
+            />
           </View>
-
-          <Button
-            title="Sign In"
-            onPress={handleLogin}
-            backgroundColor="#cbb7ff"
-            textColor="#000"
-          />
         </View>
-
         {/* Boutons sociaux sans fonctionnalité pour l'instant */}
         <TouchableOpacity style={styles.socialButton}>
           <AntDesign name="google" size={20} color="#000" />
@@ -129,10 +153,24 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  formContainer: {
+    backgroundColor: "#f9f9f9", // fond gris clair
+    borderRadius: 16,
+    padding: 20,
+    marginVertical: 10,
+    marginHorizontal: 16,
+    width: "100%",
+    marginBottom: 40,
+  },
+
+  /*form: {
+  gap: 50,
+},*/
+
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    padding: 30,
+    padding: 20,
     paddingTop: 90,
     alignItems: "center",
   },
@@ -145,7 +183,9 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: "center",
     fontFamily: "CocomatPro-Regular",
-    marginBottom: 80,
+    marginBottom: 60,
+    paddingTop: 20,
+
     color: "#000",
   },
   brand: {
@@ -153,7 +193,7 @@ const styles = StyleSheet.create({
   },
   form: {
     width: "100%",
-    marginBottom: 20,
+    marginBottom: 30,
   },
   label: {
     fontSize: 13,
@@ -165,7 +205,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#aaa",
+    borderColor: "#ddd",
     paddingHorizontal: 16,
     marginBottom: 16,
     fontFamily: "Manrope-Extralight",
@@ -175,7 +215,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#aaa",
+    borderColor: "#ddd",
     paddingHorizontal: 16,
     marginBottom: 16,
     flexDirection: "row",
@@ -183,7 +223,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   inputText: {
-    flex: 1,
+    //flex: 1,
     fontFamily: "Manrope-Extralight",
   },
   socialButton: {
@@ -215,3 +255,22 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 });
+
+/*const handleLogin = () => {
+  const requiredFields = ['email', 'password'];
+  const body = { email, password };
+
+  if (!checkBody(body, requiredFields)) {
+    setEmailError("Tous les champs sont requis");
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    setEmailError("Email invalide");
+  } else {
+    setEmailError("");
+    console.log("Connexion réussie");
+    navigation.navigate("onBoarding"); // ou API
+  }
+};*/

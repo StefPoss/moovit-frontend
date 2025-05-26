@@ -1,0 +1,122 @@
+{
+  "title": "Natation",
+  "description": "Apprends à nager comme un pro",
+  "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-001.avif",
+  "levels": [
+    {
+      "title": "Niveau 1",
+      "description": "Bases de la natation",
+      "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-001.avif",
+      "subLevels": [
+        {
+          "title": "1.1 Flottaison",
+          "description": "Apprendre à flotter",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-001.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=fT0X9dqK1Wg",
+          "tipOfThePro": "Reste détendu pour mieux flotter",
+          "timing": 120,
+          "xp": 50
+        },
+        {
+          "title": "1.2 Immersion",
+          "description": "S'immerger complètement sous l'eau",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169060/projectFinDeBatch/front/images/activities/natation/natation-photo-002.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=K2l-GKWBbtw&list=RD6rk-zpAj7w8&index=2",
+          "tipOfThePro": "Souffle lentement par le nez pour rester calme",
+          "timing": 90,
+          "xp": 40
+        },
+        {
+          "title": "1.3 Battements de jambes",
+          "description": "Apprendre les bons mouvements de jambes",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169061/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=6rk-zpAj7w8&list=RD6rk-zpAj7w8&start_radio=1",
+          "tipOfThePro": "Garde les jambes tendues, petits battements réguliers",
+          "timing": 100,
+          "xp": 45
+        },
+        {
+          "title": "1.4 Respiration aquatique",
+          "description": "Maîtriser la respiration dans l'eau",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169062/projectFinDeBatch/front/images/activities/natation/natation-photo-004.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=mnop5678def",
+          "tipOfThePro": "Expire sous l’eau, inspire rapidement en sortant la tête",
+          "timing": 110,
+          "xp": 55
+        },
+        {
+          "title": "1.5 Coordination bras-jambes",
+          "description": "Coordonner les mouvements pour avancer efficacement",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169063/projectFinDeBatch/front/images/activities/natation/natation-photo-005.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=qwerty123abc",
+          "tipOfThePro": "Travaille lentement pour bien sentir la coordination",
+          "timing": 130,
+          "xp": 60
+        },
+        {
+          "title": "1.6 Allure constante",
+          "description": "Maintenir une vitesse stable sur la longueur",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169064/projectFinDeBatch/front/images/activities/natation/natation-photo-006.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=ghijkl890uvw",
+          "tipOfThePro": "Reste régulier dans ta respiration et ton effort",
+          "timing": 140,
+          "xp": 65
+        },
+        {
+          "title": "1.1 Flottaison",
+          "description": "Apprendre à flotter",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-001.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=fT0X9dqK1Wg",
+          "tipOfThePro": "Reste détendu pour mieux flotter",
+          "timing": 120,
+          "xp": 50
+        },
+        {
+          "title": "1.2 Immersion",
+          "description": "S'immerger complètement sous l'eau",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169060/projectFinDeBatch/front/images/activities/natation/natation-photo-002.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=K2l-GKWBbtw&list=RD6rk-zpAj7w8&index=2",
+          "tipOfThePro": "Souffle lentement par le nez pour rester calme",
+          "timing": 90,
+          "xp": 40
+        },
+        {
+          "title": "1.3 Battements de jambes",
+          "description": "Apprendre les bons mouvements de jambes",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169061/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=6rk-zpAj7w8&list=RD6rk-zpAj7w8&start_radio=1",
+          "tipOfThePro": "Garde les jambes tendues, petits battements réguliers",
+          "timing": 100,
+          "xp": 45
+        },
+        {
+          "title": "1.4 Respiration aquatique",
+          "description": "Maîtriser la respiration dans l'eau",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169062/projectFinDeBatch/front/images/activities/natation/natation-photo-004.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=mnop5678def",
+          "tipOfThePro": "Expire sous l’eau, inspire rapidement en sortant la tête",
+          "timing": 110,
+          "xp": 55
+        },
+        {
+          "title": "1.5 Coordination bras-jambes",
+          "description": "Coordonner les mouvements pour avancer efficacement",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169063/projectFinDeBatch/front/images/activities/natation/natation-photo-005.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=qwerty123abc",
+          "tipOfThePro": "Travaille lentement pour bien sentir la coordination",
+          "timing": 130,
+          "xp": 60
+        },
+        {
+          "title": "1.6 Allure constante",
+          "description": "Maintenir une vitesse stable sur la longueur",
+          "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169064/projectFinDeBatch/front/images/activities/natation/natation-photo-006.avif",
+          "mediaUrl": "https://www.youtube.com/watch?v=ghijkl890uvw",
+          "tipOfThePro": "Reste régulier dans ta respiration et ton effort",
+          "timing": 140,
+          "xp": 65
+        }
+      ]
+    }
+  ]
+}
