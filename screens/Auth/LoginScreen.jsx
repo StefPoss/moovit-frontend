@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   View,
   Text,
@@ -10,32 +10,29 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
-} from "react-native";
-import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
-import Button from "../../components/Buttons";
-import { addUserToStore } from "../../reducers/userSlice";
-import { useDispatch } from "react-redux";
-import { API_URL } from "@env";
-import { checkBody } from "../../modules/checkBody";
+} from "react-native"
+import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons"
+import Button from "../../components/Buttons"
+import { addUserToStore } from "../../reducers/userSlice"
+import { useDispatch } from "react-redux"
+import { API_URL } from "@env"
+import { checkBody } from "../../modules/checkBody"
 //pour pouvoir pusher
 
-
-
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [emailError, setEmailError] = useState("")
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const dispatch = useDispatch();
+  const [passwordVisible, setPasswordVisible] = useState(false)
+  const dispatch = useDispatch()
   const handleLogin = () => {
-
-    const requiredFields = ["email", "password"];
-    const body = { email, password };
+    const requiredFields = ["email", "password"]
+    const body = { email, password }
 
     if (!checkBody(body, requiredFields)) {
-      setEmailError("Tous les champs sont requis");
-      return;
+      setEmailError("Tous les champs sont requis")
+      return
     }
 
     // Envoi d'une requête POST à l'API backend pour la route /signin
@@ -50,29 +47,42 @@ export default function LoginScreen({ navigation }) {
     })
       .then((data) => data.json())
       .then((resultData) => {
-        console.log("-- ",resultData);
-        
+        console.log("-- ", resultData)
+
         // Si le login est réussi
         if (resultData.result && resultData.sport.length === 0) {
           //envoi vers le screen dashboard
-          navigation.navigate("onBoarding");
-          dispatch(addUserToStore({ token: resultData.token }));
+          navigation.navigate("onBoarding")
+          dispatch(addUserToStore({ token: resultData.token }))
         } else if (resultData.result && resultData.sport.length > 0) {
+<<<<<<< HEAD
           navigation.navigate("TabNavigator");
           dispatch(addUserToStore({ token: resultData.token }));
+=======
+          navigation.navigate("Dashboard")
+          dispatch(addUserToStore({ token: resultData.token }))
+>>>>>>> 78462c0fa796c62e5a1659a3186edcbe976c8798
         } else {
-          alert(resultData.error);
+          alert(resultData.error)
         }
-      });
+      })
+  }
 
+<<<<<<< HEAD
      
   };
 
 
     
   
+=======
+>>>>>>> 78462c0fa796c62e5a1659a3186edcbe976c8798
   return (
-    <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss()
+      }}
+    >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={styles.container}
@@ -258,7 +268,7 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     fontWeight: "500",
   },
-});
+})
 
 /*const handleLogin = () => {
   const requiredFields = ['email', 'password'];
