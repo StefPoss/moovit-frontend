@@ -58,21 +58,14 @@ export default function LoginScreen({ navigation }) {
           navigation.navigate("onBoarding");
           dispatch(addUserToStore({ token: resultData.token }));
         } else if (resultData.result && resultData.sport.length > 0) {
-          navigation.navigate("Dashboard");
+          navigation.navigate("TabNavigator");
           dispatch(addUserToStore({ token: resultData.token }));
         } else {
           alert(resultData.error);
         }
       });
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setEmailError("Email invalide");
-    } else {
-      setEmailError("");
-      console.log("Connexion réussie");
-      navigation.navigate("onBoarding"); // ou API
-    }
+     
   };
 
 

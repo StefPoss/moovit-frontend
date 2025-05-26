@@ -31,6 +31,7 @@ export default function DashBoard(props) {
   const [nExercices, setNExercices] = useState(8);
   const [dayTime, setDayTime] = useState("Indisponible");
   const [meteo, setMeteo] = useState("Indisponible");
+  //let levelsCards =[]
   let playTime = 35
   let sessions = 5
   let xp = 105
@@ -90,6 +91,17 @@ useEffect(() =>
       }
 
       setMeteo(data.dataMeteo)
+      // levelsCards = Activity.map((e, i)=>
+      // {
+      //   return <ActivityCard
+      //                 key={i}
+      //                 style={styles.activity}
+      //                 text={e.title}
+      //                 backgroundColor="#C5C4D9" //gris du figma
+      //                 color="yellow"
+      //                 url={e.image}
+      //               />
+      // })
 
 
 
@@ -198,7 +210,7 @@ let levelsCards = Activity.map((e, i)=>
           </View>
         </View>
         {/* Intégration de la Tabnavigation ici à modifier */}
-        <Tabnavigation />
+        {/* <Tabnavigation /> */}
       </SafeAreaView>
     </SafeAreaProvider>
   );
