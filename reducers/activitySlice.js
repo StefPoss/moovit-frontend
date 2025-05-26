@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value:{}
-  
+  value: {},
 };
 
 export const activitySlice = createSlice({
@@ -11,13 +10,13 @@ export const activitySlice = createSlice({
   reducers: {
     addActivityToStore: (state, action) => {
       state.value = action.payload;
-      
     },
-    removeActivityToStore: (state, action) => {
+    removeActivityToStore: (state) => {
       state.value = initialState.value;
     },
   },
 });
 
-export const { addActivityToStore, removeActivityToStore } = activitySlice.actions;
+export const { addActivityToStore, removeActivityToStore } =
+  activitySlice.actions;
 export default activitySlice.reducer;

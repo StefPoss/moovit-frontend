@@ -59,7 +59,7 @@ export default function OnBoarding({ navigation }) {
         })
         .then((data) => {
           console.log("Réponse du backend :", data);
-          navigation.navigate("Dashboard");
+          navigation.navigate("TabNavigator");
           dispatch(removeAllInfoToStore());
         })
         .catch((error) => {
