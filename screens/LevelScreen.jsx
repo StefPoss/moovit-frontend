@@ -28,7 +28,7 @@ export default function LevelScreen(props) {
   //      fontWeight="700"
   //             />}
   const topImg= "https://reactnative.dev/img/tiny_logo.png"
-  const niv="#1"
+  const niv="1"
   const bgImage = "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif"
   return (
     <SafeAreaProvider>
@@ -51,7 +51,7 @@ export default function LevelScreen(props) {
           <CardLevelClicable
             style={styles.try}
             text="titre"
-            description="sdrfgyhjkzrdrtguhjkert"
+            description="description..."
             color="black"
             width="370" //long du boutton
             height="140" //haut du boutton
@@ -59,6 +59,7 @@ export default function LevelScreen(props) {
             url="https://reactnative.dev/img/tiny_logo.png"
             fontWeight="700"
           />
+         
           </ScrollView>
 </ImageBackground>
 
