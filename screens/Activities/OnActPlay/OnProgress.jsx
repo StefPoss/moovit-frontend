@@ -1,38 +1,44 @@
-import React, { useState, useCallback, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-  Alert,
-  Text,
-} from "react-native";
-import CardAct from "../../../components/CardAct";
+import React from "react";
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import SemiCircleProgress from "../../../components/SemiCircleProgress";
 
-export default function OnProgress({ navigation }) {
+export default function OnProgress({ navigation, level, total }) {
+  const numLevel = level;
+  const totallevel = total;
+  const pourcentage = Math.round((numLevel / totallevel) * 100);
+
   return (
     <SafeAreaView>
       <View style={styles.contain}>
-        <View>
-          <CardAct
-            height={100}
-            width={"100%"}
-            color={"grey"}
-            text={"Page de PROGRESS"}
-          />
-        </View>
-        <View>
-          <Text>Page de ONDONE</Text>
-        </View>
+        <SemiCircleProgress
+          percentage={pourcentage}
+          progressColor={"green"}
+          progressShadowColor={"#ccc"}
+          interiorCircleColor={"#fff"}
+          circleRadius={100}
+          progressWidth={14}
+        >
+          <Text style={styles.percentageText}>
+            {numLevel}/{total}
+          </Text>
+        </SemiCircleProgress>
       </View>
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   contain: {
     display: "flex",
     borderWidth: 3,
     height: "100%",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  percentageText: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "green",
+    marginBottom: 20,
   },
 });

@@ -11,18 +11,21 @@ import OnPlay from "./OnActPlay/OnPlay";
 import OnDone from "./OnActPlay/OnDone";
 import OnProgress from "./OnActPlay/OnProgress";
 import OnReward from "./OnActPlay/OnReward";
+import { useSelector } from "react-redux";
 import ProgressBarComp from "../../components/ProgressBar";
 import activities from "../../data/activities_sample.json";
 
 export default function Play({ navigation }) {
+  const user = useSelector((state) => state.user.value.username);
   const [levelStatus, setLevelStatus] = useState(0);
   const [numLevel, setNumLevel] = useState(0);
-
-  const subLevels = activities?.levels?.[0]?.subLevels || [];
-  const uriImage = subLevels[numLevel]?.image;
-  const tabLevel = ["onPlay", "onDone", "onReward", "onProgress"];
-  const totalLevels = subLevels.length;
-  const levelxp = subLevels[numLevel]?.xp;
+  const subLevels = activities?.levels?.[0]?.subLevels[numLevel] || [];
+  const tabLevel = ["onPlay", "onDone", "onProgress"];
+  const totalLevels = activities.levels[0].subLevels.length;
+  const levelxp = subLevels.xp;
+  const timing = subLevels.timing;
+  console.log(timing);
+  console.log(numLevel);
 
   const plusstate = () => {
     if (levelStatus < tabLevel.length - 1) {
@@ -62,11 +65,16 @@ export default function Play({ navigation }) {
       />
     );
   } else if (tabLevel[levelStatus] === "onDone") {
-    toDisp = <OnDone numLevel={numLevel} uriImage={uriImage} />;
-  } else if (tabLevel[levelStatus] === "onReward") {
-    toDisp = <OnReward xp={levelxp} />;
+    toDisp = (
+      <OnDone
+        user={user}
+        timing={timing}
+        xp={levelxp}
+        onPress={() => moinstate()}
+      />
+    );
   } else if (tabLevel[levelStatus] === "onProgress") {
-    toDisp = <OnProgress />;
+    toDisp = <OnProgress total={totalLevels} level={numLevel} />;
   }
 
   return (
@@ -93,7 +101,7 @@ export default function Play({ navigation }) {
         <View style={styles.container}>
           <View style={styles.content}>{toDisp}</View>
           <View style={{ alignItems: "center", marginBottom: 10 }}>
-            <Text style={{ color: "white" }}>
+            <Text style={{ color: "black" }}>
               numLevel: {numLevel} / total: {subLevels.length}
             </Text>
           </View>
@@ -114,13 +122,13 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
-    backgroundColor: "transparent",
+    backgroundColor: "white",
   },
   testHeader: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ccc", // bande grise de test
+    top: -30,
     paddingVertical: 8,
     flexWrap: "wrap",
   },
@@ -139,7 +147,6 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.4)", // fond sombre semi-transparent
   },
   container: {
     flex: 1,
@@ -149,7 +156,7 @@ const styles = StyleSheet.create({
   },
   progress: {
     width: "100%",
-    height: 10, // fixe visuellement la hauteur correcte
+    height: 10,
     borderRadius: 5,
   },
 });

@@ -15,7 +15,7 @@ const ProgressBarComp = ({ count, total }) => {
       <ProgressBar
         progress={progress}
         color="rgb(100,81,159)"
-        backgroundColor="#7d6bb3"
+        backgroundColor=""
         style={styles.progress}
       />
     </View>

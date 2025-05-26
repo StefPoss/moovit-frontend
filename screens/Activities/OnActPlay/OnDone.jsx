@@ -1,87 +1,150 @@
 import React, { useState } from "react";
 import {
   View,
-  StyleSheet,
-  TouchableOpacity,
   Text,
-  ImageBackground,
+  StyleSheet,
   SafeAreaView,
+  TouchableOpacity,
+  Image,
 } from "react-native";
-import CardAct from "../../../components/CardAct";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function OnDone(props) {
-  const [onSelect, setOnSelect] = useState("");
+  const [rating, setRating] = useState(0);
+
+  const stats = {
+    niveau: "Débutant",
+    xp: props.xp,
+    calories: "154 kcal",
+  };
+
+  const userName = "Username";
 
   return (
-    <ImageBackground
-      source={{ uri: props.uriImage }}
-      style={styles.background}
-      resizeMode="cover"
-    >
-      <SafeAreaView style={styles.safe}>
-        <View style={styles.contain}>
-          <CardAct
-            height={100}
-            width={"100%"}
-            color={"grey"}
-            text={"Qu'as tu pensé de ta séance ?"}
-          />
-          <View style={styles.grpbtn}>
-            {["Facile", "Juste Bien", "Trop dur"].map((label) => (
-              <TouchableOpacity
-                key={label}
-                style={styles.smallButton}
-                onPress={() => setOnSelect(label)}
-              >
-                <Text style={styles.btnText}>{label}</Text>
-                {onSelect === label && <View style={styles.arrow} />}
-              </TouchableOpacity>
-            ))}
+    <SafeAreaView style={styles.safe}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => props.onPress()}
+      >
+        <Ionicons name="arrow-back" size={24} color="black" />
+      </TouchableOpacity>
+
+      <View style={styles.container}>
+        <Text style={styles.emoji}>🎉</Text>
+
+        <Text style={styles.title}>Bon travail {props.user} !</Text>
+        <Text style={styles.subtitle}>
+          tu as terminé ta séance d'entraînement
+        </Text>
+
+        <View style={styles.statsContainer}>
+          <View style={styles.statBlock}>
+            <Text style={styles.statIcon}>🕒</Text>
+            <Text style={styles.statLabel}>Durée</Text>
+            <Text style={styles.statValue}>{props.timing}</Text>
+          </View>
+          <View style={styles.statBlock}>
+            <Text style={styles.statIcon}>💪</Text>
+            <Text style={styles.statLabel}>Niveau</Text>
+            <Text style={styles.statValue}>{stats.niveau}</Text>
+          </View>
+          <View style={styles.statBlock}>
+            <Text style={styles.statIcon}>🧡</Text>
+            <Text style={styles.statLabel}>XP gagnés</Text>
+            <Text style={styles.statValue}>{stats.xp}</Text>
+          </View>
+          <View style={styles.statBlock}>
+            <Text style={styles.statIcon}>🔥</Text>
+            <Text style={styles.statLabel}>Calories</Text>
+            <Text style={styles.statValue}>{stats.calories}</Text>
           </View>
         </View>
-      </SafeAreaView>
-    </ImageBackground>
+
+        <Text style={styles.note}>Note ton expérience !</Text>
+        <View style={styles.starsContainer}>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <TouchableOpacity
+              key={i}
+              onPress={() => {
+                setRating(i);
+                console.log(i);
+              }}
+            >
+              <Ionicons
+                name={i <= rating ? "star" : "star-outline"}
+                size={32}
+                color={"black"}
+              />
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
   safe: {
     flex: 1,
+    backgroundColor: "#fff",
   },
-  contain: {
+  backButton: {
+    padding: 16,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: 1,
+  },
+  container: {
     flex: 1,
-    justifyContent: "space-between",
-    paddingTop: 100,
-    paddingBottom: 300,
-    paddingHorizontal: 16,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 24,
+    paddingTop: 60,
   },
-  grpbtn: {
+  emoji: {
+    fontSize: 64,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  subtitle: {
+    fontSize: 16,
+    marginBottom: 32,
+    textAlign: "center",
+  },
+  statsContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 20,
+    marginBottom: 32,
   },
-  btnText: {
-    color: "white",
+  statBlock: {
+    alignItems: "center",
+    width: "40%",
+    marginVertical: 12,
+  },
+  statIcon: {
     fontSize: 20,
   },
-  smallButton: {
-    padding: 12,
-    backgroundColor: "#888",
-    borderRadius: 8,
-    alignItems: "center",
-  },
-  arrow: {
-    width: 0,
-    height: 0,
-    borderLeftWidth: 6,
-    borderRightWidth: 6,
-    borderBottomWidth: 8,
-    borderLeftColor: "transparent",
-    borderRightColor: "transparent",
-    borderBottomColor: "white",
-    alignSelf: "center",
+  statLabel: {
+    fontSize: 14,
+    fontWeight: "600",
     marginTop: 4,
+  },
+  statValue: {
+    fontSize: 14,
+    marginTop: 2,
+  },
+  note: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 12,
+  },
+  starsContainer: {
+    flexDirection: "row",
   },
 });
