@@ -8,7 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import Button from "../../components/buttons";
+import Button from "../../components/Buttons";
 import questionForm from "../../data/onBoardingQuestion.json";
 import ProgressBarComp from "../../components/ProgressBar";
 import CheckBoxGroup from "../../components/QuestionOnBoard/CheckBoxGroup";
@@ -142,7 +142,7 @@ export default function OnBoarding({ navigation }) {
             </Text>
           </View>
           <View>
-            <ProgressBarComp count={numQuestion} />
+            <ProgressBarComp count={numQuestion} total={questionForm.length} />
           </View>
         </View>
 

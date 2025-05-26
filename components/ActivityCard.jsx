@@ -1,13 +1,13 @@
 import React from "react";
 import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
-function activityCard({
+
+export default function ActivityCard({
   text = "",
   width = "150", //long du boutton
   height = "150", //haut du boutton
   backgroundColor = "#FCEACE", //gris du figma
-  url = "https://reactnative.dev/img/tiny_logo.png",
-
+  url = "",
   color = "black",
   fontWeight = "700",
 }) {
@@ -20,15 +20,12 @@ function activityCard({
     >
       <Image
         style={[styles.tinyLogo, { width, height }]}
-        source={{
-          uri: url,
-        }}
+        source={url ? { uri: url } : null}
       />
       <Text style={[styles.buttonText, { color, fontWeight }]}>{text}</Text>
     </TouchableOpacity>
   );
 }
-export default activityCard;
 
 const styles = StyleSheet.create({
   button: {
@@ -41,9 +38,9 @@ const styles = StyleSheet.create({
 
   buttonText: {
     flex: 0,
-   zIndex:99999,
+    zIndex: 99999,
     textAlign: "center",
-     marginTop:-100,
+    marginTop: -100,
     fontWeight: "700",
     color: "black",
   },

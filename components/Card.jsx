@@ -6,8 +6,11 @@ const CardComp = (props) => {
     <View
       style={[
         styles.CardContain,
-        { backgroundColor: props.color },
-        // { borderColor: props.borderColor },
+        {
+          backgroundColor: props.color,
+          width: props.width,
+          height: props.height,
+        },
       ]}
     >
       <Text style={styles.txtCard}>{props.text}</Text>

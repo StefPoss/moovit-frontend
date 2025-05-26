@@ -2,17 +2,27 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 function StaticCard({
+
   text = "",
   textAlign = "center",
   width = "350", //long du boutton
   height = "75", //haut du boutton
   backgroundColor = "#000", //gris du figma
   color = "#000",
-  fontWeight="700",
+  fontWeight = "700",
+
 }) {
+
   return (
     <View style={[styles.static, { width, height, backgroundColor }]}>
-      <Text style={[styles.staticText, { textAlign:textAlign, color:color,fontWeight:fontWeight }]}>{text}</Text>
+      <Text
+        style={[
+          styles.staticText,
+          { textAlign: textAlign, color: color, fontWeight: fontWeight },
+        ]}
+      >
+        {text}
+      </Text>
     </View>
   );
 }
