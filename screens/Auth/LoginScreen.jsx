@@ -55,8 +55,8 @@ export default function LoginScreen({ navigation }) {
           navigation.navigate("onBoarding")
           dispatch(addUserToStore({ token: resultData.token }))
         } else if (resultData.result && resultData.sport.length > 0) {
-          navigation.navigate("Dashboard")
-          dispatch(addUserToStore({ token: resultData.token }))
+          navigation.navigate("TabNavigator");
+          dispatch(addUserToStore({ token: resultData.token }));
         } else {
           alert(resultData.error)
         }

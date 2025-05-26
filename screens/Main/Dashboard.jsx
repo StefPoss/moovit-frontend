@@ -183,7 +183,7 @@ export default function DashBoard(props) {
             </View>
           </View>
           {/* Intégration de la Tabnavigation ici à modifier */}
-          <Tabnavigation />
+          {/* <Tabnavigation /> */}
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
