@@ -12,12 +12,13 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
-
 import Button from "../../components/Buttons";
 import { addUserToStore } from "../../reducers/userSlice";
 import { useDispatch } from "react-redux";
 import { API_URL } from "@env";
 import { checkBody } from "../../modules/checkBody";
+//pour pouvoir pusher
+
 
 
 export default function LoginScreen({ navigation }) {
