@@ -14,10 +14,11 @@ import SignUp from "./screens/Auth/SignupScreen";
 import onBoarding from "./screens/OnBoarding/OnBoardingForms";
 import Dashboard from "./screens/Main/Dashboard";
 import LevelScreen from "./screens/LevelScreen";
+import NewLevelScreen from "./screens/NewLevelScreen"
 import CguScreen from "./screens/Auth/CGUScreen";
 import Play from "./screens/Activities/Play";
 import ProfileScreen from "./screens/Main/ProfileScreen";
-import PlayScreen from "./screens/Main/PlayScreen";
+import TimerScreen from "./screens/Main/TimerScreen";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
