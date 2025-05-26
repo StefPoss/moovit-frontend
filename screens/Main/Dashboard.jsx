@@ -5,29 +5,25 @@ import {
   SafeAreaView,
   SafeAreaProvider,
 } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
+
+import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function DashBoard(props) {
-  // <ActivityCard    //clickable
-  //   text=""//texte a afficher dans le bouton
-  //   width="150" //long du boutton
-  //   height="150" //haut du boutton
-  //   backgroundColor="#FCEACE" //gris du figma
-  //   url="https://reactnative.dev/img/tiny_logo.png"//url de l'image
-  //   color="black"//couleur de la font
-  //   fontWeight="700"//fontsize
-  // />;
 
-  //  <StaticCard   //NON-clickable
-  //     text="user" //texte a afficher dans le bouton
-  //     textAlign="left" //affichage du text left/center/right
-  //     width="340" //long du boutton
-  //     height="70" //haut du boutton
-  //     backgroundColor="lightgrey" //couleur du bg
-  //     color="green"//couleur de la font
-  //     fontWeight="700"//fontsize
-  //      />
+  <ActivityCard
+    text=""
+    width="150" //long du boutton
+    height="150" //haut du boutton
+    backgroundColor="#FCEACE" //gris du figma
+    url="https://reactnative.dev/img/tiny_logo.png"
+    color="black"
+    fontWeight="700"
+  />;
+
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
@@ -59,6 +55,7 @@ export default function DashBoard(props) {
             >
               <ActivityCard
                 style={styles.activity}
+
                 text="nico"
                 color="yellow"
               />
@@ -67,6 +64,7 @@ export default function DashBoard(props) {
                 text="Sport"
                 backgroundColor="#C5C4D9" //gris du figma
                 color="yellow"
+
                 url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
               />
               <ActivityCard
@@ -86,7 +84,9 @@ export default function DashBoard(props) {
             textAlign="left"
           />
           <View style={styles.bottomButton}>
+
             <ActivityCard style={styles.activity} text="Amel" url="" />
+
             <StaticCard
               width="200" //long du boutton
               height="150" //haut du boutton
@@ -95,6 +95,8 @@ export default function DashBoard(props) {
             />
           </View>
         </View>
+        {/* Intégration de la Tabnavigation ici à modifier */}
+        <Tabnavigation />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -103,10 +105,12 @@ export default function DashBoard(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     backgroundColor: "#FEF5F8",
     justifyContent: "center",
     alignItems: "center",
     width:"100%",
+
     height: "100%",
   },
   text: {
