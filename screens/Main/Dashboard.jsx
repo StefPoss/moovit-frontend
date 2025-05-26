@@ -1,10 +1,7 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import ActivityCard from "../../components/ActivityCard";
 import StaticCard from "../../components/StaticCard";
-import {
-  SafeAreaView,
-  SafeAreaProvider,
-} from "react-native-safe-area-context";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -138,6 +135,12 @@ let levelsCards = Activity.map((e, i)=>
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
         <View style={styles.container}>
+          <StaticCard
+            text="user"
+            textAlign="left"
+            width="340"
+            height="70"
+            backgroundColor="lightgrey" />
          
           {/* <StaticCard
             text="aaa"
@@ -145,6 +148,7 @@ let levelsCards = Activity.map((e, i)=>
             width="340" 
             height="70" 
             backgroundColor="lightgrey" 
+
             color="green"
           /> */}
           <View style={styles.profilContainer}>
@@ -169,9 +173,9 @@ let levelsCards = Activity.map((e, i)=>
             color="black"
             fontWeight="700"
             text="amel"
-            width="340" 
-            height="75" 
-            backgroundColor="#C5C4D9" 
+            width="340"
+            height="75"
+            backgroundColor="#C5C4D9"
             url="https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/natation/natation-photo-003.avif"
           /> */}
           <Text style={styles.text}>Training Now</Text>
@@ -194,7 +198,7 @@ let levelsCards = Activity.map((e, i)=>
           {/* <StaticCard
             width="340" //long du boutton
             height="150" //haut du boutton
-            backgroundColor="#EF5F8" 
+            backgroundColor="#EF5F8"
             color="white"
             text="statistic"
             textAlign="left"
@@ -205,13 +209,7 @@ let levelsCards = Activity.map((e, i)=>
 
             <ActivityCard style={styles.activity} text="Amel" url="" />
 
-            <StaticCard
 
-              width="200" //long du boutton
-              height="150" //haut du boutton
-              backgroundColor="#C5C4D9" //gris du figma
-              
-            /> */}
             <View style={styles.dayTrainingContainer}>
                <View style={styles.textbottomButtonContainer}>
                 <Text style={[styles.progressText, { fontSize: 20 }]}  >Training</Text>
@@ -244,7 +242,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width:"100%",
-
     height: "100%",
   },
   text: {

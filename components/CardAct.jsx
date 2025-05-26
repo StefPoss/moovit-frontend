@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 
-const CardComp = (props) => {
+const CardAct = (props) => {
   return (
     <View
       style={[
@@ -17,15 +17,14 @@ const CardComp = (props) => {
     </View>
   );
 };
-export default CardComp;
+export default CardAct;
 
 const styles = StyleSheet.create({
   txtCard: {
     fontFamily: "ManropeSemiBold",
     fontSize: 20,
     fontWeight: "2000",
-    marginTop: 60,
-    marginBottom: 60,
+    color: "black",
     textAlign: "center",
   },
   CardContain: {
@@ -33,7 +32,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     marginHorizontal: "auto",
     borderRadius: 20,
-    // borderWidth: 1,
+
     justifyContent: "center",
     alignItems: "center",
   },

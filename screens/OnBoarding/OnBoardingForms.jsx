@@ -142,7 +142,7 @@ export default function OnBoarding({ navigation }) {
             </Text>
           </View>
           <View>
-            <ProgressBarComp count={numQuestion} />
+            <ProgressBarComp count={numQuestion} total={questionForm.length} />
           </View>
         </View>
 

@@ -10,6 +10,8 @@ import onBoarding from "./screens/OnBoarding/OnBoardingForms";
 import Dashboard from "./screens/Main/Dashboard";
 import LevelScreen from "./screens/LevelScreen";
 import CguScreen from "./screens/Auth/CGUScreen";
+import Play from "./screens/Activities/Play";
+
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
@@ -72,13 +74,9 @@ export default function App() {
               <Stack.Screen name="S'inscrire" component={SignUp} />
               <Stack.Screen name="Se connecter" component={Login} /> 
               <Stack.Screen name="onBoarding" component={onBoarding} />
-
-              <Stack.Screen name="cgu" component={CguScreen} /> */}
-                            <Stack.Screen name="Dashboard" component={Dashboard} />
-                                                        <Stack.Screen name="Profile" component={ProfileScreen} />
-                                                        <Stack.Screen name="Play" component={PlayScreen} />
-   <Stack.Screen name="LevelScreen" component={LevelScreen} />
-
+              <Stack.Screen name="cgu" component={CguScreen} />
+              <Stack.Screen name="Dashboard" component={Dashboard} />
+              <Stack.Screen name="Play" component={Play} />
 
             </Stack.Navigator>
           </NavigationContainer>

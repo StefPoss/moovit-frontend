@@ -1,24 +1,31 @@
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import { ProgressBar, MD3Colors } from "react-native-paper";
-import questionForm from "../data/onBoardingQuestion.json";
+import { StyleSheet, View, Text } from "react-native";
+import { ProgressBar } from "react-native-paper";
 
-const ProgressBarComp = (props) => {
-  let indice = props.count / questionForm.length;
+const ProgressBarComp = ({ count, total }) => {
+  const c = Number(count);
+  const t = Number(total);
+  const progress = t > 0 ? (c + 1) / t : 0;
+
   return (
-    <ProgressBar
-      progress={indice}
-      color={"rgb(100,81,159)"}
-      backgroundColor={"#7d6bb3"}
-      style={styles.progress}
-    />
+    <View>
+      <Text style={{ color: "white", textAlign: "center", marginBottom: 4 }}>
+        Progress: {Math.round(progress * 100)}% ({c}/{t})
+      </Text>
+      <ProgressBar
+        progress={progress}
+        color="rgb(100,81,159)"
+        backgroundColor="#7d6bb3"
+        style={styles.progress}
+      />
+    </View>
   );
 };
+
 export default ProgressBarComp;
 
 const styles = StyleSheet.create({
   progress: {
-    width: "400",
+    width: "100%",
   },
 });
-
