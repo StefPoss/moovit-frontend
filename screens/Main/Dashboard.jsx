@@ -70,7 +70,7 @@ useEffect(() =>
       }
       dispatch(addUserToStore(newUser))
       dispatch(addActivityToStore(data.dataLevel.subLevels))
-      console.log(data.dataMeteo);
+      console.log(data);
       let dailyTime = data.dataUser.form.dayTime
       if(dailyTime==="4 h/semaine")
       {
