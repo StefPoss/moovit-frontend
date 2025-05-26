@@ -1,23 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-  value:{}
-  
-};
+  value: {},
+}
 
 export const activitySlice = createSlice({
   name: "activity",
   initialState,
   reducers: {
     addActivityToStore: (state, action) => {
-      state.value = action.payload;
-      
+      state.value = action.payload
     },
-    removeActivityToStore: (state, action) => {
-      state.value = initialState.value;
+    removeActivityToStore: (state) => {
+      state.value = initialState.value
     },
   },
-});
+})
 
-export const { addActivityToStore, removeActivityToStore } = activitySlice.actions;
-export default activitySlice.reducer;
+export const { addActivityToStore, removeActivityToStore } =
+  activitySlice.actions
+export default activitySlice.reducer

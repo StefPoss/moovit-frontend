@@ -4,7 +4,7 @@ const initialState = {
   value: {
     token: "",
     photoUrl: "",
-    username: "",
+    username: "testUserRedux",
     admin: false,
     sportPlayed: "",
     xp: "",

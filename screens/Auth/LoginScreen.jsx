@@ -19,8 +19,6 @@ import { API_URL } from "@env";
 import { checkBody } from "../../modules/checkBody";
 //pour pouvoir pusher
 
-
-
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +27,6 @@ export default function LoginScreen({ navigation }) {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch = useDispatch();
   const handleLogin = () => {
-
     const requiredFields = ["email", "password"];
     const body = { email, password };
 
@@ -50,36 +47,28 @@ export default function LoginScreen({ navigation }) {
     })
       .then((data) => data.json())
       .then((resultData) => {
-        console.log("-- ",resultData);
-        
+        console.log("-- ", resultData);
+
         // Si le login est réussi
         if (resultData.result && resultData.sport.length === 0) {
           //envoi vers le screen dashboard
           navigation.navigate("onBoarding");
           dispatch(addUserToStore({ token: resultData.token }));
         } else if (resultData.result && resultData.sport.length > 0) {
-          navigation.navigate("Dashboard");
+          navigation.navigate("TabNavigator");
           dispatch(addUserToStore({ token: resultData.token }));
         } else {
           alert(resultData.error);
         }
       });
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setEmailError("Email invalide");
-    } else {
-      setEmailError("");
-      console.log("Connexion réussie");
-      navigation.navigate("onBoarding"); // ou API
-    }
   };
 
-
-    
-  
   return (
-    <TouchableWithoutFeedback onPress={()=>{Keyboard.dismiss()}}>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={styles.container}
@@ -160,7 +149,7 @@ export default function LoginScreen({ navigation }) {
         </Text>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

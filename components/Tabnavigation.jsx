@@ -49,7 +49,7 @@ export default function BottomNavBar() {
 const styles = StyleSheet.create({
   container: {
     //position: "absolute",
-    bottom: 40,
+    bottom: 340,
     width: "100%",
     //alignItems: "center",
     marginLeft: 25, // pour aligner la barre au centre
