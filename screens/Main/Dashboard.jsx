@@ -48,8 +48,6 @@ export default function DashBoard(props) {
 
   //useEffect pour charger les données au chargement de la page
   useEffect(() => {
-    //requete vers le back
-    // console.log("User is", User)
     fetch(`${API_URL}/api/users/dashboard`, {
       method: "POST", // méthode HTTP POST pour envoyer les données
       headers: { "Content-Type": "application/json" }, // type de contenu envoyé en JSON

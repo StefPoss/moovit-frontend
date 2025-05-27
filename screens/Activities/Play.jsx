@@ -15,20 +15,7 @@ import { TouchableOpacity } from "react-native";
 export default function Play({ navigation }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(
-      addUserToStore({
-        token: "123abc",
-        photoUrl: "https://example.com/photo.jpg",
-        username: "Sami",
-        admin: true,
-        sportPlayed: "Padel",
-        xp: "1000",
-        level: "3",
-      })
-    );
-  }, []);
-
+  /////////////////////// A modifier pour choper en redux /////////////////////////////
   const user = useSelector((state) => state.user?.value?.username ?? "Invité");
   const sportPlayed = useSelector(
     (state) => state.user?.value?.sportPlayed ?? "Loading"
@@ -44,6 +31,8 @@ export default function Play({ navigation }) {
   const levelxp = subLevels.xp;
   const timing = subLevels.timing;
   const pourcent = Math.floor((100 * numLevel) / totalLevels);
+
+  ///////////////////////////////////////////////////////////////////////////////////////
 
   const plusstate = () => {
     if (levelStatus < tabLevel.length - 1) {
