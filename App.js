@@ -29,6 +29,7 @@ import userReducer from "./reducers/userSlice";
 import activityReducer from "./reducers/activitySlice";
 import onBoardingReducer from "./reducers/onBoardingSlice";
 import { PaperProvider } from "react-native-paper";
+import ForgotScreen from "./screens/Auth/ForgotScreen";
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -97,7 +98,7 @@ const TabNavigator = () => {
           // left: 20,
           // right: 20,
           // elevation: 0,
-          backgroundColor: "#FEF5F8",
+          backgroundColor: "#f9f9f9",
           // borderRadius: 15,
           // height: 50,
           // //paddingTop:15,
@@ -142,6 +143,7 @@ export default function App() {
               <Stack.Screen name="Dashboard" component={Dashboard} />
               <Stack.Screen name="Play" component={Play} />
               <Stack.Screen name="TabNavigator" component={TabNavigator} />
+              <Stack.Screen name="Forgot" component={ForgotScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
