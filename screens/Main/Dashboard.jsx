@@ -24,8 +24,6 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
 
-//a importé dans le terminal !!!  npx expo install react-native-safe-area-context
-
 export default function DashBoard(props) {
   const User = useSelector((state) => state.user.value);
   const activity = useSelector((state) => state.activity.value);
