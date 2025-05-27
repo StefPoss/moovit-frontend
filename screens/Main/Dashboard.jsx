@@ -9,8 +9,6 @@ import {
 import ActivityCard from "../../components/ActivityCard"
 import StaticCard from "../../components/StaticCard"
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context"
-
-import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { API_URL } from "@env"
 import { useDispatch } from "react-redux"
@@ -82,6 +80,7 @@ export default function DashBoard(props) {
           // console.log("activity is", activity)
           //console.log("this is ", User);
           console.log(data)
+
           let dailyTime = data.dataUser.form.dayTime
           if (dailyTime === "4 h/semaine") {
             setDayTime("45 minutes")
@@ -104,6 +103,7 @@ export default function DashBoard(props) {
   // Si activity est un tableau, chaque élément sera transformé en ActivityCard
   // Si activity est vide, levelsCards sera un tableau vide
   let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => (
+
     <ActivityCard
       key={i}
       style={styles.activity}
@@ -113,6 +113,7 @@ export default function DashBoard(props) {
       url={e.image}
     />
   ))
+
 
   if (!photoUrl || photoUrl === "") {
     // Si l'URL de la photo de profil est vide, on utilise une image par défaut
@@ -143,6 +144,7 @@ export default function DashBoard(props) {
       )
     }
   }
+
 
   return (
     <SafeAreaProvider>
