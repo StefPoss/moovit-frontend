@@ -10,9 +10,14 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
+import { useSelector } from "react-redux";
 
 
 export default function ProfileScreen({ navigation }) {
+    const user = useSelector((state) => state.user.value);
+    console.log("profil -- ",user);
+    
+  
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* Header with back and settings */}
@@ -29,12 +34,13 @@ export default function ProfileScreen({ navigation }) {
       {/* Profile image */}
       <Image
         source={{
-          uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png",
+           uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png",
+          //uri: user.photoUrl
         }}
         style={styles.profileImage}
       />
 
-      <Text style={styles.name}>Anna Tomie</Text>
+      <Text style={styles.name}>{user.username} {user.name}</Text>
 
       {/* Stats box poids taille */}
       <View style={styles.statsContainer}>
@@ -42,14 +48,14 @@ export default function ProfileScreen({ navigation }) {
           <Ionicons name="barbell-outline" size={20} color="#555" />
           <View style={styles.statTextBox}>
             <Text style={styles.statLabel}>Poids</Text>
-            <Text style={styles.statValue}>77 kg</Text>
+            <Text style={styles.statValue}>{user.weight} kg</Text>
           </View>
         </View>
         <View style={styles.statItem}>
           <Ionicons name="body-outline" size={20} color="#555" />
           <View style={styles.statTextBox}>
             <Text style={styles.statLabel}>Taille</Text>
-            <Text style={styles.statValue}>164 cm</Text>
+            <Text style={styles.statValue}>{user.height} cm</Text>
           </View>
         </View>
       </View>

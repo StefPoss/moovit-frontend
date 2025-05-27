@@ -13,6 +13,7 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { API_URL } from "@env";
+import { LOCAL } from "@env";
 import { useDispatch } from "react-redux";
 import { addUserToStore } from "../../reducers/userSlice";
 import { addActivityToStore } from "../../reducers/activitySlice";
@@ -68,15 +69,19 @@ export default function DashBoard(props) {
             token: data.dataUser.token,
             photoUrl: data.dataUser.photoUrl,
             username: data.dataUser.username,
+            name: data.dataUser.name,
             admin: false,
             sportPlayed: data.dataUser.sportPlayed[0],
             xp: data.dataUser.xp,
             level: data.dataUser.level,
+            height: data.dataUser.height,
+            weight: data.dataUser.weight,
+
           };
           dispatch(addUserToStore(newUser));
           dispatch(addActivityToStore(data.dataLevel.subLevels));
           // console.log("activity is", activity)
-          console.log("data is", data.dataLevel.subLevels);
+          console.log("this is ", User);
           // console.log(data)
           let dailyTime = data.dataUser.form.dayTime;
           if (dailyTime === "4 h/semaine") {
@@ -163,6 +168,7 @@ export default function DashBoard(props) {
             ></StatiscticGraphic>
 
             <View style={styles.bottomButton}>
+              {/* TEMPS PAR JOUR */}
               <View style={styles.dayTrainingContainer}>
                 <View style={styles.textbottomButtonContainer}>
                   <Text style={[styles.progressText, { fontSize: 20 }]}>
@@ -172,6 +178,7 @@ export default function DashBoard(props) {
                 </View>
               </View>
 
+              {/* METEO */}
               <View style={styles.meteoContainer}>
                 <View style={styles.textbottomButtonContainer}>
                   <Text style={[styles.profilText, { fontSize: 20 }]}>
@@ -270,8 +277,8 @@ const styles = StyleSheet.create({
   },
   dayTrainingContainer: {
     backgroundColor: "#FCEACE",
-    width: "170", //long du boutton
-    height: "150", //haut du boutton
+    width: "43%", //long du boutton
+    height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
     margin: 5,
   },
@@ -281,8 +288,8 @@ const styles = StyleSheet.create({
   },
   meteoContainer: {
     backgroundColor: "#C5C4D9",
-    width: "170", //long du boutton
-    height: "150", //haut du boutton
+    width: "43%", //long du boutton
+    height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
     margin: 5,
   },
