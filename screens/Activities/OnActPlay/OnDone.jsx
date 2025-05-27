@@ -22,13 +22,6 @@ export default function OnDone(props) {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => props.onPress()}
-      >
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
-
       <View style={styles.container}>
         <Text style={styles.emoji}>🎉</Text>
 

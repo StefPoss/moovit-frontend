@@ -22,10 +22,6 @@ export default function OnReward({
 }) {
   return (
     <SafeAreaView style={styles.safe}>
-      <TouchableOpacity style={styles.backBtn} onPress={() => onPress()}>
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
-
       <View style={styles.content}>
         <Text style={styles.title}>Ton avancement !</Text>
         <Text style={styles.subText}>

@@ -28,7 +28,7 @@ export default function NewLevelScreen(props) {
             resizeMode="cover"
             style={styles.topImg}
           >
-            <ProgressStep style={styles.half} niv={30}/>
+            <ProgressStep style={styles.half} niv={30} />
             <Text style={styles.toptxt}>NIVEAU {niv}</Text>
           </ImageBackground>
         </View>
@@ -58,26 +58,23 @@ const styles = StyleSheet.create({
   },
   top: {
     flex: 0,
-    height:"40%",
-    width:"100%",
-    justifyContent:"flex-end",
+    height: "40%",
+    width: "100%",
+    justifyContent: "flex-end",
   },
   topImg: {
     zIndex: 0,
     // marginLeft: "-30%",
-    marginTop:"%",
+    marginTop: "%",
     width: "100%",
     height: "100%",
   },
-    half: {
-   
-
-  },
+  half: {},
 
   toptxt: {
-    zIndex:99999,
+    zIndex: 99999,
     // marginTop:"55%",
-    marginTop:"-41%",
+    marginTop: "-41%",
     textAlign: "center",
     fontSize: 30,
     fontWeight: 600,
@@ -89,7 +86,7 @@ const styles = StyleSheet.create({
   midd: {
     backgroundColor: "rgba(255, 255, 255, 0)",
     flex: 1,
-    marginTop:"-12%",
+    marginTop: "-12%",
     justifyContent: "flex-start",
     alignSelf: "flex-start",
   },
