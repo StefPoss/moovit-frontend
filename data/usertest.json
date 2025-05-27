@@ -1,0 +1,40 @@
+{
+  "_id": {
+    "$oid": "683436ab1571a4b92fa20da6"
+  },
+  "admin": false,
+  "token": "vWV2Qbb7ngOl2GWCySzepzfhApa6BIjo",
+  "email": "kkk@ttt.com",
+  "password": "$2b$10$9vL/NVrkr/JQXnz3MIy0fOqcktseIYGfia.gAN4mpGvWVjBOPt0Fq",
+  "coordinate": {
+    "location": {
+      "coordinates": []
+    }
+  },
+  "xp": 0,
+  "sportPlayed": [
+    {
+      "$oid": "682b3e38b0d896a34fdef7ee"
+    }
+  ],
+  "medals": [],
+  "__v": 0,
+  "age": 55,
+  "city": "nice",
+  "form": {
+    "reason": "Pour me challenger",
+    "dayTime": "30 min/jour",
+    "_id": {
+      "$oid": "6834379d1571a4b92fa2100a"
+    }
+  },
+  "currentLevelID": 1,
+  "currentSubLevelID": 10,
+  "gender": "Féminin",
+  "height": 180,
+  "level": "Niveau 3",
+  "name": "Nom",
+  "photoUrl": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1748005964/projectFinDeBatch/front/images/default-profile_cltqmm.png",
+  "username": "Nom",
+  "weight": 75
+}

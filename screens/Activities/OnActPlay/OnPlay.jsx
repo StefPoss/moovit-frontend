@@ -11,9 +11,8 @@ import YoutubePlayer from "react-native-youtube-iframe";
 import { Ionicons } from "@expo/vector-icons";
 import activities from "../../../data/activities_sample.json";
 
-export default function OnPlay({ navigation, numLevel, timing }) {
-  const subLevel = activities?.levels?.[0]?.subLevels[numLevel] || {};
-  const { image, mediaUrl, title, description, tipOfThePro } = subLevel;
+export default function OnPlay({ infos }) {
+  const { image, title, mediaUrl, description, tipOfThePro, timing } = infos;
 
   const [isRunning, setIsRunning] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(timing * 60);

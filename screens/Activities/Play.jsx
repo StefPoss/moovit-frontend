@@ -6,86 +6,70 @@ import OnPlay from "./OnActPlay/OnPlay";
 import OnDone from "./OnActPlay/OnDone";
 import OnProgress from "./OnActPlay/OnProgress";
 
-import activities from "../../data/activities_sample.json";
 import { addUserToStore } from "../../reducers/userSlice";
 import Button from "../../components/Buttons";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+////// A remplacer par le redux
+import user from "../../data/usertest.json";
+import activities from "../../data/activitiestest.json";
 
 export default function Play({ navigation }) {
   const dispatch = useDispatch();
-
-  /////////////////////// A modifier pour choper en redux /////////////////////////////
-  const user = useSelector((state) => state.user?.value?.username ?? "Invité");
-  const sportPlayed = useSelector(
-    (state) => state.user?.value?.sportPlayed ?? "Loading"
-  );
-
-  const [levelStatus, setLevelStatus] = useState(0);
-  const [numLevel, setNumLevel] = useState(0);
-  const [bigLevel, setBigLevel] = useState(0);
-
-  const subLevels = activities?.levels?.[bigLevel]?.subLevels[numLevel] || {};
   const tabLevel = ["onPlay", "onDone", "onProgress"];
-  const totalLevels = activities.levels[bigLevel].subLevels.length;
-  const levelxp = subLevels.xp;
-  const timing = subLevels.timing;
-  const pourcent = Math.floor((100 * numLevel) / totalLevels);
-
-  ///////////////////////////////////////////////////////////////////////////////////////
+  const [levelStatus, setLevelStatus] = useState(0);
 
   const plusstate = () => {
     if (levelStatus < tabLevel.length - 1) {
       setLevelStatus(levelStatus + 1);
     }
   };
-
   const moinstate = () => {
     if (levelStatus > 0) {
       setLevelStatus(levelStatus - 1);
     }
   };
 
-  const moinslevel = () => {
-    if (numLevel > 0) {
-      setNumLevel(numLevel - 1);
-    }
-  };
+  const currentLevel = [user.currentLevelID, user.currentSubLevelID];
+  let nextLevel = [];
 
-  const pluslevel = () => {
-    if (numLevel < totalLevels - 1) {
-      setNumLevel(numLevel + 1);
-    }
-  };
+  console.log(currentLevel);
 
-  useEffect(() => {
-    console.log("ÉTAPE :", tabLevel[levelStatus]);
-  }, [levelStatus]);
+  const [level, setLevel] = useState(currentLevel[0]);
+  const [subLevel, setSubLevel] = useState(currentLevel[1]);
+  const subLevelInfos = activities[1].levels[level - 1].subLevels[subLevel - 1];
+  const totalSubLevels = activities[1].levels[level - 1].subLevels.length;
+  const timing = subLevelInfos.timing;
+  const levelxp = subLevelInfos.xp;
+  const titleSubLevel = subLevelInfos.title;
+  const pourcent = Math.floor((100 * subLevel) / totalSubLevels);
+  if (currentLevel[1] == totalSubLevels) {
+    nextLevel = [currentLevel[0] + 1, 1];
+  } else {
+    nextLevel = [currentLevel[0], currentLevel[1] + 1];
+  }
 
+  console.log(nextLevel);
   let toDisp;
   if (tabLevel[levelStatus] === "onPlay") {
-    toDisp = (
-      <OnPlay numLevel={numLevel} setNumLevel={setNumLevel} timing={timing} />
-    );
+    toDisp = <OnPlay infos={subLevelInfos} />;
   } else if (tabLevel[levelStatus] === "onDone") {
     toDisp = (
       <OnDone
-        user={user}
-        timing={timing * 3600}
+        user={user.username}
+        timing={timing}
         xp={levelxp}
         onPress={moinstate}
-        sport={sportPlayed}
+        sport={"Padel"}
       />
     );
   } else if (tabLevel[levelStatus] === "onProgress") {
     toDisp = (
       <OnProgress
-        total={totalLevels}
-        level={numLevel}
+        total={totalSubLevels}
+        level={level}
         xp={levelxp}
-        name={subLevels.title}
-        levelplus={activities.levels[bigLevel + 1]?.title ?? "Niveau final"}
-        levelmoins={activities.levels[bigLevel].title}
+        name={titleSubLevel}
         pourcent={pourcent}
         onPress={moinstate}
       />

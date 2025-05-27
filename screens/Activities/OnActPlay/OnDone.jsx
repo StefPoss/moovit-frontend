@@ -18,8 +18,6 @@ export default function OnDone(props) {
     calories: "154 kcal",
   };
 
-  const userName = "Username";
-
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
