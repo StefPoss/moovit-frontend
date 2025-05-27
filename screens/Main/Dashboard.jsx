@@ -76,8 +76,8 @@ export default function DashBoard(props) {
           dispatch(addUserToStore(newUser));
           dispatch(addActivityToStore(data.dataLevel.subLevels));
           // console.log("activity is", activity)
-          console.log("data is", data.dataLevel.subLevels);
-          // console.log(data)
+          //console.log("data is", data.dataLevel.subLevels);
+           console.log("aaa ",data)
           let dailyTime = data.dataUser.form.dayTime;
           if (dailyTime === "4 h/semaine") {
             setDayTime("45 minutes");
