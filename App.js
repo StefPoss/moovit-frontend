@@ -134,12 +134,12 @@ export default function App() {
           <NavigationContainer>
             <StatusBar style="light" />
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              {/* <Stack.Screen name="Welcome" component={Splash} />
+              <Stack.Screen name="Welcome" component={Splash} />
               <Stack.Screen name="S'inscrire" component={SignUp} />
               <Stack.Screen name="Se connecter" component={Login} />
               <Stack.Screen name="onBoarding" component={onBoarding} />
               <Stack.Screen name="cgu" component={CguScreen} />
-              <Stack.Screen name="Dashboard" component={Dashboard} /> */}
+              <Stack.Screen name="Dashboard" component={Dashboard} />
               <Stack.Screen name="Play" component={Play} />
               <Stack.Screen name="TabNavigator" component={TabNavigator} />
             </Stack.Navigator>
