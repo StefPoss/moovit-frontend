@@ -14,7 +14,7 @@ import SignUp from "./screens/Auth/SignupScreen";
 import onBoarding from "./screens/OnBoarding/OnBoardingForms";
 import Dashboard from "./screens/Main/Dashboard";
 import LevelScreen from "./screens/LevelScreen";
-import NewLevelScreen from "./screens/NewLevelScreen"
+import NewLevelScreen from "./screens/NewLevelScreen";
 import CguScreen from "./screens/Auth/CGUScreen";
 import Play from "./screens/Activities/Play";
 import ProfileScreen from "./screens/Main/ProfileScreen";
@@ -125,7 +125,7 @@ export default function App() {
     MaterialCommunityIcons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"), // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
   });
 
-  //if (!fontsLoaded) return null;
+  if (!fontsLoaded) return null;
 
   return (
     <Provider store={store}>
@@ -139,8 +139,8 @@ export default function App() {
               <Stack.Screen name="Se connecter" component={Login} />
               <Stack.Screen name="onBoarding" component={onBoarding} />
               <Stack.Screen name="cgu" component={CguScreen} />
-              {/* <Stack.Screen name="Dashboard" component={Dashboard} />
-              <Stack.Screen name="Play" component={Play} /> */}
+              <Stack.Screen name="Dashboard" component={Dashboard} />
+              <Stack.Screen name="Play" component={Play} />
               <Stack.Screen name="TabNavigator" component={TabNavigator} />
             </Stack.Navigator>
           </NavigationContainer>
