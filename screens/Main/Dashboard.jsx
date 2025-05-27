@@ -9,20 +9,23 @@ import {
 import ActivityCard from "../../components/ActivityCard"
 import StaticCard from "../../components/StaticCard"
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context"
-import { useSelector, useDispatch } from "react-redux"
+
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import { API_URL } from "@env"
+import { useDispatch } from "react-redux"
 import { addUserToStore } from "../../reducers/userSlice"
 import { addActivityToStore } from "../../reducers/activitySlice"
 import PhotoProfil from "../../components/PhotoProfil"
 import ExercisesProgressBar from "../../components/ExercisesProgressBar"
 import StatiscticGraphic from "../../components/StatiscticGraphic"
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import { AsyncStorage } from "react-native"
+// Importation des actions de Cloudinary
+import { name } from "@cloudinary/url-gen/actions/namedTransformation"
 
-// import { Ionicons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons"
 
 import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
-
-//a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function DashBoard(props) {
   const User = useSelector((state) => state.user.value)
@@ -59,23 +62,26 @@ export default function DashBoard(props) {
     })
       .then((r) => r.json())
       .then((data) => {
-        // console.log("data is", data)
+        console.log("data is", data)
 
         if (data.result) {
           let newUser = {
             token: data.dataUser.token,
             photoUrl: data.dataUser.photoUrl,
             username: data.dataUser.username,
+            name: data.dataUser.name,
             admin: false,
             sportPlayed: data.dataUser.sportPlayed[0],
             xp: data.dataUser.xp,
             level: data.dataUser.level,
+            height: data.dataUser.height,
+            weight: data.dataUser.weight,
           }
           dispatch(addUserToStore(newUser))
           dispatch(addActivityToStore(data.dataLevel.subLevels))
           // console.log("activity is", activity)
-          // console.log("data is", data.dataLevel.subLevels)
-          // console.log(data)
+          //console.log("this is ", User);
+          console.log(data)
           let dailyTime = data.dataUser.form.dayTime
           if (dailyTime === "4 h/semaine") {
             setDayTime("45 minutes")
@@ -107,6 +113,36 @@ export default function DashBoard(props) {
       url={e.image}
     />
   ))
+
+  if (!photoUrl || photoUrl === "") {
+    // Si l'URL de la photo de profil est vide, on utilise une image par défaut
+    if (!gender || gender === "") {
+      // Si le genre n'est pas défini ou vide, on utilise une image neutre
+      User.photoUrl = new defaultNeutralProfileImage(
+        "cld-sample.jpg"
+      ).namedTransformation(
+        name(
+          "https://res.cloudinary.com/deuhttaaq/image/upload/v1747826317/projectFinDeBatch/front/images/default-profile-male_exgh99.png"
+        )
+      )
+    } else if (gender === "Masculin") {
+      User.photoUrl = new defaultMaleProfileImage(
+        "cld-sample.jpg"
+      ).namedTransformation(
+        name(
+          "https://res.cloudinary.com/deuhttaaq/image/upload/v1748005964/projectFinDeBatch/front/images/default-profile-male_cltqmm.png"
+        )
+      )
+    } else if (gender === "Féminin") {
+      User.photoUrl = new defaultFemaleProfileImage(
+        "cld-sample.jpg"
+      ).namedTransformation(
+        name(
+          "https://res.cloudinary.com/deuhttaaq/image/upload/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png"
+        )
+      )
+    }
+  }
 
   return (
     <SafeAreaProvider>
@@ -166,6 +202,7 @@ export default function DashBoard(props) {
             ></StatiscticGraphic>
 
             <View style={styles.bottomButton}>
+              {/* TEMPS PAR JOUR */}
               <View style={styles.dayTrainingContainer}>
                 <View style={styles.textbottomButtonContainer}>
                   <Text style={[styles.progressText, { fontSize: 20 }]}>
@@ -175,6 +212,7 @@ export default function DashBoard(props) {
                 </View>
               </View>
 
+              {/* METEO */}
               <View style={styles.meteoContainer}>
                 <View style={styles.textbottomButtonContainer}>
                   <Text style={[styles.profilText, { fontSize: 20 }]}>
@@ -273,8 +311,8 @@ const styles = StyleSheet.create({
   },
   dayTrainingContainer: {
     backgroundColor: "#FCEACE",
-    width: "170", //long du boutton
-    height: "150", //haut du boutton
+    width: "43%", //long du boutton
+    height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
     margin: 5,
   },
@@ -284,8 +322,8 @@ const styles = StyleSheet.create({
   },
   meteoContainer: {
     backgroundColor: "#C5C4D9",
-    width: "170", //long du boutton
-    height: "150", //haut du boutton
+    width: "43%", //long du boutton
+    height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
     margin: 5,
   },
