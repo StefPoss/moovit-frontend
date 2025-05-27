@@ -72,6 +72,10 @@ export default function Play({ navigation }) {
         name={titleSubLevel}
         pourcent={pourcent}
         onPress={moinstate}
+        token={user.token}
+        sport={"Padel"}
+        xpUpdated={levelxp + user.xp}
+        updatelvl={nextLevel}
       />
     );
   }

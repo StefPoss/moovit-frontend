@@ -23,8 +23,14 @@ export const userSlice = createSlice({
     removeUserToStore: (state, action) => {
       state.value = initialState.value;
     },
+    updateUser: (state, action) => {
+      state.value.currentLevelID = action.payload.currentLevelID;
+      state.value.currentSubLevelID = action.payload.currentSubLevelID;
+      state.value.xp = action.payload.xp;
+    },
   },
 });
 
-export const { addUserToStore, removeUserToStore } = userSlice.actions;
+export const { addUserToStore, removeUserToStore, updateUser } =
+  userSlice.actions;
 export default userSlice.reducer;

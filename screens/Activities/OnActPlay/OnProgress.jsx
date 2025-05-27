@@ -9,17 +9,51 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import ProgressStep from "../../../components/ProgressStep";
+import { updateUser } from "../../reducers/userSlice";
 
 export default function OnReward({
-  navigation,
   xp,
   name,
   medalUri,
   levelplus,
   levelmoins,
   pourcent,
-  onPress,
+
+  sport,
+  token,
+  updatelvl,
+  xpUpdated,
 }) {
+  const dispatch = useDispatch();
+  const subLevelUpdated = updatelvl[1];
+  const levelUpdated = updatelvl[0];
+  useEffect(() => {
+    return () => {
+      dispatch(
+        updateUser({
+          currentLevelID: levelUpdated,
+          currentSubLevelID: subLevelUpdated,
+          xp: xpUpdated,
+        })
+      );
+
+      fetch(`${API_URL}/api/users/levelupdate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: token,
+          sport: sport,
+          xp: xpUpdated,
+          subLevel: subLevelUpdated,
+          level: levelUpdated,
+        }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data);
+        });
+    };
+  }, []);
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.content}>
