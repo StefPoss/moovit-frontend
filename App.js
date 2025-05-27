@@ -126,7 +126,7 @@ export default function App() {
     MaterialCommunityIcons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"), // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
   });
 
-  //if (!fontsLoaded) return null;
+  if (!fontsLoaded) return null;
 
   return (
     <Provider store={store}>

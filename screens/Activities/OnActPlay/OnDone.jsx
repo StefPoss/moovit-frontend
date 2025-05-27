@@ -45,8 +45,8 @@ export default function OnDone(props) {
           </View>
           <View style={styles.statBlock}>
             <Text style={styles.statIcon}>💪</Text>
-            <Text style={styles.statLabel}>Niveau</Text>
-            <Text style={styles.statValue}>{stats.niveau}</Text>
+            <Text style={styles.statLabel}>Sport</Text>
+            <Text style={styles.statValue}>{props.sport}</Text>
           </View>
           <View style={styles.statBlock}>
             <Text style={styles.statIcon}>🧡</Text>
@@ -73,7 +73,7 @@ export default function OnDone(props) {
               <Ionicons
                 name={i <= rating ? "star" : "star-outline"}
                 size={32}
-                color={"black"}
+                color={"orange"}
               />
             </TouchableOpacity>
           ))}
@@ -109,11 +109,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    fontFamily: "ManropeExtraBold",
   },
   subtitle: {
     fontSize: 16,
     marginBottom: 32,
     textAlign: "center",
+    fontFamily: "ManropeRegular",
   },
   statsContainer: {
     flexDirection: "row",
@@ -134,6 +136,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
     marginTop: 4,
+    fontFamily: "ManropeExtraBold",
   },
   statValue: {
     fontSize: 14,
@@ -143,6 +146,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 12,
+    fontFamily: "ManropeExtraBold",
   },
   starsContainer: {
     flexDirection: "row",

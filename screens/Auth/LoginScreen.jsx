@@ -17,10 +17,6 @@ import { addUserToStore } from "../../reducers/userSlice";
 import { useDispatch } from "react-redux";
 import { API_URL } from "@env";
 import { checkBody } from "../../modules/checkBody";
- 
-//import { useNavigation } from "@react-navigation/native";
-
-//pour pouvoir pusher
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");

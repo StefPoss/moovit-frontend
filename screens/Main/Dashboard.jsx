@@ -1,52 +1,53 @@
-import React from "react";
+import React from "react"
 import {
   View,
   Text,
   ScrollView,
   StyleSheet,
   RefreshControl,
-} from "react-native";
-import ActivityCard from "../../components/ActivityCard";
-import StaticCard from "../../components/StaticCard";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+} from "react-native"
+import ActivityCard from "../../components/ActivityCard"
+import StaticCard from "../../components/StaticCard"
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context"
 
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { API_URL } from "@env";
-import { useDispatch } from "react-redux";
-import { addUserToStore } from "../../reducers/userSlice";
-import { addActivityToStore } from "../../reducers/activitySlice";
-import PhotoProfil from "../../components/PhotoProfil";
-import ExercisesProgressBar from "../../components/ExercisesProgressBar";
-import StatiscticGraphic from "../../components/StatiscticGraphic";
 
-import { Ionicons } from "@expo/vector-icons";
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { API_URL } from "@env"
+import { useDispatch } from "react-redux"
+import { addUserToStore } from "../../reducers/userSlice"
+import { addActivityToStore } from "../../reducers/activitySlice"
+import PhotoProfil from "../../components/PhotoProfil"
+import ExercisesProgressBar from "../../components/ExercisesProgressBar"
+import StatiscticGraphic from "../../components/StatiscticGraphic"
+import { AsyncStorage } from "react-native"
 
-import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
 
-//a importé dans le terminal !!!  npx expo install react-native-safe-area-context
+import { Ionicons } from "@expo/vector-icons"
+
+import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
 export default function DashBoard(props) {
-  const User = useSelector((state) => state.user.value);
-  const activity = useSelector((state) => state.activity.value);
-  const dispatch = useDispatch();
-  const [nExercices, setNExercices] = useState(8);
-  const [dayTime, setDayTime] = useState("Indisponible");
-  const [meteo, setMeteo] = useState("Indisponible");
-  let playTime = 35;
-  let sessions = 5;
-  let xp = 105;
+  const User = useSelector((state) => state.user.value)
+  const activity = useSelector((state) => state.activity.value)
+  const dispatch = useDispatch()
+  const [nExercices, setNExercices] = useState(8)
+  const [dayTime, setDayTime] = useState("Indisponible")
+  const [meteo, setMeteo] = useState("Indisponible")
+  let playTime = 35
+  let sessions = 5
+  let xp = 105
   // console.log("activity is", activity)
   // console.log("rendering dashboard")
 
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = React.useState(false)
 
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
+    setRefreshing(true)
     setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
-  }, []);
+      setRefreshing(false)
+    }, 2000)
+  }, [])
 
   //useEffect pour charger les données au chargement de la page
   useEffect(() => {
@@ -61,40 +62,44 @@ export default function DashBoard(props) {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log("data is", data);
+        console.log("data is", data)
 
         if (data.result) {
           let newUser = {
             token: data.dataUser.token,
             photoUrl: data.dataUser.photoUrl,
             username: data.dataUser.username,
+            name: data.dataUser.name,
             admin: false,
             sportPlayed: data.dataUser.sportPlayed[0],
             xp: data.dataUser.xp,
             level: data.dataUser.level,
+            height: data.dataUser.height,
+            weight: data.dataUser.weight,
+
           };
           dispatch(addUserToStore(newUser));
           dispatch(addActivityToStore(data.dataLevel.subLevels));
           // console.log("activity is", activity)
-          console.log("data is", data.dataLevel.subLevels);
+          //console.log("this is ", User);
           // console.log(data)
-          let dailyTime = data.dataUser.form.dayTime;
+          let dailyTime = data.dataUser.form.dayTime
           if (dailyTime === "4 h/semaine") {
-            setDayTime("45 minutes");
+            setDayTime("45 minutes")
           } else if (dailyTime === "8 h/semaine ou plus") {
-            setDayTime("1 heure");
+            setDayTime("1 heure")
           } else if (dailyTime === "15 min/jour") {
-            setDayTime("15 minutes");
+            setDayTime("15 minutes")
           } else if (dailyTime === "30 min/jour") {
-            setDayTime("30 minutes");
+            setDayTime("30 minutes")
           }
 
-          setMeteo(data.dataMeteo);
+          setMeteo(data.dataMeteo)
         }
-      });
-  }, []);
+      })
+  }, [])
 
-  let levelsCards = activity?.map((e, i) => (
+  let levelsCards = (activity || [])?.map((e, i) => (
     <ActivityCard
       key={i}
       style={styles.activity}
@@ -103,7 +108,7 @@ export default function DashBoard(props) {
       color="yellow"
       url={e.image}
     />
-  ));
+  ))
 
   return (
     <SafeAreaProvider>
@@ -163,6 +168,7 @@ export default function DashBoard(props) {
             ></StatiscticGraphic>
 
             <View style={styles.bottomButton}>
+              {/* TEMPS PAR JOUR */}
               <View style={styles.dayTrainingContainer}>
                 <View style={styles.textbottomButtonContainer}>
                   <Text style={[styles.progressText, { fontSize: 20 }]}>
@@ -172,6 +178,7 @@ export default function DashBoard(props) {
                 </View>
               </View>
 
+              {/* METEO */}
               <View style={styles.meteoContainer}>
                 <View style={styles.textbottomButtonContainer}>
                   <Text style={[styles.profilText, { fontSize: 20 }]}>
@@ -187,7 +194,7 @@ export default function DashBoard(props) {
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -270,8 +277,8 @@ const styles = StyleSheet.create({
   },
   dayTrainingContainer: {
     backgroundColor: "#FCEACE",
-    width: "170", //long du boutton
-    height: "150", //haut du boutton
+    width: "43%", //long du boutton
+    height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
     margin: 5,
   },
@@ -281,9 +288,9 @@ const styles = StyleSheet.create({
   },
   meteoContainer: {
     backgroundColor: "#C5C4D9",
-    width: "170", //long du boutton
-    height: "150", //haut du boutton
+    width: "43%", //long du boutton
+    height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
     margin: 5,
   },
-});
+})
