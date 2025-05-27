@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: [],
@@ -9,14 +9,14 @@ export const activitySlice = createSlice({
   initialState,
   reducers: {
     addActivityToStore: (state, action) => {
-      state.value = action.payload
+      state.value = action.payload;
     },
     removeActivityToStore: (state) => {
-      state.value = initialState.value
+      state.value = initialState.value;
     },
   },
-})
+});
 
 export const { addActivityToStore, removeActivityToStore } =
-  activitySlice.actions
-export default activitySlice.reducer
+  activitySlice.actions;
+export default activitySlice.reducer;
