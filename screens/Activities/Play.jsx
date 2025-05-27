@@ -5,51 +5,49 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Text,
-  ImageBackground,
 } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+
 import OnPlay from "./OnActPlay/OnPlay";
 import OnDone from "./OnActPlay/OnDone";
 import OnProgress from "./OnActPlay/OnProgress";
-import OnReward from "./OnActPlay/OnReward";
-import { useSelector } from "react-redux";
+
 import ProgressBarComp from "../../components/ProgressBar";
 import activities from "../../data/activities_sample.json";
+import { addUserToStore } from "../../reducers/userSlice";
 
 export default function Play({ navigation }) {
-  const user = useSelector((state) => state.user.value.username);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      addUserToStore({
+        token: "123abc",
+        photoUrl: "https://example.com/photo.jpg",
+        username: "Sami",
+        admin: true,
+        sportPlayed: "Padel",
+        xp: "1000",
+        level: "3",
+      })
+    );
+  }, []);
+  const user = useSelector((state) => state.user?.value?.username ?? "Invité");
+  const sportPlayed = useSelector(
+    (state) => state.user?.value?.sportPlayed ?? "Loading"
+  );
+  console.log(user);
   const [levelStatus, setLevelStatus] = useState(0);
   const [numLevel, setNumLevel] = useState(0);
+  const [bigLevel, setBigLevel] = useState(0);
+
   const subLevels = activities?.levels?.[0]?.subLevels[numLevel] || [];
   const tabLevel = ["onPlay", "onDone", "onProgress"];
-  const totalLevels = activities.levels[0].subLevels.length;
+  const totalLevels = activities.levels[bigLevel].subLevels.length;
   const levelxp = subLevels.xp;
   const timing = subLevels.timing;
-  console.log(timing);
-  console.log(numLevel);
 
-  const plusstate = () => {
-    if (levelStatus < tabLevel.length - 1) {
-      setLevelStatus(levelStatus + 1);
-    }
-  };
-
-  const moinstate = () => {
-    if (levelStatus > 0) {
-      setLevelStatus(levelStatus - 1);
-    }
-  };
-
-  const moinslevel = () => {
-    if (numLevel > 0) {
-      setNumLevel(numLevel - 1);
-    }
-  };
-
-  const pluslevel = () => {
-    if (numLevel < totalLevels - 1) {
-      setNumLevel(numLevel + 1);
-    }
-  };
+  const pourcent = Math.floor((100 * numLevel) / totalLevels);
 
   useEffect(() => {
     console.log("ÉTAPE :", tabLevel[levelStatus]);
@@ -71,45 +69,29 @@ export default function Play({ navigation }) {
         timing={timing}
         xp={levelxp}
         onPress={() => moinstate()}
+        sport={sportPlayed}
       />
     );
   } else if (tabLevel[levelStatus] === "onProgress") {
-    toDisp = <OnProgress total={totalLevels} level={numLevel} />;
+    toDisp = (
+      <OnProgress
+        total={totalLevels}
+        level={numLevel}
+        xp={levelxp}
+        name={subLevels.title}
+        levelplus={activities.levels[bigLevel + 1].title}
+        levelmoins={activities.levels[bigLevel].title}
+        pourcent={pourcent}
+        onPress={() => moinstate()}
+      />
+    );
   }
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.testHeader}>
-        <TouchableOpacity style={styles.smallButton} onPress={moinstate}>
-          <Text style={styles.btnText}>state-</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.smallButton} onPress={plusstate}>
-          <Text style={styles.btnText}>state+</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.smallButton} onPress={moinslevel}>
-          <Text style={styles.btnText}>level-</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.smallButton} onPress={pluslevel}>
-          <Text style={styles.btnText}>level+</Text>
-        </TouchableOpacity>
-      </View>
-
       <View style={styles.overlay}>
         <View style={styles.container}>
           <View style={styles.content}>{toDisp}</View>
-          <View style={{ alignItems: "center", marginBottom: 10 }}>
-            <Text style={{ color: "black" }}>
-              numLevel: {numLevel} / total: {subLevels.length}
-            </Text>
-          </View>
-          <View style={styles.progree}>
-            <View style={{ paddingHorizontal: 20, marginBottom: 20 }}>
-              <ProgressBarComp count={numLevel} total={subLevels.length} />
-            </View>
-          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -117,9 +99,6 @@ export default function Play({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
   safeArea: {
     flex: 1,
     backgroundColor: "white",
@@ -154,9 +133,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
-  progress: {
-    width: "100%",
-    height: 10,
-    borderRadius: 5,
+  levelInfo: {
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  progressContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 20,
   },
 });
