@@ -1,20 +1,22 @@
 import React, { useState, useCallback } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  ImageBackground,
-} from "react-native";
+import { View, StyleSheet, ImageBackground } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import InstructionCard from "../../../components/InstructionCard";
 import activities from "../../../data/activities_sample.json";
 
-export default function OnPlay(props) {
+export default function OnPlay({ numLevel, onDone }) {
   const [playing, setPlaying] = useState(false);
+
   const subLevels = activities?.levels?.[0]?.subLevels || [];
-  const subLevel = subLevels[props.numLevel] || {};
-  const imgback = subLevel.image;
+  const subLevel = subLevels[numLevel] || {};
+  const {
+    image: imgback,
+    mediaUrl,
+    timing,
+    title,
+    description,
+    tipOfThePro,
+  } = subLevel;
 
   const extractYouTubeID = (url) => {
     try {
@@ -24,18 +26,18 @@ export default function OnPlay(props) {
     }
   };
 
-  const videoId = extractYouTubeID(subLevel.mediaUrl);
+  const videoId = extractYouTubeID(mediaUrl);
 
   const onStateChange = useCallback(
     (state) => {
       if (state === "ended") {
         setPlaying(false);
-        if (props.onDone && typeof props.onDone === "function") {
-          props.onDone();
+        if (typeof onDone === "function") {
+          onDone();
         }
       }
     },
-    [props.onDone]
+    [onDone]
   );
 
   return (
@@ -61,12 +63,12 @@ export default function OnPlay(props) {
 
         <View style={styles.ins}>
           <InstructionCard
-            timing={subLevel.timing}
+            timing={timing}
             title1={activities.title}
             title2={activities.levels[0].title}
-            title3={subLevel.title}
-            desc={subLevel.description}
-            tip={subLevel.tipOfThePro}
+            title3={title}
+            desc={description}
+            tip={tipOfThePro}
           />
         </View>
       </View>
