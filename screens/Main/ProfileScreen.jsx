@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   View,
@@ -10,19 +9,24 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
+import { useNavigation } from "@react-navigation/native";
 
+export default function ProfileScreen() {
+  const navigation = useNavigation();
+  const handleLogout = () => {
+    navigation.navigate("Welcome");
+  };
 
-export default function ProfileScreen({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Header with back and settings */}
+      {/* Header with back and deconnexion */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="chevron-back" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.title}>Profil</Text>
-        <TouchableOpacity>
-          <Ionicons name="settings-outline" size={20} color="black" />
+        <TouchableOpacity onPress={handleLogout}>
+          <Ionicons name="log-out-outline" size={30} color="black" />
         </TouchableOpacity>
       </View>
 
@@ -35,6 +39,7 @@ export default function ProfileScreen({ navigation }) {
       />
 
       <Text style={styles.name}>Anna Tomie</Text>
+      <Text style={styles.username}>username</Text>
 
       {/* Stats box poids taille */}
       <View style={styles.statsContainer}>
@@ -56,31 +61,41 @@ export default function ProfileScreen({ navigation }) {
 
       {/* Badges */}
       <Text style={styles.subtitle}>Mes médailles</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.badgesContainer}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.badgesContainer}
+      >
         <Image
           source={{
-            uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747826097/projectFinDeBatch/front/images/medals/medal-natation-04_dabzkx.png"
+            uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747826097/projectFinDeBatch/front/images/medals/medal-natation-04_dabzkx.png",
           }}
           style={styles.badge}
         />
         <Image
           source={{
-            uri:"https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747811166/projectFinDeBatch/front/images/medals/medal-natation-01_sva2zb.png"}}
-          style={styles.badge}
-        />
-        <Image
-          source={{
-            uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png"
+            uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747811166/projectFinDeBatch/front/images/medals/medal-natation-01_sva2zb.png",
           }}
           style={styles.badge}
         />
         <Image
           source={{
-            uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747682/projectFinDeBatch/front/images/medals/medal-natation-01_bktbt8.png"
+            uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png",
+          }}
+          style={styles.badge}
+        />
+        <Image
+          source={{
+            uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747682/projectFinDeBatch/front/images/medals/medal-natation-01_bktbt8.png",
           }}
           style={styles.badge}
         />
       </ScrollView>
+      
+      <View style={styles.xpContainer}>
+        <Text style={styles.xpTitle}>XP Gagnés</Text>
+        <Text style={styles.xpValue}>+180 XP</Text>
+      </View>
     </ScrollView>
   );
 }
@@ -102,23 +117,30 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     marginVertical: 40,
+
+    username: {
+      fontSize: 14,
+      color: "#888",
+      marginBottom: 20,
+      textalign: "center",
+    },
   },
   profileImage: {
     width: 200,
     height: 200,
     borderRadius: 50,
-    marginVertical: 15,
+    //marginBottom: 0,
   },
   name: {
     fontSize: 18,
     fontWeight: "600",
-    marginBottom: 20,
+    marginBottom: 0,
   },
   statsContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
-    marginBottom: 20,
+    marginBottom: 30,
   },
   statItem: {
     flexDirection: "row",
@@ -128,6 +150,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginHorizontal: 10,
+    color: "#888",
   },
   statTextBox: {
     marginLeft: 8,
@@ -154,6 +177,35 @@ const styles = StyleSheet.create({
     height: 80,
     marginRight: 10,
     borderRadius: 10,
+  },
+  xpContainer: {
+  marginTop: 30,
+  marginHorizontal: 20,
+  backgroundColor: "#EFEAFF", // couleur pastel douce
+  paddingVertical: 15,
+  paddingHorizontal: 25,
+  borderRadius: 16,
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.1,
+  shadowRadius: 6,
+  elevation: 4,
+  alignItems: "center",
+},
+
+xpTitle: {
+  fontSize: 16,
+  fontWeight: "600",
+  color: "#555",
+  marginBottom: 5,
+},
+
+xpValue: {
+  fontSize: 22,
+  fontWeight: "bold",
+  color: "#785BFF", // couleur violette vive pour bien ressortir
+
+
   },
 });
 
