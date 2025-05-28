@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
 
   countFormText: {
-    fontFamily: "Manrope-ExtraLight",
+    fontFamily: "Questrial",
     fontSize: 20,
     color: "#858585",
     textAlign: "center",
