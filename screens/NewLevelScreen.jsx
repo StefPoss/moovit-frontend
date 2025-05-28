@@ -16,11 +16,11 @@ import { useSelector } from "react-redux";
 //a importé dans le terminal !!!npm i react-native-circular-progress + npm i --save react-native-circular-progress react-native-svg// npx expo install react-native-reanimated + yarn add react-native-circular-progress-indicator + yarn add react-native-svg
 
 export default function NewLevelScreen({ navigation }) {
-  const [value, setValue] = useState(60);
+  // const [value, setValue] = useState(60);
     const topImg =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   //"https://reactnative.dev/img/tiny_logo.png";
-    const niv = 80
+    const niv = 6
   // setValue(niv)
   const bgImage =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
@@ -35,7 +35,7 @@ export default function NewLevelScreen({ navigation }) {
             style={styles.topImg}
           >
             <BarStep value={niv} />
-            <Text style={styles.toptxt}>NIVEAU {niv}</Text>
+            <Text style={styles.toptxt}>Etapes {niv}</Text>
           </ImageBackground>
         </View>
         <View style={styles.midd}>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   toptxt: {
     zIndex: 99999,
     // marginTop:"55%",
-    marginTop: "-41%",
+    marginTop: "-42.5%",
     textAlign: "center",
     fontSize: 30,
     fontWeight: 600,
