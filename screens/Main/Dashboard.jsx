@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import {
   View,
   Text,
@@ -9,9 +9,6 @@ import {
 import ActivityCard from "../../components/ActivityCard"
 import StaticCard from "../../components/StaticCard"
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context"
-
-
-import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { API_URL } from "@env"
 import { useDispatch } from "react-redux"
@@ -20,86 +17,123 @@ import { addActivityToStore } from "../../reducers/activitySlice"
 import PhotoProfil from "../../components/PhotoProfil"
 import ExercisesProgressBar from "../../components/ExercisesProgressBar"
 import StatiscticGraphic from "../../components/StatiscticGraphic"
-import { AsyncStorage } from "react-native"
-
-
 import { Ionicons } from "@expo/vector-icons"
-
 import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
-export default function DashBoard(props) {
-  const User = useSelector((state) => state.user.value)
+export default function Dashboard(props) {
+  // LE DASHBOARD : affiche les infos user, le fallback photo profil, etc.
+  const user = useSelector((state) => state.user.value)
   const activity = useSelector((state) => state.activity.value)
   const dispatch = useDispatch()
   const [nExercices, setNExercices] = useState(8)
   const [dayTime, setDayTime] = useState("Indisponible")
   const [meteo, setMeteo] = useState("Indisponible")
+  const [refreshing, setRefreshing] = React.useState(false)
+  const [animationKey, setAnimationKey] = useState(0)
   let playTime = 35
   let sessions = 5
   let xp = 105
   // console.log("activity is", activity)
   // console.log("rendering dashboard")
 
-  const [refreshing, setRefreshing] = React.useState(false)
-
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true)
-    setTimeout(() => {
-      setRefreshing(false)
-    }, 2000)
-  }, [])
+  // Fonction qui génère une url default 250x250 en fonction du genre
+  const getPhotoUrl = (gender) => {
+    // Si masculin, profil homme en 250x250
+    if (gender === "Masculin")
+      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_cltqmm.png"
+    // Si féminin, profil femme en 250x250
+    if (gender === "Féminin")
+      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png"
+    // Si non binaire, avatar neutre en 250x250
+    if (gender === "Non binaire")
+      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png"
+    // Par défaut, avatar générique 250x250
+    return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png"
+  }
 
   //useEffect pour charger les données au chargement de la page
-  useEffect(() => {
-    //requete vers le back
-    // console.log("User is", User)
-    fetch(`${API_URL}/api/users/dashboard`, {
-      method: "POST", // méthode HTTP POST pour envoyer les données
-      headers: { "Content-Type": "application/json" }, // type de contenu envoyé en JSON
+  // useEffect(() => {
+  //requete vers le back
+  // console.log("User is", User)
+  // Récupère user + activities depuis l’API
+  // Ici, gestion du fallback AVANT le dispatch ! (store toujours clean)
+  // Appel l'API, gère la photo profil/fallback AVANT le dispatch, pour que le store soit toujours clean
+  const fetchUserData = () => {
+    return fetch(`${API_URL}/api/users/dashboard`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        token: User.token, // token stocké dans le redux
+        token: user.token,
       }),
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log("data is", data)
+        let photoUrl = data.dataUser.photoUrl
 
-        if (data.result) {
-          let newUser = {
-            token: data.dataUser.token,
-            photoUrl: data.dataUser.photoUrl,
-            username: data.dataUser.username,
-            name: data.dataUser.name,
-            admin: false,
-            sportPlayed: data.dataUser.sportPlayed[0],
-            xp: data.dataUser.xp,
-            level: data.dataUser.level,
-            height: data.dataUser.height,
-            weight: data.dataUser.weight,
-
-          };
-          dispatch(addUserToStore(newUser));
-          dispatch(addActivityToStore(data.dataLevel.subLevels));
-          // console.log("activity is", activity)
-          //console.log("this is ", User);
-          // console.log(data)
-          let dailyTime = data.dataUser.form.dayTime
-          if (dailyTime === "4 h/semaine") {
-            setDayTime("45 minutes")
-          } else if (dailyTime === "8 h/semaine ou plus") {
-            setDayTime("1 heure")
-          } else if (dailyTime === "15 min/jour") {
-            setDayTime("15 minutes")
-          } else if (dailyTime === "30 min/jour") {
-            setDayTime("30 minutes")
-          }
-
-          setMeteo(data.dataMeteo)
+        // Si la photo de la DB contient "default-profile", on force le fallback redimensionné selon le genre
+        if (
+          photoUrl &&
+          photoUrl.includes("default-profile") &&
+          !photoUrl.includes("w_250")
+        ) {
+          photoUrl = getPhotoUrl(data.dataUser.gender)
         }
+
+        let newUser = {
+          token: data.dataUser.token,
+          photoUrl,
+          username: data.dataUser.username,
+          name: data.dataUser.name,
+          admin: false,
+          sportPlayed: data.dataUser.sportPlayed[0],
+          xp: data.dataUser.xp,
+          level: data.dataUser.level,
+          gender: data.dataUser.gender || "",
+          currentLevelID: data.dataUser.currentLevelID,
+          currentSubLevelID: data.dataUser.currentSubLevelID,
+          height: data.dataUser.height,
+          weight: data.dataUser.weight,
+        }
+        dispatch(addUserToStore(newUser))
+        dispatch(addActivityToStore(data.dataLevel.subLevels))
+        let dailyTime = data.dataUser.form.dayTime
+        if (dailyTime === "4 h/semaine") setDayTime("45 minutes")
+        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure")
+        else if (dailyTime === "15 min/jour") setDayTime("15 minutes")
+        else if (dailyTime === "30 min/jour") setDayTime("30 minutes")
+        setMeteo(data.dataMeteo)
       })
+  }
+
+  // 1er appel : charge le dashboard au premier render
+  useEffect(() => {
+    fetchUserData()
   }, [])
 
-  let levelsCards = (activity || [])?.map((e, i) => (
+  // Fonction Pull-to-Refresh pour MAJ user/activities
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true)
+    fetchUserData().finally(() => {
+      setRefreshing(false)
+      setAnimationKey(Date.now()) // force le refresh ProgressBar
+    })
+    // Log l’heure du refresh pour debug
+    const now = new Date()
+    const hh = now.getHours().toString().padStart(2, "0")
+    const mm = now.getMinutes().toString().padStart(2, "0")
+    const ss = now.getSeconds().toString().padStart(2, "0")
+    console.log(`${hh}H${mm}mn${ss}s`)
+  }, [])
+
+  console.log("user is", user)
+
+  // Création du carousel de cartes d’activités > sécurisation du .map car
+  // activity peut être undefined (par exemple avant d’être fetch du back ou de Redux
+  // En forçant (Array.isArray(activity) ? activity : []), on garantis que :
+  // Si activity est bien un tableau, on l'utilise tel quel
+  // Si c'est undefined ou un objet ou autre chose, on mappe sur un tableau vide, donc pas d’erreur
+  // on a juste pas de cartes à afficher
+  let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => (
     <ActivityCard
       key={i}
       style={styles.activity}
@@ -110,6 +144,23 @@ export default function DashBoard(props) {
     />
   ))
 
+  // Log l'URL utilisée pour la photo profil
+  console.log(
+    "Dashboard envoie photoUrl à PhotoProfil:",
+    user.photoUrl,
+    "| gender:",
+    user.gender
+  )
+
+  // Choix de l'URL à passer au composant PhotoProfil :
+  // - Si l’API renvoie une photo → on prend ça
+  // - Sinon → on génère la bonne URL via getPhotoUrl(user.gender)
+  const profileUrl =
+    user.photoUrl && user.photoUrl !== ""
+      ? user.photoUrl
+      : getPhotoUrl(user.gender)
+
+  // RENDER : SafeArea + ScrollView + toutes les cartes
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
@@ -122,10 +173,10 @@ export default function DashBoard(props) {
           <View style={styles.container}>
             {/* PROFILE CARD */}
             <View style={styles.profilContainer}>
-              <PhotoProfil photoUrl={User.photoUrl}></PhotoProfil>
+              <PhotoProfil photoUrl={user.photoUrl} />
               <View style={styles.textProfilContainer}>
                 <Text style={[styles.profilText, { fontSize: 20 }]}>
-                  Bonjour {User.username}
+                  Bonjour {user.username}
                 </Text>
                 <Text style={styles.profilText}>
                   Prêt pour un nouveau challenge ?
@@ -136,13 +187,16 @@ export default function DashBoard(props) {
             {/*PROGRESS CARD */}
             <View style={styles.progressCard}>
               <View style={styles.progressLeftBlock}>
-                <Text style={styles.progressTitle}>{User.level}</Text>
+                <Text style={styles.progressTitle}>
+                  Niveau actuel : {user.currentLevelID}.{user.currentSubLevelID}
+                </Text>
                 <Text style={styles.progressSteps}>
                   {nExercices}/10 exercices complétés
                 </Text>
               </View>
               <View style={styles.progressRightBlock}>
                 <ExercisesProgressBar
+                  key={animationKey} // change la key dynamiquement sur refresh pour forcer le rerender et donc l'animation
                   value={nExercices * 10}
                 ></ExercisesProgressBar>
               </View>
