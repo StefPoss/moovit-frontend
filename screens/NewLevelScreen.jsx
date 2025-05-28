@@ -20,7 +20,7 @@ export default function NewLevelScreen({ navigation }) {
   const topImg =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   //"https://reactnative.dev/img/tiny_logo.png";
-  const niv = 15
+  const niv = 15;
   // setValue(niv)
   const bgImage =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
@@ -34,11 +34,7 @@ export default function NewLevelScreen({ navigation }) {
             resizeMode="cover"
             style={styles.topImg}
           >
-<<<<<<< HEAD
-            <ProgressStep style={styles.half} niv={30} />
-=======
             <ProgressStepLVL niv={value} />
->>>>>>> 3791923b3ded5689ea062dc12091309c610c44c7
             <Text style={styles.toptxt}>NIVEAU {niv}</Text>
           </ImageBackground>
         </View>
@@ -82,10 +78,7 @@ const styles = StyleSheet.create({
     height: "40%",
     width: "100%",
     justifyContent: "flex-end",
-<<<<<<< HEAD
-=======
     marginTop: "",
->>>>>>> 3791923b3ded5689ea062dc12091309c610c44c7
   },
   topImg: {
     zIndex: 0,

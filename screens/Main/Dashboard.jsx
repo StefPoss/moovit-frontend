@@ -5,10 +5,10 @@ import {
   ScrollView,
   StyleSheet,
   RefreshControl,
-<<<<<<< HEAD
 } from "react-native";
-import ActivityCard from "../../components/ActivityCard";
-import StaticCard from "../../components/StaticCard";
+// import ActivityCard from "../../components/ActivityCard"
+// import StaticCard from "../../components/StaticCard"
+import CardLevelClicable from "../../components/CardLevelClicable";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import { API_URL } from "@env";
@@ -18,49 +18,25 @@ import { addActivityToStore } from "../../reducers/activitySlice";
 import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
-import { Ionicons } from "@expo/vector-icons";
-import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
-=======
-} from "react-native"
-// import ActivityCard from "../../components/ActivityCard"
-// import StaticCard from "../../components/StaticCard"
-import CardLevelClicable from "../../components/CardLevelClicable";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context"
-import { useSelector } from "react-redux"
-import { API_URL } from "@env"
-import { useDispatch } from "react-redux"
-import { addUserToStore } from "../../reducers/userSlice"
-import { addActivityToStore } from "../../reducers/activitySlice"
-import PhotoProfil from "../../components/PhotoProfil"
-import ExercisesProgressBar from "../../components/ExercisesProgressBar"
-import StatiscticGraphic from "../../components/StatiscticGraphic"
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
->>>>>>> 3791923b3ded5689ea062dc12091309c610c44c7
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
-;
 
 export default function DashBoard(props) {
   // LE DASHBOARD : affiche les infos user, le fallback photo profil, etc.
   const user = useSelector((state) => state.user.value);
   const activity = useSelector((state) => state.activity.value);
   const dispatch = useDispatch();
+  console.log(activity);
   const [nExercices, setNExercices] = useState(8);
   const [dayTime, setDayTime] = useState("Indisponible");
   const [meteo, setMeteo] = useState("Indisponible");
-<<<<<<< HEAD
   const [refreshing, setRefreshing] = React.useState(false);
   const [animationKey, setAnimationKey] = useState(0);
-=======
-   const [refreshing, setRefreshing] = React.useState(false)
-  const [animationKey, setAnimationKey] = useState(0)
->>>>>>> 3791923b3ded5689ea062dc12091309c610c44c7
   let playTime = 35;
   let sessions = 5;
   let xp = 105;
-  // console.log("activity is", activity)
-  // console.log("rendering dashboard")
 
   // Fonction qui génère une url default 250x250 en fonction du genre
   const getPhotoUrl = (gender) => {
@@ -112,6 +88,7 @@ export default function DashBoard(props) {
           name: data.dataUser.name,
           admin: false,
           sportPlayed: data.dataUser.sportPlayed[0],
+          titleLevel: data.dataLevel.title,
           xp: data.dataUser.xp,
           level: data.dataUser.level,
           gender: data.dataUser.gender || "",
@@ -148,10 +125,7 @@ export default function DashBoard(props) {
     const hh = now.getHours().toString().padStart(2, "0");
     const mm = now.getMinutes().toString().padStart(2, "0");
     const ss = now.getSeconds().toString().padStart(2, "0");
-    console.log(`${hh}H${mm}mn${ss}s`);
   }, []);
-
-  console.log("user is", user);
 
   // Création du carousel de cartes d’activités > sécurisation du .map car
   // activity peut être undefined (par exemple avant d’être fetch du back ou de Redux
@@ -170,18 +144,10 @@ export default function DashBoard(props) {
       fill={true}
       linkTo="LevelScreen"
       // keyNum={key}
-
-      
     />
   ));
 
   // Log l'URL utilisée pour la photo profil
-  console.log(
-    "Dashboard envoie photoUrl à PhotoProfil:",
-    user.photoUrl,
-    "| gender:",
-    user.gender
-  );
 
   // Choix de l'URL à passer au composant PhotoProfil :
   // - Si l’API renvoie une photo → on prend ça

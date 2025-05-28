@@ -1,0 +1,112 @@
+[
+  {
+    "_id": "6836e05d170232ba19714a52",
+    "description": "1. Comprendre les règles du padel",
+    "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/padel/padel-photo-001.avif",
+    "mediaUrl": "https://www.youtube.com/watch?v=7taGJ0D0uF8",
+    "subLevelID": 1,
+    "timing": 120,
+    "tipOfThePro": "Pense à ton placement et à ton relâchement",
+    "title": "1.1 1. Comprendre les règles du padel",
+    "xp": 50
+  },
+  {
+    "_id": "6836e05d170232ba19714a53",
+    "description": "2. Savoir compter les points",
+    "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/padel/padel-photo-002.avif",
+    "mediaUrl": "https://www.youtube.com/watch?v=jk9Kqato8Ps",
+    "subLevelID": 2,
+    "timing": 120,
+    "tipOfThePro": "Pense à ton placement et à ton relâchement",
+    "title": "1.2 2. Savoir compter les points",
+    "xp": 50
+  },
+  {
+    "_id": "6836e05d170232ba19714a54",
+    "description": "3. Connaître les dimensions du terrain",
+    "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif",
+    "mediaUrl": "https://www.youtube.com/watch?v=EYv37BFbQuI",
+    "subLevelID": 3,
+    "timing": 120,
+    "tipOfThePro": "Pense à ton placement et à ton relâchement",
+    "title": "1.3 3. Connaître les dimensions du terrain",
+    "xp": 50
+  },
+  {
+    "_id": "6836e05d170232ba19714a55",
+    "description": "4. Identifier les zones de jeu (filet, fond, vitres)",
+    "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/padel/padel-photo-004.avif",
+    "mediaUrl": "https://www.youtube.com/watch?v=jk9Kqato8Ps",
+    "subLevelID": 4,
+    "timing": 120,
+    "tipOfThePro": "Pense à ton placement et à ton relâchement",
+    "title": "1.4 4. Identifier les zones de jeu (filet, fond, vitres)",
+    "xp": 50
+  },
+  {
+    "_id": "6836e05d170232ba19714a56",
+    "description": "5. Savoir tenir sa raquette correctement",
+    "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/padel/padel-photo-001.avif",
+    "mediaUrl": "https://www.youtube.com/watch?v=7taGJ0D0uF8",
+    "subLevelID": 5,
+    "timing": 120,
+    "tipOfThePro": "Pense à ton placement et à ton relâchement",
+    "title": "1.5 5. Savoir tenir sa raquette correctement",
+    "xp": 50
+  },
+  {
+    "_id": "6836e05d170232ba19714a57",
+    "description": "6. Apprendre la position d’attente",
+    "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/padel/padel-photo-003.avif",
+    "mediaUrl": "https://www.youtube.com/watch?v=jk9Kqato8Ps",
+    "subLevelID": 6,
+    "timing": 120,
+    "tipOfThePro": "Pense à ton placement et à ton relâchement",
+    "title": "1.6 6. Apprendre la position d’attente",
+    "xp": 50
+  },
+  {
+    "_id": "6836e05d170232ba19714a58",
+    "description": "7. Apprendre à faire un service régulier",
+    "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/padel/padel-photo-002.avif",
+    "mediaUrl": "https://www.youtube.com/watch?v=EYv37BFbQuI",
+    "subLevelID": 7,
+    "timing": 120,
+    "tipOfThePro": "Pense à ton placement et à ton relâchement",
+    "title": "1.7 7. Apprendre à faire un service régulier",
+    "xp": 50
+  },
+  {
+    "_id": "6836e05d170232ba19714a59",
+    "description": "8. Comprendre les rebonds sur les vitres",
+    "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif",
+    "mediaUrl": "https://www.youtube.com/watch?v=EYv37BFbQuI",
+    "subLevelID": 8,
+    "timing": 120,
+    "tipOfThePro": "Pense à ton placement et à ton relâchement",
+    "title": "1.8 8. Comprendre les rebonds sur les vitres",
+    "xp": 50
+  },
+  {
+    "_id": "6836e05d170232ba19714a5a",
+    "description": "9. Connaitre les fautes les plus courantes",
+    "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/padel/padel-photo-001.avif",
+    "mediaUrl": "https://www.youtube.com/watch?v=EYv37BFbQuI",
+    "subLevelID": 9,
+    "timing": 120,
+    "tipOfThePro": "Pense à ton placement et à ton relâchement",
+    "title": "1.9 9. Connaitre les fautes les plus courantes",
+    "xp": 50
+  },
+  {
+    "_id": "6836e05d170232ba19714a5b",
+    "description": "10. Participer à sa première partie découverte",
+    "image": "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747169059/projectFinDeBatch/front/images/activities/padel/padel-photo-004.avif",
+    "mediaUrl": "https://www.youtube.com/watch?v=8eFcPbDsnrs",
+    "subLevelID": 10,
+    "timing": 120,
+    "tipOfThePro": "Pense à ton placement et à ton relâchement",
+    "title": "1.10 10. Participer à sa première partie découverte",
+    "xp": 50
+  }
+]

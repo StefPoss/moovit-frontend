@@ -10,11 +10,10 @@ import { addUserToStore } from "../../reducers/userSlice";
 import Button from "../../components/Buttons";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
-////// A remplacer par le redux
-import user from "../../data/usertest.json";
-import activities from "../../data/activitiestest.json";
 
 export default function Play({ navigation }) {
+  const user = useSelector((state) => state.user.value);
+  const activity = useSelector((state) => state.activity.value);
   const dispatch = useDispatch();
   const tabLevel = ["onPlay", "onDone", "onProgress"];
   const [levelStatus, setLevelStatus] = useState(0);
@@ -22,6 +21,8 @@ export default function Play({ navigation }) {
   const plusstate = () => {
     if (levelStatus < tabLevel.length - 1) {
       setLevelStatus(levelStatus + 1);
+    } else {
+      navigation.navigate("Dashboard");
     }
   };
   const moinstate = () => {
@@ -37,8 +38,8 @@ export default function Play({ navigation }) {
 
   const [level, setLevel] = useState(currentLevel[0]);
   const [subLevel, setSubLevel] = useState(currentLevel[1]);
-  const subLevelInfos = activities[1].levels[level - 1].subLevels[subLevel - 1];
-  const totalSubLevels = activities[1].levels[level - 1].subLevels.length;
+  const subLevelInfos = activity[subLevel];
+  const totalSubLevels = activity.length;
   const timing = subLevelInfos.timing;
   const levelxp = subLevelInfos.xp;
   const titleSubLevel = subLevelInfos.title;

@@ -11,6 +11,9 @@ import { Ionicons } from "@expo/vector-icons";
 import ProgressStep from "../../../components/ProgressStep";
 import { updateUser } from "../../../reducers/userSlice";
 import { addActivityToStore } from "../../../reducers/activitySlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { API_URL } from "@env";
 
 export default function OnReward({
   xp,
@@ -28,32 +31,31 @@ export default function OnReward({
   const subLevelUpdated = updatelvl[1];
   const levelUpdated = updatelvl[0];
   useEffect(() => {
-    return () => {
-      fetch(`${API_URL}/api/users/levelupdate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          token: token,
-          sport: sport,
-          xp: xpUpdated,
-          subLevel: subLevelUpdated,
-          level: levelUpdated,
-        }),
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          if (data.result) {
-            dispatch(
-              updateUser({
-                currentLevelID: levelUpdated,
-                currentSubLevelID: subLevelUpdated,
-                xp: xpUpdated,
-              })
-            );
-            dispatch(addActivityToStore(data.dataActivity.subLevels));
-          }
-        });
-    };
+    fetch(`${API_URL}/api/users/levelupdate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: token,
+        sport: sport,
+        xp: xpUpdated,
+        subLevel: subLevelUpdated,
+        level: levelUpdated,
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data);
+        if (data.result) {
+          dispatch(
+            updateUser({
+              currentLevelID: levelUpdated,
+              currentSubLevelID: subLevelUpdated,
+              xp: xpUpdated,
+            })
+          );
+          dispatch(addActivityToStore(data.dataActivity.subLevels));
+        }
+      });
   }, []);
   return (
     <SafeAreaView style={styles.safe}>
