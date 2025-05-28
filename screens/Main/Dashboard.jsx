@@ -143,7 +143,7 @@ export default function DashBoard(props) {
       style={styles.activity}
       text={e.title}
       backgroundColor="#C5C4D9"
-      color="yellow"
+      color="white"
       url={e.image}
       fill={true}
       linkTo="LevelScreen"
@@ -208,8 +208,8 @@ export default function DashBoard(props) {
                 ></ExercisesProgressBar>
               </View>
             </View>
+            <Text style={styles.text}>Entrainement du Jour</Text>
 
-            <Text style={styles.text}>Mon Actu</Text>
             {/* CAROUSEL D'ACTIIVTIES */}
             <View style={styles.topButton}>
               <ScrollView
