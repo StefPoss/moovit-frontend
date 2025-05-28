@@ -1,15 +1,11 @@
-
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { BarChart } from 'react-native-chart-kit';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { BarChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 
-
 export default function StatiscticGraphic(props) {
-  
-
   const data = {
-    labels: ['Temps de jeu', 'Sessions', 'XP'],
+    labels: ["Temps de jeu", "Sessions", "XP"],
     datasets: [
       {
         data: [props.playTime, props.sessions, props.xp],
@@ -18,13 +14,11 @@ export default function StatiscticGraphic(props) {
   };
 
   const chartConfig = {
-    backgroundGradientFrom: 'black',
-    backgroundGradientTo: 'black',
-   
+    backgroundGradientFrom: "#f5f5fd", // Violet pastel très clair
+    backgroundGradientTo: "#f5f5fd",
     decimalPlaces: 0,
-    color: () => `rgb(255, 255, 255)`, // barres blanches
-  labelColor: () => `rgb(255, 255, 255)`, // labels en blanc
-
+    color: () => "#6B47DC", // Couleur des barres (violet doux)
+    labelColor: () => "#333333", // Couleur des textes sous les barres
     propsForBackgroundLines: {
       strokeWidth: 0,
     },
@@ -43,27 +37,15 @@ export default function StatiscticGraphic(props) {
         showValuesOnTopOfBars={true}
         fromZero={true}
         chartConfig={chartConfig}
-        
-       
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: 
-  {
-   
-    
-    
-  
-  },
-  barChart: 
-  {
+  container: {},
+  barChart: {
     borderRadius: 15,
     marginRight: 5,
-
   },
 });
-
-

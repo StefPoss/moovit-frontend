@@ -18,6 +18,7 @@ import { addActivityToStore } from "../../reducers/activitySlice";
 import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
+import {FontAwesome5} from "@expo/vector-icons";
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
@@ -207,8 +208,8 @@ export default function DashBoard(props) {
                 ></ExercisesProgressBar>
               </View>
             </View>
-
             <Text style={styles.text}>Entrainement du Jour</Text>
+
             {/* CAROUSEL D'ACTIIVTIES */}
             <View style={styles.topButton}>
               <ScrollView
@@ -231,9 +232,17 @@ export default function DashBoard(props) {
               {/* TEMPS PAR JOUR */}
               <View style={styles.dayTrainingContainer}>
                 <View style={styles.textbottomButtonContainer}>
-                  <Text style={[styles.progressText, { fontSize: 20 }]}>
-                    Training
-                  </Text>
+                  <View style={styles.trainingRow}>
+                    <Text style={[styles.progressText, { fontSize: 20 }]}>
+                      Training
+                    </Text>
+                    <FontAwesome5
+                      name="dumbbell"
+                      size={18}
+                      color="#black"
+                      style={{ marginLeft: 10, paddingTop: 10 }}
+                    />
+                  </View>
                   <Text style={styles.progressText}>{dayTime}</Text>
                 </View>
               </View>
@@ -268,9 +277,9 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   text: {
-    color: "grey",
+    color: "#555555",
     fontSize: 20,
-    marginLeft: -100,
+    marginLeft: -250,
   },
   topButton: {
     flex: 0,
@@ -293,16 +302,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   profilText: {
-    color: "#555555",
+    color: "black",
     marginTop: 5,
     fontWeight: "500",
+    borderRadius: 15,
   },
   progressCard: {
     width: "90%",
-    height: 90,
+    height: 80,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#9775f0",
+    backgroundColor: "#7D6BB3",
     borderRadius: 15,
     marginRight: 5,
     margin: 5,
@@ -324,6 +334,7 @@ const styles = StyleSheet.create({
     color: "ffffff",
     marginTop: 5,
     fontWeight: "500",
+    justifyContent: "center",
   },
   progressSteps: {
     color: "#fff",
@@ -336,19 +347,32 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   dayTrainingContainer: {
-    backgroundColor: "#FCEACE",
+    backgroundColor: "#FFF4E2",
     width: "43%", //long du boutton
     height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
+    borderColor: "#cbb7ff",
     margin: 5,
   },
   textbottomButtonContainer: {
+    // backgroundColor: "#f9f9f9",
+    //borderColor: "#cbb7ff",
+    // borderWidth: 5,
+    //borderRadius: 20,
+    padding: 15,
+    margin: 15,
     alignItems: "center",
-    paddingTop: 40,
+  },
+
+  trainingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 14,
   },
   meteoContainer: {
-    backgroundColor: "#C5C4D9",
-    width: "43%", //long du boutton
+    backgroundColor: "#E4F0F4",
+    width: "40%", //long du boutton
     height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
     margin: 5,
