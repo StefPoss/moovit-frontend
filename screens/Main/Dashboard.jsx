@@ -18,7 +18,7 @@ import { addActivityToStore } from "../../reducers/activitySlice";
 import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
-import {FontAwesome5} from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
@@ -129,6 +129,10 @@ export default function DashBoard(props) {
     //console.log(`${hh}H${mm}mn${ss}s`)
   }, []);
 
+  // const fetchSport = () => {
+  //   return fetch(`${API_URL}/api/getsport`, (req,res) =>{
+
+  //   }
   //console.log("user is", user)
 
   // Création du carousel de cartes d’activités > sécurisation du .map car
@@ -137,19 +141,27 @@ export default function DashBoard(props) {
   // Si activity est bien un tableau, on l'utilise tel quel
   // Si c'est undefined ou un objet ou autre chose, on mappe sur un tableau vide, donc pas d’erreur
   // on a juste pas de cartes à afficher
-  let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => (
-    <CardLevelClicable
-      key={i}
-      style={styles.activity}
-      text={e.title}
-      backgroundColor="#C5C4D9"
-      color="white"
-      url={e.image}
-      fill={true}
-      opacity="0.4"
-      linkTo="LevelScreen"
-    />
-  ));
+  // console.log("lvl id", user.currentLevelID);
+  // console.log("sublvl id", user.currentSubLevelID);
+  // console.log("activity", activity.length);
+
+  let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => {
+    let opa;
+    user.currentSubLevelID < i ? (opa = 0.5) : (opa = 1);
+    return (
+      <CardLevelClicable
+        key={i}
+        style={styles.activity}
+        text={e.title}
+        backgroundColor="#C5C4D9"
+        color="white"
+        url={e.image}
+        fill={true}
+        opacity={opa}
+        linkTo="LevelScreen"
+      />
+    );
+  });
 
   // Log l'URL utilisée pour la photo profil
   // console.log(
