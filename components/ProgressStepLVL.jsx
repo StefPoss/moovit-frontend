@@ -7,19 +7,24 @@ import { View } from "react-native";
 
 //a importé dans le terminal !!!npm i react-native-circular-progress + npm i --save react-native-circular-progress react-native-svg// npx expo install react-native-reanimated + yarn add react-native-circular-progress-indicator + yarn add react-native-svg
 
-const ProgressStep = (props) => {
+const ProgressStepLVL = (props) => {
   //   let indice = xp; //variable qui sert a faire progressé la barre
   const [value, setValue] = useState(0);
-
+   let blue=value*2.55
+  // let green=255/value //${green}
+   let newRGB=`rgba(0, 255 , ${blue},0.99)`
+   console.log(blue);
+   
   return (
     <View style={styles.arc}>
       <AnimatedCircularProgress
         // z-index={9999}
-        size={350}
+        size={310}
         width={35}
         fill={value}
         // tintColor="#00e0ff"
-        tintColor="rgba(0, 255, 72, 0.92)"
+        tintColor={newRGB}
+        
         backgroundColor="#3d5875"
         padding={10}
         arcSweepAngle={180}
@@ -33,11 +38,11 @@ const ProgressStep = (props) => {
   );
 };
 
-export default ProgressStep;
+export default ProgressStepLVL;
 const styles = StyleSheet.create({
   arc: {
-    marginLeft: "2%",
-    marginTop: "8%",
-    padding: 0,
+    marginLeft: "8%",
+    marginTop: "10%",
+    paddingBottom: "9%",
   },
 });

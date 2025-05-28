@@ -14,7 +14,7 @@ import SignUp from "./screens/Auth/SignupScreen";
 import onBoarding from "./screens/OnBoarding/OnBoardingForms";
 import Dashboard from "./screens/Main/Dashboard";
 import LevelScreen from "./screens/LevelScreen";
-import NewLevelScreen from "./screens/NewLevelScreen"
+import NewLevelScreen from "./screens/NewLevelScreen";
 import CguScreen from "./screens/Auth/CGUScreen";
 import Play from "./screens/Activities/Play";
 import ProfileScreen from "./screens/Main/ProfileScreen";
@@ -126,7 +126,6 @@ export default function App() {
   });
 
   //if (!fontsLoaded) return null;
-
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -134,13 +133,16 @@ export default function App() {
           <NavigationContainer>
             <StatusBar style="light" />
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="Welcome" component={Splash} />
+              <Stack.Screen name="Dashboard" component={Dashboard} />
+
+              {/* <Stack.Screen name="Welcome" component={Splash} />
               <Stack.Screen name="S'inscrire" component={SignUp} />
               <Stack.Screen name="Se connecter" component={Login} />
               <Stack.Screen name="onBoarding" component={onBoarding} />
-              <Stack.Screen name="cgu" component={CguScreen} />
-              {/* <Stack.Screen name="Dashboard" component={Dashboard} />
-              <Stack.Screen name="Play" component={Play} /> */}
+              <Stack.Screen name="cgu" component={CguScreen} /> */}
+              <Stack.Screen name="LevelScreen" component={LevelScreen} />
+              <Stack.Screen name="NewLevelScreen" component={NewLevelScreen} />
+              <Stack.Screen name="Play" component={Play} />
               <Stack.Screen name="TabNavigator" component={TabNavigator} />
             </Stack.Navigator>
           </NavigationContainer>

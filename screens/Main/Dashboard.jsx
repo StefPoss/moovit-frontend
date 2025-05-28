@@ -9,7 +9,7 @@ import {
 import ActivityCard from "../../components/ActivityCard";
 import StaticCard from "../../components/StaticCard";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-
+import CardLevelClicable from "../../components/CardLevelClicable";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { API_URL } from "@env";
@@ -75,7 +75,7 @@ export default function DashBoard(props) {
           };
           dispatch(addUserToStore(newUser));
           dispatch(addActivityToStore(data.dataLevel.subLevels));
-          // console.log("activity is", activity)
+          console.log("activity is", activity);
           console.log("data is", data.dataLevel.subLevels);
           // console.log(data)
           let dailyTime = data.dataUser.form.dayTime;
@@ -95,16 +95,27 @@ export default function DashBoard(props) {
   }, []);
 
   let levelsCards = activity?.map((e, i) => (
-    <ActivityCard
+    <CardLevelClicable
       key={i}
       style={styles.activity}
       text={e.title}
       backgroundColor="#C5C4D9"
       color="yellow"
       url={e.image}
+      fill={true}
+      linkTo="LevelScreen"
+      // keyNum={key}
+
+      
     />
   ));
+  // console.log("key",key);
+  
+  // const[lastLv,setLastLv]=useState(null)
 
+  // const keyNum=(key)=>{
+  //   console.log(key)
+  //   setLastLv(key)}
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["top"]}>
@@ -210,7 +221,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   activity: {
-    padding: "5",
+    padding: "",
   },
   bottomButton: {
     flexDirection: "row",
