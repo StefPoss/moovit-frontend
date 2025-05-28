@@ -2,6 +2,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
+import { Dimensions } from "react-native";
 
 
 export default function StatiscticGraphic(props) {
@@ -34,7 +35,7 @@ export default function StatiscticGraphic(props) {
       <BarChart
         style={styles.barChart}
         data={data}
-        width={350}
+        width={Dimensions.get("window").width * 0.9} //pour mettre la largeur à 90% et que ça soit responsive
         height={170}
         withVerticalLabels={true}
         withHorizontalLabels={false}

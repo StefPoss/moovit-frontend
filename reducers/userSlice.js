@@ -9,6 +9,11 @@ const initialState = {
     sportPlayed: "",
     xp: "",
     level: "",
+    gender: "",
+    currentLevelID: "",
+    currentSubLevelID: "",
+    height: "",
+    weight: "",
   },
 };
 
@@ -17,7 +22,10 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     addUserToStore: (state, action) => {
-      state.value = action.payload;
+      // On fusionne l'ancien state user avec les nouvelles infos reçues du back :
+      // Si une clé est absente dans le payload, on garde l'ancienne valeur existante.
+      // Ça évite de perdre une info (ex : photoUrl) si le back renvoie un payload incomplet.
+      state.value = { ...state.value, ...action.payload };
       console.log(state.value);
     },
     removeUserToStore: (state, action) => {
