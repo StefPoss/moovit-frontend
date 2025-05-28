@@ -25,7 +25,7 @@ export const userSlice = createSlice({
       // On fusionne l'ancien state user avec les nouvelles infos reçues du back :
       // Si une clé est absente dans le payload, on garde l'ancienne valeur existante.
       // Ça évite de perdre une info (ex : photoUrl) si le back renvoie un payload incomplet.
-      state.value = action.payload;
+      state.value = { ...state.value, ...action.payload };
       console.log(state.value);
     },
     removeUserToStore: (state, action) => {

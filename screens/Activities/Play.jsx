@@ -15,21 +15,6 @@ export default function Play({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const activity = useSelector((state) => state.activity.value);
   const dispatch = useDispatch();
-<<<<<<< HEAD
-=======
-
- 
-  const user = useSelector((state) => state.user?.value?.username ?? "Invité");
-  const sportPlayed = useSelector(
-    (state) => state.user?.value?.sportPlayed ?? "Loading"
-  );
-  console.log(user);
-  const [levelStatus, setLevelStatus] = useState(0);
-  const [numLevel, setNumLevel] = useState(0);
-  const [bigLevel, setBigLevel] = useState(0);
-
-  const subLevels = activities?.levels?.[0]?.subLevels[numLevel] || [];
->>>>>>> f397a31fc76a327e098aa61f6f4b6bf76ab79f4d
   const tabLevel = ["onPlay", "onDone", "onProgress"];
   const [levelStatus, setLevelStatus] = useState(0);
 
@@ -38,6 +23,7 @@ export default function Play({ navigation }) {
       setLevelStatus(levelStatus + 1);
     } else {
       navigation.navigate("Dashboard");
+      setLevelStatus(0);
     }
   };
   const moinstate = () => {
@@ -45,26 +31,34 @@ export default function Play({ navigation }) {
       setLevelStatus(levelStatus - 1);
     }
   };
-
-  const currentLevel = [user.currentLevelID, user.currentSubLevelID];
+  const totalSubLevels = activity.length;
+  let currentLevel = [user.currentLevelID, user.currentSubLevelID];
   let nextLevel = [];
 
-  console.log(currentLevel);
-
-  const [level, setLevel] = useState(currentLevel[0]);
-  const [subLevel, setSubLevel] = useState(currentLevel[1]);
-  const subLevelInfos = activity[subLevel];
-  const totalSubLevels = activity.length;
-  const timing = subLevelInfos.timing;
-  const levelxp = subLevelInfos.xp;
-  const titleSubLevel = subLevelInfos.title;
-  const pourcent = Math.floor((100 * subLevel) / totalSubLevels);
   if (currentLevel[1] == totalSubLevels) {
     nextLevel = [currentLevel[0] + 1, 1];
+    currentLevel[1] = 0;
+    currentLevel[0] = currentLevel[0] + 1;
   } else {
     nextLevel = [currentLevel[0], currentLevel[1] + 1];
   }
 
+  console.log("---" + currentLevel);
+  console.log;
+
+  const [level, setLevel] = useState(currentLevel[0]);
+  const [subLevel, setSubLevel] = useState(currentLevel[1]);
+  const subLevelInfos = activity[subLevel];
+
+  const timing = subLevelInfos.timing;
+  const levelxp = subLevelInfos.xp;
+  const titleSubLevel = subLevelInfos.title;
+  const pourcent = Math.floor((100 * subLevel) / totalSubLevels);
+
+  useEffect(() => {
+    setLevel(currentLevel[0]);
+    setSubLevel(currentLevel[1]);
+  }, [user.currentLevelID, user.currentSubLevelID]);
   console.log(nextLevel);
   let toDisp;
   if (tabLevel[levelStatus] === "onPlay") {
@@ -92,6 +86,7 @@ export default function Play({ navigation }) {
         sport={"Padel"}
         xpUpdated={levelxp + user.xp}
         updatelvl={nextLevel}
+        renit={() => setLevelStatus(0)}
       />
     );
   }

@@ -26,36 +26,39 @@ export default function OnReward({
   token,
   updatelvl,
   xpUpdated,
+  renit,
 }) {
   const dispatch = useDispatch();
   const subLevelUpdated = updatelvl[1];
   const levelUpdated = updatelvl[0];
   useEffect(() => {
-    fetch(`${API_URL}/api/users/levelupdate`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        token: token,
-        sport: sport,
-        xp: xpUpdated,
-        subLevel: subLevelUpdated,
-        level: levelUpdated,
-      }),
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        console.log(data);
-        if (data.result) {
-          dispatch(
-            updateUser({
-              currentLevelID: levelUpdated,
-              currentSubLevelID: subLevelUpdated,
-              xp: xpUpdated,
-            })
-          );
-          dispatch(addActivityToStore(data.dataActivity.subLevels));
-        }
-      });
+    return () => {
+      fetch(`${API_URL}/api/users/levelupdate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: token,
+          sport: sport,
+          xp: xpUpdated,
+          subLevel: subLevelUpdated,
+          level: levelUpdated,
+        }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data);
+          if (data.result) {
+            dispatch(
+              updateUser({
+                currentLevelID: levelUpdated,
+                currentSubLevelID: subLevelUpdated,
+                xp: xpUpdated,
+              })
+            );
+            dispatch(addActivityToStore(data.dataActivity.subLevels));
+          }
+        });
+    };
   }, []);
   return (
     <SafeAreaView style={styles.safe}>
