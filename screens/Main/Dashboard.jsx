@@ -96,7 +96,6 @@ export default function DashBoard(props) {
           sportPlayed: data.dataUser.sportPlayed[0].title,
           titleLevel: data.dataLevel.title,
           xp: data.dataUser.xp,
-          level: data.dataUser.level,
           gender: data.dataUser.gender || "",
           currentLevelID: data.dataUser.currentLevelID,
           currentSubLevelID: data.dataUser.currentSubLevelID,
@@ -161,8 +160,8 @@ export default function DashBoard(props) {
       color="white"
       url={e.image}
       fill={true}
-      opacity="0.4"
       linkTo="LevelScreen"
+      // keyNum={key}
     />
   ));
 
