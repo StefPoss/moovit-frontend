@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   ScrollView,
   StyleSheet,
   RefreshControl,
-} from "react-native"
+} from "react-native";
 // import ActivityCard from "../../components/ActivityCard"
 // import StaticCard from "../../components/StaticCard"
 import CardLevelClicable from "../../components/CardLevelClicable";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context"
-import { useSelector } from "react-redux"
-import { API_URL } from "@env"
-import { useDispatch } from "react-redux"
-import { addUserToStore } from "../../reducers/userSlice"
-import { addActivityToStore } from "../../reducers/activitySlice"
-import PhotoProfil from "../../components/PhotoProfil"
-import ExercisesProgressBar from "../../components/ExercisesProgressBar"
-import StatiscticGraphic from "../../components/StatiscticGraphic"
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { useSelector } from "react-redux";
+import { API_URL } from "@env";
+import { useDispatch } from "react-redux";
+import { addUserToStore } from "../../reducers/userSlice";
+import { addActivityToStore } from "../../reducers/activitySlice";
+import PhotoProfil from "../../components/PhotoProfil";
+import ExercisesProgressBar from "../../components/ExercisesProgressBar";
+import StatiscticGraphic from "../../components/StatiscticGraphic";
+import { FontAwesome5 } from "@expo/vector-icons";
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
-;
 
 export default function DashBoard(props) {
   // LE DASHBOARD : affiche les infos user, le fallback photo profil, etc.
-  const user = useSelector((state) => state.user.value)
-  const activity = useSelector((state) => state.activity.value)
-  const dispatch = useDispatch()
-  const [nExercices, setNExercices] = useState(5)
-  const [dayTime, setDayTime] = useState("Indisponible")
-  const [meteo, setMeteo] = useState("Indisponible")
-  const [refreshing, setRefreshing] = React.useState(false)
-  const [animationKey, setAnimationKey] = useState(0)
+  const user = useSelector((state) => state.user.value);
+  const activity = useSelector((state) => state.activity.value);
+  const dispatch = useDispatch();
+  const [nExercices, setNExercices] = useState(5);
+  const [dayTime, setDayTime] = useState("Indisponible");
+  const [meteo, setMeteo] = useState("Indisponible");
+  const [refreshing, setRefreshing] = React.useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
   let playTime = 35;
   let sessions = 5;
   let xp = 105;
@@ -44,16 +44,16 @@ export default function DashBoard(props) {
   const getPhotoUrl = (gender) => {
     // Si masculin, profil homme en 250x250
     if (gender === "Masculin")
-      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_cltqmm.png"
+      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_cltqmm.png";
     // Si féminin, profil femme en 250x250
     if (gender === "Féminin")
-      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png"
+      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png";
     // Si non binaire, avatar neutre en 250x250
     if (gender === "Non binaire")
-      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png"
+      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png";
     // Par défaut, avatar générique 250x250
-    return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png"
-  }
+    return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png";
+  };
 
   //useEffect pour charger les données au chargement de la page
   // useEffect(() => {
@@ -72,7 +72,7 @@ export default function DashBoard(props) {
     })
       .then((r) => r.json())
       .then((data) => {
-        let photoUrl = data.dataUser.photoUrl
+        let photoUrl = data.dataUser.photoUrl;
 
         // Si la photo de la DB contient "default-profile", on force le fallback redimensionné selon le genre
         if (
@@ -80,7 +80,7 @@ export default function DashBoard(props) {
           photoUrl.includes("default-profile") &&
           !photoUrl.includes("w_250")
         ) {
-          photoUrl = getPhotoUrl(data.dataUser.gender)
+          photoUrl = getPhotoUrl(data.dataUser.gender);
         }
 
         let newUser = {
@@ -97,41 +97,39 @@ export default function DashBoard(props) {
           currentSubLevelID: data.dataUser.currentSubLevelID,
           height: data.dataUser.height,
           weight: data.dataUser.weight,
-        }
-        dispatch(addUserToStore(newUser))
-        dispatch(addActivityToStore(data.dataLevel.subLevels))
-        let dailyTime = data.dataUser.form.dayTime
-        if (dailyTime === "4 h/semaine") setDayTime("45 minutes")
-        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure")
-        else if (dailyTime === "15 min/jour") setDayTime("15 minutes")
-        else if (dailyTime === "30 min/jour") setDayTime("30 minutes")
-        setMeteo(data.dataMeteo)
+        };
+        dispatch(addUserToStore(newUser));
+        dispatch(addActivityToStore(data.dataLevel.subLevels));
+        let dailyTime = data.dataUser.form.dayTime;
+        if (dailyTime === "4 h/semaine") setDayTime("45 minutes");
+        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure");
+        else if (dailyTime === "15 min/jour") setDayTime("15 minutes");
+        else if (dailyTime === "30 min/jour") setDayTime("30 minutes");
+        setMeteo(data.dataMeteo);
         console.log("user est ", user);
-        
-      })
-  }
+      });
+  };
 
   // 1er appel : charge le dashboard au premier render
   useEffect(() => {
-    fetchUserData()
+    fetchUserData();
     //console.log("activity subLevels ",activity.length);
-    
-  }, [])
+  }, []);
 
   // Fonction Pull-to-Refresh pour MAJ user/activities
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true)
+    setRefreshing(true);
     fetchUserData().finally(() => {
-      setRefreshing(false)
-      setAnimationKey(Date.now()) // force le refresh ProgressBar
-    })
+      setRefreshing(false);
+      setAnimationKey(Date.now()); // force le refresh ProgressBar
+    });
     // Log l’heure du refresh pour debug
-    const now = new Date()
-    const hh = now.getHours().toString().padStart(2, "0")
-    const mm = now.getMinutes().toString().padStart(2, "0")
-    const ss = now.getSeconds().toString().padStart(2, "0")
+    const now = new Date();
+    const hh = now.getHours().toString().padStart(2, "0");
+    const mm = now.getMinutes().toString().padStart(2, "0");
+    const ss = now.getSeconds().toString().padStart(2, "0");
     //console.log(`${hh}H${mm}mn${ss}s`)
-  }, [])
+  }, []);
 
   //console.log("user is", user)
 
@@ -152,10 +150,8 @@ export default function DashBoard(props) {
       fill={true}
       linkTo="LevelScreen"
       // keyNum={key}
-
-      
     />
-  ))
+  ));
 
   // Log l'URL utilisée pour la photo profil
   // console.log(
@@ -171,7 +167,7 @@ export default function DashBoard(props) {
   const profileUrl =
     user.photoUrl && user.photoUrl !== ""
       ? user.photoUrl
-      : getPhotoUrl(user.gender)
+      : getPhotoUrl(user.gender);
 
   // RENDER : SafeArea + ScrollView + toutes les cartes
   return (
@@ -210,12 +206,12 @@ export default function DashBoard(props) {
               <View style={styles.progressRightBlock}>
                 <ExercisesProgressBar
                   key={animationKey} // change la key dynamiquement sur refresh pour forcer le rerender et donc l'animation
-                  value={user.currentSubLevelID * activity.length/100}
+                  value={(user.currentSubLevelID * activity.length) / 100}
                 ></ExercisesProgressBar>
               </View>
             </View>
 
-            <Text style={styles.text}>Training Now</Text>
+            <Text style={styles.text}>Mon Actu</Text>
             {/* CAROUSEL D'ACTIIVTIES */}
             <View style={styles.topButton}>
               <ScrollView
@@ -238,9 +234,17 @@ export default function DashBoard(props) {
               {/* TEMPS PAR JOUR */}
               <View style={styles.dayTrainingContainer}>
                 <View style={styles.textbottomButtonContainer}>
-                  <Text style={[styles.progressText, { fontSize: 20 }]}>
-                    Training
-                  </Text>
+                  <View style={styles.trainingRow}>
+                    <Text style={[styles.progressText, { fontSize: 20 }]}>
+                      Training
+                    </Text>
+                    <FontAwesome5
+                      name="dumbbell"
+                      size={18}
+                      color="#black"
+                      style={{ marginLeft: 10, paddingTop: 10 }}
+                    />
+                  </View>
                   <Text style={styles.progressText}>{dayTime}</Text>
                 </View>
               </View>
@@ -261,7 +265,7 @@ export default function DashBoard(props) {
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -275,9 +279,9 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   text: {
-    color: "grey",
+    color: "#555555",
     fontSize: 20,
-    marginLeft: -170,
+    marginLeft: -250,
   },
   topButton: {
     flex: 0,
@@ -300,16 +304,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   profilText: {
-    color: "#555555",
+    color: "black",
     marginTop: 5,
     fontWeight: "500",
+    borderRadius: 15,
   },
   progressCard: {
     width: "90%",
-    height: 90,
+    height: 80,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#9775f0",
+    backgroundColor: "#7D6BB3",
     borderRadius: 15,
     marginRight: 5,
     margin: 5,
@@ -331,6 +336,7 @@ const styles = StyleSheet.create({
     color: "ffffff",
     marginTop: 5,
     fontWeight: "500",
+    justifyContent: "center",
   },
   progressSteps: {
     color: "#fff",
@@ -343,21 +349,34 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   dayTrainingContainer: {
-    backgroundColor: "#FCEACE",
+    backgroundColor: "#FFF4E2",
     width: "43%", //long du boutton
     height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
+    borderColor: "#cbb7ff",
     margin: 5,
   },
   textbottomButtonContainer: {
+    // backgroundColor: "#f9f9f9",
+    //borderColor: "#cbb7ff",
+    // borderWidth: 5,
+    //borderRadius: 20,
+    padding: 15,
+    margin: 15,
     alignItems: "center",
-    paddingTop: 40,
+  },
+
+  trainingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 14,
   },
   meteoContainer: {
-    backgroundColor: "#C5C4D9",
-    width: "43%", //long du boutton
+    backgroundColor: "#E4F0F4",
+    width: "40%", //long du boutton
     height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
     margin: 5,
   },
-})
+});
