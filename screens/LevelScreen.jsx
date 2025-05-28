@@ -10,7 +10,6 @@ import {
 import CardLevelClicable from "../components/CardLevelClicable";
 import { useSelector } from "react-redux";
 
-
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useState } from "react";
 import PropTypes from "prop-types";
@@ -20,7 +19,7 @@ import PropTypes from "prop-types";
 export default function LevelScreen(props) {
   const activity = useSelector((state) => state.activity.value);
 
- let levelsCards = activity?.map((e, i) => (
+  let levelsCards = activity?.map((e, i) => (
     <CardLevelClicable
       key={i}
       // num = {i}
@@ -35,9 +34,10 @@ export default function LevelScreen(props) {
       fill={false}
       linkTo="NewLevelScreen"
       // keyNum={keyNum}
-    /> )); 
+    />
+  ));
 
-  const[lastLv,setLastLv]=useState(null)
+  const [lastLv, setLastLv] = useState(null);
   // const keyNum=(key)=>{
   //   console.log(key)
   //   setLastLv(key)
@@ -49,22 +49,19 @@ export default function LevelScreen(props) {
   const bgImage = "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif"
   return (
     <SafeAreaProvider>
-      {/* <SafeAreaView style={styles.container} edges={["top"]}>  cette balise est sesactivé car le rendu est inesthetique */} 
+      {/* <SafeAreaView style={styles.container} edges={["top"]}>  cette balise est sesactivé car le rendu est inesthetique */}
       <View style={styles.container}>
-        <Image
-          style={styles.topImg}
-          source={{ uri: topImg }}
-        />
+        <Image style={styles.topImg} source={{ uri: topImg }} />
         <Text style={styles.toptxt}>NIVEAU {niv}</Text>
         <View style={styles.midd}>
           <ImageBackground
-            source={{uri: bgImage }}
+            source={{ uri: bgImage }}
             resizeMode="cover"
             style={styles.image}
           >
             <ScrollView>
-            {levelsCards}
-          {/* <CardLevelClicable
+              {levelsCards}
+              {/* <CardLevelClicable
             style={styles.try}
             text="titre"
             description="description..."
@@ -77,10 +74,8 @@ export default function LevelScreen(props) {
             linkTo="NewLevelScreen"
             
           /> */}
-         
-          </ScrollView>
-</ImageBackground>
-
+            </ScrollView>
+          </ImageBackground>
         </View>
       </View>
       {/* </SafeAreaView> */}
@@ -111,19 +106,19 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   image: {
-zIndex:+50,
-    height:'100%',
-    width:'100%',
+    zIndex: +50,
+    height: "100%",
+    width: "100%",
   },
   midd: {
-    backgroundColor:"rgba(255, 255, 255, 0)",
+    backgroundColor: "rgba(255, 255, 255, 0)",
     flex: 1,
     justifyContent: "flex-start",
     alignSelf: "flex-start",
   },
-try:{    
-    backgroundColor:"rgba(255, 255, 255, 0)",
-},
+  try: {
+    backgroundColor: "rgba(255, 255, 255, 0)",
+  },
 
   CenterImg: {
     width: "10",
