@@ -146,8 +146,8 @@ export default function DashBoard(props) {
       color="white"
       url={e.image}
       fill={true}
+      opacity="0.4"
       linkTo="LevelScreen"
-      // keyNum={key}
     />
   ));
 
