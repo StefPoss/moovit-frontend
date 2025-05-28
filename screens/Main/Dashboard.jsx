@@ -25,15 +25,14 @@ import StatiscticGraphic from "../../components/StatiscticGraphic";
 
 export default function DashBoard(props) {
   // LE DASHBOARD : affiche les infos user, le fallback photo profil, etc.
-  const user = useSelector((state) => state.user.value);
-  const activity = useSelector((state) => state.activity.value);
-  const dispatch = useDispatch();
-  console.log(activity);
-  const [nExercices, setNExercices] = useState(8);
-  const [dayTime, setDayTime] = useState("Indisponible");
-  const [meteo, setMeteo] = useState("Indisponible");
-  const [refreshing, setRefreshing] = React.useState(false);
-  const [animationKey, setAnimationKey] = useState(0);
+  const user = useSelector((state) => state.user.value)
+  const activity = useSelector((state) => state.activity.value)
+  const dispatch = useDispatch()
+  const [nExercices, setNExercices] = useState(5)
+  const [dayTime, setDayTime] = useState("Indisponible")
+  const [meteo, setMeteo] = useState("Indisponible")
+  const [refreshing, setRefreshing] = React.useState(false)
+  const [animationKey, setAnimationKey] = useState(0)
   let playTime = 35;
   let sessions = 5;
   let xp = 105;
@@ -96,22 +95,26 @@ export default function DashBoard(props) {
           currentSubLevelID: data.dataUser.currentSubLevelID,
           height: data.dataUser.height,
           weight: data.dataUser.weight,
-        };
-        dispatch(addUserToStore(newUser));
-        dispatch(addActivityToStore(data.dataLevel.subLevels));
-        let dailyTime = data.dataUser.form.dayTime;
-        if (dailyTime === "4 h/semaine") setDayTime("45 minutes");
-        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure");
-        else if (dailyTime === "15 min/jour") setDayTime("15 minutes");
-        else if (dailyTime === "30 min/jour") setDayTime("30 minutes");
-        setMeteo(data.dataMeteo);
-      });
-  };
+        }
+        dispatch(addUserToStore(newUser))
+        dispatch(addActivityToStore(data.dataLevel.subLevels))
+        let dailyTime = data.dataUser.form.dayTime
+        if (dailyTime === "4 h/semaine") setDayTime("45 minutes")
+        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure")
+        else if (dailyTime === "15 min/jour") setDayTime("15 minutes")
+        else if (dailyTime === "30 min/jour") setDayTime("30 minutes")
+        setMeteo(data.dataMeteo)
+        console.log("user est ", user);
+        
+      })
+  }
 
   // 1er appel : charge le dashboard au premier render
   useEffect(() => {
-    fetchUserData();
-  }, []);
+    fetchUserData()
+    //console.log("activity subLevels ",activity.length);
+    
+  }, [])
 
   // Fonction Pull-to-Refresh pour MAJ user/activities
   const onRefresh = React.useCallback(() => {
@@ -121,11 +124,14 @@ export default function DashBoard(props) {
       setAnimationKey(Date.now()); // force le refresh ProgressBar
     });
     // Log l’heure du refresh pour debug
-    const now = new Date();
-    const hh = now.getHours().toString().padStart(2, "0");
-    const mm = now.getMinutes().toString().padStart(2, "0");
-    const ss = now.getSeconds().toString().padStart(2, "0");
-  }, []);
+    const now = new Date()
+    const hh = now.getHours().toString().padStart(2, "0")
+    const mm = now.getMinutes().toString().padStart(2, "0")
+    const ss = now.getSeconds().toString().padStart(2, "0")
+    //console.log(`${hh}H${mm}mn${ss}s`)
+  }, [])
+
+  //console.log("user is", user)
 
   // Création du carousel de cartes d’activités > sécurisation du .map car
   // activity peut être undefined (par exemple avant d’être fetch du back ou de Redux
@@ -148,6 +154,15 @@ export default function DashBoard(props) {
   ));
 
   // Log l'URL utilisée pour la photo profil
+<<<<<<< HEAD
+=======
+  // console.log(
+  //   "Dashboard envoie photoUrl à PhotoProfil:",
+  //   user.photoUrl,
+  //   "| gender:",
+  //   user.gender
+  // )
+>>>>>>> f397a31fc76a327e098aa61f6f4b6bf76ab79f4d
 
   // Choix de l'URL à passer au composant PhotoProfil :
   // - Si l’API renvoie une photo → on prend ça
@@ -188,13 +203,13 @@ export default function DashBoard(props) {
                   Niveau actuel : {user.currentLevelID}.{user.currentSubLevelID}
                 </Text>
                 <Text style={styles.progressSteps}>
-                  {nExercices}/10 exercices complétés
+                  {user.currentSubLevelID}/{activity.length} exercices complétés
                 </Text>
               </View>
               <View style={styles.progressRightBlock}>
                 <ExercisesProgressBar
                   key={animationKey} // change la key dynamiquement sur refresh pour forcer le rerender et donc l'animation
-                  value={nExercices * 10}
+                  value={user.currentSubLevelID * activity.length/100}
                 ></ExercisesProgressBar>
               </View>
             </View>
@@ -215,7 +230,7 @@ export default function DashBoard(props) {
             <StatiscticGraphic
               playTime={playTime}
               sessions={sessions}
-              xp={xp}
+              xp={user.xp}
             ></StatiscticGraphic>
 
             <View style={styles.bottomButton}>

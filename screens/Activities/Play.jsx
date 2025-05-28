@@ -15,6 +15,21 @@ export default function Play({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const activity = useSelector((state) => state.activity.value);
   const dispatch = useDispatch();
+<<<<<<< HEAD
+=======
+
+ 
+  const user = useSelector((state) => state.user?.value?.username ?? "Invité");
+  const sportPlayed = useSelector(
+    (state) => state.user?.value?.sportPlayed ?? "Loading"
+  );
+  console.log(user);
+  const [levelStatus, setLevelStatus] = useState(0);
+  const [numLevel, setNumLevel] = useState(0);
+  const [bigLevel, setBigLevel] = useState(0);
+
+  const subLevels = activities?.levels?.[0]?.subLevels[numLevel] || [];
+>>>>>>> f397a31fc76a327e098aa61f6f4b6bf76ab79f4d
   const tabLevel = ["onPlay", "onDone", "onProgress"];
   const [levelStatus, setLevelStatus] = useState(0);
 

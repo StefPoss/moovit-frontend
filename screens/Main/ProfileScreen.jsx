@@ -10,13 +10,19 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeUserToStore } from "../../reducers/userSlice"
+import { removeActivityToStore } from "../../reducers/activitySlice"
+
 
 export default function ProfileScreen({}) {
   const user = useSelector((state) => state.user.value);
+  dispatch = useDispatch()
   console.log("profil -- ", user);
   const navigation = useNavigation();
   const handleLogout = () => {
+    dispatch(removeActivityToStore())
+    dispatch(removeUserToStore())
     navigation.navigate("Welcome");
   };
 
@@ -36,8 +42,8 @@ export default function ProfileScreen({}) {
       {/* Profile image */}
       <Image
         source={{
-          uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png",
-          //uri: user.photoUrl
+          //uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png",
+          uri: user.photoUrl
         }}
         style={styles.profileImage}
       />
@@ -98,7 +104,7 @@ export default function ProfileScreen({}) {
 
       <View style={styles.xpContainer}>
         <Text style={styles.xpTitle}>XP Gagnés</Text>
-        <Text style={styles.xpValue}>+180 XP</Text>
+        <Text style={styles.xpValue}>{user.xp} XP</Text>
       </View>
     </ScrollView>
   );
