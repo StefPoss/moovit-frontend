@@ -6,8 +6,9 @@ import {
   StyleSheet,
   RefreshControl,
 } from "react-native"
-import ActivityCard from "../../components/ActivityCard"
-import StaticCard from "../../components/StaticCard"
+// import ActivityCard from "../../components/ActivityCard"
+// import StaticCard from "../../components/StaticCard"
+import CardLevelClicable from "../../components/CardLevelClicable";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context"
 import { useSelector } from "react-redux"
 import { API_URL } from "@env"
@@ -17,22 +18,25 @@ import { addActivityToStore } from "../../reducers/activitySlice"
 import PhotoProfil from "../../components/PhotoProfil"
 import ExercisesProgressBar from "../../components/ExercisesProgressBar"
 import StatiscticGraphic from "../../components/StatiscticGraphic"
-import { Ionicons } from "@expo/vector-icons"
-import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
+// import { Ionicons } from "@expo/vector-icons"
+// import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
-export default function Dashboard(props) {
+//a importé dans le terminal !!!  npx expo install react-native-safe-area-context
+;
+
+export default function DashBoard(props) {
   // LE DASHBOARD : affiche les infos user, le fallback photo profil, etc.
-  const user = useSelector((state) => state.user.value)
-  const activity = useSelector((state) => state.activity.value)
-  const dispatch = useDispatch()
-  const [nExercices, setNExercices] = useState(8)
-  const [dayTime, setDayTime] = useState("Indisponible")
-  const [meteo, setMeteo] = useState("Indisponible")
-  const [refreshing, setRefreshing] = React.useState(false)
+  const user = useSelector((state) => state.user.value);
+  const activity = useSelector((state) => state.activity.value);
+  const dispatch = useDispatch();
+  const [nExercices, setNExercices] = useState(8);
+  const [dayTime, setDayTime] = useState("Indisponible");
+  const [meteo, setMeteo] = useState("Indisponible");
+   const [refreshing, setRefreshing] = React.useState(false)
   const [animationKey, setAnimationKey] = useState(0)
-  let playTime = 35
-  let sessions = 5
-  let xp = 105
+  let playTime = 35;
+  let sessions = 5;
+  let xp = 105;
   // console.log("activity is", activity)
   // console.log("rendering dashboard")
 
@@ -134,13 +138,18 @@ export default function Dashboard(props) {
   // Si c'est undefined ou un objet ou autre chose, on mappe sur un tableau vide, donc pas d’erreur
   // on a juste pas de cartes à afficher
   let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => (
-    <ActivityCard
+    <CardLevelClicable
       key={i}
       style={styles.activity}
       text={e.title}
       backgroundColor="#C5C4D9"
       color="yellow"
       url={e.image}
+      fill={true}
+      linkTo="LevelScreen"
+      // keyNum={key}
+
+      
     />
   ))
 
@@ -208,7 +217,7 @@ export default function Dashboard(props) {
               <ScrollView
                 contentContainerStyle={{ padding: 5 }}
                 horizontal={true} //permet le scroll horizontal
-                showHorizontalScrollIndicator={false} //affiche une barre de scroll
+                // showHorizontalScrollIndicator={false} //affiche une barre de scroll
                 style={styles.scrollView}
               >
                 {levelsCards}
@@ -271,7 +280,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   activity: {
-    padding: "5",
+    padding: 0,
   },
   bottomButton: {
     flexDirection: "row",
