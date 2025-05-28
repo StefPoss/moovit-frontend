@@ -143,7 +143,7 @@ export default function DashBoard(props) {
       style={styles.activity}
       text={e.title}
       backgroundColor="#C5C4D9"
-      color="yellow"
+      color="white"
       url={e.image}
       fill={true}
       linkTo="LevelScreen"
