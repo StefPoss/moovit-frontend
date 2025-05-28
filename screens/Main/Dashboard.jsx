@@ -19,8 +19,10 @@ import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
 import {FontAwesome5} from "@expo/vector-icons";
+import meteoIcons from "../../data/meteoIcons.json";
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
+
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
@@ -32,6 +34,7 @@ export default function DashBoard(props) {
   const [nExercices, setNExercices] = useState(5);
   const [dayTime, setDayTime] = useState("Indisponible");
   const [meteo, setMeteo] = useState("Indisponible");
+  const [meteoIcon, setMeteoIcon] = useState("?");
   const [refreshing, setRefreshing] = React.useState(false);
   const [animationKey, setAnimationKey] = useState(0);
   let playTime = 35;
@@ -52,6 +55,9 @@ export default function DashBoard(props) {
     // Par défaut, avatar générique 250x250
     return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png";
   };
+
+  console.log("ttt ",user.currentSubLevelID * 100/activity.length);
+  
 
   //useEffect pour charger les données au chargement de la page
   // useEffect(() => {
@@ -87,7 +93,7 @@ export default function DashBoard(props) {
           username: data.dataUser.username,
           name: data.dataUser.name,
           admin: false,
-          sportPlayed: data.dataUser.sportPlayed[0],
+          sportPlayed: data.dataUser.sportPlayed[0].title,
           titleLevel: data.dataLevel.title,
           xp: data.dataUser.xp,
           level: data.dataUser.level,
@@ -98,6 +104,8 @@ export default function DashBoard(props) {
           weight: data.dataUser.weight,
         };
         dispatch(addUserToStore(newUser));
+       
+        
         dispatch(addActivityToStore(data.dataLevel.subLevels));
         let dailyTime = data.dataUser.form.dayTime;
         if (dailyTime === "4 h/semaine") setDayTime("45 minutes");
@@ -105,6 +113,13 @@ export default function DashBoard(props) {
         else if (dailyTime === "15 min/jour") setDayTime("15 minutes");
         else if (dailyTime === "30 min/jour") setDayTime("30 minutes");
         setMeteo(data.dataMeteo);
+        let Icon = meteoIcons.find(entry=>entry.desc===data.dataMeteo)
+        setMeteoIcon(Icon.icon)
+        console.log("myIcon",Icon.icon);
+        
+
+        //console.log("--- ",meteoIcons);
+        
       });
   };
 
@@ -143,11 +158,11 @@ export default function DashBoard(props) {
       style={styles.activity}
       text={e.title}
       backgroundColor="#C5C4D9"
-      color="yellow"
+      color="white"
       url={e.image}
       fill={true}
+      opacity="0.4"
       linkTo="LevelScreen"
-      // keyNum={key}
     />
   ));
 
@@ -208,8 +223,8 @@ export default function DashBoard(props) {
                 ></ExercisesProgressBar>
               </View>
             </View>
+            <Text style={styles.text}>Entrainement du Jour</Text>
 
-            <Text style={styles.text}>Entraînement du jour</Text>
             {/* CAROUSEL D'ACTIIVTIES */}
             <View style={styles.topButton}>
               <ScrollView
@@ -249,12 +264,12 @@ export default function DashBoard(props) {
 
               {/* METEO */}
               <View style={styles.meteoContainer}>
-                <View style={styles.textbottomButtonContainer}>
-                  <Text style={[styles.profilText, { fontSize: 20 }]}>
-                    {meteo}
+                
+                  <Text style={[styles.profilText, { fontSize: 40 }, {textAlign:"center"}]}>
+                    {meteoIcon}
                   </Text>
-                  <Text style={styles.profilText}>{meteo}</Text>
-                </View>
+                  <Text style={[styles.profilText, { fontSize: 15 }]}>{meteo}</Text>
+                
               </View>
             </View>
           </View>
@@ -377,5 +392,7 @@ const styles = StyleSheet.create({
     height: 150, //haut du boutton
     borderRadius: 15, //arrondi des angles
     margin: 5,
+    paddingLeft:5,
+    paddingRight:2,
   },
 });

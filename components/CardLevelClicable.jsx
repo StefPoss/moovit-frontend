@@ -1,37 +1,40 @@
 import React from "react";
 import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { onClick } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 
 //creation d'une carte d'activité clicable
-function CardLevelClicable({
-  text = "", //text
-  num = "", //numero de la carte
-  description = "", //description s'affiche sous le txt
-  color = "black", //color de la font
-  fontSize = 13, //fontseize pour le titre
-  fontWeight = "700", //la fontWeight de toute les lettre
-  width = "150", //long du boutton
-  height = "150", //haut du boutton
-  backgroundColor = "#FCEACE", //couleur du fond de la carte
-  url = "https://reactnative.dev/img/tiny_logo.png", //petite img sur le coté
-  linkTo = "/", //nom de la page ou rediriger
-  fill = false, //image qui fait tout le composant
-  
-},props) {
-const navigation = useNavigation();
-
+function CardLevelClicable(
+  {
+    text = "", //text
+    num = "", //numero de la carte
+    description = "", //description s'affiche sous le txt
+    color = "black", //color de la font
+    fontSize = 13, //fontseize pour le titre
+    fontWeight = "700", //la fontWeight de toute les lettre
+    width = "150", //long du boutton
+    height = "150", //haut du boutton
+    backgroundColor = "#FCEACE", //couleur du fond de la carte
+    url = "https://reactnative.dev/img/tiny_logo.png", //petite img sur le coté
+    linkTo = "TabNavigator", //nom de la page ou rediriger
+    opacity="1" ,
+    fill = false, //image qui fait tout le composant
+  },
+  props
+) {
+  const navigation = useNavigation();
 
   // const idf =()=>{
   //   props.keyNum(props.key);
   // }
   return (
     <TouchableOpacity //propriete qui permet de clicker comme button et onpress
-      onPress={() => {navigation.navigate(linkTo)}} //lien executable au click
+      onPress={() => {
+        navigation.navigate(linkTo);
+      }} //lien executable au click
       style={[styles.button, { width, height, backgroundColor }]} //modif du css via les props
     >
       <View
-        style={styles.container} // contenaier general
+        style={[styles.container,{opacity} ]} // contenaier general
       >
         <View
           style={styles.lines} //container uniquement des lignes txt+description permet de gardé l'img dans le cadre du container
@@ -49,7 +52,7 @@ const navigation = useNavigation();
           </Text>
         </View>
         <Image
-          style={fill ? [styles.tinyLogo2, {}] : [styles.tinyLogo, {}]}
+          style={fill ? [styles.tinyLogo2, {}] : [styles.tinyLogo, {}]} //ternaire qui permet de changé de still si fill dans les props est false or true
           source={{ uri: url }} //petit img d'illustration du coté
         />
       </View>
@@ -59,15 +62,15 @@ const navigation = useNavigation();
 export default CardLevelClicable;
 
 const styles = StyleSheet.create({
-  button: {
-    width: "150", //long du boutton
-    height: "150", //haut du boutton
+  button: { //c'est le composant en lui meme
+    width: "150", //long du composant
+    height: "150", //haut du composant
     borderRadius: 15, //arrondi des angles
-    backgroundColor: "#FCEACE", //gris du figma
-    margin: 5,
+    backgroundColor: "#FCEACE", //couleur du bg du composant
+    margin: 5, //
     marginRight: 5,
   },
-  container: {
+  container: { //zone d'affichage interne au composant 
     marginTop: "10",
     flex: 1,
     flexDirection: "row",
@@ -75,14 +78,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgba(1, 1, 1, 0)",
     minWidth: "99%",
+    opacity:"0.4"
   },
-  buttonText: {
+
+
+  buttonText: { // titre 
     marginLeft: 15,
     fontSize: 13,
     fontWeight: "700",
     color: "black",
   },
-  buttonDescription: {
+  buttonDescription: { //description sous le titre
     flex: 0,
     flexWrap: "wrap",
     fontSize: 10,
@@ -91,10 +97,10 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "black",
   },
-  lines: {
+  lines: { // box qui contient le titre et la description
     width: "60%",
   },
-  tinyLogo: {
+  tinyLogo: { //petit logo a drt
     borderRadius: 15,
     alignSelf: "flex-end",
     width: "30%",
@@ -102,7 +108,7 @@ const styles = StyleSheet.create({
     margin: 10,
     marginRight: 15,
   },
-  tinyLogo2: {
+  tinyLogo2: { //etatlement du logo comme une img de bg sur toute la taille du composant
     flex: 1,
     zIndex: -99999,
     borderRadius: 15,
