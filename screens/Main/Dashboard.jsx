@@ -89,7 +89,7 @@ export default function DashBoard(props) {
           username: data.dataUser.username,
           name: data.dataUser.name,
           admin: false,
-          sportPlayed: data.dataUser.sportPlayed[0],
+          sportPlayed: data.dataUser.sportPlayed[0].title,
           titleLevel: data.dataLevel.title,
           xp: data.dataUser.xp,
           level: data.dataUser.level,
@@ -100,6 +100,8 @@ export default function DashBoard(props) {
           weight: data.dataUser.weight,
         };
         dispatch(addUserToStore(newUser));
+        console.log("isi ",newUser.sportPlayed);
+        
         dispatch(addActivityToStore(data.dataLevel.subLevels));
         let dailyTime = data.dataUser.form.dayTime;
         if (dailyTime === "4 h/semaine") setDayTime("45 minutes");
