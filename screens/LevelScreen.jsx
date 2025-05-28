@@ -8,27 +8,44 @@ import {
 } from "react-native";
 // import ActivityCard from "../../components/ActivityCard";
 import CardLevelClicable from "../components/CardLevelClicable";
+import { useSelector } from "react-redux";
 
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { useState } from "react";
+import PropTypes from "prop-types";
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function LevelScreen(props) {
-  //   FakeData=[{_id:objectid, title:string, description:string, image:'https://reactnative.dev/img/tiny_logo.png', level:sousdoc}]
-  // const cards=FakeData.map(Data)=>{
-  //   return <CardLevelClicable
-  //      text = Data.title
-  //      description = Data.description
-  //      color="black"
-  //      color="black"
-  //      width="370" //long du boutton
-  //      height="140" //haut du boutton
-  //      backgroundColor="#FCEACE" //gris du figma
-  //      url = Data.image
-  //      fontWeight="700"
-  //             />}
+  const activity = useSelector((state) => state.activity.value);
+
+  let levelsCards = activity?.map((e, i) => (
+    <CardLevelClicable
+      key={i + 1}
+      // num = {i}
+      width="368"
+      style={styles.activity}
+      text={e.title}
+      description={e.description}
+      fontSize={12}
+      backgroundColor="#C5C4D9"
+      color="black"
+      url={e.image}
+      fill={false}
+      linkTo="NewLevelScreen"
+      // keyNum={keyNum}
+    />
+  ));
+
+  const [lastLv, setLastLv] = useState(null);
+  // const keyNum=(key)=>{
+  //   console.log(key)
+  //   setLastLv(key)
+  // }
+  // console.log(props);
+
   const topImg = "https://reactnative.dev/img/tiny_logo.png";
-  const niv = "1";
+  const niv = lastLv;
   const bgImage =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   return (
@@ -44,19 +61,20 @@ export default function LevelScreen(props) {
             style={styles.image}
           >
             <ScrollView>
-              {/* {CardLevelClicable} */}
-
-              <CardLevelClicable
-                style={styles.try}
-                text="titre"
-                description="description..."
-                color="black"
-                width="370" //long du boutton
-                height="140" //haut du boutton
-                backgroundColor="#FCEACE" //gris du figma
-                url="https://reactnative.dev/img/tiny_logo.png"
-                fontWeight="700"
-              />
+              {levelsCards}
+              {/* <CardLevelClicable
+            style={styles.try}
+            text="titre"
+            description="description..."
+            color="black"
+            width="370" //long du boutton
+            height="140" //haut du boutton
+             backgroundColor="#FCEACE" //gris du figma
+            url="https://reactnative.dev/img/tiny_logo.png"
+            fontWeight="700"
+            linkTo="NewLevelScreen"
+            
+          /> */}
             </ScrollView>
           </ImageBackground>
         </View>
