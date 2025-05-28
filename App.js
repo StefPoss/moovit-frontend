@@ -123,7 +123,9 @@ export default function App() {
     ManropeSemiBold: require("./assets/fonts/Manrope-SemiBold.ttf"),
     ManropeBold: require("./assets/fonts/Manrope-Bold.ttf"),
     ManropeExtraBold: require("./assets/fonts/Manrope-ExtraBold.ttf"),
-    MaterialCommunityIcons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"), // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
+    MaterialCommunityIcons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"),
+    "Questrial-Regular": require("./assets/fonts/Questrial-Regular.ttf"), // police à télécharger
+    // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
   });
 
   if (!fontsLoaded) return null;

@@ -23,6 +23,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkBody } from "../../modules/checkBody";
 import { API_URL } from "@env";
 
+// télécharger la police questrial
+
 export default function OnBoarding({ navigation }) {
   const [numQuestion, setNumQuestion] = useState(0);
   const [infos, setInfos] = useState({});
@@ -133,7 +135,7 @@ export default function OnBoarding({ navigation }) {
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : undefined}
-        keyboardVerticalOffset={60}
+        keyboardVerticalOffset={80}
       >
         <View>
           <View style={styles.countForm}>
@@ -177,6 +179,7 @@ const styles = StyleSheet.create({
     color: "#858585",
     textAlign: "center",
     flex: 1,
+    width: "100%",
   },
 
   testbtn: {
@@ -202,8 +205,8 @@ const styles = StyleSheet.create({
   },
 
   fixedButton: {
-    paddingTop: 40,
+    //paddingTop: 60,
     paddingHorizontal: 20,
-    paddingBottom: 30,
+    paddingBottom: 50,
   },
 });
