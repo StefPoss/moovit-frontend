@@ -31,6 +31,8 @@ export default function Play({ navigation }) {
       setLevelStatus(levelStatus - 1);
     }
   };
+
+  console.log(user);
   const totalSubLevels = activity.length;
   let currentLevel = [user.currentLevelID, user.currentSubLevelID];
   let nextLevel = [];
@@ -70,7 +72,7 @@ export default function Play({ navigation }) {
         timing={timing}
         xp={levelxp}
         onPress={moinstate}
-        sport={"Padel"}
+        sport={user.sportPlayed}
       />
     );
   } else if (tabLevel[levelStatus] === "onProgress") {
@@ -83,7 +85,7 @@ export default function Play({ navigation }) {
         pourcent={pourcent}
         onPress={moinstate}
         token={user.token}
-        sport={"Padel"}
+        sport={user.sportPlayed}
         xpUpdated={levelxp + user.xp}
         updatelvl={nextLevel}
         renit={() => setLevelStatus(0)}

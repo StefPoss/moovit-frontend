@@ -86,7 +86,7 @@ export default function DashBoard(props) {
           username: data.dataUser.username,
           name: data.dataUser.name,
           admin: false,
-          sportPlayed: data.dataUser.sportPlayed[0],
+          sportPlayed: data.dataUser.sportPlayed[0].title,
           titleLevel: data.dataLevel.title,
           xp: data.dataUser.xp,
           level: data.dataUser.level,
