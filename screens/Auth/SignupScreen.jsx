@@ -26,7 +26,9 @@ export default function SignupScreen({ navigation }) {
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  console.log(API_URL);
+  console.log(email);
+  console.log(password);
+  
 
   // si l'email est invalid afficher le message d'erreur
 

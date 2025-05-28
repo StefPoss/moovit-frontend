@@ -19,19 +19,7 @@ import { addUserToStore } from "../../reducers/userSlice";
 export default function Play({ navigation }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(
-      addUserToStore({
-        token: "123abc",
-        photoUrl: "https://example.com/photo.jpg",
-        username: "Sami",
-        admin: true,
-        sportPlayed: "Padel",
-        xp: "1000",
-        level: "3",
-      })
-    );
-  }, []);
+ 
   const user = useSelector((state) => state.user?.value?.username ?? "Invité");
   const sportPlayed = useSelector(
     (state) => state.user?.value?.sportPlayed ?? "Loading"

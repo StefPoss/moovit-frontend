@@ -31,7 +31,7 @@ export default function DashBoard(props) {
   const User = useSelector((state) => state.user.value)
   const activity = useSelector((state) => state.activity.value)
   const dispatch = useDispatch()
-  const [nExercices, setNExercices] = useState(8)
+  const [nExercices, setNExercices] = useState(5)
   const [dayTime, setDayTime] = useState("Indisponible")
   const [meteo, setMeteo] = useState("Indisponible")
   let playTime = 35
@@ -73,7 +73,8 @@ export default function DashBoard(props) {
             admin: false,
             sportPlayed: data.dataUser.sportPlayed[0],
             xp: data.dataUser.xp,
-            level: data.dataUser.level,
+            currentLevelID: data.dataUser.currentLevelID,
+            currentSubLevelID: data.dataUser.currentSubLevelID,
             height: data.dataUser.height,
             weight: data.dataUser.weight,
 
@@ -81,15 +82,9 @@ export default function DashBoard(props) {
           dispatch(addUserToStore(newUser));
           dispatch(addActivityToStore(data.dataLevel.subLevels));
           // console.log("activity is", activity)
-<<<<<<< HEAD
-          //console.log("data is", data.dataLevel.subLevels);
-           console.log("aaa ",data)
-          let dailyTime = data.dataUser.form.dayTime;
-=======
           //console.log("this is ", User);
           // console.log(data)
           let dailyTime = data.dataUser.form.dayTime
->>>>>>> 2f78989ff83d85761dc7493367624e01ff55e143
           if (dailyTime === "4 h/semaine") {
             setDayTime("45 minutes")
           } else if (dailyTime === "8 h/semaine ou plus") {
