@@ -142,7 +142,7 @@ export default function DashBoard(props) {
       style={styles.activity}
       text={e.title}
       backgroundColor="#C5C4D9"
-      color="yellow"
+      color="white"
       url={e.image}
       fill={true}
       linkTo="LevelScreen"
@@ -208,7 +208,7 @@ export default function DashBoard(props) {
               </View>
             </View>
 
-            <Text style={styles.text}>Training Now</Text>
+            <Text style={styles.text}>Entrainement du Jour</Text>
             {/* CAROUSEL D'ACTIIVTIES */}
             <View style={styles.topButton}>
               <ScrollView
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
   text: {
     color: "grey",
     fontSize: 20,
-    marginLeft: -170,
+    marginLeft: -100,
   },
   topButton: {
     flex: 0,
