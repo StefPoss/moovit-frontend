@@ -102,12 +102,16 @@ export default function Dashboard(props) {
         else if (dailyTime === "15 min/jour") setDayTime("15 minutes")
         else if (dailyTime === "30 min/jour") setDayTime("30 minutes")
         setMeteo(data.dataMeteo)
+        console.log("user est ", user);
+        
       })
   }
 
   // 1er appel : charge le dashboard au premier render
   useEffect(() => {
     fetchUserData()
+    //console.log("activity subLevels ",activity.length);
+    
   }, [])
 
   // Fonction Pull-to-Refresh pour MAJ user/activities
@@ -122,10 +126,10 @@ export default function Dashboard(props) {
     const hh = now.getHours().toString().padStart(2, "0")
     const mm = now.getMinutes().toString().padStart(2, "0")
     const ss = now.getSeconds().toString().padStart(2, "0")
-    console.log(`${hh}H${mm}mn${ss}s`)
+    //console.log(`${hh}H${mm}mn${ss}s`)
   }, [])
 
-  console.log("user is", user)
+  //console.log("user is", user)
 
   // Création du carousel de cartes d’activités > sécurisation du .map car
   // activity peut être undefined (par exemple avant d’être fetch du back ou de Redux
@@ -145,12 +149,12 @@ export default function Dashboard(props) {
   ))
 
   // Log l'URL utilisée pour la photo profil
-  console.log(
-    "Dashboard envoie photoUrl à PhotoProfil:",
-    user.photoUrl,
-    "| gender:",
-    user.gender
-  )
+  // console.log(
+  //   "Dashboard envoie photoUrl à PhotoProfil:",
+  //   user.photoUrl,
+  //   "| gender:",
+  //   user.gender
+  // )
 
   // Choix de l'URL à passer au composant PhotoProfil :
   // - Si l’API renvoie une photo → on prend ça
@@ -191,13 +195,13 @@ export default function Dashboard(props) {
                   Niveau actuel : {user.currentLevelID}.{user.currentSubLevelID}
                 </Text>
                 <Text style={styles.progressSteps}>
-                  {nExercices}/10 exercices complétés
+                  {user.currentSubLevelID}/{activity.length} exercices complétés
                 </Text>
               </View>
               <View style={styles.progressRightBlock}>
                 <ExercisesProgressBar
                   key={animationKey} // change la key dynamiquement sur refresh pour forcer le rerender et donc l'animation
-                  value={nExercices * 10}
+                  value={user.currentSubLevelID * activity.length/100}
                 ></ExercisesProgressBar>
               </View>
             </View>
@@ -218,7 +222,7 @@ export default function Dashboard(props) {
             <StatiscticGraphic
               playTime={playTime}
               sessions={sessions}
-              xp={xp}
+              xp={user.xp}
             ></StatiscticGraphic>
 
             <View style={styles.bottomButton}>
