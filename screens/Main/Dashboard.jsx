@@ -55,6 +55,9 @@ export default function DashBoard(props) {
     return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png"
   }
 
+  console.log("ttt ",user.currentSubLevelID * 100/activity.length);
+  
+
   //useEffect pour charger les données au chargement de la page
   // useEffect(() => {
   //requete vers le back
