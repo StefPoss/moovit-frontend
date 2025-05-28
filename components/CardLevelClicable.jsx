@@ -18,6 +18,8 @@ function CardLevelClicable(
     linkTo = "TabNavigator", //nom de la page ou rediriger
     opacity="1" ,
     fill = false, //image qui fait tout le composant
+    subLevelSent={}
+
   },
   props
 ) {
@@ -29,7 +31,7 @@ function CardLevelClicable(
   return (
     <TouchableOpacity //propriete qui permet de clicker comme button et onpress
       onPress={() => {
-        navigation.navigate(linkTo);
+        navigation.navigate(linkTo, {subLevel:subLevelSent});
       }} //lien executable au click
       style={[styles.button, { width, height, backgroundColor }]} //modif du css via les props
     >
