@@ -54,7 +54,7 @@ export default function SignupScreen({ navigation }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ password: password, email: email }),
+        body: JSON.stringify({ password: password, email: email, }),
       })
         .then((response) => {
           if (!response.ok) {
