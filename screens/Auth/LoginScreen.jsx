@@ -31,6 +31,8 @@ export default function LoginScreen({ navigation }) {
     const requiredFields = ["email", "password"];
     const body = { email, password };
 
+    console.log(API_URL);
+
     if (!checkBody(body, requiredFields)) {
       setEmailError("Tous les champs sont requis");
       return;

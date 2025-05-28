@@ -9,23 +9,59 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import ProgressStep from "../../../components/ProgressStep";
+import { updateUser } from "../../../reducers/userSlice";
+import { addActivityToStore } from "../../../reducers/activitySlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { API_URL } from "@env";
 
 export default function OnReward({
-  navigation,
   xp,
   name,
   medalUri,
   levelplus,
   levelmoins,
   pourcent,
-  onPress,
+  sport,
+  token,
+  updatelvl,
+  xpUpdated,
+  renit,
 }) {
+  const dispatch = useDispatch();
+  const subLevelUpdated = updatelvl[1];
+  const levelUpdated = updatelvl[0];
+  useEffect(() => {
+    return () => {
+      fetch(`${API_URL}/api/users/levelupdate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: token,
+          sport: sport,
+          xp: xpUpdated,
+          subLevel: subLevelUpdated,
+          level: levelUpdated,
+        }),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data);
+          if (data.result) {
+            dispatch(
+              updateUser({
+                currentLevelID: levelUpdated,
+                currentSubLevelID: subLevelUpdated,
+                xp: xpUpdated,
+              })
+            );
+            dispatch(addActivityToStore(data.dataActivity.subLevels));
+          }
+        });
+    };
+  }, []);
   return (
     <SafeAreaView style={styles.safe}>
-      <TouchableOpacity style={styles.backBtn} onPress={() => onPress()}>
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
-
       <View style={styles.content}>
         <Text style={styles.title}>Ton avancement !</Text>
         <Text style={styles.subText}>

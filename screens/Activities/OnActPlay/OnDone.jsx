@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,8 @@ import {
   Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
+import { API_URL } from "@env";
 
 export default function OnDone(props) {
   const [rating, setRating] = useState(0);
@@ -18,17 +20,8 @@ export default function OnDone(props) {
     calories: "154 kcal",
   };
 
-  const userName = "Username";
-
   return (
     <SafeAreaView style={styles.safe}>
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => props.onPress()}
-      >
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
-
       <View style={styles.container}>
         <Text style={styles.emoji}>🎉</Text>
 
