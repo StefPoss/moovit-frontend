@@ -6,8 +6,9 @@ import {
   StyleSheet,
   RefreshControl,
 } from "react-native"
-import ActivityCard from "../../components/ActivityCard"
-import StaticCard from "../../components/StaticCard"
+// import ActivityCard from "../../components/ActivityCard"
+// import StaticCard from "../../components/StaticCard"
+import CardLevelClicable from "../../components/CardLevelClicable";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context"
 import { useSelector } from "react-redux"
 import { API_URL } from "@env"
@@ -17,22 +18,25 @@ import { addActivityToStore } from "../../reducers/activitySlice"
 import PhotoProfil from "../../components/PhotoProfil"
 import ExercisesProgressBar from "../../components/ExercisesProgressBar"
 import StatiscticGraphic from "../../components/StatiscticGraphic"
-import { Ionicons } from "@expo/vector-icons"
-import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
+// import { Ionicons } from "@expo/vector-icons"
+// import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
-export default function Dashboard(props) {
+//a importé dans le terminal !!!  npx expo install react-native-safe-area-context
+;
+
+export default function DashBoard(props) {
   // LE DASHBOARD : affiche les infos user, le fallback photo profil, etc.
   const user = useSelector((state) => state.user.value)
   const activity = useSelector((state) => state.activity.value)
   const dispatch = useDispatch()
-  const [nExercices, setNExercices] = useState(8)
+  const [nExercices, setNExercices] = useState(5)
   const [dayTime, setDayTime] = useState("Indisponible")
   const [meteo, setMeteo] = useState("Indisponible")
   const [refreshing, setRefreshing] = React.useState(false)
   const [animationKey, setAnimationKey] = useState(0)
-  let playTime = 35
-  let sessions = 5
-  let xp = 105
+  let playTime = 35;
+  let sessions = 5;
+  let xp = 105;
   // console.log("activity is", activity)
   // console.log("rendering dashboard")
 
@@ -102,12 +106,16 @@ export default function Dashboard(props) {
         else if (dailyTime === "15 min/jour") setDayTime("15 minutes")
         else if (dailyTime === "30 min/jour") setDayTime("30 minutes")
         setMeteo(data.dataMeteo)
+        console.log("user est ", user);
+        
       })
   }
 
   // 1er appel : charge le dashboard au premier render
   useEffect(() => {
     fetchUserData()
+    //console.log("activity subLevels ",activity.length);
+    
   }, [])
 
   // Fonction Pull-to-Refresh pour MAJ user/activities
@@ -122,10 +130,10 @@ export default function Dashboard(props) {
     const hh = now.getHours().toString().padStart(2, "0")
     const mm = now.getMinutes().toString().padStart(2, "0")
     const ss = now.getSeconds().toString().padStart(2, "0")
-    console.log(`${hh}H${mm}mn${ss}s`)
+    //console.log(`${hh}H${mm}mn${ss}s`)
   }, [])
 
-  console.log("user is", user)
+  //console.log("user is", user)
 
   // Création du carousel de cartes d’activités > sécurisation du .map car
   // activity peut être undefined (par exemple avant d’être fetch du back ou de Redux
@@ -134,23 +142,28 @@ export default function Dashboard(props) {
   // Si c'est undefined ou un objet ou autre chose, on mappe sur un tableau vide, donc pas d’erreur
   // on a juste pas de cartes à afficher
   let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => (
-    <ActivityCard
+    <CardLevelClicable
       key={i}
       style={styles.activity}
       text={e.title}
       backgroundColor="#C5C4D9"
       color="yellow"
       url={e.image}
+      fill={true}
+      linkTo="LevelScreen"
+      // keyNum={key}
+
+      
     />
   ))
 
   // Log l'URL utilisée pour la photo profil
-  console.log(
-    "Dashboard envoie photoUrl à PhotoProfil:",
-    user.photoUrl,
-    "| gender:",
-    user.gender
-  )
+  // console.log(
+  //   "Dashboard envoie photoUrl à PhotoProfil:",
+  //   user.photoUrl,
+  //   "| gender:",
+  //   user.gender
+  // )
 
   // Choix de l'URL à passer au composant PhotoProfil :
   // - Si l’API renvoie une photo → on prend ça
@@ -191,13 +204,13 @@ export default function Dashboard(props) {
                   Niveau actuel : {user.currentLevelID}.{user.currentSubLevelID}
                 </Text>
                 <Text style={styles.progressSteps}>
-                  {nExercices}/10 exercices complétés
+                  {user.currentSubLevelID}/{activity.length} exercices complétés
                 </Text>
               </View>
               <View style={styles.progressRightBlock}>
                 <ExercisesProgressBar
                   key={animationKey} // change la key dynamiquement sur refresh pour forcer le rerender et donc l'animation
-                  value={nExercices * 10}
+                  value={user.currentSubLevelID * activity.length/100}
                 ></ExercisesProgressBar>
               </View>
             </View>
@@ -208,7 +221,7 @@ export default function Dashboard(props) {
               <ScrollView
                 contentContainerStyle={{ padding: 5 }}
                 horizontal={true} //permet le scroll horizontal
-                showHorizontalScrollIndicator={false} //affiche une barre de scroll
+                // showHorizontalScrollIndicator={false} //affiche une barre de scroll
                 style={styles.scrollView}
               >
                 {levelsCards}
@@ -218,7 +231,7 @@ export default function Dashboard(props) {
             <StatiscticGraphic
               playTime={playTime}
               sessions={sessions}
-              xp={xp}
+              xp={user.xp}
             ></StatiscticGraphic>
 
             <View style={styles.bottomButton}>
@@ -271,7 +284,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   activity: {
-    padding: "5",
+    padding: 0,
   },
   bottomButton: {
     flexDirection: "row",

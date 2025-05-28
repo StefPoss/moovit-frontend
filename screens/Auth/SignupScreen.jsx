@@ -26,7 +26,9 @@ export default function SignupScreen({ navigation }) {
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  console.log(API_URL);
+  console.log(email);
+  console.log(password);
+  
 
   // si l'email est invalid afficher le message d'erreur
 
@@ -52,7 +54,7 @@ export default function SignupScreen({ navigation }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ password: password, email: email }),
+        body: JSON.stringify({ password: password, email: email, }),
       })
         .then((response) => {
           if (!response.ok) {
