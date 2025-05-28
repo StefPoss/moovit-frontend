@@ -36,7 +36,7 @@ export default function Dashboard(props) {
   // console.log("activity is", activity)
   // console.log("rendering dashboard")
 
-  // fonction qui génère une url défault 250x250 en fonction du genre
+  // Fonction qui génère une url default 250x250 en fonction du genre
   const getPhotoUrl = (gender) => {
     // Si masculin, profil homme en 250x250
     if (gender === "Masculin")
@@ -57,63 +57,55 @@ export default function Dashboard(props) {
   // console.log("User is", User)
   // Récupère user + activities depuis l’API
   // Ici, gestion du fallback AVANT le dispatch ! (store toujours clean)
+  // Appel l'API, gère la photo profil/fallback AVANT le dispatch, pour que le store soit toujours clean
   const fetchUserData = () => {
     return fetch(`${API_URL}/api/users/dashboard`, {
-      method: "POST", // méthode HTTP POST pour envoyer les données
-      headers: { "Content-Type": "application/json" }, // type de contenu envoyé en JSON
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        token: user.token, // token stocké dans le redux
+        token: user.token,
       }),
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log("data is", data)
+        let photoUrl = data.dataUser.photoUrl
 
-        if (data.result) {
-          // On récupère l'url de la photo de profil (DB ou défault)
-          let photoUrl =
-            data.dataUser.photoUrl && data.dataUser.photoUrl !== ""
-              ? data.dataUser.photoUrl
-              : getPhotoUrl(data.dataUser.gender)
-
-          let newUser = {
-            token: data.dataUser.token,
-            photoUrl,
-            username: data.dataUser.username,
-            name: data.dataUser.name,
-            admin: false,
-            sportPlayed: data.dataUser.sportPlayed[0],
-            xp: data.dataUser.xp,
-            level: data.dataUser.level,
-            gender: data.dataUser.gender || "",
-            currentLevelID: data.dataUser.currentLevelID,
-            currentSubLevelID: data.dataUser.currentSubLevelID,
-            height: data.dataUser.height,
-            weight: data.dataUser.weight,
-          }
-
-          dispatch(addUserToStore(newUser))
-          dispatch(addActivityToStore(data.dataLevel.subLevels))
-          // console.log("activity is", activity)
-          //console.log("this is ", User);
-          // console.log(data)
-          let dailyTime = data.dataUser.form.dayTime
-          if (dailyTime === "4 h/semaine") {
-            setDayTime("45 minutes")
-          } else if (dailyTime === "8 h/semaine ou plus") {
-            setDayTime("1 heure")
-          } else if (dailyTime === "15 min/jour") {
-            setDayTime("15 minutes")
-          } else if (dailyTime === "30 min/jour") {
-            setDayTime("30 minutes")
-          }
-
-          setMeteo(data.dataMeteo)
+        // Si la photo de la DB contient "default-profile", on force le fallback redimensionné selon le genre
+        if (
+          photoUrl &&
+          photoUrl.includes("default-profile") &&
+          !photoUrl.includes("w_250")
+        ) {
+          photoUrl = getPhotoUrl(data.dataUser.gender)
         }
+
+        let newUser = {
+          token: data.dataUser.token,
+          photoUrl,
+          username: data.dataUser.username,
+          name: data.dataUser.name,
+          admin: false,
+          sportPlayed: data.dataUser.sportPlayed[0],
+          xp: data.dataUser.xp,
+          level: data.dataUser.level,
+          gender: data.dataUser.gender || "",
+          currentLevelID: data.dataUser.currentLevelID,
+          currentSubLevelID: data.dataUser.currentSubLevelID,
+          height: data.dataUser.height,
+          weight: data.dataUser.weight,
+        }
+        dispatch(addUserToStore(newUser))
+        dispatch(addActivityToStore(data.dataLevel.subLevels))
+        let dailyTime = data.dataUser.form.dayTime
+        if (dailyTime === "4 h/semaine") setDayTime("45 minutes")
+        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure")
+        else if (dailyTime === "15 min/jour") setDayTime("15 minutes")
+        else if (dailyTime === "30 min/jour") setDayTime("30 minutes")
+        setMeteo(data.dataMeteo)
       })
   }
 
-  // 1er Appel : charge le dashboard au premier render
+  // 1er appel : charge le dashboard au premier render
   useEffect(() => {
     fetchUserData()
   }, [])
@@ -122,11 +114,10 @@ export default function Dashboard(props) {
   const onRefresh = React.useCallback(() => {
     setRefreshing(true)
     fetchUserData().finally(() => {
-      setRefreshing(false) // <- ICI : il n'y a qu'une seule parenthèse fermante
-      setAnimationKey(Date.now()) // assure un key unique à chaque refresh
+      setRefreshing(false)
+      setAnimationKey(Date.now()) // force le refresh ProgressBar
     })
-    // Log l’heure du refresh, format hhH mmmn ss
-    // Permet de s'assurer que le pull-to-refresh fonctionne
+    // Log l’heure du refresh pour debug
     const now = new Date()
     const hh = now.getHours().toString().padStart(2, "0")
     const mm = now.getMinutes().toString().padStart(2, "0")
@@ -153,6 +144,14 @@ export default function Dashboard(props) {
     />
   ))
 
+  // Log l'URL utilisée pour la photo profil
+  console.log(
+    "Dashboard envoie photoUrl à PhotoProfil:",
+    user.photoUrl,
+    "| gender:",
+    user.gender
+  )
+
   // Choix de l'URL à passer au composant PhotoProfil :
   // - Si l’API renvoie une photo → on prend ça
   // - Sinon → on génère la bonne URL via getPhotoUrl(user.gender)
@@ -174,7 +173,7 @@ export default function Dashboard(props) {
           <View style={styles.container}>
             {/* PROFILE CARD */}
             <View style={styles.profilContainer}>
-              <PhotoProfil photoUrl={profileUrl} />
+              <PhotoProfil photoUrl={user.photoUrl} />
               <View style={styles.textProfilContainer}>
                 <Text style={[styles.profilText, { fontSize: 20 }]}>
                   Bonjour {user.username}

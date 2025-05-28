@@ -7,7 +7,7 @@ function PhotoProfil(props) {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: props.photoUrl }} // On passe l’URL reçue en props, quelle que la source (API ou défaut)
+        source={{ uri: props.photoUrl }}
         style={styles.image}
         // On logue si jamais l’image charge mal ou l’URL est pétée
         onError={(e) => console.log("Erreur chargement image :", e.nativeEvent)}
@@ -22,8 +22,6 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    // borderWidth: 2,
-    //borderColor: "#ccc",
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
