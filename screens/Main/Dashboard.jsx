@@ -36,6 +36,7 @@ export default function Dashboard(props) {
   // console.log("activity is", activity)
   // console.log("rendering dashboard")
 
+  // fonction qui génère une url défault 250x250 en fonction du genre
   const getPhotoUrl = (gender) => {
     // Si masculin, profil homme en 250x250
     if (gender === "Masculin")
@@ -70,17 +71,10 @@ export default function Dashboard(props) {
 
         if (data.result) {
           // On récupère l'url de la photo de profil (DB ou défault)
-          let photoUrl
-          if (
-            !data.dataUser.photoUrl ||
-            data.dataUser.photoUrl.includes("default-profile_cltqmm.png")
-          ) {
-            // Si vide ou neutre, on force une URL custom selon le genre
-            photoUrl = getPhotoUrl(data.dataUser.gender)
-          } else {
-            // Sinon, on garde ce que le back a renvoyé (photo custom)
-            photoUrl = data.dataUser.photoUrl
-          }
+          let photoUrl =
+            data.dataUser.photoUrl && data.dataUser.photoUrl !== ""
+              ? data.dataUser.photoUrl
+              : getPhotoUrl(data.dataUser.gender)
 
           let newUser = {
             token: data.dataUser.token,
@@ -91,11 +85,11 @@ export default function Dashboard(props) {
             sportPlayed: data.dataUser.sportPlayed[0],
             xp: data.dataUser.xp,
             level: data.dataUser.level,
+            gender: data.dataUser.gender || "",
             currentLevelID: data.dataUser.currentLevelID,
             currentSubLevelID: data.dataUser.currentSubLevelID,
             height: data.dataUser.height,
             weight: data.dataUser.weight,
-            gender: data.dataUser.gender || "", // Ajout du genre, si vide, on met une chaîne vide
           }
 
           dispatch(addUserToStore(newUser))
@@ -140,13 +134,7 @@ export default function Dashboard(props) {
     console.log(`${hh}H${mm}mn${ss}s`)
   }, [])
 
-  // console.log("user is", user)
-  console.log(
-    "Dashboard envoie photoUrl à PhotoProfil:",
-    user.photoUrl,
-    "| gender:",
-    user.gender
-  )
+  console.log("user is", user)
 
   // Création du carousel de cartes d’activités > sécurisation du .map car
   // activity peut être undefined (par exemple avant d’être fetch du back ou de Redux
@@ -268,7 +256,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
 
-    backgroundColor: "#ffffff",
+    backgroundColor: "#f9f9f9",
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
@@ -284,7 +272,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   activity: {
-    padding: 5,
+    padding: "5",
   },
   bottomButton: {
     flexDirection: "row",
@@ -292,7 +280,7 @@ const styles = StyleSheet.create({
   profilContainer: {
     width: "90%",
     height: 90,
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "ffffff",
     borderRadius: 15,
     marginRight: 5,
     margin: 5,
@@ -328,7 +316,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   progressText: {
-    color: "#ffffff",
+    color: "ffffff",
     marginTop: 5,
     fontWeight: "500",
   },
