@@ -15,7 +15,7 @@ export default function StatiscticGraphic(props) {
 
   const chartConfig = {
     backgroundGradientFrom: "#f5f5fd", // Violet pastel très clair
-    backgroundGradientTo: "#f5f5fd",
+    backgroundGradientTo: "#f5f5fd", /// permer de faire un dégradé
     decimalPlaces: 0,
     color: () => "#6B47DC", // Couleur des barres (violet doux)
     labelColor: () => "#333333", // Couleur des textes sous les barres

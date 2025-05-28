@@ -209,13 +209,13 @@ export default function DashBoard(props) {
               </View>
             </View>
 
-            <Text style={styles.text}>Mon Actu</Text>
+            <Text style={styles.text}>Entraînement du jour</Text>
             {/* CAROUSEL D'ACTIIVTIES */}
             <View style={styles.topButton}>
               <ScrollView
                 contentContainerStyle={{ padding: 5 }}
                 horizontal={true} //permet le scroll horizontal
-                // showHorizontalScrollIndicator={false} //affiche une barre de scroll
+                 showsHorizontalScrollIndicator={false} //affiche une barre de scroll
                 style={styles.scrollView}
               >
                 {levelsCards}
@@ -278,8 +278,9 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#555555",
-    fontSize: 20,
-    marginLeft: -250,
+    fontSize: 17,
+    marginLeft: -150,
+    //fontWeight: "bold",
   },
   topButton: {
     flex: 0,
