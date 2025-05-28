@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import ProgressStep from "../../../components/ProgressStep";
-import { updateUser } from "../../reducers/userSlice";
+import { updateUser } from "../../../reducers/userSlice";
+import { addActivityToStore } from "../../../reducers/activitySlice";
 
 export default function OnReward({
   xp,
@@ -18,7 +19,6 @@ export default function OnReward({
   levelplus,
   levelmoins,
   pourcent,
-
   sport,
   token,
   updatelvl,
@@ -29,14 +29,6 @@ export default function OnReward({
   const levelUpdated = updatelvl[0];
   useEffect(() => {
     return () => {
-      dispatch(
-        updateUser({
-          currentLevelID: levelUpdated,
-          currentSubLevelID: subLevelUpdated,
-          xp: xpUpdated,
-        })
-      );
-
       fetch(`${API_URL}/api/users/levelupdate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -50,7 +42,16 @@ export default function OnReward({
       })
         .then((r) => r.json())
         .then((data) => {
-          console.log(data);
+          if (data.result) {
+            dispatch(
+              updateUser({
+                currentLevelID: levelUpdated,
+                currentSubLevelID: subLevelUpdated,
+                xp: xpUpdated,
+              })
+            );
+            dispatch(addActivityToStore(data.dataActivity.subLevels));
+          }
         });
     };
   }, []);

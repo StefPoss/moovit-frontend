@@ -14,7 +14,6 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function LevelScreen(props) {
-
   //   FakeData=[{_id:objectid, title:string, description:string, image:'https://reactnative.dev/img/tiny_logo.png', level:sousdoc}]
   // const cards=FakeData.map(Data)=>{
   //   return <CardLevelClicable
@@ -28,42 +27,38 @@ export default function LevelScreen(props) {
   //      url = Data.image
   //      fontWeight="700"
   //             />}
-  const topImg= "https://reactnative.dev/img/tiny_logo.png"
-  const niv="1"
-  const bgImage = "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif"
+  const topImg = "https://reactnative.dev/img/tiny_logo.png";
+  const niv = "1";
+  const bgImage =
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   return (
     <SafeAreaProvider>
-      {/* <SafeAreaView style={styles.container} edges={["top"]}>  cette balise est sesactivé car le rendu est inesthetique */} 
+      {/* <SafeAreaView style={styles.container} edges={["top"]}>  cette balise est sesactivé car le rendu est inesthetique */}
       <View style={styles.container}>
-        <Image
-          style={styles.topImg}
-          source={{ uri: topImg }}
-        />
+        <Image style={styles.topImg} source={{ uri: topImg }} />
         <Text style={styles.toptxt}>NIVEAU {niv}</Text>
         <View style={styles.midd}>
           <ImageBackground
-            source={{uri: bgImage }}
+            source={{ uri: bgImage }}
             resizeMode="cover"
             style={styles.image}
           >
             <ScrollView>
-          {/* {CardLevelClicable} */}
+              {/* {CardLevelClicable} */}
 
-          <CardLevelClicable
-            style={styles.try}
-            text="titre"
-            description="description..."
-            color="black"
-            width="370" //long du boutton
-            height="140" //haut du boutton
-             backgroundColor="#FCEACE" //gris du figma
-            url="https://reactnative.dev/img/tiny_logo.png"
-            fontWeight="700"
-          />
-         
-          </ScrollView>
-</ImageBackground>
-
+              <CardLevelClicable
+                style={styles.try}
+                text="titre"
+                description="description..."
+                color="black"
+                width="370" //long du boutton
+                height="140" //haut du boutton
+                backgroundColor="#FCEACE" //gris du figma
+                url="https://reactnative.dev/img/tiny_logo.png"
+                fontWeight="700"
+              />
+            </ScrollView>
+          </ImageBackground>
         </View>
       </View>
       {/* </SafeAreaView> */}
@@ -94,19 +89,19 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   image: {
-zIndex:+50,
-    height:'100%',
-    width:'100%',
+    zIndex: +50,
+    height: "100%",
+    width: "100%",
   },
   midd: {
-    backgroundColor:"rgba(255, 255, 255, 0)",
+    backgroundColor: "rgba(255, 255, 255, 0)",
     flex: 1,
     justifyContent: "flex-start",
     alignSelf: "flex-start",
   },
-try:{    
-    backgroundColor:"rgba(255, 255, 255, 0)",
-},
+  try: {
+    backgroundColor: "rgba(255, 255, 255, 0)",
+  },
 
   CenterImg: {
     width: "10",
