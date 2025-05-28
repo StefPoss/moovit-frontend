@@ -33,16 +33,9 @@ export default function LevelScreen(props) {
       url={e.image}
       fill={false}
       linkTo="NewLevelScreen"
-      // keyNum={keyNum}
     />
   ));
 
-  const [lastLv, setLastLv] = useState(null);
-  // const keyNum=(key)=>{
-  //   console.log(key)
-  //   setLastLv(key)
-  // }
-  // console.log(props);
   
   const topImg= "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1748380203/projectFinDeBatch/front/images/activities/activities-padel-01_mw10dt.png";
   const niv= "1"
