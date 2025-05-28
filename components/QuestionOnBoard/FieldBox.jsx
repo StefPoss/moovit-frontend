@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     fontSize: 16,
-    fontFamily: "CocomatPro-Regular",
+    fontFamily: "Questrial-Regular",
     backgroundColor: "#fff",
   },
 });

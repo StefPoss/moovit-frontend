@@ -21,13 +21,13 @@ export default function LevelScreen(props) {
 
   let levelsCards = activity?.map((e, i) => (
     <CardLevelClicable
-      key={i + 1}
+      key={i}
       // num = {i}
       width="368"
       style={styles.activity}
       text={e.title}
       description={e.description}
-      fontSize={12}
+      fontSize={13}
       backgroundColor="#C5C4D9"
       color="black"
       url={e.image}
@@ -43,11 +43,10 @@ export default function LevelScreen(props) {
   //   setLastLv(key)
   // }
   // console.log(props);
-
-  const topImg = "https://reactnative.dev/img/tiny_logo.png";
-  const niv = lastLv;
-  const bgImage =
-    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
+  
+  const topImg= "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1748380203/projectFinDeBatch/front/images/activities/activities-padel-01_mw10dt.png";
+  const niv= "1"
+  const bgImage = "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif"
   return (
     <SafeAreaProvider>
       {/* <SafeAreaView style={styles.container} edges={["top"]}>  cette balise est sesactivé car le rendu est inesthetique */}
