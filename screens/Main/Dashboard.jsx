@@ -18,7 +18,6 @@ import { addActivityToStore } from "../../reducers/activitySlice";
 import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
-import { FontAwesome5 } from "@expo/vector-icons";
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
@@ -37,9 +36,7 @@ export default function DashBoard(props) {
   let playTime = 35;
   let sessions = 5;
   let xp = 105;
-  // console.log("activity is", activity)
-  // console.log("rendering dashboard")
-
+  console.log(activity);
   // Fonction qui génère une url default 250x250 en fonction du genre
   const getPhotoUrl = (gender) => {
     // Si masculin, profil homme en 250x250
@@ -90,6 +87,7 @@ export default function DashBoard(props) {
           name: data.dataUser.name,
           admin: false,
           sportPlayed: data.dataUser.sportPlayed[0],
+          titleLevel: data.dataLevel.title,
           xp: data.dataUser.xp,
           level: data.dataUser.level,
           gender: data.dataUser.gender || "",
@@ -106,7 +104,6 @@ export default function DashBoard(props) {
         else if (dailyTime === "15 min/jour") setDayTime("15 minutes");
         else if (dailyTime === "30 min/jour") setDayTime("30 minutes");
         setMeteo(data.dataMeteo);
-        console.log("user est ", user);
       });
   };
 
@@ -206,7 +203,7 @@ export default function DashBoard(props) {
               <View style={styles.progressRightBlock}>
                 <ExercisesProgressBar
                   key={animationKey} // change la key dynamiquement sur refresh pour forcer le rerender et donc l'animation
-                  value={(user.currentSubLevelID * activity.length) / 100}
+                  value={(user.currentSubLevelID * 100) / activity.length}
                 ></ExercisesProgressBar>
               </View>
             </View>

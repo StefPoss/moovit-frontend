@@ -17,11 +17,9 @@ const ProgressStep = (props) => {
   return (
     <View style={styles.arc}>
       <AnimatedCircularProgress
-        // z-index={9999}
         size={props.largeur}
         width={props.epaisseur}
         fill={props.niv}
-        // tintColor="#00e0ff"
         tintColor="rgba(222, 125, 251, 0.92)"
         backgroundColor="#3d5875"
         padding={10}
