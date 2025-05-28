@@ -20,7 +20,7 @@ const BarStep = (props) => {
         // z-index={9999}
         size={310}
         width={35}
-        fill={props.value*10}
+        fill={props.value}
         // tintColor="#00e0ff"
         tintColor={newRGB}
         backgroundColor="#3d5875"
