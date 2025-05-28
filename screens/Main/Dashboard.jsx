@@ -18,6 +18,7 @@ import { addActivityToStore } from "../../reducers/activitySlice";
 import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
+import {FontAwesome5} from "@expo/vector-icons";
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
