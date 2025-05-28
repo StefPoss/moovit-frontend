@@ -4,30 +4,33 @@ import { useNavigation } from "@react-navigation/native";
 import { onClick } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 
 //creation d'une carte d'activité clicable
-function CardLevelClicable({
-  text = "", //text
-  num = "", //numero de la carte
-  description = "", //description s'affiche sous le txt
-  color = "black", //color de la font
-  fontSize = 13, //fontseize pour le titre
-  fontWeight = "700", //la fontWeight de toute les lettre
-  width = "150", //long du boutton
-  height = "150", //haut du boutton
-  backgroundColor = "#FCEACE", //couleur du fond de la carte
-  url = "https://reactnative.dev/img/tiny_logo.png", //petite img sur le coté
-  linkTo = "/", //nom de la page ou rediriger
-  fill = false, //image qui fait tout le composant
-  
-},props) {
-const navigation = useNavigation();
-
+function CardLevelClicable(
+  {
+    text = "", //text
+    num = "", //numero de la carte
+    description = "", //description s'affiche sous le txt
+    color = "black", //color de la font
+    fontSize = 13, //fontseize pour le titre
+    fontWeight = "700", //la fontWeight de toute les lettre
+    width = "150", //long du boutton
+    height = "150", //haut du boutton
+    backgroundColor = "#FCEACE", //couleur du fond de la carte
+    url = "https://reactnative.dev/img/tiny_logo.png", //petite img sur le coté
+    linkTo = "TabNavigator", //nom de la page ou rediriger
+    fill = false, //image qui fait tout le composant
+  },
+  props
+) {
+  const navigation = useNavigation();
 
   // const idf =()=>{
   //   props.keyNum(props.key);
   // }
   return (
     <TouchableOpacity //propriete qui permet de clicker comme button et onpress
-      onPress={() => {navigation.navigate(linkTo)}} //lien executable au click
+      onPress={() => {
+        navigation.navigate(linkTo);
+      }} //lien executable au click
       style={[styles.button, { width, height, backgroundColor }]} //modif du css via les props
     >
       <View

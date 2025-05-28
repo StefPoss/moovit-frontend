@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: "20%",
   },
   text: {
-    fontSize: 16,
-    fontFamily: "CocomatPro-Regular",
+    fontSize: 20,
+    fontFamily: "Questrial-Regular",
   },
 });
