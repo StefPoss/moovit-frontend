@@ -21,7 +21,6 @@ export default function NewLevelScreen({ navigation }) {
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   //"https://reactnative.dev/img/tiny_logo.png";
     const niv = 6
-  // setValue(niv)
   const bgImage =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   return (
