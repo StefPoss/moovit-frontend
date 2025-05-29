@@ -22,8 +22,7 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
-    //const navigation = useNavigation();
-  
+  //const navigation = useNavigation();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch = useDispatch();
@@ -135,19 +134,27 @@ export default function LoginScreen({ navigation }) {
           </View>
         </View>
         {/* Boutons sociaux sans fonctionnalité pour l'instant */}
-        <TouchableOpacity style={styles.socialButton}>
+        <TouchableOpacity
+          style={styles.socialButton}
+          onPress={() => navigation.navigate("ForgotScreen")}
+        >
           <AntDesign name="google" size={20} color="#000" />
+
           <Text style={styles.socialText}>Continuer avec Google</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.socialButton}>
+        <TouchableOpacity
+          style={styles.socialButton}
+          onPress={() => navigation.navigate("Forgot")}
+        >
           <FontAwesome name="apple" size={20} color="#000" />
+          onPress={() => navigation.navigate("Forgot")}
           <Text style={styles.socialText}>Continuer avec Apple</Text>
         </TouchableOpacity>
 
-         {/* Liens bas de page */}
+        {/* Liens bas de page */}
         <Text style={styles.footer}>Pas encore inscrit ?{"\n"}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
+        <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
           <Text style={styles.link}>username/ mot de passe oublié ?</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
