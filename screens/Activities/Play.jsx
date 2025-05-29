@@ -48,9 +48,6 @@ export default function Play({ navigation }) {
     nextLevel = [currentLevel[0], currentLevel[1] + 1];
   }
 
-  console.log(currentLevel, totalSubLevels);
-  console.log;
-
   const [level, setLevel] = useState(currentLevel[0]);
   const [subLevel, setSubLevel] = useState(currentLevel[1]);
   const subLevelInfos = activity[subLevel];
@@ -64,7 +61,7 @@ export default function Play({ navigation }) {
     setLevel(currentLevel[0]);
     setSubLevel(currentLevel[1]);
   }, [user.currentLevelID, user.currentSubLevelID]);
-  console.log(nextLevel);
+
   let toDisp;
   if (tabLevel[levelStatus] === "onPlay") {
     toDisp = <OnPlay infos={subLevelInfos} title={user.titleLevel} />;
@@ -94,27 +91,29 @@ export default function Play({ navigation }) {
         renit={() => setLevelStatus(0)}
         levelmoins={level}
         levelplus={level + 1}
+        sessions={user.sessions}
+        playTime={user.playTime}
+        timing={timing}
       />
     );
   }
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <View style={styles.back}>
+        <TouchableOpacity style={styles.backButton} onPress={moinstate}>
+          <Ionicons name="arrow-back" size={24} color="#000" />
+        </TouchableOpacity>
+      </View>
       <View style={styles.container}>{toDisp}</View>
       <View style={styles.header}>
-        <Button
-          title="Precedent"
-          onPress={moinstate}
-          type="primary"
-          style={styles.continueBtn}
-          backgroundColor={"grey"}
-        />
         <Button
           title="Continuer"
           onPress={plusstate}
           type="primary"
           style={styles.continueBtn}
           backgroundColor={"#FCEACE"}
+          width={"100%"}
         />
       </View>
     </SafeAreaView>
@@ -128,15 +127,22 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-between",
+    marginHorizontal: "auto",
+    width: "50%",
+    justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 16,
     paddingTop: 12,
     paddingBottom: 8,
   },
+  back: {
+    width: "20%",
+  },
 
   container: {
     flex: 1,
+  },
+  backButton: {
+    paddingLeft: 20,
   },
 });
