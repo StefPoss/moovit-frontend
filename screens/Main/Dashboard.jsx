@@ -148,20 +148,31 @@ export default function DashBoard(props) {
   let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => {
     let opa;
     let direction;
+    let bgCol;
     user.currentSubLevelID < i ? (opa = 0.5) : (opa = 1);
-    user.currentSubLevelID < i ? (direction = "TabNavigator") : (direction = "LevelScreen");
-    
+    user.currentSubLevelID < i
+      ? (direction = "TabNavigator")
+      : (direction = "LevelScreen");
+
+      i === 0 || i === 3 || i === 6 || i === 9
+      ? (bgCol = "#eeeef5")
+      : i === 1 || i === 4 || i === 7 || i === 10
+      ? (bgCol = "#ac9cc4")
+      : i === 2 || i === 5 || i === 8 || i === 11
+      ? (bgCol = "#ffecce")
+      : (bgCol = "#C5C4D9");
+
     return (
       <CardLevelClicable
         key={i}
         style={styles.activity}
         text={e.title}
-        backgroundColor="#C5C4D9"
+        backgroundColor={bgCol}
         color="white"
-        url={e.image}
+         url={e.image}
         fill={true}
         opacity={opa}
-        linkTo={direction}
+         linkTo={direction}
       />
     );
   });
