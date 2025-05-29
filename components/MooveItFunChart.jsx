@@ -6,7 +6,7 @@ import { G, Text as SvgText } from "react-native-svg"
 const Labels = ({ x, y, bandwidth, data }) => (
   <G>
     {data.map((item, index) => {
-      console.log("item", item, "y", y(item.value))
+      // console.log("item", item, "y", y(item.value))
       return (
         <SvgText
           key={index}
@@ -82,9 +82,10 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "",
     width: "90%",
     marginTop: 8,
+    marginLeft:"-30%",
   },
   label: {
     fontSize: 15,
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     textAlign: "center",
     alignContent: "space-evenly",
+    marginHorizontal:"9.5%",
   },
   xpCongrats: {
     marginTop: 12,

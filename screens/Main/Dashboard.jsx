@@ -42,7 +42,7 @@ export default function DashBoard(props) {
   // let sessions = 5
   // let xp = 105
 
-  console.log("activity", JSON.stringify(activity, null, 2));
+  // console.log("activity", JSON.stringify(activity, null, 2))
 
   // Calcul des perfs réelles
 
@@ -81,6 +81,8 @@ export default function DashBoard(props) {
         ) {
           photoUrl = getPhotoUrl(data.dataUser.gender);
         }
+        // console.log("ora ", data.dataUser.stats);
+        
         let newUser = {
           token: data.dataUser.token,
           photoUrl,
@@ -95,19 +97,22 @@ export default function DashBoard(props) {
           currentSubLevelID: data.dataUser.currentSubLevelID,
           height: data.dataUser.height,
           weight: data.dataUser.weight,
-        };
-        dispatch(addUserToStore(newUser));
-        dispatch(addActivityToStore(data.dataLevel.subLevels));
-        let dailyTime = data.dataUser.form.dayTime;
-        if (dailyTime === "4 h/semaine") setDayTime("45 minutes");
-        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure");
-        else if (dailyTime === "15 min/jour") setDayTime("15 minutes");
-        else if (dailyTime === "30 min/jour") setDayTime("30 minutes");
-        setMeteo(data.dataMeteo);
-        let Icon = meteoIcons.find((entry) => entry.desc === data.dataMeteo);
-        setMeteoIcon(Icon.icon);
-      });
-  };
+          sessions: data.dataUser.stats.nbSessions,
+          playTime: data.dataUser.stats.totalTime,
+        }
+        dispatch(addUserToStore(newUser))
+        dispatch(addActivityToStore(data.dataLevel.subLevels))
+        let dailyTime = data.dataUser.form.dayTime
+        if (dailyTime === "4 h/semaine") setDayTime("45 minutes")
+        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure")
+        else if (dailyTime === "15 min/jour") setDayTime("15 minutes")
+        else if (dailyTime === "30 min/jour") setDayTime("30 minutes")
+        setMeteo(data.dataMeteo)
+        let Icon = meteoIcons.find((entry) => entry.desc === data.dataMeteo)
+        setMeteoIcon(Icon.icon)
+      })
+  }
+
 
   // Au premier render, charge les données user/activity
   useEffect(() => {
@@ -122,10 +127,10 @@ export default function DashBoard(props) {
       setAnimationKey(Date.now()); // force le refresh ProgressBar
     });
     // Log l’heure du refresh pour debug
-    const now = new Date();
-    const hh = now.getHours().toString().padStart(2, "0");
-    const mm = now.getMinutes().toString().padStart(2, "0");
-    const ss = now.getSeconds().toString().padStart(2, "0");
+    // const now = new Date();
+    // const hh = now.getHours().toString().padStart(2, "0");
+    // const mm = now.getMinutes().toString().padStart(2, "0");
+    // const ss = now.getSeconds().toString().padStart(2, "0");
     //console.log(`${hh}H${mm}mn${ss}s`)
   }, []);
 
@@ -256,7 +261,7 @@ export default function DashBoard(props) {
               🎉 Bravo ! +{xp} XP gagnés aujourd’hui 🎉
             </Text> */}
           {/* Option : Chart/graph ici */}
-          <MooveItFunChart totalTime={playTime} exercises={sessions} xp={xp} />
+          <MooveItFunChart totalTime={user.playTime} exercises={user.sessions} xp={user.xp} />
           {/* </View> */}
 
           {/* Bas de page : Training & Météo, côte à côte */}
