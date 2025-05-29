@@ -23,7 +23,7 @@ function CardLevelClicable(
   props
 ) {
   const navigation = useNavigation();
-
+  
   // const idf =()=>{
   //   props.keyNum(props.key);
   // }
@@ -44,7 +44,7 @@ function CardLevelClicable(
             style={[styles.buttonText, { color, fontWeight, fontSize }]} //txt en titre modifiable via les props
           >
             {text}
-            {num}
+            {/* {num} */}
           </Text>
           <Text
             style={[styles.buttonDescription, {}]} // txt de despription
@@ -53,7 +53,7 @@ function CardLevelClicable(
           </Text>
         </View>
         <Image
-          style={fill ? [styles.tinyLogo2, {}] : [styles.tinyLogo, {}]} //ternaire qui permet de changé de still si fill dans les props est false or true
+          style={url===''? [styles.tinyLogo0, {}] :fill ? [styles.tinyLogo2, {}] : [styles.tinyLogo, {}]} //ternaire qui permet de changé de still si fill dans les props est false or true
           source={{ uri: url }} //petit img d'illustration du coté
         />
       </View>
@@ -105,9 +105,15 @@ const styles = StyleSheet.create({
     // box qui contient le titre et la description
     width: "60%",
   },
+<<<<<<< HEAD
+  tinyLogo0:{},
+  tinyLogo: { //petit logo a drt
+    backgroundColor:'#e0e0e0',
+=======
   tinyLogo: {
     //petit logo a drt
     backgroundColor: "#e0e0e0",
+>>>>>>> 32eae8d33c5e4ad63c41dd6c60f2f126820cbef0
     borderRadius: 15,
     alignSelf: "flex-end",
     width: "30%",

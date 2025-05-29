@@ -19,6 +19,7 @@ import CguScreen from "./screens/Auth/CGUScreen";
 import Play from "./screens/Activities/Play";
 import ProfileScreen from "./screens/Main/ProfileScreen";
 import TestChartScreen from "./screens/TestChartScreen";
+import CreditScreen from "./screens/CreditScreen"
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -128,6 +129,8 @@ export default function App() {
               <Stack.Screen name="Play" component={Play} />
               <Stack.Screen name="TabNavigator" component={TabNavigator} />
               <Stack.Screen name="Forgot" component={ForgotScreen} />
+                              <Stack.Screen name="CreditScreen" component={CreditScreen} />
+          
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>

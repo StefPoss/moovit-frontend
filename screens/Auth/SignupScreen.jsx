@@ -15,7 +15,7 @@ import { checkBody } from "../../modules/checkBody";
 import { useDispatch } from "react-redux";
 import { addUserToStore } from "../../reducers/userSlice";
 import { API_URL } from "@env";
-
+import CardLevelClicable from "../../components/CardLevelClicable";
 export default function SignupScreen({ navigation }) {
   // état pour afficher ou cacher le mot de passe
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -171,11 +171,17 @@ export default function SignupScreen({ navigation }) {
         />
       </View>
       {/* Boutons sociaux visuels non fonctionnel pour l'instant */}
-      <TouchableOpacity style={styles.socialButton}>
+      <TouchableOpacity
+        style={styles.socialButton}
+        onPress={() => navigation.navigate("Forgot")}
+      >
         <AntDesign name="google" size={20} color="#000" />
         <Text style={styles.socialText}>S'inscrire avec Google</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.socialButton}>
+      <TouchableOpacity
+        style={styles.socialButton}
+        onPress={() => navigation.navigate("Forgot")}
+      >
         <FontAwesome name="apple" size={20} color="#000" />
         <Text style={styles.socialText}>S'inscrire avec Apple</Text>
       </TouchableOpacity>
@@ -187,6 +193,18 @@ export default function SignupScreen({ navigation }) {
         En continuant vous acceptez les conditions générales et la politique de
         confidentialité
       </Text>
+      <View style={styles.credit}>
+      <CardLevelClicable        
+          width="100"
+          height="30"
+          backgroundColor="#0000"
+          fontSize={10}
+          text='Credit'
+          url=''
+          description=''
+          linkTo="CreditScreen"
+        />
+        </View>
     </KeyboardAvoidingView>
   );
 }
@@ -281,4 +299,8 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "500",
   },
+  credit:{
+    marginLeft:"7%",
+    padding:10,
+  }
 });
