@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, SafeAreaView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useNavigation } from "@react-navigation/native";
 import OnPlay from "./OnActPlay/OnPlay";
 import OnDone from "./OnActPlay/OnDone";
 import OnProgress from "./OnActPlay/OnProgress";
@@ -10,6 +10,7 @@ import { addUserToStore } from "../../reducers/userSlice";
 import Button from "../../components/Buttons";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import { width } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 
 export default function Play({ navigation }) {
   const user = useSelector((state) => state.user.value);
@@ -29,6 +30,8 @@ export default function Play({ navigation }) {
   const moinstate = () => {
     if (levelStatus > 0) {
       setLevelStatus(levelStatus - 1);
+    } else {
+      navigation.goBack();
     }
   };
 
@@ -45,7 +48,7 @@ export default function Play({ navigation }) {
     nextLevel = [currentLevel[0], currentLevel[1] + 1];
   }
 
-  console.log("---" + currentLevel);
+  console.log(currentLevel, totalSubLevels);
   console.log;
 
   const [level, setLevel] = useState(currentLevel[0]);
@@ -55,7 +58,7 @@ export default function Play({ navigation }) {
   const timing = subLevelInfos.timing;
   const levelxp = subLevelInfos.xp;
   const titleSubLevel = subLevelInfos.title;
-  const pourcent = Math.floor((100 * subLevel) / totalSubLevels);
+  const pourcent = Math.floor((100 * (subLevel + 1)) / totalSubLevels);
 
   useEffect(() => {
     setLevel(currentLevel[0]);
@@ -64,7 +67,7 @@ export default function Play({ navigation }) {
   console.log(nextLevel);
   let toDisp;
   if (tabLevel[levelStatus] === "onPlay") {
-    toDisp = <OnPlay infos={subLevelInfos} />;
+    toDisp = <OnPlay infos={subLevelInfos} title={user.titleLevel} />;
   } else if (tabLevel[levelStatus] === "onDone") {
     toDisp = (
       <OnDone
@@ -89,26 +92,31 @@ export default function Play({ navigation }) {
         xpUpdated={levelxp + user.xp}
         updatelvl={nextLevel}
         renit={() => setLevelStatus(0)}
+        levelmoins={level}
+        levelplus={level + 1}
       />
     );
   }
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>{toDisp}</View>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backBtn} onPress={() => moinstate()}>
-          <Ionicons name="arrow-back" size={24} color="black" />
-        </TouchableOpacity>
-
+        <Button
+          title="Precedent"
+          onPress={moinstate}
+          type="primary"
+          style={styles.continueBtn}
+          backgroundColor={"grey"}
+        />
         <Button
           title="Continuer"
           onPress={plusstate}
           type="primary"
           style={styles.continueBtn}
+          backgroundColor={"#FCEACE"}
         />
       </View>
-
-      <View style={styles.container}>{toDisp}</View>
     </SafeAreaView>
   );
 }
@@ -120,23 +128,14 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
+    width: "100%",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
     paddingTop: 12,
     paddingBottom: 8,
   },
-  backBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: "#F3F3F3",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  continueBtn: {
-    width: 120,
-  },
+
   container: {
     flex: 1,
   },

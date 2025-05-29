@@ -18,7 +18,7 @@ import { addActivityToStore } from "../../reducers/activitySlice";
 import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
-import {FontAwesome5} from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
@@ -215,7 +215,7 @@ export default function DashBoard(props) {
               <ScrollView
                 contentContainerStyle={{ padding: 5 }}
                 horizontal={true} //permet le scroll horizontal
-                // showHorizontalScrollIndicator={false} //affiche une barre de scroll
+                showsHorizontalScrollIndicator={false} //affiche une barre de scroll
                 style={styles.scrollView}
               >
                 {levelsCards}

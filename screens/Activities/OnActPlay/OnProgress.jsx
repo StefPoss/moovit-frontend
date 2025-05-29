@@ -31,6 +31,15 @@ export default function OnReward({
   const dispatch = useDispatch();
   const subLevelUpdated = updatelvl[1];
   const levelUpdated = updatelvl[0];
+  let image;
+  if (sport === "Piscine") {
+    image =
+      "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png";
+  } else {
+    image =
+      "https://res.cloudinary.com/deuhttaaq/image/upload/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png";
+  }
+
   useEffect(() => {
     return () => {
       fetch(`${API_URL}/api/users/levelupdate`, {
@@ -72,21 +81,17 @@ export default function OnReward({
           <ProgressStep niv={pourcent} epaisseur={30} largeur={300} />
         </View>
         <View style={styles.textProg}>
-          <Text>{levelmoins}</Text>
+          <Text>Niveau {levelmoins}</Text>
           <Text>{pourcent}%</Text>
-          <Text>{levelplus}</Text>
+          <Text>Niveau {levelplus}</Text>
         </View>
         <View style={styles.rewardBox}>
-          <Text style={styles.rewardText}>
-            Tu as gagné {xp} XP !{"\n"}Nouvelle médaille débloquée
-          </Text>
+          <Text style={styles.rewardText}>Tu as gagné {xp} XP !</Text>
         </View>
 
         <Image
           source={{
-            uri:
-              medalUri ??
-              "https://res.cloudinary.com/deuhttaaq/image/upload/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png",
+            uri: image,
           }}
           style={styles.medal}
           resizeMode="contain"
@@ -160,6 +165,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     textTransform: "uppercase",
+    textAlign: "center",
   },
   textProg: {
     flexDirection: "row",
