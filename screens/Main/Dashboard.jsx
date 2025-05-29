@@ -18,11 +18,10 @@ import { addActivityToStore } from "../../reducers/activitySlice";
 import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
-import {FontAwesome5} from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import meteoIcons from "../../data/meteoIcons.json";
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
-
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
@@ -56,8 +55,7 @@ export default function DashBoard(props) {
     return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png";
   };
 
-  console.log("ttt ",user.currentSubLevelID * 100/activity.length);
-  
+  console.log("ttt ", (user.currentSubLevelID * 100) / activity.length);
 
   //useEffect pour charger les données au chargement de la page
   // useEffect(() => {
@@ -104,8 +102,7 @@ export default function DashBoard(props) {
           weight: data.dataUser.weight,
         };
         dispatch(addUserToStore(newUser));
-       
-        
+
         dispatch(addActivityToStore(data.dataLevel.subLevels));
         let dailyTime = data.dataUser.form.dayTime;
         if (dailyTime === "4 h/semaine") setDayTime("45 minutes");
@@ -113,13 +110,11 @@ export default function DashBoard(props) {
         else if (dailyTime === "15 min/jour") setDayTime("15 minutes");
         else if (dailyTime === "30 min/jour") setDayTime("30 minutes");
         setMeteo(data.dataMeteo);
-        let Icon = meteoIcons.find(entry=>entry.desc===data.dataMeteo)
-        setMeteoIcon(Icon.icon)
-        console.log("myIcon",Icon.icon);
-        
+        let Icon = meteoIcons.find((entry) => entry.desc === data.dataMeteo);
+        setMeteoIcon(Icon.icon);
+        console.log("myIcon", Icon.icon);
 
         //console.log("--- ",meteoIcons);
-        
       });
   };
 
@@ -161,7 +156,7 @@ export default function DashBoard(props) {
       color="white"
       url={e.image}
       fill={true}
-      opacity="0.4"
+      opacity={0.4}
       linkTo="LevelScreen"
     />
   ));
@@ -230,7 +225,7 @@ export default function DashBoard(props) {
               <ScrollView
                 contentContainerStyle={{ padding: 5 }}
                 horizontal={true} //permet le scroll horizontal
-                 showsHorizontalScrollIndicator={false} //affiche une barre de scroll
+                showsHorizontalScrollIndicator={false} //affiche une barre de scroll
                 style={styles.scrollView}
               >
                 {levelsCards}
@@ -264,12 +259,18 @@ export default function DashBoard(props) {
 
               {/* METEO */}
               <View style={styles.meteoContainer}>
-                
-                  <Text style={[styles.profilText, { fontSize: 40 }, {textAlign:"center"}]}>
-                    {meteoIcon}
-                  </Text>
-                  <Text style={[styles.profilText, { fontSize: 15 }]}>{meteo}</Text>
-                
+                <Text
+                  style={[
+                    styles.profilText,
+                    { fontSize: 40 },
+                    { textAlign: "center" },
+                  ]}
+                >
+                  {meteoIcon}
+                </Text>
+                <Text style={[styles.profilText, { fontSize: 15 }]}>
+                  {meteo}
+                </Text>
               </View>
             </View>
           </View>
@@ -363,10 +364,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   dayTrainingContainer: {
-    backgroundColor: "#FFF4E2",
-    width: "43%", //long du boutton
+    backgroundColor: "#DBDBF4",
+    width: "40%", //long du boutton
     height: 150, //haut du boutton
-    borderRadius: 15, //arrondi des angles
+    borderRadius: 50, //arrondi des angles
     borderColor: "#cbb7ff",
     margin: 5,
   },
@@ -387,12 +388,12 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
   meteoContainer: {
-    backgroundColor: "#E4F0F4",
-    width: "40%", //long du boutton
+    backgroundColor: "#EEEEF5",
+    width: "50%", //long du boutton
     height: 150, //haut du boutton
-    borderRadius: 15, //arrondi des angles
+    borderRadius: 50, //arrondi des angles
     margin: 5,
-    paddingLeft:5,
-    paddingRight:2,
+    paddingLeft: 5,
+    paddingRight: 2,
   },
 });

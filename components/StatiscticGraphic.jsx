@@ -1,9 +1,15 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { View, StyleSheet, Dimensions } from "react-native";
 import { BarChart } from "react-native-chart-kit";
-import { Dimensions } from "react-native";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withTiming,
+  Easing,
+} from "react-native-reanimated";
 
-export default function StatiscticGraphic(props) {
+export default function StatisticGraphic(props) {
   const data = {
     labels: ["Temps de jeu", "Sessions", "XP"],
     datasets: [
@@ -14,22 +20,52 @@ export default function StatiscticGraphic(props) {
   };
 
   const chartConfig = {
-    backgroundGradientFrom: "#f5f5fd", // Violet pastel très clair
-    backgroundGradientTo: "#f5f5fd", /// permer de faire un dégradé
+    backgroundGradientFrom: "#F5F5FD", // fond pastel très clair
+    backgroundGradientTo: "#F5F5FD",
     decimalPlaces: 0,
-    color: () => "#6B47DC", // Couleur des barres (violet doux)
-    labelColor: () => "#333333", // Couleur des textes sous les barres
+    color: () => "#6847DC", // barres violet doux
+    labelColor: () => "#333333", // texte noir doux
     propsForBackgroundLines: {
       strokeWidth: 0,
     },
   };
 
+  const dynamicBorderRadius = Dimensions.get("window").width * 0.05;
+
+  // Animation de pulsation
+  const borderWidth = useSharedValue(2);
+
+  useEffect(() => {
+    borderWidth.value = withRepeat(
+      withTiming(4, {
+        duration: 1000,
+        easing: Easing.inOut(Easing.ease),
+      }),
+      -1,
+      true
+    );
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    borderWidth: borderWidth.value,
+  }));
+
   return (
-    <View style={styles.container}>
+    <Animated.View
+      style={[
+        styles.container,
+        animatedStyle,
+        {
+          borderColor: "#BDA1FF",
+          borderRadius: dynamicBorderRadius,
+          overflow: "hidden",
+        },
+      ]}
+    >
       <BarChart
         style={styles.barChart}
         data={data}
-        width={Dimensions.get("window").width * 0.9} //pour mettre la largeur à 90% et que ça soit responsive
+        width={Dimensions.get("window").width * 0.9}
         height={170}
         withVerticalLabels={true}
         withHorizontalLabels={false}
@@ -38,14 +74,18 @@ export default function StatiscticGraphic(props) {
         fromZero={true}
         chartConfig={chartConfig}
       />
-    </View>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    alignItems: "center",
+    backgroundColor: "#F5F5FD",
+    marginBottom: 15,
+    marginTop: 15,
+  },
   barChart: {
-    borderRadius: 15,
-    marginRight: 5,
+    marginTop: 8,
   },
 });
