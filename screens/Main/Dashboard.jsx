@@ -111,24 +111,64 @@ export default function DashBoard(props) {
   const onRefresh = React.useCallback(() => {
     setRefreshing(true)
     fetchUserData().finally(() => {
-      setRefreshing(false)
-      setAnimationKey(Date.now())
-    })
-  }, [])
 
-  // Prépare les cards du carousel des activités (niveaux)
-  let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => (
-    <CardLevelClicable
-      key={i}
-      style={styles.activity}
-      text={e.title}
-      backgroundColor="#C5C4D9"
-      color="white"
-      url={e.image}
-      fill={true}
-      linkTo="LevelScreen"
-    />
-  ))
+      setRefreshing(false);
+      setAnimationKey(Date.now()); // force le refresh ProgressBar
+    });
+    // Log l’heure du refresh pour debug
+    const now = new Date();
+    const hh = now.getHours().toString().padStart(2, "0");
+    const mm = now.getMinutes().toString().padStart(2, "0");
+    const ss = now.getSeconds().toString().padStart(2, "0");
+    //console.log(`${hh}H${mm}mn${ss}s`)
+  }, []);
+
+  // const fetchSport = () => {
+  //   return fetch(`${API_URL}/api/getsport`, (req,res) =>{
+
+  //   }
+  //console.log("user is", user)
+
+  // Création du carousel de cartes d’activités > sécurisation du .map car
+  // activity peut être undefined (par exemple avant d’être fetch du back ou de Redux
+  // En forçant (Array.isArray(activity) ? activity : []), on garantis que :
+  // Si activity est bien un tableau, on l'utilise tel quel
+  // Si c'est undefined ou un objet ou autre chose, on mappe sur un tableau vide, donc pas d’erreur
+  // on a juste pas de cartes à afficher
+  // console.log("lvl id", user.currentLevelID);
+  // console.log("sublvl id", user.currentSubLevelID);
+  // console.log("activity", activity.length);
+
+  let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => {
+    let opa;
+    let direction;
+    user.currentSubLevelID < i ? (opa = 0.5) : (opa = 1);
+    user.currentSubLevelID < i ? (direction = "TabNavigator") : (direction = "LevelScreen");
+    
+    return (
+      <CardLevelClicable
+        key={i}
+        style={styles.activity}
+        text={e.title}
+        backgroundColor="#C5C4D9"
+        color="white"
+        url={e.image}
+        fill={true}
+        opacity={opa}
+        linkTo={direction}
+      />
+    );
+  });
+
+
+  // Log l'URL utilisée pour la photo profil
+  // console.log(
+  //   "Dashboard envoie photoUrl à PhotoProfil:",
+  //   user.photoUrl,
+  //   "| gender:",
+  //   user.gender
+  // )
+
 
   // Fallback profil si pas de photo DB
   const profileUrl =
