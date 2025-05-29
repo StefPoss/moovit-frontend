@@ -91,6 +91,9 @@ export default function Play({ navigation }) {
         renit={() => setLevelStatus(0)}
         levelmoins={level}
         levelplus={level + 1}
+        sessions={user.sessions}
+        playTime={user.playTime}
+        timing={timing}
       />
     );
   }

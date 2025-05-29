@@ -27,10 +27,15 @@ export default function OnReward({
   updatelvl,
   xpUpdated,
   renit,
+  sessions,
+  playTime,
+  timing,
 }) {
   const dispatch = useDispatch();
   const subLevelUpdated = updatelvl[1];
   const levelUpdated = updatelvl[0];
+  const sessionUpd = sessions + 1;
+  const playUpd = playTime + timing;
   let image;
   if (sport === "Piscine") {
     image = [
@@ -52,6 +57,8 @@ export default function OnReward({
         xp: xpUpdated,
         subLevel: subLevelUpdated,
         level: levelUpdated,
+        sessions: sessionUpd,
+        playTime: playUpd,
       }),
     })
       .then((r) => r.json())
@@ -62,6 +69,8 @@ export default function OnReward({
               currentLevelID: levelUpdated,
               currentSubLevelID: subLevelUpdated,
               xp: xpUpdated,
+              sessions: sessionUpd,
+              playTime: playUpd,
             })
           );
           dispatch(addActivityToStore(data.dataActivity.subLevels));
