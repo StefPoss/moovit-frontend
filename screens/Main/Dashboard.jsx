@@ -158,7 +158,6 @@ export default function DashBoard(props) {
       ? (direction = "TabNavigator")
       : (direction = "LevelScreen");
 
-<<<<<<< HEAD
       let bgCol;
       i === 0 || i === 3 || i === 6 || i === 9
       ? (bgCol = "#c5bdf5")
@@ -168,8 +167,6 @@ export default function DashBoard(props) {
       ? (bgCol = "#c7deff")
       : (bgCol = "#C5C4D9");
 
-=======
->>>>>>> ef4dbdd25f577e4823f404a2ce749353abb0a46f
     return (
       <CardLevelClicable
         key={i}
