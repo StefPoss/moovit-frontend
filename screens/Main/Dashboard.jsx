@@ -42,11 +42,7 @@ export default function DashBoard(props) {
   // let sessions = 5
   // let xp = 105
 
-<<<<<<< HEAD
   // console.log("activity", JSON.stringify(activity, null, 2))
-=======
-  console.log("activity", JSON.stringify(activity, null, 2));
->>>>>>> bd1e63a5a4f8bae0c38ce3a2141334fa3f4b29c5
 
   // Calcul des perfs réelles
 
