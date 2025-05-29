@@ -257,7 +257,7 @@ export default function DashBoard(props) {
               🎉 Bravo ! +{xp} XP gagnés aujourd’hui 🎉
             </Text> */}
           {/* Option : Chart/graph ici */}
-          <MooveItFunChart totalTime={playTime} exercises={sessions} xp={xp} />
+          <MooveItFunChart totalTime={playTime} exercises={sessions} xp={user.xp} />
           {/* </View> */}
 
           {/* Bas de page : Training & Météo, côte à côte */}
