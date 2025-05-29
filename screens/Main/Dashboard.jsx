@@ -165,9 +165,8 @@ export default function DashBoard(props) {
           {/* Progression (niveau actuel, cercle de progression à droite) */}
           <View style={styles.cardProgress}>
             <View style={{ flex: 2, justifyContent: "center" }}>
-              <Text style={styles.progressTitle}>Niveau actuel</Text>
-              <Text style={styles.progressValue}>
-                {user.currentLevelID}.{user.currentSubLevelID}
+              <Text style={styles.progressTitle}>Niveau actuel : 
+              <Text style={styles.progressTitle}>&nbsp;{user.currentLevelID}.{user.currentSubLevelID}</Text>
               </Text>
               <Text style={styles.progressSteps}>
                 {user.currentSubLevelID}/{activity.length} exercices complétés
@@ -264,9 +263,6 @@ const styles = StyleSheet.create({
     padding: 4,
     flexDirection: "row",
     alignItems: "center",
-    borderWidth: 1, // épaisseur
-    borderColor: "#000000", // couleur
-    borderStyle: "solid",
   },
   textProfilContainer: {
     marginLeft: 12,
@@ -331,7 +327,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#363255", // violet foncé stats
     borderRadius: 16,
     marginTop: 0,
-    marginBottom:0,
+    marginBottom: 0,
     paddingVertical: 8,
     paddingHorizontal: 14,
     alignItems: "center",
@@ -369,7 +365,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#CFDED3", // vert pastel = contraste max sur fond foncé
     marginTop: 10,
-    marginbottom:0,
+    marginbottom: 0,
   },
   bottomRow: {
     flex: 1,
