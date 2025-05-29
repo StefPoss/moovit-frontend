@@ -7,11 +7,12 @@ export default function Button({
   onPress,
   backgroundColor = "#d6c9ff",
   textColor = "#000",
+  width,
 }) {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.button, { backgroundColor }]}
+      style={[styles.button, { backgroundColor, width }]}
     >
       <Text style={[styles.text, { color: textColor }]}>{title}</Text>
     </TouchableOpacity>

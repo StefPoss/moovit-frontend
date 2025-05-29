@@ -33,41 +33,42 @@ export default function OnReward({
   const levelUpdated = updatelvl[0];
   let image;
   if (sport === "Piscine") {
-    image =
-      "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png";
+    image = [
+      "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png",
+    ];
   } else {
-    image =
-      "https://res.cloudinary.com/deuhttaaq/image/upload/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png";
+    image = [
+      "https://res.cloudinary.com/deuhttaaq/image/upload/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png",
+    ];
   }
 
   useEffect(() => {
-    return () => {
-      fetch(`${API_URL}/api/users/levelupdate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          token: token,
-          sport: sport,
-          xp: xpUpdated,
-          subLevel: subLevelUpdated,
-          level: levelUpdated,
-        }),
-      })
-        .then((r) => r.json())
-        .then((data) => {
+    fetch(`${API_URL}/api/users/levelupdate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: token,
+        sport: sport,
+        xp: xpUpdated,
+        subLevel: subLevelUpdated,
+        level: levelUpdated,
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(
+            updateUser({
+              currentLevelID: levelUpdated,
+              currentSubLevelID: subLevelUpdated,
+              xp: xpUpdated,
+            })
+          );
+          dispatch(addActivityToStore(data.dataActivity.subLevels));
+        } else {
           console.log(data);
-          if (data.result) {
-            dispatch(
-              updateUser({
-                currentLevelID: levelUpdated,
-                currentSubLevelID: subLevelUpdated,
-                xp: xpUpdated,
-              })
-            );
-            dispatch(addActivityToStore(data.dataActivity.subLevels));
-          }
-        });
-    };
+        }
+      });
   }, []);
   return (
     <SafeAreaView style={styles.safe}>
