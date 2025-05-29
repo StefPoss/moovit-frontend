@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   ScrollView,
   StyleSheet,
   RefreshControl,
-
 } from "react-native";
 // import ActivityCard from "../../components/ActivityCard"
 // import StaticCard from "../../components/StaticCard"
@@ -21,7 +20,7 @@ import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
 import { FontAwesome5 } from "@expo/vector-icons";
 import meteoIcons from "../../data/meteoIcons.json";
-import MooveItFunChart from "../../components/MooveItFunChart"
+import MooveItFunChart from "../../components/MooveItFunChart";
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
@@ -30,39 +29,38 @@ import MooveItFunChart from "../../components/MooveItFunChart"
 
 export default function DashBoard(props) {
   // User / activity récupérés via Redux
-  const user = useSelector((state) => state.user.value)
-  const activity = useSelector((state) => state.activity.value)
-  const dispatch = useDispatch()
-  const [dayTime, setDayTime] = useState("Indisponible")
-  const [meteo, setMeteo] = useState("Indisponible")
-  const [meteoIcon, setMeteoIcon] = useState("?")
-  const [refreshing, setRefreshing] = React.useState(false)
-  const [animationKey, setAnimationKey] = useState(0)
+  const user = useSelector((state) => state.user.value);
+  const activity = useSelector((state) => state.activity.value);
+  const dispatch = useDispatch();
+  const [dayTime, setDayTime] = useState("Indisponible");
+  const [meteo, setMeteo] = useState("Indisponible");
+  const [meteoIcon, setMeteoIcon] = useState("?");
+  const [refreshing, setRefreshing] = React.useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
   // Faux data pour le chart (à remplacer par les vrais calculs)
   // let playTime = 35
   // let sessions = 5
   // let xp = 105
 
-  console.log("activity", JSON.stringify(activity, null, 2))
+  // console.log("activity", JSON.stringify(activity, null, 2))
 
   // Calcul des perfs réelles
 
-  let playTime = 120 // temps total en minutes
-  let sessions = 40 // nombre d'exercices (sublevels) réalisés dans le niveau > user.currentSubLevelID/activity.length
-  let xp = 10 // user.xp déjà accumulé
+  let playTime = 120; // temps total en minutes
+  let sessions = 40; // nombre d'exercices (sublevels) réalisés dans le niveau > user.currentSubLevelID/activity.length
+  let xp = 10; // user.xp déjà accumulé
 
   // Fonction qui génère la bonne URL de fallback selon le genre
   const getPhotoUrl = (gender) => {
     if (gender === "Masculin")
-      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_cltqmm.png"
+      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_cltqmm.png";
     if (gender === "Féminin")
-      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png"
+      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png";
     if (gender === "Non binaire")
       return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png";
     // Par défaut, avatar générique 250x250
     return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png";
   };
-
 
   // Récupère user + activities depuis l’API, fallback sur l’avatar profil selon genre, etc.
   const fetchUserData = () => {
@@ -75,14 +73,16 @@ export default function DashBoard(props) {
     })
       .then((r) => r.json())
       .then((data) => {
-        let photoUrl = data.dataUser.photoUrl
+        let photoUrl = data.dataUser.photoUrl;
         if (
           photoUrl &&
           photoUrl.includes("default-profile") &&
           !photoUrl.includes("w_250")
         ) {
-          photoUrl = getPhotoUrl(data.dataUser.gender)
+          photoUrl = getPhotoUrl(data.dataUser.gender);
         }
+        // console.log("ora ", data.dataUser.stats);
+        
         let newUser = {
           token: data.dataUser.token,
           photoUrl,
@@ -97,6 +97,8 @@ export default function DashBoard(props) {
           currentSubLevelID: data.dataUser.currentSubLevelID,
           height: data.dataUser.height,
           weight: data.dataUser.weight,
+          sessions: data.dataUser.stats.nbSessions,
+          playTime: data.dataUser.stats.totalTime,
         }
         dispatch(addUserToStore(newUser))
         dispatch(addActivityToStore(data.dataLevel.subLevels))
@@ -114,22 +116,21 @@ export default function DashBoard(props) {
 
   // Au premier render, charge les données user/activity
   useEffect(() => {
-    fetchUserData()
-  }, [])
+    fetchUserData();
+  }, []);
 
   // Pull-to-refresh pour MAJ user/activities + force anim bar de progression
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true)
+    setRefreshing(true);
     fetchUserData().finally(() => {
-
       setRefreshing(false);
       setAnimationKey(Date.now()); // force le refresh ProgressBar
     });
     // Log l’heure du refresh pour debug
-    const now = new Date();
-    const hh = now.getHours().toString().padStart(2, "0");
-    const mm = now.getMinutes().toString().padStart(2, "0");
-    const ss = now.getSeconds().toString().padStart(2, "0");
+    // const now = new Date();
+    // const hh = now.getHours().toString().padStart(2, "0");
+    // const mm = now.getMinutes().toString().padStart(2, "0");
+    // const ss = now.getSeconds().toString().padStart(2, "0");
     //console.log(`${hh}H${mm}mn${ss}s`)
   }, []);
 
@@ -153,8 +154,10 @@ export default function DashBoard(props) {
     let opa;
     let direction;
     user.currentSubLevelID < i ? (opa = 0.5) : (opa = 1);
-    user.currentSubLevelID < i ? (direction = "TabNavigator") : (direction = "LevelScreen");
-    
+    user.currentSubLevelID < i
+      ? (direction = "TabNavigator")
+      : (direction = "LevelScreen");
+
     return (
       <CardLevelClicable
         key={i}
@@ -170,12 +173,11 @@ export default function DashBoard(props) {
     );
   });
 
-
   // Fallback profil si pas de photo DB
   const profileUrl =
     user.photoUrl && user.photoUrl !== ""
       ? user.photoUrl
-      : getPhotoUrl(user.gender)
+      : getPhotoUrl(user.gender);
 
   // ========== RENDER PRINCIPAL DU DASHBOARD ==========
 
@@ -206,8 +208,11 @@ export default function DashBoard(props) {
           {/* Progression (niveau actuel, cercle de progression à droite) */}
           <View style={styles.cardProgress}>
             <View style={{ flex: 2, justifyContent: "center" }}>
-              <Text style={styles.progressTitle}>Niveau actuel : 
-              <Text style={styles.progressTitle}>&nbsp;{user.currentLevelID}.{user.currentSubLevelID}</Text>
+              <Text style={styles.progressTitle}>
+                Niveau actuel :
+                <Text style={styles.progressTitle}>
+                  &nbsp;{user.currentLevelID}.{user.currentSubLevelID}
+                </Text>
               </Text>
               <Text style={styles.progressSteps}>
                 {user.currentSubLevelID}/{activity.length} exercices complétés
@@ -219,7 +224,6 @@ export default function DashBoard(props) {
                 key={animationKey}
                 value={(user.currentSubLevelID * 100) / activity.length}
               />
-
             </View>
           </View>
 
@@ -257,7 +261,7 @@ export default function DashBoard(props) {
               🎉 Bravo ! +{xp} XP gagnés aujourd’hui 🎉
             </Text> */}
           {/* Option : Chart/graph ici */}
-          <MooveItFunChart totalTime={playTime} exercises={sessions} xp={xp} />
+          <MooveItFunChart totalTime={user.playTime} exercises={user.sessions} xp={user.xp} />
           {/* </View> */}
 
           {/* Bas de page : Training & Météo, côte à côte */}
@@ -282,7 +286,7 @@ export default function DashBoard(props) {
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
-  )
+  );
 }
 
 // ==================== STYLES FLAT CLEAN + COULEURS HARMONISÉES ====================
@@ -362,7 +366,6 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 0,
     marginBottom: 0,
-
   },
   activity: {
     padding: 0,
@@ -489,4 +492,4 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 2,
   },
-})
+});

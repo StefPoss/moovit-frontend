@@ -44,7 +44,8 @@
         "title": "Age",
         "desc": "Entrez votre âge",
         "name": "age",
-        "fieldType": "number"
+        "fieldType": "number",
+        "range": [7, 77]
       },
       {
         "title": "Ville",
@@ -65,13 +66,15 @@
         "title": "Poids",
         "desc": "Entrez votre poids (en kg)",
         "name": "weight",
-        "fieldType": "number"
+        "fieldType": "number",
+        "range": [40, 250]
       },
       {
         "title": "Taille",
         "desc": "Entrez votre taille (en cm)",
         "name": "height",
-        "fieldType": "number"
+        "fieldType": "number",
+        "range": [100, 250]
       }
     ]
   },
@@ -100,6 +103,7 @@
     "required": true,
     "mainQuestion": "",
     "secondaryQuestion": "Choisis ton niveau ?",
+
     "data": [
       {
         "main": "Aucune expérience",
@@ -128,7 +132,8 @@
     "type": "checkBox",
     "required": false,
     "mainQuestion": "",
-    "secondaryQuestion": "Pourquoi cherches-tu un coach ?",
+    "secondaryQuestion": "Pourquoi cherches-tu un coach ? ",
+    "tertiary": "facultative",
     "data": [
       { "answer": "Pour me motiver", "name": "reason" },
       { "answer": "Pour me challenger", "name": "reason" },
@@ -142,6 +147,7 @@
     "required": false,
     "mainQuestion": "",
     "secondaryQuestion": "Quel est ton objectif ?",
+    "tertiary": "facultative",
     "data": [
       { "answer": "15 min/jour", "name": "dayTime" },
       { "answer": "30 min/jour", "name": "dayTime" },

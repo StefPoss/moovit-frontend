@@ -9,10 +9,11 @@ import {
 } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { Ionicons } from "@expo/vector-icons";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
 import activities from "../../../data/activities_sample.json";
 
-export default function OnPlay({ infos }) {
-  const { image, title, mediaUrl, description, tipOfThePro, timing } = infos;
+export default function OnPlay({ infos, title }) {
+  const { image, mediaUrl, description, tipOfThePro, timing } = infos;
 
   const [isRunning, setIsRunning] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(timing * 60);
@@ -69,45 +70,55 @@ export default function OnPlay({ infos }) {
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.content}>
-        <View style={styles.row}>
-          <View style={styles.squareCard}>
-            {videoId ? (
-              <YoutubePlayer
-                height={90}
-                width={"100%"}
-                videoId={videoId}
-                play={playing}
-                onChangeState={(state) => state === "ended" && onVideoEnd()}
-                initialPlayerParams={{
-                  modestbranding: true,
-                  rel: 0,
-                  controls: 1,
-                }}
-              />
-            ) : (
-              <Ionicons name="logo-youtube" size={40} color="black" />
-            )}
+        <View style={styles.headerRow}>
+          <View style={styles.mainCard}>
+            <Image
+              source={{ uri: image }}
+              style={styles.image}
+              resizeMode="cover"
+            />
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.challengeText}>{description}</Text>
           </View>
 
-          <TouchableOpacity
-            style={styles.squareCardtimer}
-            onPress={toggleTimer}
-          >
+          <TouchableOpacity style={styles.timerCard} onPress={toggleTimer}>
+            <AnimatedCircularProgress
+              size={90}
+              width={8}
+              fill={(secondsLeft / (timing * 60)) * 100}
+              tintColor="#FF9900"
+              backgroundColor="#fff"
+              duration={1000}
+              rotation={0}
+              style={{ marginBottom: 10 }}
+            >
+              {() => (
+                <Text style={styles.timeCount}>{formatTime(secondsLeft)}</Text>
+              )}
+            </AnimatedCircularProgress>
             <Text style={styles.timerText}>
-              {isRunning ? "Pause" : "Timer"}
+              {isRunning ? "Pause" : "Start"}
             </Text>
-            <Text style={styles.timeCount}>{formatTime(secondsLeft)}</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={styles.mainCard}>
-          <Image
-            source={{ uri: image }}
-            style={styles.image}
-            resizeMode="cover"
-          />
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.challengeText}>{description}</Text>
+        <View style={styles.videoCard}>
+          {videoId ? (
+            <YoutubePlayer
+              height={200}
+              width={"100%"}
+              videoId={videoId}
+              play={playing}
+              onChangeState={(state) => state === "ended" && onVideoEnd()}
+              initialPlayerParams={{
+                modestbranding: true,
+                rel: 0,
+                controls: 1,
+              }}
+            />
+          ) : (
+            <Ionicons name="logo-youtube" size={40} color="black" />
+          )}
         </View>
 
         <View style={styles.tipBox}>
@@ -128,78 +139,75 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "space-between",
   },
-  backBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: "#F3F3F3",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  row: {
+  headerRow: {
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 20,
   },
-  squareCard: {
-    backgroundColor: "#eee",
-    width: "58%",
-    height: 200,
-    borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-  },
-  squareCardtimer: {
-    backgroundColor: "#FCEACE",
-    width: "38%",
-    height: 200,
-    borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-  },
-  timerText: {
-    fontSize: 18,
-    fontWeight: "500",
-  },
-  timeCount: {
-    fontSize: 20,
-    marginTop: 4,
-    fontWeight: "bold",
-  },
   mainCard: {
+    width: "60%",
     backgroundColor: "#f7f6ff",
-    padding: 20,
+    padding: 14,
     borderRadius: 24,
+    marginRight: 12,
     alignItems: "center",
-    marginBottom: 20,
   },
   image: {
     width: "100%",
-    height: 260,
-    borderRadius: 16,
+    height: 180,
+    borderRadius: 12,
     marginBottom: 10,
   },
   title: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "bold",
-    marginBottom: 10,
-    textTransform: "lowercase",
+    marginBottom: 6,
+    textAlign: "center",
   },
   challengeText: {
-    fontSize: 16,
+    fontSize: 12,
     textAlign: "center",
-    lineHeight: 24,
+    lineHeight: 18,
+  },
+  timerCard: {
+    width: 110,
+    height: 150,
+
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    margin: "auto",
+    padding: "auto",
+  },
+  timerText: {
+    fontSize: 14,
+    fontWeight: "500",
+    textAlign: "center",
+  },
+  timeCount: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#222",
+  },
+  videoCard: {
+    width: "100%",
+    height: 300,
+    backgroundColor: "#eee",
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+    marginBottom: 20,
   },
   tipBox: {
-    backgroundColor: "#cbc4e9",
     padding: 14,
-    borderRadius: 20,
+    borderRadius: 16,
   },
   tipText: {
     fontSize: 15,
     color: "#222",
+    textAlign: "center",
   },
 });

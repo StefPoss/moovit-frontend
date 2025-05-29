@@ -74,9 +74,28 @@ export default function OnBoarding({ navigation }) {
     if (questionForm[numQuestion]?.required) {
       for (let i = 0; i < questionForm[numQuestion].data.length; i++) {
         const key = questionForm[numQuestion].data[i].name;
-        if (!infos[key]) {
+        const fieldType = questionForm[numQuestion].data[i].fieldType;
+        const range = questionForm[numQuestion].data[i].range;
+
+        const val = infos[key];
+
+        if (!val) {
           alert("Merci de remplir tous les champs obligatoires");
           return;
+        }
+
+        if (fieldType === "number" && range) {
+          const numberVal = parseInt(val, 10);
+          if (
+            isNaN(numberVal) ||
+            numberVal < range[0] ||
+            numberVal > range[1]
+          ) {
+            alert(
+              `${questionForm[numQuestion].data[i].title} doit être un nombre entre ${range[0]} et ${range[1]}`
+            );
+            return;
+          }
         }
       }
     }
