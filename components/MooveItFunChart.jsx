@@ -1,56 +1,55 @@
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
 import { BarChart, Grid } from "react-native-svg-charts"
+import { G, Text as SvgText } from "react-native-svg"
 
-export default function MooveItFunChart(props) {
-  const { xp = 250, totalTime = 360, exercises = 0 } = props
+const Labels = ({ x, y, bandwidth, data }) => (
+  <G>
+    {data.map((item, index) => {
+      console.log("item", item, "y", y(item.value))
+      return (
+        <SvgText
+          key={index}
+          x={x(index) + bandwidth / 2}
+          y={y(item.value) - 10}
+          fontSize={22}
+          fill="#fff"
+          alignmentBaseline="middle"
+          textAnchor="middle"
+          fontWeight="bold"
+        >
+          {item.value}
+        </SvgText>
+      )
+    })}
+  </G>
+)
 
-  // Log pour vérifier les props
-  console.log("MooveItFunChart props =", { xp, totalTime, exercises })
-
+export default function MooveItFunChart({
+  totalTime = 0,
+  exercises = 0,
+  xp =0,
+}) {
   const data = [
-    {
-      value: totalTime,
-      label: "Temps total",
-      svg: { fill: "#E9FEE1" },
-    },
-    {
-      value: exercises,
-      label: "Exos",
-      svg: { fill: "#E4F0F4" },
-    },
-    {
-      value: xp,
-      label: "XP",
-      svg: { fill: "#C5C4D9" },
-    },
+    { value: totalTime, label: "Temps total", svg: { fill: "#E9FEE1" } },
+    { value: exercises, label: "Exos", svg: { fill: "#E4F0F4" } },
+    { value: xp, label: "XP", svg: { fill: "#C5C4D9" } },
   ]
-
-  const chartConfig = {
-    backgroundGradientFrom: "#1E2923",
-    backgroundGradientFromOpacity: 0,
-    backgroundGradientTo: "#08130D",
-    backgroundGradientToOpacity: 0.5,
-    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
-    barPercentage: 0.5,
-    useShadowColorFromDataset: false // optional
-  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tes perfs du moment</Text>
       <BarChart
-        style={{ height: 70, width: 280 }}
+        style={{ height: 100, width: 280 }}
         data={data}
         yAccessor={({ item }) => item.value}
         svg={({ item }) => item.svg}
         spacingInner={0.5}
-        gridMin={10}
-        chartConfig={chartConfig}
-        verticalLabelRotation={30}
+        gridMin={0}
+        contentInset={{ top: 24, bottom: 8 }}
       >
         <Grid />
+        <Labels />
       </BarChart>
       <View style={styles.labelContainer}>
         {data.map((item, idx) => (
@@ -73,7 +72,6 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 18,
     alignItems: "center",
-    elevation: 2,
     margin: 14,
   },
   title: {

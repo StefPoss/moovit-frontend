@@ -41,10 +41,8 @@ export default function DashBoard(props) {
   // Calcul des perfs réelles
 
   let playTime = 120 // temps total en minutes
-  let sessions = 40  // nombre d'exercices (sublevels) réalisés dans le niveau > user.currentSubLevelID/activity.length
+  let sessions = 40 // nombre d'exercices (sublevels) réalisés dans le niveau > user.currentSubLevelID/activity.length
   let xp = 10 // user.xp déjà accumulé
-
-
 
   // Fonction qui génère la bonne URL de fallback selon le genre
   const getPhotoUrl = (gender) => {
@@ -217,11 +215,7 @@ export default function DashBoard(props) {
               🎉 Bravo ! +{xp} XP gagnés aujourd’hui 🎉
             </Text> */}
           {/* Option : Chart/graph ici */}
-          <MooveItFunChart
-            totalTime={playTime}
-            exercises={sessions}
-            xp={xp}
-          />
+          <MooveItFunChart totalTime={playTime} exercises={sessions} xp={xp} />
           {/* </View> */}
 
           {/* Bas de page : Training & Météo, côte à côte */}
@@ -232,7 +226,7 @@ export default function DashBoard(props) {
                 name="dumbbell"
                 size={24}
                 color="#363255"
-                style={{ marginBottom: 8 }}
+                style={{ marginBottom: 0 }}
               />
               <Text style={styles.trainingTitle}>Training</Text>
               <Text style={styles.trainingText}>{dayTime}</Text>
@@ -266,7 +260,7 @@ const styles = StyleSheet.create({
     width: "92%",
     backgroundColor: "#fff", // blanc pur, démarque la card profil
     borderRadius: 16,
-    marginBottom: 10,
+    marginBottom: 6,
     padding: 4,
     flexDirection: "row",
     alignItems: "center",
@@ -287,7 +281,7 @@ const styles = StyleSheet.create({
     width: "92%",
     backgroundColor: "#7D6BB3", // violet charte, flat
     borderRadius: 16,
-    marginBottom: 2,
+    marginBottom: 0,
     paddingVertical: 18,
     paddingHorizontal: 20,
     flexDirection: "row",
@@ -297,13 +291,13 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 2,
+    marginBottom: 0,
   },
   progressValue: {
     color: "#fff",
     fontSize: 32,
     fontWeight: "bold",
-    marginBottom: 4,
+    marginBottom: 0,
   },
   progressSteps: {
     color: "#E4F0F4",
@@ -319,13 +313,15 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#ffffff", // bleu clair charte
     borderRadius: 16,
-    marginTop: 3,
+    marginTop: 0,
     marginBottom: 0,
     paddingVertical: 8,
     paddingHorizontal: 10,
   },
   scrollView: {
     width: "100%",
+    marginTop: 0,
+    marginBottom: 0,
   },
   activity: {
     padding: 0,
@@ -335,8 +331,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#363255", // violet foncé stats
     borderRadius: 16,
     marginTop: 0,
-    marginBottom: 3,
-    paddingVertical: 16,
+    marginBottom:0,
+    paddingVertical: 8,
     paddingHorizontal: 14,
     alignItems: "center",
   },
@@ -344,7 +340,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 12,
+    marginBottom: 10,
     textAlign: "center",
   },
   statsRow: {
@@ -373,13 +369,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#CFDED3", // vert pastel = contraste max sur fond foncé
     marginTop: 10,
+    marginbottom:0,
   },
   bottomRow: {
     flex: 1,
     flexDirection: "row",
     width: "92%",
     justifyContent: "space-between",
-    marginBottom: 16,
+    marginTop: 0,
+    marginBottom: 0,
     alignItems: "stretch",
   },
   cardTraining: {
@@ -388,10 +386,12 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 2,
     marginRight: 7,
-    minHeight: 90,
-    maxHeight: 130,
+    minHeight: 80,
+    maxHeight: 120,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 0,
+    marginTop: 0,
   },
   trainingInner: {
     flex: 1,
