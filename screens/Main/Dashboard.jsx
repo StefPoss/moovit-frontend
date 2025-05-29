@@ -43,7 +43,7 @@ export default function DashBoard(props) {
   // let sessions = 5
   // let xp = 105
 
-  console.log("activity", JSON.stringify(activity, null, 2))
+  // console.log("activity", JSON.stringify(activity, null, 2))
 
   // Calcul des perfs réelles
 
@@ -76,13 +76,17 @@ export default function DashBoard(props) {
       .then((r) => r.json())
       .then((data) => {
         let photoUrl = data.dataUser.photoUrl
-        if (
+        if 
+        (
           photoUrl &&
           photoUrl.includes("default-profile") &&
           !photoUrl.includes("w_250")
-        ) {
+        ) 
+        {
           photoUrl = getPhotoUrl(data.dataUser.gender)
         }
+        // console.log("ora ", data.dataUser.stats);
+        
         let newUser = {
           token: data.dataUser.token,
           photoUrl,
@@ -97,6 +101,8 @@ export default function DashBoard(props) {
           currentSubLevelID: data.dataUser.currentSubLevelID,
           height: data.dataUser.height,
           weight: data.dataUser.weight,
+          sessions: data.dataUser.stats.nbSessions,
+          playTime: data.dataUser.stats.totalTime,
         }
         dispatch(addUserToStore(newUser))
         dispatch(addActivityToStore(data.dataLevel.subLevels))
@@ -126,10 +132,10 @@ export default function DashBoard(props) {
       setAnimationKey(Date.now()); // force le refresh ProgressBar
     });
     // Log l’heure du refresh pour debug
-    const now = new Date();
-    const hh = now.getHours().toString().padStart(2, "0");
-    const mm = now.getMinutes().toString().padStart(2, "0");
-    const ss = now.getSeconds().toString().padStart(2, "0");
+    // const now = new Date();
+    // const hh = now.getHours().toString().padStart(2, "0");
+    // const mm = now.getMinutes().toString().padStart(2, "0");
+    // const ss = now.getSeconds().toString().padStart(2, "0");
     //console.log(`${hh}H${mm}mn${ss}s`)
   }, []);
 
@@ -257,7 +263,7 @@ export default function DashBoard(props) {
               🎉 Bravo ! +{xp} XP gagnés aujourd’hui 🎉
             </Text> */}
           {/* Option : Chart/graph ici */}
-          <MooveItFunChart totalTime={playTime} exercises={sessions} xp={user.xp} />
+          <MooveItFunChart totalTime={user.playTime} exercises={user.sessions} xp={user.xp} />
           {/* </View> */}
 
           {/* Bas de page : Training & Météo, côte à côte */}
