@@ -15,13 +15,35 @@ import { useSelector } from "react-redux";
 
 //a importé dans le terminal !!!npm i react-native-circular-progress + npm i --save react-native-circular-progress react-native-svg// npx expo install react-native-reanimated + yarn add react-native-circular-progress-indicator + yarn add react-native-svg
 
-export default function NewLevelScreen({ navigation }) {
+export default function NewLevelScreen({route}) {
+
+  const {subLevel} = route.params
+  console.log("popoo ",subLevel);
+
+  let sublevelsMapped = subLevel.map((e, i)=>
+  {
+    return <CardLevelClicable
+                key={i}
+                width="368"
+                height="150"
+                backgroundColor="#F5f5f5"
+                fontSize={20}
+                text={e.title}
+                num={e.subLevelID}
+                description={e.description}
+                linkTo="TabNavigator"
+              />
+  })
+
+
+  
+
+
   // const [value, setValue] = useState(60);
     const topImg =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   //"https://reactnative.dev/img/tiny_logo.png";
     const niv = 6
-  // setValue(niv)
   const bgImage =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   return (
@@ -45,7 +67,7 @@ export default function NewLevelScreen({ navigation }) {
             style={styles.image}
           >
             <ScrollView style={styles.scroll}>
-              <CardLevelClicable
+              {/* <CardLevelClicable
                 width="368"
                 height="150"
                 backgroundColor="#F5f5f5"
@@ -54,7 +76,8 @@ export default function NewLevelScreen({ navigation }) {
                 num="2"
                 description="corpus libris..corpus libris..corpus libris.."
                 linkTo="TabNavigator"
-              />
+              /> */}
+              {sublevelsMapped}
             </ScrollView>
           </ImageBackground>
         </View>

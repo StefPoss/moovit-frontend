@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 import {
   View,
   Text,
   ScrollView,
   StyleSheet,
   RefreshControl,
+
 } from "react-native";
 // import ActivityCard from "../../components/ActivityCard"
 // import StaticCard from "../../components/StaticCard"
@@ -19,47 +20,54 @@ import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import StatiscticGraphic from "../../components/StatiscticGraphic";
 import { FontAwesome5 } from "@expo/vector-icons";
+<<<<<<< HEAD
+=======
+import meteoIcons from "../../data/meteoIcons.json";
+import MooveItFunChart from "../../components/MooveItFunChart"
+>>>>>>> d8ccafadbe6e032df35920bf77c1747acebfa698
 // import { Ionicons } from "@expo/vector-icons"
 // import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
+// ========== LE DASHBOARD PRINCIPAL ==========
 
 export default function DashBoard(props) {
-  // LE DASHBOARD : affiche les infos user, le fallback photo profil, etc.
-  const user = useSelector((state) => state.user.value);
-  const activity = useSelector((state) => state.activity.value);
-  const dispatch = useDispatch();
-  const [nExercices, setNExercices] = useState(5);
-  const [dayTime, setDayTime] = useState("Indisponible");
-  const [meteo, setMeteo] = useState("Indisponible");
-  const [refreshing, setRefreshing] = React.useState(false);
-  const [animationKey, setAnimationKey] = useState(0);
-  let playTime = 35;
-  let sessions = 5;
-  let xp = 105;
-  console.log(activity);
-  // Fonction qui génère une url default 250x250 en fonction du genre
+  // User / activity récupérés via Redux
+  const user = useSelector((state) => state.user.value)
+  const activity = useSelector((state) => state.activity.value)
+  const dispatch = useDispatch()
+  const [dayTime, setDayTime] = useState("Indisponible")
+  const [meteo, setMeteo] = useState("Indisponible")
+  const [meteoIcon, setMeteoIcon] = useState("?")
+  const [refreshing, setRefreshing] = React.useState(false)
+  const [animationKey, setAnimationKey] = useState(0)
+  // Faux data pour le chart (à remplacer par les vrais calculs)
+  // let playTime = 35
+  // let sessions = 5
+  // let xp = 105
+
+  console.log("activity", JSON.stringify(activity, null, 2))
+
+  // Calcul des perfs réelles
+
+  let playTime = 120 // temps total en minutes
+  let sessions = 40 // nombre d'exercices (sublevels) réalisés dans le niveau > user.currentSubLevelID/activity.length
+  let xp = 10 // user.xp déjà accumulé
+
+  // Fonction qui génère la bonne URL de fallback selon le genre
   const getPhotoUrl = (gender) => {
-    // Si masculin, profil homme en 250x250
     if (gender === "Masculin")
-      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_cltqmm.png";
-    // Si féminin, profil femme en 250x250
+      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_cltqmm.png"
     if (gender === "Féminin")
-      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png";
-    // Si non binaire, avatar neutre en 250x250
+      return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png"
     if (gender === "Non binaire")
       return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png";
     // Par défaut, avatar générique 250x250
     return "https://res.cloudinary.com/deuhttaaq/image/upload/c_thumb,w_250,h_250/v1748005964/projectFinDeBatch/front/images/default-profile-male_exgh99.png";
   };
 
-  //useEffect pour charger les données au chargement de la page
-  // useEffect(() => {
-  //requete vers le back
-  // console.log("User is", User)
-  // Récupère user + activities depuis l’API
-  // Ici, gestion du fallback AVANT le dispatch ! (store toujours clean)
-  // Appel l'API, gère la photo profil/fallback AVANT le dispatch, pour que le store soit toujours clean
+
+  // Récupère user + activities depuis l’API, fallback sur l’avatar profil selon genre, etc.
   const fetchUserData = () => {
     return fetch(`${API_URL}/api/users/dashboard`, {
       method: "POST",
@@ -70,17 +78,14 @@ export default function DashBoard(props) {
     })
       .then((r) => r.json())
       .then((data) => {
-        let photoUrl = data.dataUser.photoUrl;
-
-        // Si la photo de la DB contient "default-profile", on force le fallback redimensionné selon le genre
+        let photoUrl = data.dataUser.photoUrl
         if (
           photoUrl &&
           photoUrl.includes("default-profile") &&
           !photoUrl.includes("w_250")
         ) {
-          photoUrl = getPhotoUrl(data.dataUser.gender);
+          photoUrl = getPhotoUrl(data.dataUser.gender)
         }
-
         let newUser = {
           token: data.dataUser.token,
           photoUrl,
@@ -90,34 +95,36 @@ export default function DashBoard(props) {
           sportPlayed: data.dataUser.sportPlayed[0].title,
           titleLevel: data.dataLevel.title,
           xp: data.dataUser.xp,
-          level: data.dataUser.level,
           gender: data.dataUser.gender || "",
           currentLevelID: data.dataUser.currentLevelID,
           currentSubLevelID: data.dataUser.currentSubLevelID,
           height: data.dataUser.height,
           weight: data.dataUser.weight,
-        };
-        dispatch(addUserToStore(newUser));
-        dispatch(addActivityToStore(data.dataLevel.subLevels));
-        let dailyTime = data.dataUser.form.dayTime;
-        if (dailyTime === "4 h/semaine") setDayTime("45 minutes");
-        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure");
-        else if (dailyTime === "15 min/jour") setDayTime("15 minutes");
-        else if (dailyTime === "30 min/jour") setDayTime("30 minutes");
-        setMeteo(data.dataMeteo);
-      });
-  };
+        }
+        dispatch(addUserToStore(newUser))
+        dispatch(addActivityToStore(data.dataLevel.subLevels))
+        let dailyTime = data.dataUser.form.dayTime
+        if (dailyTime === "4 h/semaine") setDayTime("45 minutes")
+        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure")
+        else if (dailyTime === "15 min/jour") setDayTime("15 minutes")
+        else if (dailyTime === "30 min/jour") setDayTime("30 minutes")
+        setMeteo(data.dataMeteo)
+        let Icon = meteoIcons.find((entry) => entry.desc === data.dataMeteo)
+        setMeteoIcon(Icon.icon)
+      })
+  }
 
-  // 1er appel : charge le dashboard au premier render
+
+  // Au premier render, charge les données user/activity
   useEffect(() => {
-    fetchUserData();
-    //console.log("activity subLevels ",activity.length);
-  }, []);
+    fetchUserData()
+  }, [])
 
-  // Fonction Pull-to-Refresh pour MAJ user/activities
+  // Pull-to-refresh pour MAJ user/activities + force anim bar de progression
   const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
+    setRefreshing(true)
     fetchUserData().finally(() => {
+
       setRefreshing(false);
       setAnimationKey(Date.now()); // force le refresh ProgressBar
     });
@@ -129,6 +136,10 @@ export default function DashBoard(props) {
     //console.log(`${hh}H${mm}mn${ss}s`)
   }, []);
 
+  // const fetchSport = () => {
+  //   return fetch(`${API_URL}/api/getsport`, (req,res) =>{
+
+  //   }
   //console.log("user is", user)
 
   // Création du carousel de cartes d’activités > sécurisation du .map car
@@ -137,46 +148,52 @@ export default function DashBoard(props) {
   // Si activity est bien un tableau, on l'utilise tel quel
   // Si c'est undefined ou un objet ou autre chose, on mappe sur un tableau vide, donc pas d’erreur
   // on a juste pas de cartes à afficher
-  let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => (
-    <CardLevelClicable
-      key={i}
-      style={styles.activity}
-      text={e.title}
-      backgroundColor="#C5C4D9"
-      color="white"
-      url={e.image}
-      fill={true}
-      linkTo="LevelScreen"
-      // keyNum={key}
-    />
-  ));
+  // console.log("lvl id", user.currentLevelID);
+  // console.log("sublvl id", user.currentSubLevelID);
+  // console.log("activity", activity.length);
 
-  // Log l'URL utilisée pour la photo profil
-  // console.log(
-  //   "Dashboard envoie photoUrl à PhotoProfil:",
-  //   user.photoUrl,
-  //   "| gender:",
-  //   user.gender
-  // )
+  let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => {
+    let opa;
+    let direction;
+    user.currentSubLevelID < i ? (opa = 0.5) : (opa = 1);
+    user.currentSubLevelID < i ? (direction = "TabNavigator") : (direction = "LevelScreen");
+    
+    return (
+      <CardLevelClicable
+        key={i}
+        style={styles.activity}
+        text={e.title}
+        backgroundColor="#C5C4D9"
+        color="white"
+        url={e.image}
+        fill={true}
+        opacity={opa}
+        linkTo={direction}
+      />
+    );
+  });
 
-  // Choix de l'URL à passer au composant PhotoProfil :
-  // - Si l’API renvoie une photo → on prend ça
-  // - Sinon → on génère la bonne URL via getPhotoUrl(user.gender)
+
+  // Fallback profil si pas de photo DB
   const profileUrl =
     user.photoUrl && user.photoUrl !== ""
       ? user.photoUrl
-      : getPhotoUrl(user.gender);
+      : getPhotoUrl(user.gender)
 
-  // RENDER : SafeArea + ScrollView + toutes les cartes
+  // ========== RENDER PRINCIPAL DU DASHBOARD ==========
+
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container} edges={["top"]}>
+      <SafeAreaView style={styles.fullScreen} edges={["top"]}>
         <ScrollView
-          contentContainerStyle={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
+          showsVerticalScrollIndicator={false}
+          scrollEnabled={false}
         >
+<<<<<<< HEAD
           <View style={styles.container}>
             {/* PROFILE CARD */}
             <View style={styles.profilContainer}>
@@ -256,125 +273,304 @@ export default function DashBoard(props) {
                   <Text style={styles.profilText}>{meteo}</Text>
                 </View>
               </View>
+=======
+          {/* Carte profil */}
+          <View style={styles.cardProfile}>
+            <PhotoProfil photoUrl={profileUrl} />
+            <View style={styles.textProfilContainer}>
+              <Text style={[styles.profilText, { fontSize: 20 }]}>
+                Bonjour {user.username}
+              </Text>
+              <Text style={styles.profilText}>
+                Prêt pour un nouveau challenge ?
+              </Text>
+>>>>>>> d8ccafadbe6e032df35920bf77c1747acebfa698
             </View>
           </View>
-          {/* Intégration de la Tabnavigation ici à modifier */}
-          {/* <Tabnavigation /> */}
+
+          {/* Progression (niveau actuel, cercle de progression à droite) */}
+          <View style={styles.cardProgress}>
+            <View style={{ flex: 2, justifyContent: "center" }}>
+              <Text style={styles.progressTitle}>Niveau actuel : 
+              <Text style={styles.progressTitle}>&nbsp;{user.currentLevelID}.{user.currentSubLevelID}</Text>
+              </Text>
+              <Text style={styles.progressSteps}>
+                {user.currentSubLevelID}/{activity.length} exercices complétés
+              </Text>
+            </View>
+
+            <View style={styles.progressRightBlock}>
+              <ExercisesProgressBar
+                key={animationKey}
+                value={(user.currentSubLevelID * 100) / activity.length}
+              />
+
+            </View>
+          </View>
+
+          {/* Carousel d'activités (niveaux) */}
+          <View style={styles.cardCarousel}>
+            <ScrollView
+              contentContainerStyle={{ padding: 0 }}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              style={styles.scrollView}
+            >
+              {levelsCards}
+            </ScrollView>
+          </View>
+
+          {/* Stats/perfs du moment */}
+          {/* <View style={styles.cardStats}>
+            <Text style={styles.statsTitle}>Tes perfs du moment</Text>
+            <View style={styles.statsRow}>
+              <View>
+                <Text style={styles.statsLabel}>Temps total</Text>
+                <Text style={styles.statsValue}>{playTime} min</Text>
+              </View>
+              <View>
+                <Text style={styles.statsLabel}>Exos</Text>
+                <Text style={styles.statsValue}>{sessions}</Text>
+              </View>
+              <View>
+                <Text style={styles.statsLabel}>XP</Text>
+                <Text style={styles.statsValue}>{xp}</Text>
+              </View>
+            </View> */}
+
+          {/* <Text style={styles.xpCongrats}>
+              🎉 Bravo ! +{xp} XP gagnés aujourd’hui 🎉
+            </Text> */}
+          {/* Option : Chart/graph ici */}
+          <MooveItFunChart totalTime={playTime} exercises={sessions} xp={xp} />
+          {/* </View> */}
+
+          {/* Bas de page : Training & Météo, côte à côte */}
+          <View style={styles.bottomRow}>
+            <View style={styles.cardTraining}>
+              {/* Ce bloc centre tout verticalement et horizontalement */}
+              <FontAwesome5
+                name="dumbbell"
+                size={24}
+                color="#363255"
+                style={{ marginBottom: 0 }}
+              />
+              <Text style={styles.trainingTitle}>Training</Text>
+              <Text style={styles.trainingText}>{dayTime}</Text>
+            </View>
+            <View style={styles.cardMeteo}>
+              <Text style={styles.meteoIcon}>{meteoIcon}</Text>
+              <Text style={styles.meteoText}>{meteo}</Text>
+            </View>
+          </View>
+          {/* Tabnavigation ici si besoin */}
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+// ==================== STYLES FLAT CLEAN + COULEURS HARMONISÉES ====================
 
-    backgroundColor: "#f9f9f9",
-    justifyContent: "center",
+const styles = StyleSheet.create({
+  fullScreen: {
+    flex: 1,
+    backgroundColor: "#f9f9f9", // fond page très clair
+  },
+  scrollContent: {
+    paddingVertical: 10,
+    paddingBottom: 70, // laisse place à la tab bar
     alignItems: "center",
-    width: "100%",
-    height: "100%",
+    minHeight: "100%",
   },
-  text: {
-    color: "#555555",
-    fontSize: 20,
-    marginLeft: -250,
-  },
-  topButton: {
-    flex: 0,
+  cardProfile: {
+    width: "92%",
+    backgroundColor: "#fff", // blanc pur, démarque la card profil
+    borderRadius: 16,
+    marginBottom: 6,
+    padding: 4,
     flexDirection: "row",
+    alignItems: "center",
+  },
+  textProfilContainer: {
+    marginLeft: 12,
+    justifyContent: "center",
+  },
+  profilText: {
+    color: "#262626",
+    fontWeight: "500",
+    borderRadius: 15,
+  },
+  cardProgress: {
+    width: "92%",
+    backgroundColor: "#7D6BB3", // violet charte, flat
+    borderRadius: 16,
+    marginBottom: 0,
+    paddingVertical: 18,
+    paddingHorizontal: 20,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  progressTitle: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 0,
+  },
+  progressValue: {
+    color: "#fff",
+    fontSize: 32,
+    fontWeight: "bold",
+    marginBottom: 0,
+  },
+  progressSteps: {
+    color: "#E4F0F4",
+    fontSize: 15,
+    opacity: 0.92,
+  },
+  progressRightBlock: {
+    flex: 1,
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+
+  cardCarousel: {
+    width: "100%",
+    backgroundColor: "#ffffff", // bleu clair charte
+    borderRadius: 16,
+    marginTop: 0,
+    marginBottom: 0,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+  },
+  scrollView: {
+    width: "100%",
+    marginTop: 0,
+    marginBottom: 0,
+
   },
   activity: {
     padding: 0,
   },
-  bottomButton: {
-    flexDirection: "row",
-  },
-  profilContainer: {
-    width: "90%",
-    height: 90,
-    backgroundColor: "ffffff",
-    borderRadius: 15,
-    marginRight: 5,
-    margin: 5,
-    padding: 10,
-    flexDirection: "row",
-  },
-  profilText: {
-    color: "black",
-    marginTop: 5,
-    fontWeight: "500",
-    borderRadius: 15,
-  },
-  progressCard: {
-    width: "90%",
-    height: 80,
-    flexDirection: "row",
+  cardStats: {
+    width: "92%",
+    backgroundColor: "#363255", // violet foncé stats
+    borderRadius: 16,
+    marginTop: 0,
+    marginBottom: 0,
+    paddingVertical: 8,
+    paddingHorizontal: 14,
     alignItems: "center",
-    backgroundColor: "#7D6BB3",
-    borderRadius: 15,
-    marginRight: 5,
-    margin: 5,
-    padding: 10,
-    alignSelf: "center",
   },
-  progressLeftBlock: {
+  statsTitle: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
+  },
+  statsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    marginBottom: 8,
+    marginTop: 8,
+  },
+  statsLabel: {
+    color: "#CFDED3",
+    fontSize: 15,
+    textAlign: "center",
+    fontWeight: "600",
+  },
+  statsValue: {
+    color: "#fff",
+    fontSize: 18,
+    textAlign: "center",
+    fontWeight: "bold",
+    marginTop: 2,
+  },
+  xpCongrats: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#CFDED3", // vert pastel = contraste max sur fond foncé
+    marginTop: 10,
+    marginbottom: 0,
+  },
+  bottomRow: {
+    flex: 1,
+    flexDirection: "row",
+    width: "92%",
+    justifyContent: "space-between",
+    marginTop: 0,
+    marginBottom: 0,
+    alignItems: "stretch",
+  },
+  cardTraining: {
+    flex: 1,
+    backgroundColor: "#FFF4E2", // beige charte, soft
+    borderRadius: 16,
+    padding: 2,
+    marginRight: 7,
+    minHeight: 80,
+    maxHeight: 120,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 0,
+    marginTop: 0,
+  },
+  trainingInner: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 4,
+    width: "100%",
+    height: "80%",
   },
-  progressTitle: {
-    color: "#fff",
-    fontSize: 24,
+  trainingTitle: {
+    fontSize: 18,
     fontWeight: "bold",
-    fontWeight: "600",
+    color: "#1a1a1a",
+    marginBottom: 2,
+    textAlign: "center",
+    width: "100%",
+  },
+  trainingText: {
+    fontSize: 15,
+    color: "#262626",
+    marginTop: 6,
+    textAlign: "center",
+    width: "100%",
+  },
+  cardMeteo: {
+    flex: 1,
+    backgroundColor: "#CFDED3", // vert pastel UI kit
+    borderRadius: 16,
+    padding: 0,
+    marginLeft: 7,
+    minHeight: 90,
+    maxHeight: 120,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  meteoInner: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 12,
+    width: "100%",
+  },
+  meteoIcon: {
+    fontSize: 40,
+    textAlign: "center",
+    width: "100%",
     marginBottom: 4,
   },
-  progressText: {
-    color: "ffffff",
-    marginTop: 5,
-    fontWeight: "500",
-    justifyContent: "center",
-  },
-  progressSteps: {
-    color: "#fff",
+  meteoText: {
     fontSize: 15,
-    opacity: 0.85,
+    color: "#363255",
+    textAlign: "center",
+    width: "100%",
+    marginTop: 2,
   },
-  progressRightBlock: {
-    marginLeft: 12,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  dayTrainingContainer: {
-    backgroundColor: "#FFF4E2",
-    width: "43%", //long du boutton
-    height: 150, //haut du boutton
-    borderRadius: 15, //arrondi des angles
-    borderColor: "#cbb7ff",
-    margin: 5,
-  },
-  textbottomButtonContainer: {
-    // backgroundColor: "#f9f9f9",
-    //borderColor: "#cbb7ff",
-    // borderWidth: 5,
-    //borderRadius: 20,
-    padding: 15,
-    margin: 15,
-    alignItems: "center",
-  },
-
-  trainingRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 14,
-  },
-  meteoContainer: {
-    backgroundColor: "#E4F0F4",
-    width: "40%", //long du boutton
-    height: 150, //haut du boutton
-    borderRadius: 15, //arrondi des angles
-    margin: 5,
-  },
-});
+})

@@ -8,8 +8,6 @@ import {
   Pressable,
   Platform,
   KeyboardAvoidingView,
-
-
 } from "react-native"; // import des composants react native
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import Button from "../../components/Buttons";
@@ -17,7 +15,6 @@ import { checkBody } from "../../modules/checkBody";
 import { useDispatch } from "react-redux";
 import { addUserToStore } from "../../reducers/userSlice";
 import { API_URL } from "@env";
-
 
 export default function SignupScreen({ navigation }) {
   // état pour afficher ou cacher le mot de passe
@@ -28,10 +25,8 @@ export default function SignupScreen({ navigation }) {
   const dispatch = useDispatch();
   console.log(email);
   console.log(password);
-  
 
   // si l'email est invalid afficher le message d'erreur
-
 
   const handleSignup = () => {
     const requiredFields = ["email", "password"];
@@ -45,16 +40,15 @@ export default function SignupScreen({ navigation }) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setEmailError("Email invalide");
-   } else {
-      setEmailError("") // sinon on efface l'erreur
-
+    } else {
+      setEmailError(""); // sinon on efface l'erreur
 
       fetch(`${API_URL}/api/users/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ password: password, email: email, }),
+        body: JSON.stringify({ password: password, email: email }),
       })
         .then((response) => {
           if (!response.ok) {
@@ -134,9 +128,6 @@ export default function SignupScreen({ navigation }) {
           backgroundColor="#cbb7ff"
           textColor="#000"
         />
-
-        {/* Mot de passe oublié */}
-        <Text style={styles.forgotText}>Mot de passe oublié ?</Text>
       </View>
       {/* Boutons sociaux visuels non fonctionnel pour l'instant */}
       <TouchableOpacity style={styles.socialButton}>
