@@ -23,7 +23,7 @@ export default function ForgotScreen() {
 
       {/* Animation nuage */}
       <LottieView
-        source={require("../../assets/Animation - 1748526184745.json")} // chemin package json
+        source={require("../../assets/Animation - 1748526184745.json")} // chemin package json pour le lien animation en progression + installer au cas où yarn add lottie-react-native
         autoPlay
         loop
         style={styles.cloud}
