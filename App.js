@@ -18,6 +18,7 @@ import NewLevelScreen from "./screens/NewLevelScreen"
 import CguScreen from "./screens/Auth/CGUScreen"
 import Play from "./screens/Activities/Play"
 import ProfileScreen from "./screens/Main/ProfileScreen"
+import TestChartScreen from "./screens/TestChartScreen"
 
 import { Provider } from "react-redux"
 import { PersistGate } from "redux-persist/integration/react"
@@ -125,8 +126,7 @@ export default function App() {
     MaterialCommunityIcons: require("@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"),
     "Questrial-Regular": require("./assets/fonts/Questrial-Regular.ttf"), // police à télécharger
     // Ajout des fonts (Modification du nom des polices pour compatibilité sur android)
-  });
-    
+  })
 
   if (!fontsLoaded) return null
 
@@ -137,6 +137,7 @@ export default function App() {
           <NavigationContainer>
             <StatusBar style="light" />
             <Stack.Navigator screenOptions={{ headerShown: false }}>
+              {/* <Stack.Screen name="TestChart" component={TestChartScreen} /> */}
               <Stack.Screen name="Welcome" component={Splash} />
               <Stack.Screen name="S'inscrire" component={SignUp} />
               <Stack.Screen name="Se connecter" component={Login} />
