@@ -43,7 +43,7 @@ export default function SignupScreen({ navigation }) {
 
     if(password.length<8)
     {
-      setEmailError("Le mot de passe doit contenir au moins 8 caractères, dont 1 caractère spécial");
+      setEmailError("Le mot de passe doit contenir au moins 8 caractères");
       return;
 
     }
