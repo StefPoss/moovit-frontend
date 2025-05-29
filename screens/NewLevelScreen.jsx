@@ -27,8 +27,9 @@ export default function NewLevelScreen({route}) {
                 width="368"
                 height="150"
                 backgroundColor="#F5f5f5"
-                fontSize={20}
+                fontSize={17}
                 text={e.title}
+                url={e.image}
                 num={e.subLevelID}
                 description={e.description}
                 linkTo="TabNavigator"
@@ -40,10 +41,10 @@ export default function NewLevelScreen({route}) {
 
 
   // const [value, setValue] = useState(60);
-    const topImg =
-    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
+    const topImg = "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168960/projectFinDeBatch/front/images/activities/padel/padel-photo-013.avif"
+    // "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   //"https://reactnative.dev/img/tiny_logo.png";
-    const niv = 6
+    const niv = ''
   const bgImage =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   return (
@@ -56,7 +57,7 @@ export default function NewLevelScreen({route}) {
             resizeMode="cover"
             style={styles.topImg}
           >
-            <BarStep value={niv} />
+            {/* <BarStep value={niv} /> */}
             <Text style={styles.toptxt}>Etapes {niv}</Text>
           </ImageBackground>
         </View>
@@ -110,18 +111,22 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     marginTop: "",
+    borderRadius:"",
   },
   half: {},
 
   toptxt: {
     zIndex: 99999,
     // marginTop:"55%",
-    marginTop: "-42.5%",
+    // marginTop: "61.5%",
+    marginTop: "40.5%",
     textAlign: "center",
+    // fontFamily:"CocomatPro-Regular",
+    fontFamily:"ManropeBold",
     fontSize: 30,
-    fontWeight: 600,
-    color: "rgba(0, 0, 0, 0.52)",
-    backgroundColor: "rgba(255, 255, 255, 0.62)",
+    // fontWeight: "heavy",
+    color: "rgba(255, 255, 255, 1)",
+    // backgroundColor: "rgba(255, 255, 255, 0.62)",
     width: "100%",
   },
 
