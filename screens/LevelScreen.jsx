@@ -16,6 +16,7 @@ import PropTypes from "prop-types";
 import { API_URL } from "@env";
 
 
+
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
 export default function LevelScreen(props) {
@@ -70,8 +71,17 @@ export default function LevelScreen(props) {
         })
   }
 
-  let levelsCards = allActivity?.map((e, i) => (
-    <CardLevelClicable
+  let levelsCards = allActivity?.map((e, i) => {
+    // let bgCol;
+    //   i === 0 || i === 3 || i === 6 || i === 9
+    //   ? (bgCol = "#eeeef5")
+    //   : i === 1 || i === 4 || i === 7 || i === 10
+    //   ? (bgCol = "#ac9cc4")
+    //   : i === 2 || i === 5 || i === 8 || i === 11
+    //   ? (bgCol = "#ffecce")
+    //   : (bgCol = "#C5C4D9");
+
+    return (<CardLevelClicable
       key={i}
       // num = {i}
       width="368"
@@ -79,21 +89,22 @@ export default function LevelScreen(props) {
       text={e.title}
       description={e.description}
       fontSize={13}
-      backgroundColor="#C5C4D9"
+      backgroundColor={"#F5f5f5"}
       color="black"
       url={e.image}
       fill={false}
       linkTo="NewLevelScreen"
       subLevelSent={e.subLevels}
     />
-  ));
+  )});
 
 
 
   
-  const topImg= "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1748380203/projectFinDeBatch/front/images/activities/activities-padel-01_mw10dt.png";
-  const niv= "1"
-  const bgImage = "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif"
+  const topImg= "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168945/projectFinDeBatch/front/images/activities/padel/padel-photo-020.avif"
+  // "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1748380203/projectFinDeBatch/front/images/activities/activities-padel-01_mw10dt.png";
+  const niv= ""
+   const bgImage = ''//"https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif"
 
     // 1er appel : charge le dashboard au premier render
     useEffect(() => {
@@ -106,7 +117,7 @@ export default function LevelScreen(props) {
       {/* <SafeAreaView style={styles.container} edges={["top"]}>  cette balise est sesactivé car le rendu est inesthetique */}
       <View style={styles.container}>
         <Image style={styles.topImg} source={{ uri: topImg }} />
-        <Text style={styles.toptxt}>NIVEAU {niv}</Text>
+        <Text style={styles.toptxt}>Niveaux {niv}</Text>
         <View style={styles.midd}>
           <ImageBackground
             source={{ uri: bgImage }}
@@ -140,7 +151,7 @@ export default function LevelScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FEF5F8",
+    // backgroundColor: "#FEF5F8",
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
@@ -151,13 +162,15 @@ const styles = StyleSheet.create({
     height: "35%",
   },
   toptxt: {
-    marginTop: -49,
+    marginTop: "-39%",
+    paddingBottom:'30%',
     textAlign: "center",
     fontSize: 30,
     fontWeight: 600,
-    color: "rgba(0, 0, 0, 0.52)",
-    backgroundColor: "rgba(255, 255, 255, 0.62)",
+    color: "rgb(255, 255, 255)",
+    // backgroundColor: "rgba(255, 255, 255, 0.62)",
     width: "100%",
+    fontFamily:'CocomatPro-Regular'
   },
   image: {
     zIndex: +50,

@@ -158,17 +158,26 @@ export default function DashBoard(props) {
       ? (direction = "TabNavigator")
       : (direction = "LevelScreen");
 
+      let bgCol;
+      i === 0 || i === 3 || i === 6 || i === 9
+      ? (bgCol = "#c5bdf5")
+      : i === 1 || i === 4 || i === 7 || i === 10
+      ? (bgCol = "#f3c0e7")
+      : i === 2 || i === 5 || i === 8 || i === 11
+      ? (bgCol = "#c7deff")
+      : (bgCol = "#C5C4D9");
+
     return (
       <CardLevelClicable
         key={i}
         style={styles.activity}
         text={e.title}
-        backgroundColor="#C5C4D9"
+        backgroundColor={bgCol}
         color="white"
-        url={e.image}
+         url={e.image}
         fill={true}
         opacity={opa}
-        linkTo={direction}
+         linkTo={direction}
       />
     );
   });
