@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 12,
     paddingBottom: 8,
+    marginBottom: 40,
   },
   back: {
     width: "20%",
@@ -143,6 +144,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backButton: {
-    paddingLeft: 20,
+    paddingLeft: 30,
+    paddingTop: 50,
   },
 });

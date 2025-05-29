@@ -1,7 +1,7 @@
-import React from "react"
-import { View, StyleSheet, Text } from "react-native"
-import { AnimatedCircularProgress } from "react-native-circular-progress"
-import { performLinearAnimation } from "react-native-circular-progress/src/AnimatedCircularProgress"
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
+import { AnimatedCircularProgress } from "react-native-circular-progress";
+import { performLinearAnimation } from "react-native-circular-progress/src/AnimatedCircularProgress";
 
 export default function ExercisesProgressBar(props) {
   return (
@@ -9,7 +9,7 @@ export default function ExercisesProgressBar(props) {
       <AnimatedCircularProgress
         size={70}
         width={8}
-        fill={props.value} // Ici, 90%
+        fill={props.value ? props.value : 0} // Ici, 90%
         tintColor="#ffffff"
         backgroundColor="#362956"
         rotation={0} // Angle de départ
@@ -21,7 +21,7 @@ export default function ExercisesProgressBar(props) {
         )}
       </AnimatedCircularProgress>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#ffffff",
   },
-})
+});
