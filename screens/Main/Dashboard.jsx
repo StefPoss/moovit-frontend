@@ -435,7 +435,7 @@ const styles = StyleSheet.create({
   },
   cardTraining: {
     flex: 1,
-    backgroundColor: "#FFF4E2", // beige charte, soft
+    backgroundColor: "#e3dafb", // beige charte, soft FFF4E2
     borderRadius: 16,
     padding: 2,
     marginRight: 7,
@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 4,
-    width: "100%",
+    width: "80%",
     height: "80%",
   },
   trainingTitle: {
@@ -471,14 +471,15 @@ const styles = StyleSheet.create({
   },
   cardMeteo: {
     flex: 1,
-    backgroundColor: "#CFDED3", // vert pastel UI kit
-    borderRadius: 16,
+    backgroundColor: "#eef3fa", // vert pastel UI kit CFDED3
+    borderRadius: 30, // changement radius et taille pour que le bloc méteo soit plus grand 
     padding: 0,
     marginLeft: 7,
-    minHeight: 90,
-    maxHeight: 120,
+    //minHeight: 90,
+    //maxHeight: 120,
     justifyContent: "center",
     alignItems: "center",
+     width: "70%",
   },
   meteoInner: {
     flex: 1,
