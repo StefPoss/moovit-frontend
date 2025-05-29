@@ -106,17 +106,11 @@ const styles = StyleSheet.create({
     // box qui contient le titre et la description
     width: "60%",
   },
-<<<<<<< HEAD
 
   tinyLogo0:{},
 
   tinyLogo: { //petit logo a drt
     backgroundColor:'#e0e0e0',
-=======
-  tinyLogo: {
-    //petit logo a drt
-    backgroundColor: "#e0e0e0",
->>>>>>> fd73875b4a238c2aa93792891810e64cf35b82c6
     borderRadius: 15,
     alignSelf: "flex-end",
     width: "30%",
