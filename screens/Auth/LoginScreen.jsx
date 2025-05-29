@@ -136,7 +136,7 @@ export default function LoginScreen({ navigation }) {
         {/* Boutons sociaux sans fonctionnalité pour l'instant */}
         <TouchableOpacity
           style={styles.socialButton}
-          onPress={() => navigation.navigate("ForgotScreen")}
+          onPress={() => navigation.navigate("Forgot")}
         >
           <AntDesign name="google" size={20} color="#000" />
 
@@ -148,7 +148,7 @@ export default function LoginScreen({ navigation }) {
           onPress={() => navigation.navigate("Forgot")}
         >
           <FontAwesome name="apple" size={20} color="#000" />
-          onPress={() => navigation.navigate("Forgot")}
+          
           <Text style={styles.socialText}>Continuer avec Apple</Text>
         </TouchableOpacity>
 
