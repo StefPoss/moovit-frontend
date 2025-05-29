@@ -11,8 +11,8 @@ import YoutubePlayer from "react-native-youtube-iframe";
 import { Ionicons } from "@expo/vector-icons";
 import activities from "../../../data/activities_sample.json";
 
-export default function OnPlay({ infos }) {
-  const { image, title, mediaUrl, description, tipOfThePro, timing } = infos;
+export default function OnPlay({ infos, title }) {
+  const { image, mediaUrl, description, tipOfThePro, timing } = infos;
 
   const [isRunning, setIsRunning] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(timing * 60);
@@ -128,15 +128,7 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "space-between",
   },
-  backBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: "#F3F3F3",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 16,
-  },
+
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -186,7 +178,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 10,
-    textTransform: "lowercase",
   },
   challengeText: {
     fontSize: 16,
@@ -201,5 +192,6 @@ const styles = StyleSheet.create({
   tipText: {
     fontSize: 15,
     color: "#222",
+    textAlign: "center",
   },
 });
