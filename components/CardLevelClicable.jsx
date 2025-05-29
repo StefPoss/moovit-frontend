@@ -48,7 +48,7 @@ function CardLevelClicable(
             {num}
           </Text>
           <Text
-            style={[styles.buttonDescription, { color, fontWeight }]} // txt de despription
+            style={[styles.buttonDescription, {  }]} // txt de despription
           >
             {description}
           </Text>
@@ -93,16 +93,17 @@ const styles = StyleSheet.create({
   buttonDescription: { //description sous le titre
     flex: 0,
     flexWrap: "wrap",
-    fontSize: 10,
+    fontSize: 12,
 
     marginLeft: 15,
     fontWeight: "500",
-    color: "black",
+    color: "#9a9898",
   },
   lines: { // box qui contient le titre et la description
     width: "60%",
   },
   tinyLogo: { //petit logo a drt
+    backgroundColor:'#e0e0e0',
     borderRadius: 15,
     alignSelf: "flex-end",
     width: "30%",

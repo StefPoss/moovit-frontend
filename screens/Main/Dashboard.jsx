@@ -152,18 +152,18 @@ export default function DashBoard(props) {
   let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => {
     let opa;
     let direction;
-    let bgCol;
     user.currentSubLevelID < i ? (opa = 0.5) : (opa = 1);
     user.currentSubLevelID < i
       ? (direction = "TabNavigator")
       : (direction = "LevelScreen");
 
+      let bgCol;
       i === 0 || i === 3 || i === 6 || i === 9
-      ? (bgCol = "#eeeef5")
+      ? (bgCol = "#c5bdf5")
       : i === 1 || i === 4 || i === 7 || i === 10
-      ? (bgCol = "#ac9cc4")
+      ? (bgCol = "#f3c0e7")
       : i === 2 || i === 5 || i === 8 || i === 11
-      ? (bgCol = "#ffecce")
+      ? (bgCol = "#c7deff")
       : (bgCol = "#C5C4D9");
 
     return (
