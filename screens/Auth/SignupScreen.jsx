@@ -25,6 +25,10 @@ export default function SignupScreen({ navigation }) {
   const dispatch = useDispatch();
   console.log(email);
   console.log(password);
+  const regex = /[^A-Za-z0-9]/;
+
+
+  
 
   // si l'email est invalid afficher le message d'erreur
 
@@ -35,6 +39,13 @@ export default function SignupScreen({ navigation }) {
     if (!checkBody(body, requiredFields)) {
       setEmailError("Tous les champs sont requis");
       return;
+    }
+
+    if(password.length<8 || !regex.test(password))
+    {
+      setEmailError("Le mot de passe doit contenir au moins 8 caractères, dont 1 caractère spécial");
+      return;
+
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
