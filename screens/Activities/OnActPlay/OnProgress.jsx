@@ -37,14 +37,12 @@ export default function OnReward({
   const sessionUpd = sessions + 1;
   const playUpd = playTime + timing;
   let image;
-  if (sport === "Piscine") {
-    image = [
-      "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png",
-    ];
+  if (sport === "Natation") {
+    image =
+      "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png";
   } else {
-    image = [
-      "https://res.cloudinary.com/deuhttaaq/image/upload/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png",
-    ];
+    image =
+      "https://res.cloudinary.com/deuhttaaq/image/upload/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png";
   }
 
   useEffect(() => {

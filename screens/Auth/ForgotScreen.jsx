@@ -1,33 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import Button from '../../components/Buttons'; // Composant bouton réutilisable
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import LottieView from "lottie-react-native";
 
 export default function ForgotScreen() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       {/* Bouton retour */}
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('Se connecter')}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      >
         <Ionicons name="chevron-back" size={28} color="black" />
       </TouchableOpacity>
 
       <Text style={styles.title}>Page en progression</Text>
       <Text style={styles.subtitle}>En cours</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder=""
-        value={email}
-        onChangeText={setEmail}
-      />
-
-      <Button
-        title="Continuer"
-        onPress={() => console.log("Lien envoyé à", email)}
+      {/* Animation nuage */}
+      <LottieView
+        source={require("../../assets/Animation - 1748526184745.json")} // chemin package json
+        autoPlay
+        loop
+        style={styles.cloud}
       />
     </View>
   );
@@ -36,33 +35,28 @@ export default function ForgotScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#fff',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
   },
   backButton: {
-    position: 'absolute',
-    top: 50,
+    position: "absolute",
+    top: 40,
     left: 20,
   },
   title: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+    color: "#6C5DD3",
     marginBottom: 10,
-    marginTop: 80,
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
+    color: "#A18CF3",
     marginBottom: 20,
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 12,
-    padding: 12,
-    marginBottom: 20,
-    backgroundColor: '#f9f9f9',
+  cloud: {
+    width: 150,
+    height: 150,
   },
 });
-
