@@ -45,7 +45,7 @@
         "desc": "Entrez votre âge",
         "name": "age",
         "fieldType": "number",
-        "range": [7, 77]
+        "range": [5, 99]
       },
       {
         "title": "Ville",
@@ -67,7 +67,7 @@
         "desc": "Entrez votre poids (en kg)",
         "name": "weight",
         "fieldType": "number",
-        "range": [40, 250]
+        "range": [20, 250]
       },
       {
         "title": "Taille",
