@@ -36,16 +36,26 @@ export default function OnReward({
   const levelUpdated = updatelvl[0];
   const sessionUpd = sessions + 1;
   const playUpd = playTime + timing;
-  let image;
-  if (sport === "Piscine") {
-    image = [
-      "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png",
-    ];
-  } else {
-    image = [
-      "https://res.cloudinary.com/deuhttaaq/image/upload/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png",
-    ];
+  const imagePadel = [
+    "https://res.cloudinary.com/deuhttaaq/image/upload/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747746038/projectFinDeBatch/front/images/medals/medal-padel-05_e44k5r.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-02_bokjpu.png",
+  ];
+
+  const imagePool = [
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747691/projectFinDeBatch/front/images/medals/medal-natation-04_rga9lh.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747682/projectFinDeBatch/front/images/medals/medal-natation-02_plmmko.png",
+  ];
+
+  function getRandomImage(sport) {
+    const images = sport === "Padel" ? imagePadel : imagePool;
+    const index = Math.floor(Math.random() * images.length);
+    return images[index];
   }
+
+  // 👇 Appel clair
+  const image = getRandomImage(sport);
 
   useEffect(() => {
     fetch(`${API_URL}/api/users/levelupdate`, {

@@ -16,10 +16,9 @@ function CardLevelClicable(
     backgroundColor = "#FCEACE", //couleur du fond de la carte
     url = "https://reactnative.dev/img/tiny_logo.png", //petite img sur le coté
     linkTo = "TabNavigator", //nom de la page ou rediriger
-    opacity="1" ,
+    opacity = "1",
     fill = false, //image qui fait tout le composant
-    subLevelSent={}
-
+    subLevelSent = {},
   },
   props
 ) {
@@ -31,12 +30,12 @@ function CardLevelClicable(
   return (
     <TouchableOpacity //propriete qui permet de clicker comme button et onpress
       onPress={() => {
-        navigation.navigate(linkTo, {subLevel:subLevelSent});
+        navigation.navigate(linkTo, { subLevel: subLevelSent });
       }} //lien executable au click
       style={[styles.button, { width, height, backgroundColor }]} //modif du css via les props
     >
       <View
-        style={[styles.container,{opacity} ]} // contenaier general
+        style={[styles.container, { opacity }]} // contenaier general
       >
         <View
           style={styles.lines} //container uniquement des lignes txt+description permet de gardé l'img dans le cadre du container
@@ -48,7 +47,7 @@ function CardLevelClicable(
             {/* {num} */}
           </Text>
           <Text
-            style={[styles.buttonDescription, {  }]} // txt de despription
+            style={[styles.buttonDescription, {}]} // txt de despription
           >
             {description}
           </Text>
@@ -64,7 +63,8 @@ function CardLevelClicable(
 export default CardLevelClicable;
 
 const styles = StyleSheet.create({
-  button: { //c'est le composant en lui meme
+  button: {
+    //c'est le composant en lui meme
     width: "150", //long du composant
     height: "150", //haut du composant
     borderRadius: 15, //arrondi des angles
@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
     margin: 5, //
     marginRight: 5,
   },
-  container: { //zone d'affichage interne au composant 
+  container: {
+    //zone d'affichage interne au composant
     marginTop: "10",
     flex: 1,
     flexDirection: "row",
@@ -80,17 +81,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgba(1, 1, 1, 0)",
     minWidth: "99%",
-    opacity:"0.4"
+    opacity: "0.4",
   },
 
-
-  buttonText: { // titre 
+  buttonText: {
+    // titre
     marginLeft: 15,
     fontSize: 13,
     fontWeight: "700",
     color: "black",
   },
-  buttonDescription: { //description sous le titre
+  buttonDescription: {
+    //description sous le titre
     flex: 0,
     flexWrap: "wrap",
     fontSize: 12,
@@ -99,12 +101,19 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#9a9898",
   },
-  lines: { // box qui contient le titre et la description
+  lines: {
+    // box qui contient le titre et la description
     width: "60%",
   },
+<<<<<<< HEAD
   tinyLogo0:{},
   tinyLogo: { //petit logo a drt
     backgroundColor:'#e0e0e0',
+=======
+  tinyLogo: {
+    //petit logo a drt
+    backgroundColor: "#e0e0e0",
+>>>>>>> 32eae8d33c5e4ad63c41dd6c60f2f126820cbef0
     borderRadius: 15,
     alignSelf: "flex-end",
     width: "30%",
@@ -112,7 +121,8 @@ const styles = StyleSheet.create({
     margin: 10,
     marginRight: 15,
   },
-  tinyLogo2: { //etatlement du logo comme une img de bg sur toute la taille du composant
+  tinyLogo2: {
+    //etatlement du logo comme une img de bg sur toute la taille du composant
     flex: 1,
     zIndex: -99999,
     borderRadius: 15,

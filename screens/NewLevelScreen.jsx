@@ -12,39 +12,35 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import CardLevelClicable from "../components/CardLevelClicable";
 import { useSelector } from "react-redux";
 
-
 //a importé dans le terminal !!!npm i react-native-circular-progress + npm i --save react-native-circular-progress react-native-svg// npx expo install react-native-reanimated + yarn add react-native-circular-progress-indicator + yarn add react-native-svg
 
-export default function NewLevelScreen({route}) {
+export default function NewLevelScreen({ route }) {
+  const { subLevel } = route.params;
+  console.log("popoo ", subLevel);
 
-  const {subLevel} = route.params
-  console.log("popoo ",subLevel);
-
-  let sublevelsMapped = subLevel.map((e, i)=>
-  {
-    return <CardLevelClicable
-                key={i}
-                width="368"
-                height="150"
-                backgroundColor="#F5f5f5"
-                fontSize={17}
-                text={e.title}
-                url={e.image}
-                num={e.subLevelID}
-                description={e.description}
-                linkTo="TabNavigator"
-              />
-  })
-
-
-  
-
+  let sublevelsMapped = subLevel.map((e, i) => {
+    return (
+      <CardLevelClicable
+        key={i}
+        width="100%"
+        height="150"
+        backgroundColor="#F5f5f5"
+        fontSize={17}
+        text={e.title}
+        url={e.image}
+        num={e.subLevelID}
+        description={e.description}
+        linkTo="TabNavigator"
+      />
+    );
+  });
 
   // const [value, setValue] = useState(60);
-    const topImg = "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168960/projectFinDeBatch/front/images/activities/padel/padel-photo-013.avif"
-    // "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
+  const topImg =
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168960/projectFinDeBatch/front/images/activities/padel/padel-photo-013.avif";
+  // "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   //"https://reactnative.dev/img/tiny_logo.png";
-    const niv = ''
+  const niv = "";
   const bgImage =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   return (
@@ -111,7 +107,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     marginTop: "",
-    borderRadius:"",
+    borderRadius: "",
   },
   half: {},
 
@@ -122,7 +118,7 @@ const styles = StyleSheet.create({
     marginTop: "40.5%",
     textAlign: "center",
     // fontFamily:"CocomatPro-Regular",
-    fontFamily:"ManropeBold",
+    fontFamily: "ManropeBold",
     fontSize: 30,
     // fontWeight: "heavy",
     color: "rgba(255, 255, 255, 1)",
@@ -131,13 +127,15 @@ const styles = StyleSheet.create({
   },
 
   midd: {
-    zIndex: 99999,
+    zIndex: 1,
 
     backgroundColor: "rgba(255, 255, 255, 0)",
     flex: 1,
     marginTop: "-12%",
-    justifyContent: "flex-start",
-    alignSelf: "flex-start",
+    justifyContent: "center",
+    alignSelf: "center",
+    alignContent: "center",
+    width: "100%",
   },
   scroll: {
     backgroundColor: "#ffffff",

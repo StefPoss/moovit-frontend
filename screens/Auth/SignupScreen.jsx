@@ -25,6 +25,10 @@ export default function SignupScreen({ navigation }) {
   const dispatch = useDispatch();
   console.log(email);
   console.log(password);
+  
+
+
+  
 
   // si l'email est invalid afficher le message d'erreur
 
@@ -36,6 +40,43 @@ export default function SignupScreen({ navigation }) {
       setEmailError("Tous les champs sont requis");
       return;
     }
+
+    if(password.length<8)
+    {
+      setEmailError("Le mot de passe doit contenir au moins 8 caractères, dont 1 caractère spécial");
+      return;
+
+    }
+
+
+    if(!/[A-Z]/.test(password))
+    {
+      setEmailError("Le mot de passe doit contenir au moins une lettre majuscule");
+      return;
+
+    }
+
+    if(!/[a-z]/.test(password))
+    {
+      setEmailError("Le mot de passe doit contenir au moins une lettre minuscule");
+      return;
+
+    }
+
+    if(!/[0-9]/.test(password))
+    {
+      setEmailError("Le mot de passe doit contenir au moins un chiffre");
+      return;
+
+    }
+
+    if(!/[^A-Za-z0-9]/.test(password))
+    {
+      setEmailError("Le mot de passe doit contenir au moins 1 caractère spécial");
+      return;
+
+    }
+
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
