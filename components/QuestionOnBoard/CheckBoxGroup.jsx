@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   tertiary: {
     textAlign: "center",
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 100,
     fontStyle: "italic",
   },
