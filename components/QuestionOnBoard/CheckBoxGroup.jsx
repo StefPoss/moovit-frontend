@@ -19,6 +19,12 @@ export default function CheckBoxGroup({ question, infos, handleChange }) {
           <Text style={styles.secondary}>{question.secondaryQuestion}</Text>
         </View>
       )}
+      {question.tertiary && (
+        <View>
+          <Text style={styles.tertiary}>({question.tertiary})</Text>
+        </View>
+      )}
+
       <View style={styles.questionDisp}>
         {question.data.map((data) => (
           <TouchableOpacity
@@ -49,7 +55,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     height: "100%",
   },
-
+  tertiary: {
+    textAlign: "center",
+    fontSize: 15,
+    fontWeight: 100,
+    fontStyle: "italic",
+  },
   secondary: {
     fontSize: 16,
 

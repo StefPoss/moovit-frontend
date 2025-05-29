@@ -35,6 +35,8 @@ export const userSlice = createSlice({
       state.value.currentLevelID = action.payload.currentLevelID;
       state.value.currentSubLevelID = action.payload.currentSubLevelID;
       state.value.xp = action.payload.xp;
+      state.value.sessions = action.payload.sessions;
+      state.value.playTime = action.payload.playTime;
     },
   },
 });
