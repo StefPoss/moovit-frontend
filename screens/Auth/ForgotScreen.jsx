@@ -18,8 +18,8 @@ export default function ForgotScreen() {
         <Ionicons name="chevron-back" size={28} color="black" />
       </TouchableOpacity>
 
-      <Text style={styles.title}>Page en progression</Text>
-      <Text style={styles.subtitle}>En cours</Text>
+      <Text style={styles.title}>Page en construction</Text>
+      {/*<Text style={styles.subtitle}>En cours</Text>*/}
 
       {/* Animation nuage */}
       <LottieView
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   title: {
-    fontSize: 22,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#6C5DD3",
     marginBottom: 10,
