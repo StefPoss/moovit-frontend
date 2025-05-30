@@ -14,6 +14,8 @@ import { addActivityToStore } from "../../../reducers/activitySlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { API_URL } from "@env";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function OnReward({
   xp,
@@ -37,15 +39,16 @@ export default function OnReward({
   const sessionUpd = sessions + 1;
   const playUpd = playTime + timing;
   const imagePadel = [
-    "https://res.cloudinary.com/deuhttaaq/image/upload/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-04_qowywo.png",
-    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747746038/projectFinDeBatch/front/images/medals/medal-padel-05_e44k5r.png",
-    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747746036/projectFinDeBatch/front/images/medals/medal-padel-02_bokjpu.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747827625/projectFinDeBatch/front/images/medals/medal-padel-04_pspous.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747827083/projectFinDeBatch/front/images/medals/medal-padel-03_j1xbl9.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747826943/projectFinDeBatch/front/images/medals/medal-padel-02_enz2s8.png",
   ];
 
   const imagePool = [
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747826097/projectFinDeBatch/front/images/medals/medal-natation-04_dabzkx.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747811166/projectFinDeBatch/front/images/medals/medal-natation-01_sva2zb.png",
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png",
-    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747691/projectFinDeBatch/front/images/medals/medal-natation-04_rga9lh.png",
-    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747682/projectFinDeBatch/front/images/medals/medal-natation-02_plmmko.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747682/projectFinDeBatch/front/images/medals/medal-natation-01_bktbt8.png",
   ];
 
   function getRandomImage(sport) {
@@ -94,7 +97,7 @@ export default function OnReward({
       <View style={styles.content}>
         <Text style={styles.title}>Ton avancement !</Text>
         <Text style={styles.subText}>
-          Suivez vos progrès et voyez à quel point vous êtes proche du niveau
+          Suis tes progrès et découvre à quel point tu es proche du niveau
           suivant.
         </Text>
         <View style={styles.prog}>
@@ -106,9 +109,17 @@ export default function OnReward({
           <Text>Niveau {levelplus}</Text>
         </View>
         <View style={styles.rewardBox}>
-          <Text style={styles.rewardText}>Tu as gagné {xp} XP !</Text>
+          <FontAwesome
+            name="star"
+            size={20}
+            color="#facc15"
+            style={styles.icon}
+          />
+          <Text style={styles.rewardText}>
+            Au prochain exercice, tu gagneras {xp} XP !
+          </Text>
         </View>
-
+        <Text style={styles.rec}>Ta prochaine récompense !</Text>
         <Image
           source={{
             uri: image,
@@ -128,6 +139,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingHorizontal: 20,
+  },
+  rec: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 10,
+    textTransform: "uppercase",
+    textAlign: "center",
+    marginBottom: 20,
+    textDecorationLine: "underline",
   },
   prog: {
     width: 100,
@@ -164,16 +184,19 @@ const styles = StyleSheet.create({
     fontFamily: "ManropeRegular",
   },
   rewardBox: {
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#E4F0F4",
     paddingVertical: 16,
     paddingHorizontal: 20,
-    borderRadius: 12,
+    borderRadius: 20,
     marginVertical: 20,
     marginTop: "40%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   rewardText: {
     fontSize: 16,
     textAlign: "center",
+    marginTop: 10,
   },
   medal: {
     width: 120,

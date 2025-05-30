@@ -10,7 +10,7 @@ import {
 import YoutubePlayer from "react-native-youtube-iframe";
 import { Ionicons } from "@expo/vector-icons";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
-import activities from "../../../data/activities_sample.json";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function OnPlay({ infos, title }) {
   const { image, mediaUrl, description, tipOfThePro, timing } = infos;
@@ -53,161 +53,177 @@ export default function OnPlay({ infos, title }) {
     return () => clearInterval(intervalRef.current);
   }, [isRunning]);
 
-  const toggleTimer = () => {
-    setIsRunning((prev) => !prev);
-  };
-
-  const onVideoEnd = useCallback(() => {
-    setPlaying(false);
-  }, []);
-
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
+  const toggleTimer = () => setIsRunning((prev) => !prev);
+  const onVideoEnd = useCallback(() => setPlaying(false), []);
+  const formatTime = (s) =>
+    `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
 
   return (
-    <SafeAreaView style={styles.safe}>
-      <View style={styles.content}>
-        <View style={styles.headerRow}>
-          <View style={styles.mainCard}>
-            <Image
-              source={{ uri: image }}
-              style={styles.image}
-              resizeMode="cover"
-            />
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.challengeText}>{description}</Text>
+    <LinearGradient
+      colors={["#FFFFFF", "#FCEACE", "#FFFFFF"]}
+      style={styles.safe}
+    >
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.content}>
+          <View style={styles.headerRow}>
+            <View style={styles.mainCard}>
+              <Image
+                source={{ uri: image }}
+                style={styles.image}
+                resizeMode="cover"
+              />
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.challengeText}>{description}</Text>
+            </View>
+
+            <TouchableOpacity style={styles.timerCard} onPress={toggleTimer}>
+              <Text style={styles.timerLabel}>Timer</Text>
+              <AnimatedCircularProgress
+                size={90}
+                width={8}
+                fill={(secondsLeft / (timing * 60)) * 100}
+                tintColor="#facc15"
+                backgroundColor="#e5e7eb"
+                duration={1000}
+                rotation={0}
+                style={{ marginBottom: 10 }}
+              >
+                {() => (
+                  <Text style={styles.timeCount}>
+                    {formatTime(secondsLeft)}
+                  </Text>
+                )}
+              </AnimatedCircularProgress>
+              <Text style={styles.timerText}>
+                {isRunning ? "Pause" : "Start"}
+              </Text>
+            </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.timerCard} onPress={toggleTimer}>
-            <AnimatedCircularProgress
-              size={90}
-              width={8}
-              fill={(secondsLeft / (timing * 60)) * 100}
-              tintColor="#FF9900"
-              backgroundColor="#fff"
-              duration={1000}
-              rotation={0}
-              style={{ marginBottom: 10 }}
-            >
-              {() => (
-                <Text style={styles.timeCount}>{formatTime(secondsLeft)}</Text>
-              )}
-            </AnimatedCircularProgress>
-            <Text style={styles.timerText}>
-              {isRunning ? "Pause" : "Start"}
-            </Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.videoCard}>
+            {videoId ? (
+              <YoutubePlayer
+                height={200}
+                width={"100%"}
+                videoId={videoId}
+                play={playing}
+                onChangeState={(state) => state === "ended" && onVideoEnd()}
+                initialPlayerParams={{
+                  modestbranding: true,
+                  rel: 0,
+                  controls: 1,
+                }}
+              />
+            ) : (
+              <Ionicons name="logo-youtube" size={40} color="#1f2937" />
+            )}
+          </View>
 
-        <View style={styles.videoCard}>
-          {videoId ? (
-            <YoutubePlayer
-              height={200}
-              width={"100%"}
-              videoId={videoId}
-              play={playing}
-              onChangeState={(state) => state === "ended" && onVideoEnd()}
-              initialPlayerParams={{
-                modestbranding: true,
-                rel: 0,
-                controls: 1,
-              }}
-            />
-          ) : (
-            <Ionicons name="logo-youtube" size={40} color="black" />
-          )}
+          <View style={styles.tipBox}>
+            <Text style={styles.tipTitle}>Tip of the Pro</Text>
+            <Text style={styles.tipText}>{tipOfThePro}</Text>
+          </View>
         </View>
-
-        <View style={styles.tipBox}>
-          <Text style={styles.tipText}>{tipOfThePro}</Text>
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: "#fff",
   },
   content: {
     flex: 1,
     padding: 20,
-    justifyContent: "space-between",
+    gap: 20,
   },
   headerRow: {
-    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 20,
   },
   mainCard: {
     width: "60%",
-    backgroundColor: "#f7f6ff",
-    padding: 14,
+    backgroundColor: "#F5F5F5",
+
+    padding: 16,
     borderRadius: 24,
-    marginRight: 12,
     alignItems: "center",
   },
   image: {
     width: "100%",
     height: 180,
-    borderRadius: 12,
+    borderRadius: 16,
     marginBottom: 10,
   },
   title: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "bold",
-    marginBottom: 6,
+    marginBottom: 4,
     textAlign: "center",
+    color: "#1f2937",
   },
   challengeText: {
-    fontSize: 12,
+    fontSize: 13,
     textAlign: "center",
+    color: "#4b5563",
     lineHeight: 18,
   },
   timerCard: {
     width: 110,
-    height: 150,
-
-    borderRadius: 12,
+    height: 180,
+    margin: "auto",
+    // backgroundColor: "#FCEACE",
+    borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10,
-    margin: "auto",
-    padding: "auto",
+    paddingVertical: 10,
+  },
+  timerLabel: {
+    fontWeight: "600",
+    fontSize: 16,
+    marginBottom: 10,
+    color: "#1f2937",
   },
   timerText: {
     fontSize: 14,
     fontWeight: "500",
-    textAlign: "center",
+    color: "#1f2937",
   },
   timeCount: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
-    color: "#222",
+    color: "#1f2937",
   },
   videoCard: {
     width: "100%",
-    height: 300,
-    backgroundColor: "#eee",
-    borderRadius: 12,
+    height: 220,
+    backgroundColor: "transparent",
+    borderRadius: 16,
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
-    marginBottom: 20,
   },
   tipBox: {
-    padding: 14,
+    padding: 16,
+    backgroundColor: "#EEEEEE",
     borderRadius: 16,
+
+    marginTop: 10,
+  },
+  tipTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 8,
+    textAlign: "center",
+    color: "blck",
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
   },
   tipText: {
     fontSize: 15,
-    color: "#222",
+    color: "black",
     textAlign: "center",
+    fontStyle: "italic",
   },
 });
