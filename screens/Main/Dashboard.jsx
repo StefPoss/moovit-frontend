@@ -205,9 +205,12 @@ export default function DashBoard(props) {
           <View style={styles.cardProfile}>
             <PhotoProfil photoUrl={profileUrl} />
             <View style={styles.textProfilContainer}>
-              <Text style={[styles.profilText, { fontSize: 20 }]}>
-                Bonjour {user.username}
-              </Text>
+              <View style={{flexDirection:"row"}}>
+                <Text style={[styles.profilText, { fontSize: 20 }]}>
+                  Bonjour {user.name} 
+                </Text>
+                <Text style={[styles.profilText, { fontSize: 15 }, {color:"grey"}, {fontStyle:"italic"}, {marginLeft:8}, {marginTop:5}]}>({user.username})</Text>
+              </View>
               <Text style={styles.profilText}>
                 Prêt pour un nouveau challenge ?
               </Text>
@@ -432,6 +435,8 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 0,
     alignItems: "stretch",
+    height:150, // Ajouté pour que le bloc prenne tout l’espace disponible
+   
   },
   cardTraining: {
     flex: 1,
@@ -440,11 +445,12 @@ const styles = StyleSheet.create({
     padding: 2,
     marginRight: 7,
     minHeight: 80,
-    maxHeight: 120,
+    // maxHeight: 120,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 0,
-    marginTop: 0,
+    marginBottom: 10,
+    marginTop: 10,
+    //height:"100%",
   },
   trainingInner: {
     flex: 1,
@@ -480,6 +486,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
      width: "70%",
+     marginTop: 10, // Ajouté
+     marginBottom:10,
   },
   meteoInner: {
     flex: 1,
