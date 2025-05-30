@@ -25,10 +25,6 @@ export default function SignupScreen({ navigation }) {
   const dispatch = useDispatch();
   console.log(email);
   console.log(password);
-  
-
-
-  
 
   // si l'email est invalid afficher le message d'erreur
 
@@ -41,42 +37,36 @@ export default function SignupScreen({ navigation }) {
       return;
     }
 
-    if(password.length<8)
-    {
+    if (password.length < 8) {
       setEmailError("Le mot de passe doit contenir au moins 8 caractères");
       return;
-
     }
 
-
-    if(!/[A-Z]/.test(password))
-    {
-      setEmailError("Le mot de passe doit contenir au moins une lettre majuscule");
+    if (!/[A-Z]/.test(password)) {
+      setEmailError(
+        "Le mot de passe doit contenir au moins une lettre majuscule"
+      );
       return;
-
     }
 
-    if(!/[a-z]/.test(password))
-    {
-      setEmailError("Le mot de passe doit contenir au moins une lettre minuscule");
+    if (!/[a-z]/.test(password)) {
+      setEmailError(
+        "Le mot de passe doit contenir au moins une lettre minuscule"
+      );
       return;
-
     }
 
-    if(!/[0-9]/.test(password))
-    {
+    if (!/[0-9]/.test(password)) {
       setEmailError("Le mot de passe doit contenir au moins un chiffre");
       return;
-
     }
 
-    if(!/[^A-Za-z0-9]/.test(password))
-    {
-      setEmailError("Le mot de passe doit contenir au moins 1 caractère spécial");
+    if (!/[^A-Za-z0-9]/.test(password)) {
+      setEmailError(
+        "Le mot de passe doit contenir au moins 1 caractère spécial"
+      );
       return;
-
     }
-
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -194,17 +184,17 @@ export default function SignupScreen({ navigation }) {
         confidentialité
       </Text>
       <View style={styles.credit}>
-      <CardLevelClicable        
+        <CardLevelClicable
           width="100"
           height="30"
           backgroundColor="#0000"
           fontSize={10}
-          text='Credit'
-          url=''
-          description=''
+          text="Credit"
+          url=""
+          description=""
           linkTo="CreditScreen"
         />
-        </View>
+      </View>
     </KeyboardAvoidingView>
   );
 }
@@ -299,8 +289,8 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "500",
   },
-  credit:{
-    marginLeft:"7%",
-    padding:10,
-  }
+  credit: {
+    marginLeft: "7%",
+    padding: 10,
+  },
 });

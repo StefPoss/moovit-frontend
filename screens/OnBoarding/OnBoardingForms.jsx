@@ -3,10 +3,12 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import Button from "../../components/Buttons";
 import questionForm from "../../data/onBoardingQuestion.json";
@@ -20,10 +22,7 @@ import {
   removeAllInfoToStore,
 } from "../../reducers/onBoardingSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { checkBody } from "../../modules/checkBody";
 import { API_URL } from "@env";
-
-// télécharger la police questrial
 
 export default function OnBoarding({ navigation }) {
   const [numQuestion, setNumQuestion] = useState(0);
@@ -119,7 +118,6 @@ export default function OnBoarding({ navigation }) {
             handleChange={handleChange}
           />
         );
-        ////////////////////////////////:
       } else if (questionForm[numQuestion].type === "fieldBox") {
         return (
           <FieldBox
@@ -128,7 +126,6 @@ export default function OnBoarding({ navigation }) {
             handleChange={handleChange}
           />
         );
-        ////////////////////////////////:
       } else if (questionForm[numQuestion].type === "imgSelect") {
         return (
           <ImageSelect
@@ -137,7 +134,6 @@ export default function OnBoarding({ navigation }) {
             handleChange={handleChange}
           />
         );
-        ////////////////////////////////:
       } else if (questionForm[numQuestion].type === "checkBoxObject") {
         return (
           <CheckBoxObjectGroup
@@ -146,9 +142,8 @@ export default function OnBoarding({ navigation }) {
             handleChange={handleChange}
           />
         );
-        ////////////////////////////////:
       } else {
-        null;
+        return null;
       }
     } else {
       return null;
@@ -158,25 +153,39 @@ export default function OnBoarding({ navigation }) {
   return (
     numQuestion<questionForm.length && <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior="padding"
-        keyboardVerticalOffset={80}
+        style={styles.flexGrow}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
       >
-        <View>
-          <View style={styles.countForm}>
-            <Text style={styles.countFormText}>
-              Question : {numQuestion + 1}/{questionForm.length}
-            </Text>
-          </View>
-          <View>
-            <ProgressBarComp count={numQuestion} total={questionForm.length} />
-          </View>
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.flexGrow}>
+            {/* Scroll sur le contenu uniquement */}
+            <ScrollView
+              contentContainerStyle={styles.scrollContainer}
+              keyboardShouldPersistTaps="handled"
+            >
+              <View style={styles.countForm}>
+                <Text style={styles.countFormText}>
+                  Question : {numQuestion + 1}/{questionForm.length}
+                </Text>
+              </View>
 
-        <View style={styles.formContent}>{onBoardingDisp(numQuestion)}</View>
-        <View style={styles.fixedButton}>
-          <Button title="Continuer" onPress={btnclick} />
-        </View>
+              <ProgressBarComp
+                count={numQuestion}
+                total={questionForm.length}
+              />
+
+              <View style={styles.formContent}>
+                {onBoardingDisp(numQuestion)}
+              </View>
+            </ScrollView>
+
+            {/* Bouton en dehors du scroll, visible au-dessus du clavier */}
+            <View style={styles.fixedButton}>
+              <Button title="Continuer" onPress={btnclick} />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -187,6 +196,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     paddingTop: 60,
+  },
+
+  flexGrow: {
+    flex: 1,
   },
 
   countForm: {
@@ -207,31 +220,21 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 
-  testbtn: {
-    backgroundColor: "black",
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
-
-  testbtn1: {
-    backgroundColor: "black",
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
-
   formContent: {
-    flexGrow: 1,
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     paddingTop: 30,
-    height: "80%",
+    paddingBottom: 30,
+  },
+
+  scrollContainer: {
+    flexGrow: 1,
+    paddingBottom: 100, // Laisse de la place au bouton
   },
 
   fixedButton: {
-    //paddingTop: 60,
     paddingHorizontal: 20,
-    paddingBottom: 50,
+    paddingBottom: Platform.OS === "ios" ? 20 : 10,
+    backgroundColor: "white",
   },
 });
