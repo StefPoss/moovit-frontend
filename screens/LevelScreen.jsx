@@ -81,18 +81,19 @@ export default function LevelScreen(props) {
         text={e.title}
         description={e.description}
         fontSize={13}
-        backgroundColor={"#F5f5f5"}
+        backgroundColor={"#eaeaea"}
         color="black"
         url={e.image}
         fill={false}
         linkTo="NewLevelScreen"
         subLevelSent={e.subLevels}
+        // opacity = "0"
       />
     );
   });
 
   const topImg =
-    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168945/projectFinDeBatch/front/images/activities/padel/padel-photo-020.avif";
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168930/projectFinDeBatch/front/images/activities/padel/padel-photo-026.avif";
   // "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1748380203/projectFinDeBatch/front/images/activities/activities-padel-01_mw10dt.png";
   const niv = "";
   const bgImage = ""; //"https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif"
@@ -106,14 +107,19 @@ export default function LevelScreen(props) {
     <SafeAreaProvider>
       {/* <SafeAreaView style={styles.container} edges={["top"]}>  cette balise est sesactivé car le rendu est inesthetique */}
       <View style={styles.container}>
+        
         <Image style={styles.topImg} source={{ uri: topImg }} />
-        <Text style={styles.toptxt}>Niveaux {niv}</Text>
+        <View style={styles.textBubble}>
+        <Text style={styles.toptxt}>
+          Explore tous les niveaux {"\n"}pour suivre ton évolution ! {niv}
+        </Text>
+        </View>
         <View style={styles.midd}>
-          <ImageBackground
+          {/* <ImageBackground
             source={{ uri: bgImage }}
             resizeMode="cover"
             style={styles.image}
-          >
+          > */}
             <ScrollView>
               {levelsCards}
               {/* <CardLevelClicable
@@ -130,7 +136,7 @@ export default function LevelScreen(props) {
             
           /> */}
             </ScrollView>
-          </ImageBackground>
+          {/* </ImageBackground> */}
         </View>
       </View>
       {/* </SafeAreaView> */}
@@ -147,40 +153,52 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  /*textBubble: {
+    backgroundColor: "rgba(255, 255, 255,0.6)",
+    borderradius:12,
+    paddingHorinzontale:16,
+    paddingverticale:8,
+    alignSelf:"center",
+   marginTop:10,
+  },*/
   topImg: {
     width: "100%",
     height: "35%",
+    
   },
   toptxt: {
     marginTop: "-39%",
     paddingBottom: "30%",
-    textAlign: "center",
-    fontSize: 30,
-    fontWeight: 600,
+    //textAlign: "center",
+    fontSize: 25,
+    marginLeft: 50,
+    fontsize: 40,
     color: "rgb(255, 255, 255)",
     // backgroundColor: "rgba(255, 255, 255, 0.62)",
     width: "100%",
-    fontFamily: "CocomatPro-Regular",
+    fontFamily: "ManropeBold",
   },
-  image: {
-    zIndex: +50,
-    height: "100%",
-    width: "100%",
-  },
+  // image: {
+  //   zIndex: +50,
+  //   height: "100%",
+  //   width: "100%",
+  // },
   midd: {
-    backgroundColor: "rgba(255, 255, 255, 0)",
+        backgroundColor: "rgba(85, 23, 23, 0)",
+    // zIndex:"999",
+    // backgroundColor: "rgba(255, 255, 255, 0)",
     flex: 1,
     justifyContent: "center",
     alignSelf: "center",
   },
-  try: {
-    backgroundColor: "rgba(255, 255, 255, 0)",
-  },
+  // try: {
+  //   backgroundColor: "rgba(255, 255, 255, 0)",
+  // },
 
-  CenterImg: {
-    width: "10",
-    height: "10",
-  },
+  // CenterImg: {
+  //   width: "10",
+  //   height: "10",
+  // },
 
   text: {
     color: "grey",
@@ -191,7 +209,7 @@ const styles = StyleSheet.create({
     flex: 0,
     flexDirection: "row",
   },
-  activity: {},
+  // activity: {},
   bottomButton: {
     flexDirection: "row",
   },
