@@ -25,6 +25,58 @@ export default function ProfileScreen({}) {
     dispatch(removeUserToStore())
     navigation.navigate("Welcome");
   };
+  let medalsData
+
+  let natationImages = 
+  [
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747826097/projectFinDeBatch/front/images/medals/medal-natation-04_dabzkx.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747811166/projectFinDeBatch/front/images/medals/medal-natation-01_sva2zb.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747682/projectFinDeBatch/front/images/medals/medal-natation-01_bktbt8.png",
+  ]
+
+  let padelImages = 
+  [
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747827625/projectFinDeBatch/front/images/medals/medal-padel-04_pspous.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747827083/projectFinDeBatch/front/images/medals/medal-padel-03_j1xbl9.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747826943/projectFinDeBatch/front/images/medals/medal-padel-02_enz2s8.png",
+    "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747827941/projectFinDeBatch/front/images/medals/medal-padel-05_shbhmg.png",
+    
+  ]
+
+  
+  
+  if(user.sportPlayed==="Padel")
+  {
+    medalsData=padelImages.map((e, i)=>
+    {
+      return <Image
+            source={{
+              uri:e,
+
+            }}
+            style={styles.badge}
+            key={i}
+          />
+    })
+  }
+  else if(user.sportPlayed==="Natation")
+  {
+    medalsData=natationImages.map((e, i)=>
+    {
+      return <Image
+            source={{
+              uri:e,
+
+            }}
+            style={styles.badge}
+            key={i}
+          />
+    })
+
+  }
+
+  
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -76,7 +128,7 @@ export default function ProfileScreen({}) {
         showsHorizontalScrollIndicator={false}
         style={styles.badgesContainer}
       >
-        <Image
+         {/* <Image
           source={{
             uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747826097/projectFinDeBatch/front/images/medals/medal-natation-04_dabzkx.png",
           }}
@@ -99,7 +151,8 @@ export default function ProfileScreen({}) {
             uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747682/projectFinDeBatch/front/images/medals/medal-natation-01_bktbt8.png",
           }}
           style={styles.badge}
-        />
+        /> */}
+        {medalsData}
       </ScrollView>
 
       <View style={styles.xpContainer}>
@@ -115,6 +168,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
     backgroundColor: "#fff",
+    flex:1,
   },
   header: {
     flexDirection: "row",
@@ -151,6 +205,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: "100%",
     marginBottom: 30,
+    marginTop:30,
   },
   statItem: {
     flexDirection: "row",
@@ -201,6 +256,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 4,
     alignItems: "center",
+    marginBottom:25,
   },
 
   xpTitle: {
