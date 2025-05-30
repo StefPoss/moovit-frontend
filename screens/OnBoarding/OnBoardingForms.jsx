@@ -62,6 +62,7 @@ export default function OnBoarding({ navigation }) {
           console.log("Réponse du backend :", data);
           navigation.navigate("TabNavigator");
           dispatch(removeAllInfoToStore());
+
         })
         .catch((error) => {
           console.error("Erreur lors de l’envoi :", error);
@@ -70,6 +71,7 @@ export default function OnBoarding({ navigation }) {
   }, [numQuestion]);
 
   const btnclick = () => {
+    
     if (questionForm[numQuestion]?.required) {
       for (let i = 0; i < questionForm[numQuestion].data.length; i++) {
         const key = questionForm[numQuestion].data[i].name;
@@ -99,7 +101,11 @@ export default function OnBoarding({ navigation }) {
       }
     }
 
-    setNumQuestion((n) => n + 1);
+
+     setNumQuestion((n) => n + 1)
+
+    // if(numQuestion<questionForm.length){setNumQuestion((n) => n + 1)}
+    
   };
 
   const onBoardingDisp = (numQuestion) => {
@@ -145,7 +151,7 @@ export default function OnBoarding({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    numQuestion<questionForm.length && <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={styles.flexGrow}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
