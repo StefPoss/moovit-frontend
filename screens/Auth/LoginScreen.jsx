@@ -148,12 +148,14 @@ export default function LoginScreen({ navigation }) {
           onPress={() => navigation.navigate("Forgot")}
         >
           <FontAwesome name="apple" size={20} color="#000" />
-          
+
           <Text style={styles.socialText}>Continuer avec Apple</Text>
         </TouchableOpacity>
 
         {/* Liens bas de page */}
-        <Text style={styles.footer}>Pas encore inscrit ?{"\n"}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("S'inscrire")}>
+          <Text style={styles.footer}>Pas encore inscrit ?{"\n"}</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
           <Text style={styles.link}>username/ mot de passe oublié ?</Text>
         </TouchableOpacity>

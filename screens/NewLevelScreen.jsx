@@ -54,7 +54,7 @@ export default function NewLevelScreen({ route }) {
             style={styles.topImg}
           >
             {/* <BarStep value={niv} /> */}
-            <Text style={styles.toptxt}>Etapes {niv}</Text>
+            <Text style={styles.toptxt}>Laisse toi guider à travers les étapes de ce niveau {niv}</Text>
           </ImageBackground>
         </View>
         <View style={styles.midd}>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     // fontFamily:"CocomatPro-Regular",
     fontFamily: "ManropeBold",
-    fontSize: 30,
+    fontSize: 25,
     // fontWeight: "heavy",
     color: "rgba(255, 255, 255, 1)",
     // backgroundColor: "rgba(255, 255, 255, 0.62)",
