@@ -126,29 +126,9 @@ export default function DashBoard(props) {
       setRefreshing(false);
       setAnimationKey(Date.now()); // force le refresh ProgressBar
     });
-    // Log l’heure du refresh pour debug
-    // const now = new Date();
-    // const hh = now.getHours().toString().padStart(2, "0");
-    // const mm = now.getMinutes().toString().padStart(2, "0");
-    // const ss = now.getSeconds().toString().padStart(2, "0");
-    //console.log(`${hh}H${mm}mn${ss}s`)
   }, []);
 
-  // const fetchSport = () => {
-  //   return fetch(`${API_URL}/api/getsport`, (req,res) =>{
 
-  //   }
-  //console.log("user is", user)
-
-  // Création du carousel de cartes d’activités > sécurisation du .map car
-  // activity peut être undefined (par exemple avant d’être fetch du back ou de Redux
-  // En forçant (Array.isArray(activity) ? activity : []), on garantis que :
-  // Si activity est bien un tableau, on l'utilise tel quel
-  // Si c'est undefined ou un objet ou autre chose, on mappe sur un tableau vide, donc pas d’erreur
-  // on a juste pas de cartes à afficher
-  // console.log("lvl id", user.currentLevelID);
-  // console.log("sublvl id", user.currentSubLevelID);
-  // console.log("activity", activity.length);
 
   let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => {
     let opa;
@@ -192,6 +172,7 @@ export default function DashBoard(props) {
 
   return (
     <SafeAreaProvider>
+      <ScrollView>
       <SafeAreaView style={styles.fullScreen} edges={["top"]}>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
@@ -251,35 +232,9 @@ export default function DashBoard(props) {
             </ScrollView>
           </View>
 
-          {/* Stats/perfs du moment */}
-          {/* <View style={styles.cardStats}>
-            <Text style={styles.statsTitle}>Tes perfs du moment</Text>
-            <View style={styles.statsRow}>
-              <View>
-                <Text style={styles.statsLabel}>Temps total</Text>
-                <Text style={styles.statsValue}>{playTime} min</Text>
-              </View>
-              <View>
-                <Text style={styles.statsLabel}>Exos</Text>
-                <Text style={styles.statsValue}>{sessions}</Text>
-              </View>
-              <View>
-                <Text style={styles.statsLabel}>XP</Text>
-                <Text style={styles.statsValue}>{xp}</Text>
-              </View>
-            </View> */}
-
-          {/* <Text style={styles.xpCongrats}>
-              🎉 Bravo ! +{xp} XP gagnés aujourd’hui 🎉
-            </Text> */}
-          {/* Option : Chart/graph ici */}
           <MooveItFunChart totalTime={user.playTime} exercises={user.sessions} xp={user.xp} />
-          {/* </View> */}
-
-          {/* Bas de page : Training & Météo, côte à côte */}
           <View style={styles.bottomRow}>
             <View style={styles.cardTraining}>
-              {/* Ce bloc centre tout verticalement et horizontalement */}
               <FontAwesome5
                 name="dumbbell"
                 size={24}
@@ -294,9 +249,9 @@ export default function DashBoard(props) {
               <Text style={styles.meteoText}>{meteo}</Text>
             </View>
           </View>
-          {/* Tabnavigation ici si besoin */}
         </ScrollView>
       </SafeAreaView>
+      </ScrollView>
     </SafeAreaProvider>
   );
 }
@@ -445,12 +400,10 @@ const styles = StyleSheet.create({
     padding: 2,
     marginRight: 7,
     minHeight: 80,
-    // maxHeight: 120,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
     marginTop: 10,
-    //height:"100%",
   },
   trainingInner: {
     flex: 1,
@@ -481,8 +434,6 @@ const styles = StyleSheet.create({
     borderRadius: 30, // changement radius et taille pour que le bloc méteo soit plus grand 
     padding: 0,
     marginLeft: 7,
-    //minHeight: 90,
-    //maxHeight: 120,
     justifyContent: "center",
     alignItems: "center",
      width: "70%",

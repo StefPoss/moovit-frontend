@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, SafeAreaView } from "react-native";
+import { View, StyleSheet, SafeAreaView,ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import OnPlay from "./OnActPlay/OnPlay";
@@ -11,6 +11,7 @@ import Button from "../../components/Buttons";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { width } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
+// import { ScrollView } from "react-native-web";
 
 export default function Play({ navigation }) {
   const user = useSelector((state) => state.user.value);
@@ -18,6 +19,8 @@ export default function Play({ navigation }) {
   const dispatch = useDispatch();
   const tabLevel = ["onPlay", "onDone", "onProgress"];
   const [levelStatus, setLevelStatus] = useState(0);
+
+  
 
   const plusstate = () => {
     if (levelStatus < tabLevel.length - 1) {
@@ -100,6 +103,7 @@ export default function Play({ navigation }) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <ScrollView>
       <View style={styles.back}>
         <TouchableOpacity style={styles.backButton} onPress={moinstate}>
           <Ionicons name="arrow-back" size={24} color="#000" />
@@ -116,6 +120,7 @@ export default function Play({ navigation }) {
           width={"100%"}
         />
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

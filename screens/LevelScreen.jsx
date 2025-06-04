@@ -6,7 +6,6 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
-// import ActivityCard from "../../components/ActivityCard";
 import CardLevelClicable from "../components/CardLevelClicable";
 import { useSelector } from "react-redux";
 
@@ -22,25 +21,8 @@ export default function LevelScreen(props) {
   const user = useSelector((state) => state.user.value);
   const [allActivity, setAllActivity] = useState([]);
 
-  // let levelsCards = activity?.map((e, i) => (
-  //   <CardLevelClicable
-  //     key={i}
-  //     // num = {i}
-  //     width="368"
-  //     style={styles.activity}
-  //     text={e.title}
-  //     description={e.description}
-  //     fontSize={13}
-  //     backgroundColor="#C5C4D9"
-  //     color="black"
-  //     url={e.image}
-  //     fill={false}
-  //     linkTo="NewLevelScreen"
-  //   />
-  // ));
 
   function fetchActivityData() {
-    // console.log(user.sportPlayed);
 
     return fetch(`${API_URL}/api/users/getsport`, {
       method: "POST",
@@ -63,19 +45,10 @@ export default function LevelScreen(props) {
   }
 
   let levelsCards = allActivity?.map((e, i) => {
-    // let bgCol;
-    //   i === 0 || i === 3 || i === 6 || i === 9
-    //   ? (bgCol = "#eeeef5")
-    //   : i === 1 || i === 4 || i === 7 || i === 10
-    //   ? (bgCol = "#ac9cc4")
-    //   : i === 2 || i === 5 || i === 8 || i === 11
-    //   ? (bgCol = "#ffecce")
-    //   : (bgCol = "#C5C4D9");
 
     return (
       <CardLevelClicable
         key={i}
-        // num = {i}
         width="100%"
         style={styles.activity}
         text={e.title}
@@ -87,25 +60,19 @@ export default function LevelScreen(props) {
         fill={false}
         linkTo="NewLevelScreen"
         subLevelSent={e.subLevels}
-        // opacity = "0"
       />
     );
   });
 
   const topImg =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168930/projectFinDeBatch/front/images/activities/padel/padel-photo-026.avif";
-  // "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1748380203/projectFinDeBatch/front/images/activities/activities-padel-01_mw10dt.png";
   const niv = "";
-  const bgImage = ""; //"https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif"
-
-  // 1er appel : charge le dashboard au premier render
+  const bgImage = ""; 
   useEffect(() => {
     fetchActivityData();
-    //console.log("activity subLevels ",activity.length);
   }, []);
   return (
     <SafeAreaProvider>
-      {/* <SafeAreaView style={styles.container} edges={["top"]}>  cette balise est sesactivé car le rendu est inesthetique */}
       <View style={styles.container}>
         
         <Image style={styles.topImg} source={{ uri: topImg }} />
@@ -115,31 +82,11 @@ export default function LevelScreen(props) {
         </Text>
         </View>
         <View style={styles.midd}>
-          {/* <ImageBackground
-            source={{ uri: bgImage }}
-            resizeMode="cover"
-            style={styles.image}
-          > */}
-            <ScrollView>
+            <ScrollView style={styles.scroll}>
               {levelsCards}
-              {/* <CardLevelClicable
-            style={styles.try}
-            text="titre"
-            description="description..."
-            color="black"
-            width="370" //long du boutton
-            height="140" //haut du boutton
-             backgroundColor="#FCEACE" //gris du figma
-            url="https://reactnative.dev/img/tiny_logo.png"
-            fontWeight="700"
-            linkTo="NewLevelScreen"
-            
-          /> */}
             </ScrollView>
-          {/* </ImageBackground> */}
         </View>
       </View>
-      {/* </SafeAreaView> */}
     </SafeAreaProvider>
   );
 }
@@ -147,20 +94,11 @@ export default function LevelScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#FEF5F8",
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
     height: "100%",
   },
-  /*textBubble: {
-    backgroundColor: "rgba(255, 255, 255,0.6)",
-    borderradius:12,
-    paddingHorinzontale:16,
-    paddingverticale:8,
-    alignSelf:"center",
-   marginTop:10,
-  },*/
   topImg: {
     width: "100%",
     height: "35%",
@@ -169,37 +107,26 @@ const styles = StyleSheet.create({
   toptxt: {
     marginTop: "-39%",
     paddingBottom: "30%",
-    //textAlign: "center",
+
     fontSize: 25,
     marginLeft: 50,
     fontsize: 40,
     color: "rgb(255, 255, 255)",
-    // backgroundColor: "rgba(255, 255, 255, 0.62)",
     width: "100%",
     fontFamily: "ManropeBold",
   },
-  // image: {
-  //   zIndex: +50,
-  //   height: "100%",
-  //   width: "100%",
-  // },
   midd: {
         backgroundColor: "rgba(85, 23, 23, 0)",
-    // zIndex:"999",
-    // backgroundColor: "rgba(255, 255, 255, 0)",
     flex: 1,
     justifyContent: "center",
     alignSelf: "center",
   },
-  // try: {
-  //   backgroundColor: "rgba(255, 255, 255, 0)",
-  // },
-
-  // CenterImg: {
-  //   width: "10",
-  //   height: "10",
-  // },
-
+  scroll:{
+    // marginTop:"-39%", //portable nico
+    marginTop:"-5%", //portable steph
+    // marginTop:"-9%", //portable amel
+    
+  },
   text: {
     color: "grey",
     fontSize: 20,
@@ -209,7 +136,6 @@ const styles = StyleSheet.create({
     flex: 0,
     flexDirection: "row",
   },
-  // activity: {},
   bottomButton: {
     flexDirection: "row",
   },

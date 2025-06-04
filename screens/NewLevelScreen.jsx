@@ -38,14 +38,11 @@ export default function NewLevelScreen({ route }) {
   // const [value, setValue] = useState(60);
   const topImg =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168960/projectFinDeBatch/front/images/activities/padel/padel-photo-013.avif";
-  // "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
-  //"https://reactnative.dev/img/tiny_logo.png";
-  const niv = "";
+ const niv = "";
   const bgImage =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   return (
     <SafeAreaProvider>
-      {/* <SafeAreaView style={styles.container} edges={["top"]}>  cette balise est sesactivé car le rendu est inesthetique */}
       <View style={styles.container}>
         <View style={styles.top}>
           <ImageBackground
@@ -64,22 +61,11 @@ export default function NewLevelScreen({ route }) {
             style={styles.image}
           >
             <ScrollView style={styles.scroll}>
-              {/* <CardLevelClicable
-                width="368"
-                height="150"
-                backgroundColor="#F5f5f5"
-                fontSize={20}
-                text="entete "
-                num="2"
-                description="corpus libris..corpus libris..corpus libris.."
-                linkTo="TabNavigator"
-              /> */}
               {sublevelsMapped}
             </ScrollView>
           </ImageBackground>
         </View>
       </View>
-      {/* </SafeAreaView> */}
     </SafeAreaProvider>
   );
 }
@@ -102,7 +88,6 @@ const styles = StyleSheet.create({
   },
   topImg: {
     zIndex: 0,
-    // marginLeft: "-30%",
     marginTop: "%",
     width: "100%",
     height: "100%",
@@ -113,16 +98,11 @@ const styles = StyleSheet.create({
 
   toptxt: {
     zIndex: 99999,
-    // marginTop:"55%",
-    // marginTop: "61.5%",
     marginTop: "40.5%",
     textAlign: "center",
-    // fontFamily:"CocomatPro-Regular",
     fontFamily: "ManropeBold",
     fontSize: 25,
-    // fontWeight: "heavy",
     color: "rgba(255, 255, 255, 1)",
-    // backgroundColor: "rgba(255, 255, 255, 0.62)",
     width: "100%",
   },
 
@@ -143,7 +123,6 @@ const styles = StyleSheet.create({
   image: {
     zIndex: 99999,
 
-    // zIndex: +50,
     height: "100%",
     width: "100%",
   },
