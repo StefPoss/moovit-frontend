@@ -6,8 +6,6 @@ import {
   StyleSheet,
   RefreshControl,
 } from "react-native";
-// import ActivityCard from "../../components/ActivityCard"
-// import StaticCard from "../../components/StaticCard"
 import CardLevelClicable from "../../components/CardLevelClicable";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
@@ -21,10 +19,7 @@ import StatiscticGraphic from "../../components/StatiscticGraphic";
 import { FontAwesome5 } from "@expo/vector-icons";
 import meteoIcons from "../../data/meteoIcons.json";
 import MooveItFunChart from "../../components/MooveItFunChart";
-// import { Ionicons } from "@expo/vector-icons"
-// import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
-//a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 // ========== LE DASHBOARD PRINCIPAL ==========
 
 export default function DashBoard(props) {
@@ -37,18 +32,7 @@ export default function DashBoard(props) {
   const [meteoIcon, setMeteoIcon] = useState("?");
   const [refreshing, setRefreshing] = React.useState(false);
   const [animationKey, setAnimationKey] = useState(0);
-  // Faux data pour le chart (à remplacer par les vrais calculs)
-  // let playTime = 35
-  // let sessions = 5
-  // let xp = 105
-
-  // console.log("activity", JSON.stringify(activity, null, 2))
-
-  // Calcul des perfs réelles
-
-  let playTime = 120; // temps total en minutes
-  let sessions = 40; // nombre d'exercices (sublevels) réalisés dans le niveau > user.currentSubLevelID/activity.length
-  let xp = 10; // user.xp déjà accumulé
+  
 
   // Fonction qui génère la bonne URL de fallback selon le genre
   const getPhotoUrl = (gender) => {
@@ -126,19 +110,9 @@ export default function DashBoard(props) {
       setRefreshing(false);
       setAnimationKey(Date.now()); // force le refresh ProgressBar
     });
-    // Log l’heure du refresh pour debug
-    // const now = new Date();
-    // const hh = now.getHours().toString().padStart(2, "0");
-    // const mm = now.getMinutes().toString().padStart(2, "0");
-    // const ss = now.getSeconds().toString().padStart(2, "0");
-    //console.log(`${hh}H${mm}mn${ss}s`)
+    
   }, []);
 
-  // const fetchSport = () => {
-  //   return fetch(`${API_URL}/api/getsport`, (req,res) =>{
-
-  //   }
-  //console.log("user is", user)
 
   // Création du carousel de cartes d’activités > sécurisation du .map car
   // activity peut être undefined (par exemple avant d’être fetch du back ou de Redux
@@ -251,30 +225,10 @@ export default function DashBoard(props) {
             </ScrollView>
           </View>
 
-          {/* Stats/perfs du moment */}
-          {/* <View style={styles.cardStats}>
-            <Text style={styles.statsTitle}>Tes perfs du moment</Text>
-            <View style={styles.statsRow}>
-              <View>
-                <Text style={styles.statsLabel}>Temps total</Text>
-                <Text style={styles.statsValue}>{playTime} min</Text>
-              </View>
-              <View>
-                <Text style={styles.statsLabel}>Exos</Text>
-                <Text style={styles.statsValue}>{sessions}</Text>
-              </View>
-              <View>
-                <Text style={styles.statsLabel}>XP</Text>
-                <Text style={styles.statsValue}>{xp}</Text>
-              </View>
-            </View> */}
-
-          {/* <Text style={styles.xpCongrats}>
-              🎉 Bravo ! +{xp} XP gagnés aujourd’hui 🎉
-            </Text> */}
+        
           {/* Option : Chart/graph ici */}
           <MooveItFunChart totalTime={user.playTime} exercises={user.sessions} xp={user.xp} />
-          {/* </View> */}
+       
 
           {/* Bas de page : Training & Météo, côte à côte */}
           <View style={styles.bottomRow}>
