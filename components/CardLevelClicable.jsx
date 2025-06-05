@@ -19,6 +19,7 @@ function CardLevelClicable(
     opacity = "1",
     fill = false, //image qui fait tout le composant
     subLevelSent = {},
+    varNewLevel = false,
   },
   props
 ) {
@@ -31,6 +32,7 @@ function CardLevelClicable(
   return (
     <TouchableOpacity //propriete qui permet de clicker comme button et onpress
       onPress={() => {
+        varNewLevel? navigation.navigate(linkTo, { screen:"Dashboard" }):
         navigation.navigate(linkTo, { subLevel: subLevelSent });
       }} //lien executable au click
       style={[styles.button, { width, height, backgroundColor }]} //modif du css via les props

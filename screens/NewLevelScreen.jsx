@@ -31,6 +31,13 @@ export default function NewLevelScreen({ route }) {
         num={e.subLevelID}
         description={e.description}
         linkTo="TabNavigator"
+        varNewLevel= {true}
+
+
+        // subLevelSent={''}
+
+        // linkTo="HistoryPlay"
+        // linkTo="Dashboard"
       />
     );
   });
@@ -38,7 +45,7 @@ export default function NewLevelScreen({ route }) {
   // const [value, setValue] = useState(60);
   const topImg =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168960/projectFinDeBatch/front/images/activities/padel/padel-photo-013.avif";
- const niv = "";
+  const niv = "";
   const bgImage =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168977/projectFinDeBatch/front/images/activities/padel/padel-photo-005.avif";
   return (
@@ -51,7 +58,9 @@ export default function NewLevelScreen({ route }) {
             style={styles.topImg}
           >
             {/* <BarStep value={niv} /> */}
-            <Text style={styles.toptxt}>Laisse toi guider à travers les étapes de ce niveau {niv}</Text>
+            <Text style={styles.toptxt}>
+              Laisse toi guider à travers les étapes de ce niveau {niv}
+            </Text>
           </ImageBackground>
         </View>
         <View style={styles.midd}>
@@ -60,9 +69,7 @@ export default function NewLevelScreen({ route }) {
             resizeMode="cover"
             style={styles.image}
           >
-            <ScrollView style={styles.scroll}>
-              {sublevelsMapped}
-            </ScrollView>
+            <ScrollView style={styles.scroll}>{sublevelsMapped}</ScrollView>
           </ImageBackground>
         </View>
       </View>
