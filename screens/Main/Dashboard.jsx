@@ -6,8 +6,6 @@ import {
   StyleSheet,
   RefreshControl,
 } from "react-native";
-// import ActivityCard from "../../components/ActivityCard"
-// import StaticCard from "../../components/StaticCard"
 import CardLevelClicable from "../../components/CardLevelClicable";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
@@ -17,14 +15,10 @@ import { addUserToStore } from "../../reducers/userSlice";
 import { addActivityToStore } from "../../reducers/activitySlice";
 import PhotoProfil from "../../components/PhotoProfil";
 import ExercisesProgressBar from "../../components/ExercisesProgressBar";
-import StatiscticGraphic from "../../components/StatiscticGraphic";
 import { FontAwesome5 } from "@expo/vector-icons";
 import meteoIcons from "../../data/meteoIcons.json";
 import MooveItFunChart from "../../components/MooveItFunChart";
-// import { Ionicons } from "@expo/vector-icons"
-// import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
 
-//a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 // ========== LE DASHBOARD PRINCIPAL ==========
 
 export default function DashBoard(props) {
@@ -37,13 +31,6 @@ export default function DashBoard(props) {
   const [meteoIcon, setMeteoIcon] = useState("?");
   const [refreshing, setRefreshing] = React.useState(false);
   const [animationKey, setAnimationKey] = useState(0);
-  // Faux data pour le chart (à remplacer par les vrais calculs)
-  // let playTime = 35
-  // let sessions = 5
-  // let xp = 105
-
-  // console.log("activity", JSON.stringify(activity, null, 2))
-
   // Calcul des perfs réelles
 
   let playTime = 120; // temps total en minutes
@@ -82,7 +69,7 @@ export default function DashBoard(props) {
           photoUrl = getPhotoUrl(data.dataUser.gender);
         }
         // console.log("ora ", data.dataUser.stats);
-        
+
         let newUser = {
           token: data.dataUser.token,
           photoUrl,
@@ -99,20 +86,19 @@ export default function DashBoard(props) {
           weight: data.dataUser.weight,
           sessions: data.dataUser.stats.nbSessions,
           playTime: data.dataUser.stats.totalTime,
-        }
-        dispatch(addUserToStore(newUser))
-        dispatch(addActivityToStore(data.dataLevel.subLevels))
-        let dailyTime = data.dataUser.form.dayTime
-        if (dailyTime === "4 h/semaine") setDayTime("45 minutes")
-        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure")
-        else if (dailyTime === "15 min/jour") setDayTime("15 minutes")
-        else if (dailyTime === "30 min/jour") setDayTime("30 minutes")
-        setMeteo(data.dataMeteo)
-        let Icon = meteoIcons.find((entry) => entry.desc === data.dataMeteo)
-        setMeteoIcon(Icon.icon)
-      })
-  }
-
+        };
+        dispatch(addUserToStore(newUser));
+        dispatch(addActivityToStore(data.dataLevel.subLevels));
+        let dailyTime = data.dataUser.form.dayTime;
+        if (dailyTime === "4 h/semaine") setDayTime("45 minutes");
+        else if (dailyTime === "8 h/semaine ou plus") setDayTime("1 heure");
+        else if (dailyTime === "15 min/jour") setDayTime("15 minutes");
+        else if (dailyTime === "30 min/jour") setDayTime("30 minutes");
+        setMeteo(data.dataMeteo);
+        let Icon = meteoIcons.find((entry) => entry.desc === data.dataMeteo);
+        setMeteoIcon(Icon.icon);
+      });
+  };
 
   // Au premier render, charge les données user/activity
   useEffect(() => {
@@ -126,46 +112,24 @@ export default function DashBoard(props) {
       setRefreshing(false);
       setAnimationKey(Date.now()); // force le refresh ProgressBar
     });
-    // Log l’heure du refresh pour debug
-    // const now = new Date();
-    // const hh = now.getHours().toString().padStart(2, "0");
-    // const mm = now.getMinutes().toString().padStart(2, "0");
-    // const ss = now.getSeconds().toString().padStart(2, "0");
-    //console.log(`${hh}H${mm}mn${ss}s`)
   }, []);
-
-  // const fetchSport = () => {
-  //   return fetch(`${API_URL}/api/getsport`, (req,res) =>{
-
-  //   }
-  //console.log("user is", user)
-
-  // Création du carousel de cartes d’activités > sécurisation du .map car
-  // activity peut être undefined (par exemple avant d’être fetch du back ou de Redux
-  // En forçant (Array.isArray(activity) ? activity : []), on garantis que :
-  // Si activity est bien un tableau, on l'utilise tel quel
-  // Si c'est undefined ou un objet ou autre chose, on mappe sur un tableau vide, donc pas d’erreur
-  // on a juste pas de cartes à afficher
-  // console.log("lvl id", user.currentLevelID);
-  // console.log("sublvl id", user.currentSubLevelID);
-  // console.log("activity", activity.length);
 
   let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => {
     let opa;
     let direction;
-    user.currentSubLevelID < i ? (opa = 0.5) : (opa = 1);
+    user.currentSubLevelID < i ? (opa = 0.5) : (opa = 1); //regle l'opacité des carte clickable  (valeur stoké dans la varriable opa)
     user.currentSubLevelID < i
-      ? (direction = "TabNavigator")
-      : (direction = "LevelScreen");
+      ? (direction = "TabNavigator") //redirection des cartes si grisé  (var stokage direction)
+      : (direction = "Play"); // redirection des cartes vers levelScreen
 
-      let bgCol;
-      i === 0 || i === 3 || i === 6 || i === 9
-      ? (bgCol = "#c5bdf5")
-      : i === 1 || i === 4 || i === 7 || i === 10
-      ? (bgCol = "#f3c0e7")
-      : i === 2 || i === 5 || i === 8 || i === 11
-      ? (bgCol = "#c7deff")
-      : (bgCol = "#C5C4D9");
+    let bgCol;
+    i === 0 || i === 3 || i === 6 || i === 9 //si l'index est 0/3/6/9 (valeur stoké dans la varriable bgCol)
+      ? (bgCol = "#c5bdf5") //applique cette couleur
+      : i === 1 || i === 4 || i === 7 || i === 10 //sinon si c'est 1/4/7/10
+      ? (bgCol = "#f3c0e7") //applique cette couleur
+      : i === 2 || i === 5 || i === 8 || i === 11 //sinon si c'est 2/5/8/11
+      ? (bgCol = "#c7deff") //applique celle ci
+      : (bgCol = "#C5C4D9"); //sinon applique celle la
 
     return (
       <CardLevelClicable
@@ -174,10 +138,11 @@ export default function DashBoard(props) {
         text={e.title}
         backgroundColor={bgCol}
         color="white"
-         url={e.image}
+        url={e.image}
         fill={true}
         opacity={opa}
-         linkTo={direction}
+        linkTo={direction}
+        //  linkTo={"play"}
       />
     );
   });
@@ -192,111 +157,101 @@ export default function DashBoard(props) {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.fullScreen} edges={["top"]}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-          showsVerticalScrollIndicator={false}
-          scrollEnabled={false}
-        >
-          {/* Carte profil */}
-          <View style={styles.cardProfile}>
-            <PhotoProfil photoUrl={profileUrl} />
-            <View style={styles.textProfilContainer}>
-              <View style={{flexDirection:"row"}}>
-                <Text style={[styles.profilText, { fontSize: 20 }]}>
-                  Bonjour {user.name} 
+      <ScrollView>
+        <SafeAreaView style={styles.fullScreen} edges={["top"]}>
+          <ScrollView
+            contentContainerStyle={styles.scrollContent}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={false}
+          >
+            {/* Carte profil */}
+            <View style={styles.cardProfile}>
+              <PhotoProfil photoUrl={profileUrl} />
+              <View style={styles.textProfilContainer}>
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={[styles.profilText, { fontSize: 20 }]}>
+                    Bonjour {user.name}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.profilText,
+                      { fontSize: 15 },
+                      { color: "grey" },
+                      { fontStyle: "italic" },
+                      { marginLeft: 8 },
+                      { marginTop: 5 },
+                    ]}
+                  >
+                    ({user.username})
+                  </Text>
+                </View>
+                <Text style={styles.profilText}>
+                  Prêt pour un nouveau challenge ?
                 </Text>
-                <Text style={[styles.profilText, { fontSize: 15 }, {color:"grey"}, {fontStyle:"italic"}, {marginLeft:8}, {marginTop:5}]}>({user.username})</Text>
               </View>
-              <Text style={styles.profilText}>
-                Prêt pour un nouveau challenge ?
-              </Text>
             </View>
-          </View>
 
-          {/* Progression (niveau actuel, cercle de progression à droite) */}
-          <View style={styles.cardProgress}>
-            <View style={{ flex: 2, justifyContent: "center" }}>
-              <Text style={styles.progressTitle}>
-                Niveau actuel :
+            {/* Progression (niveau actuel, cercle de progression à droite) */}
+            <View style={styles.cardProgress}>
+              <View style={{ flex: 2, justifyContent: "center" }}>
                 <Text style={styles.progressTitle}>
-                  &nbsp;{user.currentLevelID}.{user.currentSubLevelID}
+                  Niveau actuel :
+                  <Text style={styles.progressTitle}>
+                    &nbsp;{user.currentLevelID}.{user.currentSubLevelID}
+                  </Text>
                 </Text>
-              </Text>
-              <Text style={styles.progressSteps}>
-                {user.currentSubLevelID}/{activity.length} exercices complétés
-              </Text>
-            </View>
-
-            <View style={styles.progressRightBlock}>
-              <ExercisesProgressBar
-                key={animationKey}
-                value={(user.currentSubLevelID * 100) / activity.length}
-              />
-            </View>
-          </View>
-
-          {/* Carousel d'activités (niveaux) */}
-          <View style={styles.cardCarousel}>
-            <ScrollView
-              contentContainerStyle={{ padding: 0 }}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              style={styles.scrollView}
-            >
-              {levelsCards}
-            </ScrollView>
-          </View>
-
-          {/* Stats/perfs du moment */}
-          {/* <View style={styles.cardStats}>
-            <Text style={styles.statsTitle}>Tes perfs du moment</Text>
-            <View style={styles.statsRow}>
-              <View>
-                <Text style={styles.statsLabel}>Temps total</Text>
-                <Text style={styles.statsValue}>{playTime} min</Text>
+                <Text style={styles.progressSteps}>
+                  {user.currentSubLevelID}/{activity.length} exercices complétés
+                </Text>
               </View>
-              <View>
-                <Text style={styles.statsLabel}>Exos</Text>
-                <Text style={styles.statsValue}>{sessions}</Text>
-              </View>
-              <View>
-                <Text style={styles.statsLabel}>XP</Text>
-                <Text style={styles.statsValue}>{xp}</Text>
-              </View>
-            </View> */}
 
-          {/* <Text style={styles.xpCongrats}>
-              🎉 Bravo ! +{xp} XP gagnés aujourd’hui 🎉
-            </Text> */}
-          {/* Option : Chart/graph ici */}
-          <MooveItFunChart totalTime={user.playTime} exercises={user.sessions} xp={user.xp} />
-          {/* </View> */}
+              <View style={styles.progressRightBlock}>
+                <ExercisesProgressBar
+                  key={animationKey}
+                  value={(user.currentSubLevelID * 100) / activity.length}
+                />
+              </View>
+            </View>
 
-          {/* Bas de page : Training & Météo, côte à côte */}
-          <View style={styles.bottomRow}>
-            <View style={styles.cardTraining}>
-              {/* Ce bloc centre tout verticalement et horizontalement */}
-              <FontAwesome5
-                name="dumbbell"
-                size={24}
-                color="#363255"
-                style={{ marginBottom: 0 }}
-              />
-              <Text style={styles.trainingTitle}>Training</Text>
-              <Text style={styles.trainingText}>{dayTime}</Text>
+            {/* Carousel d'activités (niveaux) */}
+            <View style={styles.cardCarousel}>
+              <ScrollView
+                contentContainerStyle={{ padding: 0 }}
+                horizontal={true} //reglage horizontal du carousel
+                showsHorizontalScrollIndicator={false} //enleve le curseur de defilement du carousel horizontal
+                style={styles.scrollView}
+              >
+                {levelsCards}
+              </ScrollView>
             </View>
-            <View style={styles.cardMeteo}>
-              <Text style={styles.meteoIcon}>{meteoIcon}</Text>
-              <Text style={styles.meteoText}>{meteo}</Text>
+
+            <MooveItFunChart
+              totalTime={user.playTime}
+              exercises={user.sessions}
+              xp={user.xp}
+            />
+            <View style={styles.bottomRow}>
+              <View style={styles.cardTraining}>
+                <FontAwesome5
+                  name="dumbbell"
+                  size={24}
+                  color="#363255"
+                  style={{ marginBottom: 0 }}
+                />
+                <Text style={styles.trainingTitle}>Training</Text>
+                <Text style={styles.trainingText}>{dayTime}</Text>
+              </View>
+              <View style={styles.cardMeteo}>
+                <Text style={styles.meteoIcon}>{meteoIcon}</Text>
+                <Text style={styles.meteoText}>{meteo}</Text>
+              </View>
             </View>
-          </View>
-          {/* Tabnavigation ici si besoin */}
-        </ScrollView>
-      </SafeAreaView>
+          </ScrollView>
+        </SafeAreaView>
+      </ScrollView>
     </SafeAreaProvider>
   );
 }
@@ -435,8 +390,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 0,
     alignItems: "stretch",
-    height:150, // Ajouté pour que le bloc prenne tout l’espace disponible
-   
+    height: 150, // Ajouté pour que le bloc prenne tout l’espace disponible
   },
   cardTraining: {
     flex: 1,
@@ -445,12 +399,10 @@ const styles = StyleSheet.create({
     padding: 2,
     marginRight: 7,
     minHeight: 80,
-    // maxHeight: 120,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
     marginTop: 10,
-    //height:"100%",
   },
   trainingInner: {
     flex: 1,
@@ -478,16 +430,14 @@ const styles = StyleSheet.create({
   cardMeteo: {
     flex: 1,
     backgroundColor: "#eef3fa", // vert pastel UI kit CFDED3
-    borderRadius: 30, // changement radius et taille pour que le bloc méteo soit plus grand 
+    borderRadius: 30, // changement radius et taille pour que le bloc méteo soit plus grand
     padding: 0,
     marginLeft: 7,
-    //minHeight: 90,
-    //maxHeight: 120,
     justifyContent: "center",
     alignItems: "center",
-     width: "70%",
-     marginTop: 10, // Ajouté
-     marginBottom:10,
+    width: "70%",
+    marginTop: 10, // Ajouté
+    marginBottom: 10,
   },
   meteoInner: {
     flex: 1,

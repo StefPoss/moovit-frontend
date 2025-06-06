@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
+import { View, StyleSheet, SafeAreaView,ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import OnPlay from "./OnActPlay/OnPlay";
@@ -13,18 +13,20 @@ import { TouchableOpacity } from "react-native";
 import { width } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 // import { ScrollView } from "react-native-web";
 
-export default function Play({ navigation }) {
+export default function HistoryPlay({ navigation }) {
   const user = useSelector((state) => state.user.value);
   const activity = useSelector((state) => state.activity.value);
   const dispatch = useDispatch();
   const tabLevel = ["onPlay", "onDone", "onProgress"];
   const [levelStatus, setLevelStatus] = useState(0);
 
+  
+
   const plusstate = () => {
     if (levelStatus < tabLevel.length - 1) {
       setLevelStatus(levelStatus + 1);
     } else {
-      navigation.navigate("TabNavigator");
+      navigation.navigate("Dashboard");
       setLevelStatus(0);
     }
   };
@@ -102,22 +104,22 @@ export default function Play({ navigation }) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
-        <View style={styles.back}>
-          <TouchableOpacity style={styles.backButton} onPress={moinstate}>
-            <Ionicons name="arrow-back" size={24} color="#000" />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.container}>{toDisp}</View>
-        <View style={styles.header}>
-          <Button
-            title="Continuer"
-            onPress={plusstate}
-            type="primary"
-            style={styles.continueBtn}
-            backgroundColor={"#FCEACE"}
-            width={"100%"}
-          />
-        </View>
+      <View style={styles.back}>
+        <TouchableOpacity style={styles.backButton} onPress={moinstate}>
+          <Ionicons name="arrow-back" size={24} color="#000" />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.container}>{toDisp}</View>
+      <View style={styles.header}>
+        <Button
+          title="Continuer"
+          onPress={plusstate}
+          type="primary"
+          style={styles.continueBtn}
+          backgroundColor={"#FCEACE"}
+          width={"100%"}
+        />
+      </View>
       </ScrollView>
     </SafeAreaView>
   );
