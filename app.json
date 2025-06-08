@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "frontend",
+    "name": "MooveIt",
     "slug": "frontend",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,7 +23,11 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon.png",
+      "themeColor": "#c7deff",
+      "backgroundColor": "#ffffff",
+      "display": "standalone"
+    },
+    "description": "MooveIt : ton coach de poche"
   }
 }

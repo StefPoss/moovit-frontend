@@ -25,6 +25,7 @@
     "expo-linear-gradient": "~14.1.4",
     "expo-status-bar": "~2.2.3",
     "jsonwebtoken": "^9.0.2",
+    "lottie-react": "^2.4.1",
     "lottie-react-native": "^7.2.2",
     "newrelic-react-native-agent": "^1.5.5",
     "prop-types": "^15.8.1",

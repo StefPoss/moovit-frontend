@@ -1,12 +1,17 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import LottieView from "lottie-react-native";
+import React, { useState } from "react"
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { Ionicons } from "@expo/vector-icons"
+import { useNavigation } from "@react-navigation/native"
+// import LottieView from "lottie-react-native";
+
+// importation unique de la bibliothèque Lottie pour les animations
+// Avec compatibilité conditionnelle pour le web et mobile
+// Expo choisit le bon fichier selon la plateforme
+import Lottie from "../../components/LottieWrapper"
 
 export default function ForgotScreen() {
-  const [email, setEmail] = useState("");
-  const navigation = useNavigation();
+  const [email, setEmail] = useState("")
+  const navigation = useNavigation()
 
   return (
     <View style={styles.container}>
@@ -22,14 +27,14 @@ export default function ForgotScreen() {
       {/*<Text style={styles.subtitle}>En cours</Text>*/}
 
       {/* Animation nuage */}
-      <LottieView
+      <Lottie
         source={require("../../assets/Animation - 1748526184745.json")} // chemin package json pour le lien animation en progression + installer au cas où yarn add lottie-react-native
         autoPlay
         loop
         style={styles.cloud}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -59,4 +64,4 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
   },
-});
+})
