@@ -39,9 +39,10 @@ yarn-error.*
 .env*.local
 .env.production
 .env
-<<<<<<< HEAD
-=======
 
->>>>>>> f397a31fc76a327e098aa61f6f4b6bf76ab79f4d
 # typescript
 *.tsbuildinfo
+
+# cloc > stats lignes de code
+cloc-results.txt
+.cloc-cache
