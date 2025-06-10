@@ -176,7 +176,7 @@ export default function DashBoard(props) {
             <View style={styles.cardProfile}>
               <PhotoProfil photoUrl={profileUrl} />
               <View style={styles.textProfilContainer}>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ padding:4 }}>
                   <Text style={[styles.profilText, { fontSize: 20 }]}>
                     Bonjour {user.name}
                   </Text>
