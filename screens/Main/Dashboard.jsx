@@ -31,11 +31,7 @@ export default function DashBoard(props) {
   const [meteoIcon, setMeteoIcon] = useState("?");
   const [refreshing, setRefreshing] = React.useState(false);
   const [animationKey, setAnimationKey] = useState(0);
-  // Calcul des perfs réelles
 
-  let playTime = 120; // temps total en minutes
-  let sessions = 40; // nombre d'exercices (sublevels) réalisés dans le niveau > user.currentSubLevelID/activity.length
-  let xp = 10; // user.xp déjà accumulé
 
   // Fonction qui génère la bonne URL de fallback selon le genre
   const getPhotoUrl = (gender) => {
@@ -112,7 +108,9 @@ export default function DashBoard(props) {
       setRefreshing(false);
       setAnimationKey(Date.now()); // force le refresh ProgressBar
     });
+
   }, []);
+
 
   let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => {
     let opa;
@@ -228,6 +226,7 @@ export default function DashBoard(props) {
               </ScrollView>
             </View>
 
+
             <MooveItFunChart
               totalTime={user.playTime}
               exercises={user.sessions}
@@ -248,6 +247,7 @@ export default function DashBoard(props) {
                 <Text style={styles.meteoIcon}>{meteoIcon}</Text>
                 <Text style={styles.meteoText}>{meteo}</Text>
               </View>
+
             </View>
           </ScrollView>
         </SafeAreaView>
