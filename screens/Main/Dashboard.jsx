@@ -162,7 +162,7 @@ export default function DashBoard(props) {
 
   return (
     <SafeAreaProvider>
-      <ScrollView>
+      {/* <ScrollView> */}
         <SafeAreaView style={styles.fullScreen} edges={["top"]}>
           <ScrollView
             contentContainerStyle={styles.scrollContent}
@@ -258,7 +258,7 @@ export default function DashBoard(props) {
             </View>
           </ScrollView>
         </SafeAreaView>
-      </ScrollView>
+      {/* </ScrollView> */}
     </SafeAreaProvider>
   );
 }
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
   },
   cardProfile: {
     width: width * 0.92,
-    height:height*0.1,
+    height:height*0.09,
     backgroundColor: "#fff", // blanc pur, démarque la card profil
     borderRadius: 16,
     marginBottom: 6,
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
   },
   cardProgress: {
     width: width*0.92,
-    height:height*0.13,
+    height:height*0.1,
     backgroundColor: "#7D6BB3", // violet charte, flat
     borderRadius: 16,
     marginBottom: 0,
