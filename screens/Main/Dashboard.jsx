@@ -114,7 +114,9 @@ export default function DashBoard(props) {
       setRefreshing(false);
       setAnimationKey(Date.now()); // force le refresh ProgressBar
     });
+
   }, []);
+
 
   let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => {
     let opa;
@@ -231,6 +233,7 @@ export default function DashBoard(props) {
               </ScrollView>
             </View>
 
+
             <MooveItFunChart
               totalTime={user.playTime}
               exercises={user.sessions}
@@ -251,6 +254,7 @@ export default function DashBoard(props) {
                 <Text style={styles.meteoIcon}>{meteoIcon}</Text>
                 <Text style={styles.meteoText}>{meteo}</Text>
               </View>
+
             </View>
           </ScrollView>
         </SafeAreaView>
