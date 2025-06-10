@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
@@ -13,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUserToStore } from "../../reducers/userSlice"
 import { removeActivityToStore } from "../../reducers/activitySlice"
+const { width, height } = Dimensions.get('window');
 
 
 export default function ProfileScreen({}) {
@@ -204,8 +206,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
-    marginBottom: 30,
-    marginTop:30,
+    marginBottom: height*0.01,
+    marginTop:height*0.01,
   },
   statItem: {
     flexDirection: "row",
@@ -236,16 +238,17 @@ const styles = StyleSheet.create({
   },
   badgesContainer: {
     flexDirection: "row",
+   
   },
   badge: {
-    width: 80,
-    height: 80,
+    width: width*0.2,
+    height: height*0.1,
     marginRight: 10,
     borderRadius: 10,
   },
   xpContainer: {
-    marginTop: 30,
-    marginHorizontal: 20,
+   
+   
     backgroundColor: "#EFEAFF", // couleur pastel douce
     paddingVertical: 15,
     paddingHorizontal: 25,
@@ -256,7 +259,8 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 4,
     alignItems: "center",
-    marginBottom:25,
+    marginBottom:height*0.02,
+   
   },
 
   xpTitle: {

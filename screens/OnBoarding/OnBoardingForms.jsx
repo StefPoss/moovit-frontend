@@ -9,6 +9,7 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
+  Dimensions
 } from "react-native";
 import Button from "../../components/Buttons";
 import questionForm from "../../data/onBoardingQuestion.json";
@@ -23,6 +24,9 @@ import {
 } from "../../reducers/onBoardingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from "@env";
+
+const { width, height } = Dimensions.get('window');
+
 
 export default function OnBoarding({ navigation }) {
   const [numQuestion, setNumQuestion] = useState(0);
@@ -151,11 +155,12 @@ export default function OnBoarding({ navigation }) {
   };
 
   return (
-    numQuestion<questionForm.length && <SafeAreaView style={styles.container}>
+    numQuestion<questionForm.length && <View style={styles.pageContainer}>
+    <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={styles.flexGrow}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
+        
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.flexGrow}>
@@ -179,21 +184,32 @@ export default function OnBoarding({ navigation }) {
                 {onBoardingDisp(numQuestion)}
               </View>
             </ScrollView>
+           
+           
+          </View>
 
-            {/* Bouton en dehors du scroll, visible au-dessus du clavier */}
+        </TouchableWithoutFeedback>
+       
+      </KeyboardAvoidingView>
+      
+       
+    </SafeAreaView>
+     {/* Bouton en dehors du scroll, visible au-dessus du clavier */}
             <View style={styles.fixedButton}>
               <Button title="Continuer" onPress={btnclick} />
             </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+            <View style={styles.whiteBackground}></View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  pageContainer:{
+    flex:1,
+
+  },
   container: {
-    flex: 1,
+    height:height*0.85,
     backgroundColor: "white",
     paddingTop: 60,
   },
@@ -225,6 +241,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 30,
     paddingBottom: 30,
+    width:width*0.95,
+    marginLeft:width*0.025
+    
   },
 
   scrollContainer: {
@@ -236,5 +255,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: Platform.OS === "ios" ? 20 : 10,
     backgroundColor: "white",
+   
+    
   },
+  whiteBackground:{
+     backgroundColor: "white",
+     height:height*1,
+  }
 });
