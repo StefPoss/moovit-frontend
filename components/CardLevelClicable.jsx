@@ -27,15 +27,18 @@ function CardLevelClicable(
 ) {
   const navigation = useNavigation();
   let des;
-  description.length<=70?des=description: des=description.substring(0,70)+'...';
+  description.length <= 70
+    ? (des = description)
+    : (des = description.substring(0, 70) + "...");
   // const idf =()=>{
   //   props.keyNum(props.key);
   // }
   return (
     <TouchableOpacity //propriete qui permet de clicker comme button et onpress
       onPress={() => {
-        varNewLevel? navigation.navigate(linkTo, { screen:"Dashboard" }):
-        navigation.navigate(linkTo, { subLevel: subLevelSent });
+        varNewLevel
+          ? navigation.navigate(linkTo, { screen: "Dashboard" })
+          : navigation.navigate(linkTo, { leveling: subLevelSent });
       }} //lien executable au click
       style={[styles.button, { width, height, backgroundColor }]} //modif du css via les props
     >
@@ -58,7 +61,13 @@ function CardLevelClicable(
           </Text>
         </View>
         <Image
-          style={url===''? [styles.tinyLogo0, {}] :fill ? [styles.tinyLogo2, {}] : [styles.tinyLogo, {}]} //ternaire qui permet de changé de still si fill dans les props est false or true
+          style={
+            url === ""
+              ? [styles.tinyLogo0, {}]
+              : fill
+              ? [styles.tinyLogo2, {}]
+              : [styles.tinyLogo, {}]
+          } //ternaire qui permet de changé de still si fill dans les props est false or true
           source={{ uri: url }} //petit img d'illustration du coté
         />
       </View>
@@ -111,10 +120,11 @@ const styles = StyleSheet.create({
     width: "60%",
   },
 
-  tinyLogo0:{},
+  tinyLogo0: {},
 
-  tinyLogo: { //petit logo a drt
-    backgroundColor:'#e0e0e0',
+  tinyLogo: {
+    //petit logo a drt
+    backgroundColor: "#e0e0e0",
     borderRadius: 15,
     alignSelf: "flex-end",
     width: "30%",
