@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
   View,
   Text,
@@ -6,77 +6,67 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
-import { useNavigation } from "@react-navigation/native";
-import { useSelector, useDispatch } from "react-redux";
+  Dimensions,
+} from "react-native"
+import { Ionicons } from "@expo/vector-icons"
+import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
+import { useNavigation } from "@react-navigation/native"
+import { useSelector, useDispatch } from "react-redux"
 import { removeUserToStore } from "../../reducers/userSlice"
 import { removeActivityToStore } from "../../reducers/activitySlice"
-
+const { width, height } = Dimensions.get("window")
 
 export default function ProfileScreen({}) {
-  const user = useSelector((state) => state.user.value);
-  dispatch = useDispatch()
-  console.log("profil -- ", user);
-  const navigation = useNavigation();
+  const user = useSelector((state) => state.user.value)
+  const dispatch = useDispatch()
+  console.log("profil -- ", user)
+  const navigation = useNavigation()
   const handleLogout = () => {
     dispatch(removeActivityToStore())
     dispatch(removeUserToStore())
-    navigation.navigate("Welcome");
-  };
+    navigation.navigate("Welcome")
+  }
   let medalsData
 
-  let natationImages = 
-  [
+  let natationImages = [
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747826097/projectFinDeBatch/front/images/medals/medal-natation-04_dabzkx.png",
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747811166/projectFinDeBatch/front/images/medals/medal-natation-01_sva2zb.png",
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747696/projectFinDeBatch/front/images/medals/medal-natation-05_rhqkre.png",
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747747682/projectFinDeBatch/front/images/medals/medal-natation-01_bktbt8.png",
   ]
 
-  let padelImages = 
-  [
+  let padelImages = [
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747827625/projectFinDeBatch/front/images/medals/medal-padel-04_pspous.png",
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747827083/projectFinDeBatch/front/images/medals/medal-padel-03_j1xbl9.png",
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747826943/projectFinDeBatch/front/images/medals/medal-padel-02_enz2s8.png",
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747827941/projectFinDeBatch/front/images/medals/medal-padel-05_shbhmg.png",
-    
   ]
 
-  
-  
-  if(user.sportPlayed==="Padel")
-  {
-    medalsData=padelImages.map((e, i)=>
-    {
-      return <Image
-            source={{
-              uri:e,
-
-            }}
-            style={styles.badge}
-            key={i}
-          />
+  if (user.sportPlayed === "Padel") {
+    medalsData = padelImages.map((e, i) => {
+      return (
+        <Image
+          source={{
+            uri: e,
+          }}
+          style={styles.badge}
+          key={i}
+        />
+      )
+    })
+  } else if (user.sportPlayed === "Natation") {
+    medalsData = natationImages.map((e, i) => {
+      return (
+        <Image
+          source={{
+            uri: e,
+          }}
+          style={styles.badge}
+          key={i}
+        />
+      )
     })
   }
-  else if(user.sportPlayed==="Natation")
-  {
-    medalsData=natationImages.map((e, i)=>
-    {
-      return <Image
-            source={{
-              uri:e,
-
-            }}
-            style={styles.badge}
-            key={i}
-          />
-    })
-
-  }
-
-  
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -91,11 +81,25 @@ export default function ProfileScreen({}) {
         </TouchableOpacity>
       </View>
 
+      <View style={styles.premiumSubscribeContainer}>
+      <TouchableOpacity //propriete qui permet de clicker comme button et onpress
+            onPress={() => {navigation.navigate(linkTo, { screen: "Stripe" })
+
+            }} //lien executable au click
+            style={[styles.button, { width, height, backgroundColor }]} //modif du css via les props
+          >
+        <Text style={styles.premiumSubscribeTitle}>Deviens Premium !</Text>
+        <Text style={styles.premiumSubscribeValue}>
+          profites de dizaines d'avantages
+        </Text>
+        </TouchableOpacity>
+      </View>
+
       {/* Profile image */}
       <Image
         source={{
           //uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747993035/projectFinDeBatch/front/images/default-profile-female_kn6nlb.png",
-          uri: user.photoUrl
+          uri: user.photoUrl,
         }}
         style={styles.profileImage}
       />
@@ -128,7 +132,7 @@ export default function ProfileScreen({}) {
         showsHorizontalScrollIndicator={false}
         style={styles.badgesContainer}
       >
-         {/* <Image
+        {/* <Image
           source={{
             uri: "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747826097/projectFinDeBatch/front/images/medals/medal-natation-04_dabzkx.png",
           }}
@@ -160,15 +164,15 @@ export default function ProfileScreen({}) {
         <Text style={styles.xpValue}>{user.xp} XP</Text>
       </View>
     </ScrollView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#fff",
-    flex:1,
+    backgroundCrolor: "#fff",
+    flex: 1,
   },
   header: {
     flexDirection: "row",
@@ -204,8 +208,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
-    marginBottom: 30,
-    marginTop:30,
+    marginBottom: height * 0.01,
+    marginTop: height * 0.01,
   },
   statItem: {
     flexDirection: "row",
@@ -238,14 +242,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   badge: {
-    width: 80,
-    height: 80,
+    width: width * 0.2,
+    height: height * 0.1,
     marginRight: 10,
     borderRadius: 10,
   },
   xpContainer: {
-    marginTop: 30,
-    marginHorizontal: 20,
     backgroundColor: "#EFEAFF", // couleur pastel douce
     paddingVertical: 15,
     paddingHorizontal: 25,
@@ -256,7 +258,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 4,
     alignItems: "center",
-    marginBottom:25,
+    marginBottom: height * 0.02,
   },
 
   xpTitle: {
@@ -271,4 +273,30 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#785BFF", // couleur violette vive pour bien ressortir
   },
-});
+  premiumSubscribeContainer: {
+    backgroundColor: "#fceace", // couleur pastel douce
+    paddingVertical: 15,
+    paddingHorizontal: 25,
+    borderRadius: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
+    alignItems: "center",
+    marginBottom: height * 0.02,
+  },
+
+  premiumSubscribeTitle: {
+    fontSize: 22,
+    fontWeight: "600",
+    color: "#555",
+    marginBottom: 5,
+  },
+
+  premiumSubscribeValue: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#785BFF", // couleur violette vive pour bien ressortir
+  },
+})
