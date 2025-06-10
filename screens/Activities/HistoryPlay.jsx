@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, SafeAreaView,ScrollView } from "react-native";
+import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import OnPlay from "./OnActPlay/OnPlay";
@@ -13,20 +13,21 @@ import { TouchableOpacity } from "react-native";
 import { width } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 // import { ScrollView } from "react-native-web";
 
-export default function HistoryPlay({ navigation }) {
+export default function HistoryPlay({ navigation, route }) {
+  const { leveling } = route.params;
+  console.log("ppp ", leveling);
+
   const user = useSelector((state) => state.user.value);
   const activity = useSelector((state) => state.activity.value);
   const dispatch = useDispatch();
   const tabLevel = ["onPlay", "onDone", "onProgress"];
   const [levelStatus, setLevelStatus] = useState(0);
 
-  
-
   const plusstate = () => {
     if (levelStatus < tabLevel.length - 1) {
       setLevelStatus(levelStatus + 1);
     } else {
-      navigation.navigate("Dashboard");
+      navigation.navigate("TabNavigator");
       setLevelStatus(0);
     }
   };
@@ -38,7 +39,6 @@ export default function HistoryPlay({ navigation }) {
     }
   };
 
-  console.log(user);
   const totalSubLevels = activity.length;
   let currentLevel = [user.currentLevelID, user.currentSubLevelID];
   let nextLevel = [];
@@ -53,7 +53,7 @@ export default function HistoryPlay({ navigation }) {
 
   const [level, setLevel] = useState(currentLevel[0]);
   const [subLevel, setSubLevel] = useState(currentLevel[1]);
-  const subLevelInfos = activity[subLevel];
+  const subLevelInfos = activity[leveling - 1];
 
   const timing = subLevelInfos.timing;
   const levelxp = subLevelInfos.xp;
@@ -67,7 +67,7 @@ export default function HistoryPlay({ navigation }) {
 
   let toDisp;
   if (tabLevel[levelStatus] === "onPlay") {
-    toDisp = <OnPlay infos={subLevelInfos} title={user.titleLevel} />;
+    toDisp = <OnPlay infos={subLevelInfos} title={subLevelInfos.title} />;
   } else if (tabLevel[levelStatus] === "onDone") {
     toDisp = (
       <OnDone
@@ -104,22 +104,22 @@ export default function HistoryPlay({ navigation }) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView>
-      <View style={styles.back}>
-        <TouchableOpacity style={styles.backButton} onPress={moinstate}>
-          <Ionicons name="arrow-back" size={24} color="#000" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.container}>{toDisp}</View>
-      <View style={styles.header}>
-        <Button
-          title="Continuer"
-          onPress={plusstate}
-          type="primary"
-          style={styles.continueBtn}
-          backgroundColor={"#FCEACE"}
-          width={"100%"}
-        />
-      </View>
+        <View style={styles.back}>
+          <TouchableOpacity style={styles.backButton} onPress={moinstate}>
+            <Ionicons name="arrow-back" size={24} color="#000" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.container}>{toDisp}</View>
+        <View style={styles.header}>
+          <Button
+            title="Continuer"
+            onPress={plusstate}
+            type="primary"
+            style={styles.continueBtn}
+            backgroundColor={"#FCEACE"}
+            width={"100%"}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

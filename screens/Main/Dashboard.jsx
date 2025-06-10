@@ -114,13 +114,16 @@ export default function DashBoard(props) {
     });
   }, []);
 
+  console.log("lll ", activity);
+
   let levelsCards = (Array.isArray(activity) ? activity : []).map((e, i) => {
     let opa;
     let direction;
     user.currentSubLevelID < i ? (opa = 0.5) : (opa = 1); //regle l'opacité des carte clickable  (valeur stoké dans la varriable opa)
     user.currentSubLevelID < i
       ? (direction = "TabNavigator") //redirection des cartes si grisé  (var stokage direction)
-      : (direction = "Play"); // redirection des cartes vers levelScreen
+       // : (direction = "Play"); // redirection des cartes vers levelScreen
+       : (direction = "HistoryPlay"); // redirection des cartes vers levelScreen
 
     let bgCol;
     i === 0 || i === 3 || i === 6 || i === 9 //si l'index est 0/3/6/9 (valeur stoké dans la varriable bgCol)
@@ -142,6 +145,8 @@ export default function DashBoard(props) {
         fill={true}
         opacity={opa}
         linkTo={direction}
+        subLevelSent={e.subLevelID}
+
         //  linkTo={"play"}
       />
     );

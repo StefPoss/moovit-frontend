@@ -15,10 +15,10 @@ import { useSelector } from "react-redux";
 //a importé dans le terminal !!!npm i react-native-circular-progress + npm i --save react-native-circular-progress react-native-svg// npx expo install react-native-reanimated + yarn add react-native-circular-progress-indicator + yarn add react-native-svg
 
 export default function NewLevelScreen({ route }) {
-  const { subLevel } = route.params;
-  console.log("popoo ", subLevel);
+  const { leveling } = route.params;
+ 
 
-  let sublevelsMapped = subLevel.map((e, i) => {
+  let sublevelsMapped = leveling.map((e, i) => {
     return (
       <CardLevelClicable
         key={i}

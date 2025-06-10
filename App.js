@@ -20,7 +20,7 @@ import Play from "./screens/Activities/Play";
 import ProfileScreen from "./screens/Main/ProfileScreen";
 import TestChartScreen from "./screens/TestChartScreen";
 import CreditScreen from "./screens/CreditScreen";
-// import HistoryPlay from "./screens/HistoryPlay";
+import HistoryPlay from "./screens/Activities/HistoryPlay";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -67,11 +67,10 @@ const TabNavigator = () => {
           if (route.name === "Dashboard") {
             iconName = "home-outline";
           } else if (route.name === "LevelScreen") {
-            iconName = "play-circle-outline";
+            iconName = "list-outline"; 
           } else if (route.name === "ProfilScreen") {
             iconName = "person-outline";
           }
-
           return <Ionicons name={iconName} size={32} color={color} />;
         },
         tabBarActiveTintColor: "#785BFF",
@@ -128,7 +127,7 @@ export default function App() {
               <Stack.Screen name="LevelScreen" component={LevelScreen} />
               <Stack.Screen name="NewLevelScreen" component={NewLevelScreen} />
               <Stack.Screen name="Play" component={Play} />
-              {/* <Stack.Screen name="HistoryPlay" component={HistoryPlay} /> */}
+              <Stack.Screen name="HistoryPlay" component={HistoryPlay} />
               <Stack.Screen name="TabNavigator" component={TabNavigator} />
               <Stack.Screen name="Forgot" component={ForgotScreen} />
               <Stack.Screen name="CreditScreen" component={CreditScreen} />
