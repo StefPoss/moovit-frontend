@@ -5,6 +5,9 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
 // import ActivityCard from "../../components/ActivityCard";
 import BarStep from "../components/BarStep";
 import { useState } from "react";
@@ -14,7 +17,7 @@ import { useSelector } from "react-redux";
 
 //a importé dans le terminal !!!npm i react-native-circular-progress + npm i --save react-native-circular-progress react-native-svg// npx expo install react-native-reanimated + yarn add react-native-circular-progress-indicator + yarn add react-native-svg
 
-export default function NewLevelScreen({ route }) {
+export default function NewLevelScreen({ route, navigation }) {
   const { leveling } = route.params;
  
 
@@ -57,6 +60,14 @@ export default function NewLevelScreen({ route }) {
             resizeMode="cover"
             style={styles.topImg}
           >
+               <TouchableOpacity
+            style={styles.touchableButton}
+            onPress={() => navigation.goBack()}
+          >
+            <View style={styles.backButton}>
+            <Ionicons name="arrow-back" size={35} color="white" />
+            </View>
+          </TouchableOpacity>
             {/* <BarStep value={niv} /> */}
             <Text style={styles.toptxt}>
               Laisse toi guider à travers les étapes de ce niveau {niv}
@@ -88,20 +99,25 @@ const styles = StyleSheet.create({
   },
   top: {
     flex: 0,
-    height: "40%",
+    height: "50%",
     width: "100%",
-    justifyContent: "flex-end",
-    marginTop: "",
+    marginTop: "-25%",
   },
   topImg: {
     zIndex: 0,
-    marginTop: "%",
     width: "100%",
     height: "100%",
-    marginTop: "",
-    borderRadius: "",
   },
-  half: {},
+
+  toptxt: {
+    zIndex: 99999,
+    marginTop: "40.5%",
+    textAlign: "center",
+    fontFamily: "ManropeBold",
+    fontSize: 25,
+    color: "rgba(255, 255, 255, 1)",
+    width: "100%",
+  },
 
   toptxt: {
     zIndex: 99999,
@@ -149,4 +165,18 @@ const styles = StyleSheet.create({
   bottomButton: {
     flexDirection: "row",
   },
+  touchableButton:{
+    marginTop: "35%",
+    paddingBottom:"20%",
+    marginBottom:"-160",
+
+  },
+  backButton:{
+    marginBottom:"-160",
+    borderRadius:7,
+    backgroundColor: "rgba(72, 68, 68, 0.42)",
+    width:"35"
+
+},
+
 });

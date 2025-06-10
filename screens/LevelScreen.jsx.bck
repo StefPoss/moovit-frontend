@@ -6,8 +6,11 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
+import { TouchableOpacity } from "react-native";
+
 import CardLevelClicable from "../components/CardLevelClicable";
 import { useSelector } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
 
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { useState, useEffect } from "react";
@@ -16,14 +19,12 @@ import { API_URL } from "@env";
 
 //a importé dans le terminal !!!  npx expo install react-native-safe-area-context
 
-export default function LevelScreen(props) {
+export default function LevelScreen({ navigation }) {
   const activity = useSelector((state) => state.activity.value);
   const user = useSelector((state) => state.user.value);
   const [allActivity, setAllActivity] = useState([]);
 
-
   function fetchActivityData() {
-
     return fetch(`${API_URL}/api/users/getsport`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -45,7 +46,6 @@ export default function LevelScreen(props) {
   }
 
   let levelsCards = allActivity?.map((e, i) => {
-
     return (
       <CardLevelClicable
         key={i}
@@ -67,24 +67,29 @@ export default function LevelScreen(props) {
   const topImg =
     "https://res.cloudinary.com/deuhttaaq/image/upload/f_auto,q_auto/v1747168930/projectFinDeBatch/front/images/activities/padel/padel-photo-026.avif";
   const niv = "";
-  const bgImage = ""; 
+  const bgImage = "";
   useEffect(() => {
     fetchActivityData();
   }, []);
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
-        
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back" size={24} color="grey" />
+        </TouchableOpacity>
+
         <Image style={styles.topImg} source={{ uri: topImg }} />
+
         <View style={styles.textBubble}>
-        <Text style={styles.toptxt}>
-          Explore tous les niveaux {"\n"}pour suivre ton évolution ! {niv}
-        </Text>
+          <Text style={styles.toptxt}>
+            Explore tous les niveaux {"\n"}pour suivre ton évolution ! {niv}
+          </Text>
         </View>
         <View style={styles.midd}>
-            <ScrollView style={styles.scroll}>
-              {levelsCards}
-            </ScrollView>
+          <ScrollView style={styles.scroll}>{levelsCards}</ScrollView>
         </View>
       </View>
     </SafeAreaProvider>
@@ -98,11 +103,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "100%",
+    marginTop:"-10%",
+  },
+  backButton: {
+    zIndex: 99999,
+    paddingTop: "200",
+    marginLeft: "-75%",
   },
   topImg: {
     width: "100%",
     height: "35%",
-    
   },
   toptxt: {
     marginTop: "-39%",
@@ -116,16 +126,15 @@ const styles = StyleSheet.create({
     fontFamily: "ManropeBold",
   },
   midd: {
-        backgroundColor: "rgba(85, 23, 23, 0)",
+    backgroundColor: "rgba(85, 23, 23, 0)",
     flex: 1,
     justifyContent: "center",
     alignSelf: "center",
   },
-  scroll:{
-    // marginTop:"-39%", //portable nico
-    marginTop:"-5%", //portable steph
+  scroll: {
+    marginTop: "-39%", //portable nico
+    // marginTop:"-5%", //portable steph
     // marginTop:"-9%", //portable amel
-    
   },
   text: {
     color: "grey",
