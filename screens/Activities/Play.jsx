@@ -19,7 +19,7 @@ export default function Play({ navigation }) {
   const dispatch = useDispatch();
   const tabLevel = ["onPlay", "onDone", "onProgress"];
   const [levelStatus, setLevelStatus] = useState(0);
-
+  
   const plusstate = () => {
     if (levelStatus < tabLevel.length - 1) {
       setLevelStatus(levelStatus + 1);
@@ -36,7 +36,6 @@ export default function Play({ navigation }) {
     }
   };
 
-  console.log(user);
   const totalSubLevels = activity.length;
   let currentLevel = [user.currentLevelID, user.currentSubLevelID];
   let nextLevel = [];

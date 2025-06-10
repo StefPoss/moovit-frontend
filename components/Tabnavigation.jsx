@@ -14,6 +14,9 @@ const tabs = [
   { name: "person-outline", screen: "Profile" }
 ];
 
+//<FontAwesomeIcon icon="fa-solid fa-bars" />
+//<FontAwesomeIcon icon="fa-regular fa-rectangle-list" />
+
 export default function BottomNavBar() {
   const navigation = useNavigation();
   const [activeScreen, setActiveScreen] = useState("Home");
