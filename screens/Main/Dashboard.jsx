@@ -18,8 +18,13 @@ import ExercisesProgressBar from "../../components/ExercisesProgressBar";
 import { FontAwesome5 } from "@expo/vector-icons";
 import meteoIcons from "../../data/meteoIcons.json";
 import MooveItFunChart from "../../components/MooveItFunChart";
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+
 
 // ========== LE DASHBOARD PRINCIPAL ==========
+
 
 export default function DashBoard(props) {
   // User / activity récupérés via Redux
@@ -31,11 +36,8 @@ export default function DashBoard(props) {
   const [meteoIcon, setMeteoIcon] = useState("?");
   const [refreshing, setRefreshing] = React.useState(false);
   const [animationKey, setAnimationKey] = useState(0);
-  // Calcul des perfs réelles
 
-  let playTime = 120; // temps total en minutes
-  let sessions = 40; // nombre d'exercices (sublevels) réalisés dans le niveau > user.currentSubLevelID/activity.length
-  let xp = 10; // user.xp déjà accumulé
+
 
   // Fonction qui génère la bonne URL de fallback selon le genre
   const getPhotoUrl = (gender) => {
@@ -142,6 +144,7 @@ export default function DashBoard(props) {
         fill={true}
         opacity={opa}
         linkTo={direction}
+        
         //  linkTo={"play"}
       />
     );
@@ -270,13 +273,15 @@ const styles = StyleSheet.create({
     minHeight: "100%",
   },
   cardProfile: {
-    width: "92%",
+    width: width * 0.92,
+    height:height*0.1,
     backgroundColor: "#fff", // blanc pur, démarque la card profil
     borderRadius: 16,
     marginBottom: 6,
     padding: 4,
     flexDirection: "row",
     alignItems: "center",
+    
   },
   textProfilContainer: {
     marginLeft: 12,
@@ -288,7 +293,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   cardProgress: {
-    width: "92%",
+    width: width*0.92,
+    height:height*0.13,
     backgroundColor: "#7D6BB3", // violet charte, flat
     borderRadius: 16,
     marginBottom: 0,
@@ -321,7 +327,7 @@ const styles = StyleSheet.create({
   },
 
   cardCarousel: {
-    width: "100%",
+    width: width*1,
     backgroundColor: "#ffffff", // bleu clair charte
     borderRadius: 16,
     marginTop: 0,
@@ -385,12 +391,12 @@ const styles = StyleSheet.create({
   bottomRow: {
     flex: 1,
     flexDirection: "row",
-    width: "92%",
+    width: width*0.92,
     justifyContent: "space-between",
     marginTop: 0,
     marginBottom: 0,
     alignItems: "stretch",
-    height: 150, // Ajouté pour que le bloc prenne tout l’espace disponible
+    height: height*0.17, // Ajouté pour que le bloc prenne tout l’espace disponible
   },
   cardTraining: {
     flex: 1,

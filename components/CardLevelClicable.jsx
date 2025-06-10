@@ -1,6 +1,8 @@
 import React from "react";
-import { Image, View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { Image, View, TouchableOpacity, Text, StyleSheet, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
 //creation d'une carte d'activité clicable
 function CardLevelClicable(
@@ -11,8 +13,8 @@ function CardLevelClicable(
     color = "black", //color de la font
     fontSize = 13, //fontseize pour le titre
     fontWeight = "700", //la fontWeight de toute les lettre
-    width = "150", //long du boutton
-    height = "150", //haut du boutton
+    width = screenHeight*0.17, //long du boutton
+    height = screenHeight*0.17, //haut du boutton
     backgroundColor = "#FCEACE", //couleur du fond de la carte
     url = "https://reactnative.dev/img/tiny_logo.png", //petite img sur le coté
     linkTo = "TabNavigator", //nom de la page ou rediriger
