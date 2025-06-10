@@ -60,7 +60,7 @@ export default function OnPlay({ infos, title }) {
 
   return (
     <LinearGradient
-      colors={["#FFFFFF", "#FCEACE", "#FFFFFF"]}
+      colors={["#FFFFFF", "#a394d7", "#FFFFFF"]}
       style={styles.safe}
     >
       <SafeAreaView style={{ flex: 1 }}>

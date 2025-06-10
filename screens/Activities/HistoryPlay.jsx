@@ -116,7 +116,7 @@ export default function HistoryPlay({ navigation, route }) {
             onPress={plusstate}
             type="primary"
             style={styles.continueBtn}
-            backgroundColor={"#FCEACE"}
+            backgroundColor={"#d6c9ff"}
             width={"100%"}
           />
         </View>

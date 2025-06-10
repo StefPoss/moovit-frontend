@@ -64,8 +64,8 @@ export default function CreditScreen({ navigation }) {
         </View>
         <View style={styles.body}>
           <View style={styles.heading}>
-            {" "}
-            <Text style={styles.center}>Staff by Alphabetic Order:</Text>{" "}
+            
+            <Text style={styles.center}>Staff by Alphabetic Order:</Text>
           </View>
         </View>
               
