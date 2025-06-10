@@ -19,17 +19,20 @@ function CardLevelClicable(
     opacity = "1",
     fill = false, //image qui fait tout le composant
     subLevelSent = {},
+    varNewLevel = false,
   },
   props
 ) {
   const navigation = useNavigation();
-  
+  let des;
+  description.length<=70?des=description: des=description.substring(0,70)+'...';
   // const idf =()=>{
   //   props.keyNum(props.key);
   // }
   return (
     <TouchableOpacity //propriete qui permet de clicker comme button et onpress
       onPress={() => {
+        varNewLevel? navigation.navigate(linkTo, { screen:"Dashboard" }):
         navigation.navigate(linkTo, { subLevel: subLevelSent });
       }} //lien executable au click
       style={[styles.button, { width, height, backgroundColor }]} //modif du css via les props
@@ -49,7 +52,7 @@ function CardLevelClicable(
           <Text
             style={[styles.buttonDescription, {}]} // txt de despription
           >
-            {description}
+            {des}
           </Text>
         </View>
         <Image
@@ -105,9 +108,11 @@ const styles = StyleSheet.create({
     // box qui contient le titre et la description
     width: "60%",
   },
-  tinyLogo: {
-    //petit logo a drt
-    backgroundColor: "#e0e0e0",
+
+  tinyLogo0:{},
+
+  tinyLogo: { //petit logo a drt
+    backgroundColor:'#e0e0e0',
     borderRadius: 15,
     alignSelf: "flex-end",
     width: "30%",
