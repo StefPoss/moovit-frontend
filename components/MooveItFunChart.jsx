@@ -1,7 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { BarChart, Grid } from "react-native-svg-charts";
 import { G, Text as SvgText } from "react-native-svg";
+
+const { width, height } = Dimensions.get('window');
+
 
 const Labels = ({ x, y, bandwidth, data }) => (
   <G>
@@ -40,7 +43,7 @@ export default function MooveItFunChart({
     <View style={styles.container}>
       <Text style={styles.title}>Tes perfs du moment</Text>
       <BarChart
-        style={{ height: 85, width: 250 }}
+        style={{ height: height*0.1, width: 250 }}
         data={data}
         yAccessor={({ item }) => item.value}
         svg={({ item }) => item.svg}
@@ -67,7 +70,7 @@ export default function MooveItFunChart({
 
 const styles = StyleSheet.create({
   container: {
-    width: "90%",
+    width: width*0.92,
     backgroundColor: "#3D3F65",
     padding: 10,
     borderRadius: 18,
