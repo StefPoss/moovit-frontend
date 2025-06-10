@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
+import { View, StyleSheet, SafeAreaView, ScrollView, Dimensions } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import OnPlay from "./OnActPlay/OnPlay";
@@ -10,8 +10,10 @@ import { addUserToStore } from "../../reducers/userSlice";
 import Button from "../../components/Buttons";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
-import { width } from "deprecated-react-native-prop-types/DeprecatedImagePropType";
 // import { ScrollView } from "react-native-web";
+import { Platform } from "react-native";
+const { width, height } = Dimensions.get('window');
+
 
 export default function HistoryPlay({ navigation, route }) {
   const { leveling } = route.params;
@@ -103,7 +105,7 @@ export default function HistoryPlay({ navigation, route }) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView>
+      {/* <ScrollView> */}
         <View style={styles.back}>
           <TouchableOpacity style={styles.backButton} onPress={moinstate}>
             <Ionicons name="arrow-back" size={24} color="#000" />
@@ -120,7 +122,7 @@ export default function HistoryPlay({ navigation, route }) {
             width={"100%"}
           />
         </View>
-      </ScrollView>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 }
@@ -129,6 +131,8 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: "white",
+   
+   
   },
   header: {
     flexDirection: "row",
@@ -137,12 +141,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 16,
-    paddingTop: 12,
-    paddingBottom: 8,
-    marginBottom: 40,
+    ...(Platform.OS==="android" && { marginBottom:height*0.05,}),
+     ...(Platform.OS==="ios" && { marginBottom:height*-0.015,}),
+  
   },
   back: {
     width: "20%",
+    ...(Platform.OS==="android" && {marginTop:height*0.025}),
+    
+    
   },
 
   container: {
@@ -150,6 +157,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
     paddingLeft: 30,
-    paddingTop: 50,
+   
   },
 });

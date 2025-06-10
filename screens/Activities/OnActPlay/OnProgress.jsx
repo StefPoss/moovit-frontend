@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import ProgressStep from "../../../components/ProgressStep";
@@ -16,6 +17,7 @@ import { useEffect, useState } from "react";
 import { API_URL } from "@env";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+const { width, height } = Dimensions.get('window');
 
 export default function OnReward({
   xp,
@@ -150,8 +152,8 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   prog: {
-    width: 100,
-    height: 100,
+    width: width*1,
+    height: height*0.12,
     alignItems: "center",
   },
   backBtn: {
@@ -172,7 +174,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     textAlign: "center",
-    marginVertical: 12,
+    marginTop:height*-0.02,
     fontFamily: "arial",
     fontFamily: "ManropeRegular",
   },
@@ -189,12 +191,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 20,
     marginVertical: 20,
-    marginTop: "40%",
+    marginTop: height*0.13,
     justifyContent: "center",
     alignItems: "center",
   },
   rewardText: {
-    fontSize: 16,
+    fontSize: width*0.038,
     textAlign: "center",
     marginTop: 10,
   },
@@ -214,7 +216,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
 
     bottom: "-12%",
-    width: "80%",
+    width: width*0.8,
     justifyContent: "space-between",
   },
 });
