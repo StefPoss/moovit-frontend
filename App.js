@@ -13,7 +13,6 @@ import Login from "./screens/Auth/LoginScreen";
 import SignUp from "./screens/Auth/SignupScreen";
 import onBoarding from "./screens/OnBoarding/OnBoardingForms";
 import Dashboard from "./screens/Main/Dashboard";
-import LevelScreen from "./screens/LevelScreen";
 import NewLevelScreen from "./screens/NewLevelScreen";
 import CguScreen from "./screens/Auth/CGUScreen";
 import Play from "./screens/Activities/Play";
@@ -21,6 +20,7 @@ import ProfileScreen from "./screens/Main/ProfileScreen";
 import TestChartScreen from "./screens/TestChartScreen";
 import CreditScreen from "./screens/CreditScreen";
 import HistoryPlay from "./screens/Activities/HistoryPlay";
+import RLevelScreen from "./screens/RLevelScreen";
 import StripeScreen from "./screens/Premium/StripeScreen"
 
 import { Provider } from "react-redux";
@@ -67,7 +67,7 @@ const TabNavigator = () => {
 
           if (route.name === "Dashboard") {
             iconName = "home-outline";
-          } else if (route.name === "LevelScreen") {
+          } else if (route.name === "RLevelScreen") {
             iconName = "list-outline"; 
           } else if (route.name === "ProfilScreen") {
             iconName = "person-outline";
@@ -87,7 +87,7 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen name="Dashboard" component={Dashboard} />
-      <Tab.Screen name="LevelScreen" component={LevelScreen} />
+      <Tab.Screen name="RLevelScreen" component={RLevelScreen} />
       <Tab.Screen name="ProfilScreen" component={ProfileScreen} />
     </Tab.Navigator>
   );
@@ -125,7 +125,7 @@ export default function App() {
               <Stack.Screen name="onBoarding" component={onBoarding} />
               <Stack.Screen name="Dashboard" component={Dashboard} />
               <Stack.Screen name="cgu" component={CguScreen} />
-              <Stack.Screen name="LevelScreen" component={LevelScreen} />
+              <Stack.Screen name="RLevelScreen" component={RLevelScreen} />
               <Stack.Screen name="NewLevelScreen" component={NewLevelScreen} />
               <Stack.Screen name="Play" component={Play} />
               <Stack.Screen name="HistoryPlay" component={HistoryPlay} />

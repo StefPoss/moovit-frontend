@@ -6,11 +6,15 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { Ionicons } from "@expo/vector-icons";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { LinearGradient } from "expo-linear-gradient";
+
+const { width, height } = Dimensions.get('window');
+
 
 export default function OnPlay({ infos, title }) {
   const { image, mediaUrl, description, tipOfThePro, timing } = infos;
@@ -60,7 +64,7 @@ export default function OnPlay({ infos, title }) {
 
   return (
     <LinearGradient
-      colors={["#FFFFFF", "#FCEACE", "#FFFFFF"]}
+      colors={["#FFFFFF", "#a394d7", "#FFFFFF"]}
       style={styles.safe}
     >
       <SafeAreaView style={{ flex: 1 }}>
@@ -143,8 +147,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   mainCard: {
-    width: "60%",
+    width: width*0.6,
     backgroundColor: "#F5F5F5",
+    height:height*0.38,
 
     padding: 16,
     borderRadius: 24,
@@ -152,7 +157,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 180,
+    height: height*0.15,
     borderRadius: 16,
     marginBottom: 10,
   },
@@ -170,8 +175,8 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
   timerCard: {
-    width: 110,
-    height: 180,
+    width: width*0.3,
+    height: height*0.3,
     margin: "auto",
     // backgroundColor: "#FCEACE",
     borderRadius: 16,
@@ -197,19 +202,19 @@ const styles = StyleSheet.create({
   },
   videoCard: {
     width: "100%",
-    height: 220,
+    height: height*0.25,
     backgroundColor: "transparent",
-    borderRadius: 16,
+   
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
   },
   tipBox: {
-    padding: 16,
+    padding: 8,
     backgroundColor: "#EEEEEE",
     borderRadius: 16,
 
-    marginTop: 10,
+    
   },
   tipTitle: {
     fontSize: 16,

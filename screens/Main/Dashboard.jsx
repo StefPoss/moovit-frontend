@@ -164,7 +164,7 @@ export default function DashBoard(props) {
 
   return (
     <SafeAreaProvider>
-      {/* <ScrollView> */}
+      <ScrollView>
         <SafeAreaView style={styles.fullScreen} edges={["top"]}>
           <ScrollView
             contentContainerStyle={styles.scrollContent}
@@ -178,7 +178,7 @@ export default function DashBoard(props) {
             <View style={styles.cardProfile}>
               <PhotoProfil photoUrl={profileUrl} />
               <View style={styles.textProfilContainer}>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ padding:4 }}>
                   <Text style={[styles.profilText, { fontSize: 20 }]}>
                     Bonjour {user.name}
                   </Text>
@@ -203,7 +203,7 @@ export default function DashBoard(props) {
 
             {/* Progression (niveau actuel, cercle de progression à droite) */}
             <View style={styles.cardProgress}>
-              <View style={{ flex: 2, justifyContent: "center" }}>
+              <View style={{ flex: 2, justifyContent: "center",marginTop:"2%",marginRight:"-15%" }}>
                 <Text style={styles.progressTitle}>
                   Niveau actuel :
                   <Text style={styles.progressTitle}>
@@ -260,7 +260,7 @@ export default function DashBoard(props) {
             </View>
           </ScrollView>
         </SafeAreaView>
-      {/* </ScrollView> */}
+      </ScrollView>
     </SafeAreaProvider>
   );
 }
@@ -287,6 +287,7 @@ const styles = StyleSheet.create({
     padding: 4,
     flexDirection: "row",
     alignItems: "center",
+    paddingBottom: "0",
     
   },
   textProfilContainer: {
@@ -330,6 +331,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-end",
     justifyContent: "center",
+    marginTop:"7%",
   },
 
   cardCarousel: {
