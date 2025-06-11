@@ -82,16 +82,15 @@ export default function ProfileScreen({}) {
       </View>
 
       <View style={styles.premiumSubscribeContainer}>
-      <TouchableOpacity //propriete qui permet de clicker comme button et onpress
-            onPress={() => {navigation.navigate(linkTo, { screen: "Stripe" })
-
-            }} //lien executable au click
-            style={[styles.button, { width, height, backgroundColor }]} //modif du css via les props
-          >
-        <Text style={styles.premiumSubscribeTitle}>Deviens Premium !</Text>
-        <Text style={styles.premiumSubscribeValue}>
-          profites de dizaines d'avantages
-        </Text>
+        <TouchableOpacity //propriete qui permet de clicker comme button et onpress
+          onPress={() => {
+            navigation.navigate(linkTo, { screen: "Stripe" })
+          }} //renvoie vers le screen de la page Stripe pour l'abonnement Premium
+        >
+          <Text style={styles.premiumSubscribeTitle}>Deviens Premium !</Text>
+          <Text style={styles.premiumSubscribeValue}>
+            profites de dizaines d'avantages
+          </Text>
         </TouchableOpacity>
       </View>
 

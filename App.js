@@ -21,6 +21,7 @@ import ProfileScreen from "./screens/Main/ProfileScreen";
 import TestChartScreen from "./screens/TestChartScreen";
 import CreditScreen from "./screens/CreditScreen";
 import HistoryPlay from "./screens/Activities/HistoryPlay";
+import StripeScreen from "./screens/Premium/StripeScreen"
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -131,6 +132,7 @@ export default function App() {
               <Stack.Screen name="TabNavigator" component={TabNavigator} />
               <Stack.Screen name="Forgot" component={ForgotScreen} />
               <Stack.Screen name="CreditScreen" component={CreditScreen} />
+              <Stack.Screen name="Stripe" component={StripeScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </PaperProvider>
