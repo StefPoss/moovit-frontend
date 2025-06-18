@@ -7,15 +7,14 @@ import {
   ScrollView,
   TouchableOpacity,
   Dimensions,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import Tabnavigation from "../../components/Tabnavigation"; // ajout tabnavigation barre avec les icones
-import { useNavigation } from "@react-navigation/native";
-import { useSelector, useDispatch } from "react-redux";
+} from "react-native"
+import { Ionicons } from "@expo/vector-icons"
+import Tabnavigation from "../../components/Tabnavigation" // ajout tabnavigation barre avec les icones
+import { useNavigation } from "@react-navigation/native"
+import { useSelector, useDispatch } from "react-redux"
 import { removeUserToStore } from "../../reducers/userSlice"
 import { removeActivityToStore } from "../../reducers/activitySlice"
-const { width, height } = Dimensions.get('window');
-
+const { width, height } = Dimensions.get("window")
 
 export default function ProfileScreen({}) {
   const user = useSelector((state) => state.user.value)
@@ -82,11 +81,12 @@ export default function ProfileScreen({}) {
         </TouchableOpacity>
       </View>
 
+      {/* Abonnement Premium > Screen Stripe */}
       <View style={styles.premiumSubscribeContainer}>
-        <TouchableOpacity //propriete qui permet de clicker comme button et onpress
+        <TouchableOpacity
           onPress={() => {
-            navigation.navigate(linkTo, { screen: "Stripe" })
-          }} //renvoie vers le screen de la page Stripe pour l'abonnement Premium
+            navigation.navigate("Stripe")
+          }}
         >
           <Text style={styles.premiumSubscribeTitle}>Deviens Premium !</Text>
           <Text style={styles.premiumSubscribeValue}>
@@ -208,8 +208,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
-    marginBottom: height*0.01,
-    marginTop:height*0.01,
+    marginBottom: height * 0.01,
+    marginTop: height * 0.01,
   },
   statItem: {
     flexDirection: "row",
@@ -240,17 +240,14 @@ const styles = StyleSheet.create({
   },
   badgesContainer: {
     flexDirection: "row",
-   
   },
   badge: {
-    width: width*0.2,
-    height: height*0.1,
+    width: width * 0.2,
+    height: height * 0.1,
     marginRight: 10,
     borderRadius: 10,
   },
   xpContainer: {
-   
-   
     backgroundColor: "#EFEAFF", // couleur pastel douce
     paddingVertical: 15,
     paddingHorizontal: 25,
@@ -261,8 +258,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 4,
     alignItems: "center",
-    marginBottom:height*0.02,
-   
+    marginBottom: height * 0.02,
   },
 
   xpTitle: {

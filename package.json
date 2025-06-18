@@ -4,10 +4,10 @@
   "main": "index.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
+    "android": "expo start --android -c",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "tunnel": "expo start --tunnel"
+    "tunnel": "expo start --tunnel -c"
   },
   "dependencies": {
     "@expo/metro-runtime": "~5.0.4",
